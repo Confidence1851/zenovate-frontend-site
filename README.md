@@ -1,36 +1,17 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Zenovate Platform
 
-## Getting Started
+This repository is part of the Zenovate platform ecosystem. Below are the main repositories:
 
-First, run the development server:
+## Core Repositories
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### [zv-form](https://github.com/design-aesthetics/zenovate/tree/zv-form)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Client application built with Next.js for form management and user interactions.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### [zv-core](https://github.com/design-aesthetics/zenovate/tree/zv-core)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Backend API and core business logic. Handles data processing, authentication, and service integration.
 
-## Learn More
+### [zv-site](https://github.com/design-aesthetics/zenovate/tree/zv-site)
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Main website and landing pages for Zenovate.
