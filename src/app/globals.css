@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  /* color: var(--foreground);
+  background: var(--background); */
+  font-family: "Bebas Neue", sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+}
+
+
+/* SCROLL_BAR */
+/* Hide the scrollbar track */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 10px;
+  height: 6px;
+}
+
+/* Style the scrollbar handle */
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #000;
+  border-radius: 6px;
+}
+
+/* On hover, style the scrollbar handle */
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: #162C15;
+}
+
+/* FORM */
+.form-input {
+  @apply text-Black-100 h-11 focus-visible:ring-4 border focus-visible:ring-offset-2 ring-primary text-lg rounded-none
+}
+
+/* Calender */
+.rdp-vhidden {
+  display: none;
+}
+
+.rdp-dropdown_year>div,
+.rdp-dropdown_month>div {
+  display: none;
+}
+
+.rdp-caption_dropdowns {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+
+}
+
+.rdp-dropdown {
+  @apply h-[26px] text-[#162C15] rounded-[5px] p-0.5 bg-[#EBEBE6] border border-[#162C15];
+}

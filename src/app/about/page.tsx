@@ -1,0 +1,96 @@
+import MissionAndValues from "@/components/about-page/MissionAndValues";
+import OurPromise from "@/components/about-page/OurPromise";
+import PageHeroWrapper from "@/components/common/PageHeroWrapper";
+import { Button } from "@/components/ui/button";
+import { ArrowRight } from "iconsax-react";
+
+const AboutPage = () => {
+  return (
+    <main>
+      {/* HERO */}
+      {/* <section className=" bg-White-100 pb-10 lg:pb-20">
+        <div className="w-full max-w-[1550px] mx-auto px-2">
+          <h3 className="text-4xl md:text-5xl lg:text-8xl uppercase  tracking-wider font-bold py-10 lg:py-20 md:text-center">
+            The Zenovate <span className="text-Green-300">Story</span>
+          </h3>
+
+          <div className="w-full flex flex-col lg:flex-row gap-10 ">
+            <p className="text-Black-100 text-base md:text-lg lg:text-xl leading-loose text-balance flex-1 text-justify">
+              Founded by a team of passionate healthcare professionals and
+              wellness enthusiasts, Zenovate was born out of a shared vision: to
+              make personalized, effective nutrient therapy accessible to all.
+              We saw a need for a solution that combines the power of precision
+              nutrition with the convenience of telehealth and at-home delivery.
+              <span>
+                From humble beginnings to a global wellness brand, our journey
+                started with a simple belief: everyone deserves access to clean,
+                natural, and effective health solutions. It all began in a small
+                kitchen where our founder, Jane Doe, started creating homemade
+                remedies from organic herbs and natural ingredients to support
+                her own wellness journey.
+              </span>
+              <span>
+                What started as a passion for natural healing quickly grew into
+                something much bigger. Friends and family began noticing the
+                benefits and soon asked for their own remedies. Fueled by a deep
+                desire to help others achieve optimal health, Jane decided to
+                turn her kitchen creations into a brand that could make a real
+                impact.
+              </span>
+              <span>
+                Today, we’re proud to offer a full line of health and wellness
+                products, trusted by thousands of people across the globe. Our
+                commitment to quality, transparency, and sustainability remains
+                at the core of everything we do, as we continue to innovate and
+                bring you products that nourish your body and mind.
+              </span>
+            </p>
+
+            <div className="grid gap-4 border lg:w-[700px] h-[450px] ">
+              <div className="flex gap-4">
+                <div className="h-full w-full bg-Green-100"></div>
+                <div className="h-full w-full bg-Green-200"></div>
+              </div>
+              <div className="bg-Green-300"></div>
+            </div>
+          </div>
+        </div>
+      </section> */}
+
+      <PageHeroWrapper
+        heading="The Zenovate Story"
+        description=" Founded by a team of passionate healthcare professionals and wellness enthusiasts, Zenovate was born out of a shared vision: to make personalized, effective nutrient therapy accessible to all. We saw a need for a solution that combines the power of precision nutrition with the convenience of telehealth and at-home delivery"
+      />
+
+      {/* Mission and values */}
+      <MissionAndValues />
+      {/* Our promise */}
+      <OurPromise />
+      {/* THE team */}
+      {/* <Team /> */}
+
+      <section className=" lg:p-20">
+        <div className="w-full max-w-[1400px] mx-auto h-full flex justify-center items-center gap-10 flex-col bg-Green-200 py-10 md:p-28">
+          <div className="flex justify-center items-center gap-10 flex-col max-w-[800px] mx-auto">
+            <h1 className="text-3xl md:text-4xl uppercase  tracking-wider font-bold text-center">
+              Join the Zenovate community today and experience the
+              transformative power of personalized nutrient therapy.
+            </h1>
+
+            <Button
+              variant="lemon"
+              className="flex justify-between items-center p-4 md:gap-20 gap-3 w-fit border border-Green-100 h-11"
+            >
+              <span className="uppercase text-sm md:text-xl font-semibold">
+                Start Your Journey to Optimal Health Now
+              </span>
+              <ArrowRight size="24" className=" font-bold" />
+            </Button>
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+};
+
+export default AboutPage;
