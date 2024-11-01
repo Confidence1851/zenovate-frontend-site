@@ -7,7 +7,7 @@ const HomePage = () => {
   return (
     <main className="mb-6 lg:mb-0">
       {/* HERO */}
-      <section className="h-[calc(100dvh-60px)] sm:max-h-[613px] xl:max-h-fit  bg-Gray-200 px-[5vw] sm:px-[3.5vw] lg:px-[3vw]">
+      <section className="h-[calc(100dvh-60px)] sm:max-h-[600px] xl:max-h-fit  bg-Gray-200 px-[5vw] sm:px-[3.5vw] lg:px-[3vw]">
         <div className="w-full max-w-[1550px] mx-auto h-full flex justify-end flex-col pb-16 md:pb-[6rem] lg:pb-40 ">
           <div className="w-full max-w-[600px] flex flex-col gap-1 md:gap-4 lg:gap-6">
             <h3 className="text-OffWhite-100 text-2xl md:text-4xl lg:text-5xl leading-[44px] uppercase font-bold">

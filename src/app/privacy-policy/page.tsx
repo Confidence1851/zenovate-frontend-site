@@ -43,39 +43,38 @@ const policies = [
 const PrivacyPolicyPage = () => {
   return (
     <main>
-      <section className="py-10 md:py-20">
-        <div className="w-full max-w-[1550px] mx-auto px-2">
-          <div className="w-full max-w-[1000px] space-y-8">
+      <section className="pt-9 pb-10 md:py-16 lg:py-20 px-[5vw] sm:px-[3.5vw] lg:px-[3vw]">
+        <div className="w-full max-w-[1550px] mx-auto ">
+          <div className="w-full max-w-[1000px] space-y-5 md:space-y-6 lg:space-y-8">
             <h1 className="text-lg md:text-2xl uppercase font-bold">
               Privacy policy
             </h1>
-            <h3 className="text-2xl md:text-3xl uppercase">
+            <h3 className="text-lg md:text-2xl lg:text-3xl uppercase">
               At Zenovate, we are committed to protecting your privacy and
               ensuring the security of your personal information. This Privacy
               Policy outlines how we collect, use, disclose, and safeguard your
               data when you visit our website or use our services.
             </h3>
-            <div className="border w-full bg-Green-100" />
+            <div className="w-full pt-2 md:pt-3 lg:pt-3.5">
+              <div className="border w-full bg-Green-100" />
+            </div>
           </div>
         </div>
       </section>
 
       <section className="lg:pb-20">
-        <div className="w-full px-2 max-w-[1550px] mx-auto">
-          <div className="flex flex-col gap-10 lg:gap-0 lg:flex-row max-w-[1400px] mx-auto">
-            <div className="space-y-14">
+        <div className="w-full  max-w-[1550px] mx-auto">
+          <div className="flex flex-col gap-10 lg:gap-16 lg:flex-row lg:px-[3vw] max-w-[1400px] mx-auto">
+            <div className=" space-y-10 md:space-y-14 px-[5vw] sm:px-[3.5vw] lg:px-0">
               {policies.map((item, i) => (
-                <div className="space-y-8" key={i}>
+                <div className=" space-y-5 md:space-y-8" key={i}>
                   <h2 className="text-lg md:text-xl uppercase font-semibold">
                     {item.heading}
                   </h2>
                   <div>
-                    <ul className="flex flex-col gap-3">
+                    <ul className="flex flex-col gap-2.5 md:gap-3 pl-0 ml-[1.0625rem]">
                       {item.list.map((list, i) => (
-                        <li
-                          className="list-inside list-disc text-base md:text-lg"
-                          key={i}
-                        >
+                        <li className=" list-disc text-base md:text-lg" key={i}>
                           {list}
                         </li>
                       ))}
@@ -85,7 +84,7 @@ const PrivacyPolicyPage = () => {
               ))}
             </div>
 
-            <div className="bg-Green-200 h-fit w-full lg:max-w-[400px] mx-auto py-20 px-5 flex items-center flex-col gap-14">
+            <div className="bg-Green-200 mt-5 md:mt-8 lg:mt-0 h-fit w-full lg:max-w-[400px] mx-auto py-12 md:py-16 lg:py-20 px-5 flex items-center flex-col gap-8 md:gap-10">
               <h3 className="text-lg uppercase font-semibold text-center max-w-[600px]">
                 For more detailed information about our data practices and your
                 rights under applicable laws, please review our full Privacy

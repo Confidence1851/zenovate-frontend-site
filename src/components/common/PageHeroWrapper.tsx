@@ -10,10 +10,10 @@ const PageHeroWrapper: React.FC<PageHeroWrapperProps> = ({
   coloredHeading,
 }) => {
   return (
-    <section className="h-[calc(70dvh-60px)] bg-OffWhite-100">
-      <div className="w-full max-w-[1550px] mx-auto h-full flex justify-end flex-col pb-20 lg:pb-30 px-2">
-        <div className="w-full max-w-[750px] flex flex-col gap-6">
-          <h3 className="text-Black-100 text-2xl md:text-4xl lg:text-5xl leading-loose uppercase font-bold lg:tracking-wider">
+    <section className=" h-[calc(65dvh-60px)] min-h-[300px] md:h-[calc(70dvh-60px)] sm:max-h-[400px] lg:max-h-[550px] xl:max-h-fit bg-OffWhite-100 px-[5vw] sm:px-[3.5vw] lg:px-[3vw]">
+      <div className="w-full max-w-[1550px] mx-auto h-full flex justify-end flex-col pb-14 sm:pb-20 lg:pb-30 ">
+        <div className="w-full max-w-[750px] flex flex-col gap-3 md:gap-6">
+          <h3 className="text-Black-100 text-2xl md:text-4xl lg:text-5xl leading-normal md:leading-[1.3] lg:leading-[1.3]  uppercase font-bold lg:tracking-wider">
             {heading}{" "}
             {coloredHeading && (
               <span className="text-Green-300">{coloredHeading}</span>

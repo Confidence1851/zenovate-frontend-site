@@ -21,9 +21,9 @@ const ProductsPage = () => {
       <FeatureProducts />
 
       {/* MORE PRODUCTS */}
-      <section className="bg-Black-100 py-6">
-        <div className="w-full max-w-[1550px] mx-auto flex justify-between items-center  px-2">
-          <p className="uppercase text-White-100 text-xl">view all products</p>
+      <section className="bg-Black-100 py-6 px-[5vw] sm:px-[3.5vw] lg:px-[3vw]">
+        <div className="w-full cursor-pointer max-w-[1550px] mx-auto flex justify-between items-center  ">
+          <p className="uppercase text-White-100 text-lg md:text-xl">view all products</p>
           <ArrowRight
             size={30}
             className="cursor-pointer text-White-100 hover:text-Green-400"
