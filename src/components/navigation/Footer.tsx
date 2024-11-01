@@ -37,17 +37,17 @@ const socialMedia = [
 const Footer = () => {
   return (
     <>
-      <nav className="bg-Green-100 py-10 px-4 ">
-        <div className="lg:grid grid-cols-2 w-full max-w-[1550px] mx-auto space-y-12 lg:space-y-0">
+      <nav className="bg-Green-100 py-10 md:py-16 xl:pt-24 px-[5vw] sm:px-[3.5vw] lg:px-[3vw] ">
+        <div className="xl:grid grid-cols-2 w-full max-w-[1550px] mx-auto space-y-12 lg:space-y-20 xl:space-y-0">
           <div className="flex justify-between flex-col gap-10">
-            <h3 className="text-White-100 uppercase text-xl font-semibold lg:text-4xl">
+            <h3 className="text-White-100 uppercase text-2xl font-semibold lg:text-4xl xl:text-[2.625rem] xl:leading-[2.75rem] max-w-[240px] lg:max-w-[254px] xl:max-w-[294px]">
               Stay in tune with your health.
             </h3>
-            <Logo className="!text-White-100 text-xl lg:text-2xl" />
+            <Logo className="!text-White-100 text-xl lg:text-2xl !font-extrabold !lowercase" />
           </div>
 
-          <div className="space-y-12">
-            <div className="flex flex-col lg:flex-row gap-16">
+          <div className="space-y-12 lg:space-y-20">
+            <div className="flex flex-col lg:flex-row gap-16  lg:gap-x-[10rem]">
               {/* explore more */}
               <div className="space-y-6">
                 <h3 className="text-White-100 uppercase text-base font-semibold lg:text-xl">
@@ -57,7 +57,7 @@ const Footer = () => {
                   {navLinks.map((item) => (
                     <Link
                       href={item.link}
-                      className="text-White-100 text-base uppercase hover:text-Green-400"
+                      className="text-White-100 text-sm uppercase hover:text-Green-400"
                       key={item.label}
                     >
                       {item.label}
@@ -66,13 +66,13 @@ const Footer = () => {
                 </div>
               </div>
 
-              <div className="space-y-12 flex-1">
+              <div className="space-y-12 flex-1 lg:flex lg:flex-col lg:justify-between">
                 {/* Community */}
                 <div className="space-y-6">
                   <h3 className="text-White-100 uppercase text-base font-semibold lg:text-xl">
                     join our community
                   </h3>
-                  <p className="text-White-100">
+                  <p className="text-White-100 text-sm">
                     Sign up today to receive exclusive offers, health tips, and
                     updates on our latest products.
                   </p>
@@ -99,7 +99,7 @@ const Footer = () => {
               <h3 className="text-White-100 uppercase text-base font-semibold lg:text-xl">
                 trust & certifications
               </h3>
-              <p className="text-White-100">
+              <p className="text-White-100 text-sm">
                 Your health is our priority. We proudly display our
                 certifications and partnerships with trusted health
                 organizations to ensure you receive only the best.
@@ -109,7 +109,7 @@ const Footer = () => {
         </div>
       </nav>
 
-      <div className="bg-Black-100 px-4 py-10 ">
+      <div className="bg-Black-100 px-[5vw] sm:px-[3.5vw] lg:px-[3vw] py-10 ">
         <div className="w-full max-w-[1550px] mx-auto flex flex-col lg:flex-row justify-between gap-6">
           <div className="flex gap-4 items-center">
             <Call size="32" className="text-Green-400" />

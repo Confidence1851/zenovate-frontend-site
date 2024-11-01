@@ -24,13 +24,13 @@ const uniqueQualities = [
 ];
 const UniqueQualities = () => {
   return (
-    <section className="bg-Green-200 space-y-24 pb-10 lg:pb-40">
-      <div className="w-full max-w-[1550px] mx-auto h-full flex justify-end flex-col  px-2">
-        <div className="flex flex-col gap-3 pt-32 w-full max-w-[1500px] mx-auto">
-          <h1 className="text-4xl md:text-5xl lg:text-8xl uppercase  tracking-wider font-bold text-Green-100">
+    <section className="bg-Green-200 space-y-12 md:space-y-14 xl:space-y-24 pb-12 md:pb-16 lg:pb-20 xl:pb-40">
+      <div className="w-full mb-[-8px] md:mb-0 max-w-[1550px] mx-auto h-full flex justify-end flex-col  px-[5vw] sm:px-[3.5vw] lg:px-[3vw]">
+        <div className="flex flex-col gap-0 lg:gap-3  pt-12 md:pt-16 lg:pt-20 xl:pt-32 w-full max-w-[1500px] mx-auto">
+          <h1 className="text-3xl md:text-[44px] md:leading-tight xl:text-8xl uppercase  tracking-wider font-bold text-Green-100">
             discover the
           </h1>
-          <h1 className="text-4xl md:text-5xl lg:text-8xl uppercase lg:text-right tracking-wider lg:pr-20 font-bold text-Green-100">
+          <h1 className="text-3xl md:text-[44px] md:leading-tight xl:text-8xl uppercase min-[1400px]:text-right tracking-wider  min-[1400px]:pr-20  font-bold text-Green-100">
             zenovate differences
           </h1>
         </div>
@@ -38,7 +38,7 @@ const UniqueQualities = () => {
       {/* DIVIDER */}
       <div className="border w-full bg-Green-100" />
 
-      <div className="max-w-[1550px] w-full mx-auto px-2">
+      <div className="max-w-[1550px] w-full mx-auto px-[5vw] sm:px-[3.5vw] lg:px-[3vw]">
         {/* <div className="w-full overflow-x-scroll grid md:grid-cols-2 lg:flex  gap-6 custom-scrollbar pb-5 "> */}
         <div className="w-full grid md:grid-cols-2 xl:grid-cols-4  gap-8 custom-scrollbar pb-5">
           {uniqueQualities.map((item, i) => (

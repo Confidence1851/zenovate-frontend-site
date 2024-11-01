@@ -46,16 +46,16 @@ const feedback = [
 ];
 const CustomersFeedback = () => {
   return (
-    <section className="bg-OffWhite-100 space-y-24 pb-20 lg:pb-40">
-      <div className="w-full max-w-[1550px] mx-auto h-full flex justify-end flex-col  px-2">
-        <div className="flex flex-col gap-5 pt-10 lg:pt-32 w-full mx-auto">
-          <h2 className="text-2xl md:text-3xl lg:text-5xl uppercase text-Green-300 font-semibold">
+    <section className="bg-OffWhite-100 space-y-12 md:space-y-14 xl:space-y-24 pb-12 md:pb-16 lg:pb-20 xl:pb-40">
+      <div className="w-full max-w-[1550px] mx-auto h-full flex justify-end flex-col px-[5vw] sm:px-[3.5vw] lg:px-[3vw]   ">
+        <div className="flex flex-col gap-1.5 md:gap-3 xl:gap-5 pt-12 md:pt-16 lg:pt-20 xl:pt-32 w-full mx-auto">
+          <h2 className="text-lg md:text-[28px] md:leading-9 xl:text-5xl uppercase text-Green-300 font-semibold">
             Real Stories, Real Transformations
           </h2>
-          <h1 className="text-4xl md:text-5xl lg:text-8xl uppercase  tracking-wider font-bold">
+          <h1 className="text-[28px] leading-9 md:text-[44px] md:leading-tight xl:text-8xl uppercase  tracking-wider font-bold">
             What our customers are saying
           </h1>
-          {/* <h1 className="text-4xl md:text-5xl lg:text-8xl uppercase lg:text-right tracking-wider lg:pr-20 font-bold">
+          {/* <h1 className="text-4xl md:text-5xl xl:text-8xl uppercase xl:text-right tracking-wider lg:pr-20 font-bold">
             are saying
           </h1> */}
         </div>
@@ -63,7 +63,7 @@ const CustomersFeedback = () => {
       {/* DIVIDER */}
       <div className="border w-full bg-Black-100" />
 
-      <div className="max-w-[1550px] mx-auto px-2">
+      <div className="max-w-[1550px] mx-auto px-[5vw] sm:px-[3.5vw] lg:px-[3vw] ">
         <Carousel
           opts={{
             align: "start",
