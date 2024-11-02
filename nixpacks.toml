@@ -1,0 +1,19 @@
+[phases.setup]
+nixPkgs = ['bun']
+
+[phases.install]
+cmds = [
+    'bun install --frozen-lockfile --production',
+    'bun add -d tsconfig-paths'
+]
+
+[phases.build]
+cmds = [
+    'bun run build'
+]
+
+[start]
+cmd = 'bun start'
+
+[meta]
+expose = '3000'
