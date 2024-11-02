@@ -8,7 +8,7 @@ cmds = [
 
 [phases.build]
 cmds = [
-    'bun node_modules/next/dist/bin/next build',
+    'bun run build',
 ]
 [start]
 cmd = 'bun start'
