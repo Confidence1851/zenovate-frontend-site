@@ -3,7 +3,7 @@ nixPkgs = ['nodejs', 'bun']
 
 [phases.install]
 cmds = [
-    'bun install --frozen-lockfile --production',
+    'bun install --frozen-lockfile',
 ]
 
 [phases.build]
