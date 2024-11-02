@@ -55,16 +55,27 @@ const HowItWorksPage = () => {
         heading="ACHIEVE OPTIMAL HEALTH IN 3 Simple Steps"
       />
       <section className="bg-White-100 py-10 lg:py-20">
-        <div className="w-full max-w-[1550px] mx-auto px-2">
-          <div className="grid lg:grid-cols-2 gap-10 w-full max-w-[500px] lg:max-w-[1000px] mx-auto">
+        <div className="w-full max-w-[1550px] mx-auto px-[5vw] sm:px-[3.5vw]">
+          <div className="grid xl:grid-cols-2 gap-y-6 md:gap-y-8 xl:gap-y-10 gap-x-20 w-full max-w-[800px] lg:max-w-[1100px] mx-auto">
             {data.map((Item, i) => (
-              <div className="flex gap-4 lg:even:pt-16 min-h-[250px]" key={i}>
-                <h1 className="text-Gray-100 text-8xl font-bold">{i + 1}</h1>
+              <div
+                className={`flex gap-4 md:gap-8 lg:even:pt-16 ${
+                  i === 0
+                    ? "min-h-[100px] xl:min-h-[250px]"
+                    : " min-h-[100px] xl:min-h-[250px]"
+                }`}
+                key={i}
+              >
+                <h1
+                  className={`text-Gray-100 text-7xl md:text-7xl xl:text-8xl font-bold`}
+                >
+                  {i + 1}
+                </h1>
                 <div className="pt-6">
-                  <h2 className="font-bold uppercase text-[42px]">
+                  <h2 className="font-bold uppercase text-[28px] leading-9 md:text-3xl xl:text-[44px] xl:leading-tight ">
                     {Item.heading}
                   </h2>
-                  <p className="text-base">{Item.description}</p>
+                  <p className="text-base mt-2">{Item.description}</p>
                 </div>
               </div>
             ))}
@@ -72,29 +83,28 @@ const HowItWorksPage = () => {
         </div>
       </section>
 
-      <section className="bg-OffWhite-100 space-y-24 pb-10 lg:pb-40">
-        <div className="w-full max-w-[1550px] mx-auto h-full flex justify-end flex-col  px-2">
-          <div className="flex flex-col gap-3 pt-32 w-full max-w-[1200px] mx-auto">
-            <h1 className="text-4xl md:text-5xl lg:text-8xl uppercase  tracking-wider font-bold text-Black-100">
+      <section className="bg-OffWhite-100 space-y-10 md:space-y-16 pb-12 lg:pb-16">
+        <div className="w-full max-w-[1550px] mx-auto h-full flex justify-end flex-col  px-[5vw] sm:px-[3.5vw] lg:px-[3vw]">
+          <div className="flex flex-col gap-3 pt-12 md:pt-16 w-full max-w-[1020px] mx-auto">
+            <h1 className="text-4xl md:text-5xl lg:text-7xl uppercase  tracking-wider font-bold text-Black-100">
               frequently
             </h1>
-            <h1 className="text-4xl md:text-5xl lg:text-8xl uppercase lg:text-right tracking-wider lg:pr-20 font-bold text-Black-100">
+            <h1 className="text-4xl md:text-5xl lg:text-7xl uppercase lg:text-right tracking-wider lg:pr-20 font-bold text-Black-100">
               asked questions
             </h1>
           </div>
         </div>
         {/* DIVIDER */}
         <div className="border w-full bg-Green-100" />
-
-        <div className=" max-w-[900px] mx-auto  w-full px-2">
-          <Accordion type="single" className="gap-5 flex flex-col  w-full ">
+        <div className=" max-w-[900px] mx-auto  w-full px-[5vw] sm:px-[3.5vw] lg:px-[3vw]">
+          <Accordion type="multiple" className="gap-5 flex flex-col  w-full ">
             {faq.map((item, i) => (
               <AccordionItem
                 value={item.heading}
-                className="border-Gray-100 border "
+                className="border-Gray-100 border"
                 key={i}
               >
-                <AccordionTrigger className="uppercase transition-transform duration-500 text-[14px] md:text-base px-4 font-semibold border-b-0 data-[state=open]:bg-Black-100 data-[state=open]:text-White-100 data-[state=open]:no-underline   bg-White-100">
+                <AccordionTrigger className="uppercase hover:no-underline text-left  transition-colors duration-300 text-[14px] md:text-base px-4 font-semibold border-b-0 data-[state=open]:bg-Black-100 data-[state=open]:text-White-100 data-[state=open]:no-underline  ">
                   {item.heading}
                 </AccordionTrigger>
                 <AccordionContent className="p-4 leading-4 md:leading-6 text-base md:text-lg bg-White-100">
@@ -106,21 +116,24 @@ const HowItWorksPage = () => {
         </div>
       </section>
 
-      <section className="w-full bg-White-100 lg:py-32">
-        <div className="w-full max-w-[1400px] mx-auto h-full  bg-Green-200 p-10 md:p-28">
-          <div className="flex justify-center items-center gap-10 flex-col w-full max-w-[600px] mx-auto">
-            <h1 className="text-3xl md:text-5xl uppercase  tracking-wider font-bold text-center">
+      <section className="w-full bg-White-100 lg:py-20">
+        <div className="w-full max-w-[1400px] mx-auto h-full  bg-Green-200 p-10 md:p-20">
+          <div className="flex justify-center items-center gap-10 flex-col w-full max-w-[650px] mx-auto">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl md:leading-tight uppercase  tracking-wider font-bold text-center">
               Ready to Start Your Zenovate Journey?
             </h1>
 
             <Button
               variant="lemon"
-              className="flex justify-between items-center p-4 gap-2 w-fit border border-Green-100 h-11"
+              className="flex justify-between items-center flex-wrap p-4 gap-x-6 gap-y-3 w-full sm:w-fit  md:gap-x-16 md:gap-20 gap-3  border border-Green-100 min-h-11 h-fit "
             >
-              <span className="uppercase text-base lg:text-xl font-semibold">
+              <span className="uppercase mx-auto text-wrap text-sm md:text-xl font-semibold">
                 Book Your Personalized Consultation Now
               </span>
-              <ArrowRight size="24" className=" font-bold" />
+              <ArrowRight
+                size="24"
+                className=" mx-auto font-bold hidden md:inline-block"
+              />
             </Button>
           </div>
         </div>

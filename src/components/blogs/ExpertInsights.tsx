@@ -2,6 +2,8 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
 } from "@/components/ui/carousel";
 import ArticleCard from "./ArticleCard";
 import BlogSectionWrapper from "./BlogSectionWrapper";
@@ -19,6 +21,16 @@ const expertInsights = [
   },
   {
     id: "3",
+    content:
+      "Fueling Peak Performance: How Zenovate Helped Alex Take His Athletic Career to the Next Level ",
+  },
+  {
+    id: "4",
+    content:
+      "Fueling Peak Performance: How Zenovate Helped Alex Take His Athletic Career to the Next Level ",
+  },
+  {
+    id: "5",
     content:
       "Fueling Peak Performance: How Zenovate Helped Alex Take His Athletic Career to the Next Level ",
   },
@@ -45,10 +57,10 @@ const ExpertInsights = async () => {
             </CarouselItem>
           ))}
         </CarouselContent>
-        {/* <div className="flex justify-end gap-10 items-center">
-              <CarouselPrevious className="!relative !left-0 !top-0  border-0 shadow-none p-0 translate-y-0" />
-              <CarouselNext className="!relative !left-0 !top-0  border-0 shadow-none p-0 translate-y-0" />
-            </div> */}
+        <div className="flex justify-end gap-10 items-center mt-4">
+          <CarouselPrevious className="!relative !left-0 !top-0  border-0 shadow-none p-0 translate-y-0" />
+          <CarouselNext className="!relative !left-0 !top-0  border-0 shadow-none p-0 translate-y-0" />
+        </div>
       </Carousel>
     </BlogSectionWrapper>
   );

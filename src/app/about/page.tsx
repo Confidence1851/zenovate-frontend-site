@@ -84,7 +84,7 @@ const AboutPage = () => {
               <span className="uppercase mx-auto text-sm md:text-xl font-semibold">
                 Start Your Journey to Optimal Health Now
               </span>
-              <ArrowRight size="24" className=" mx-auto font-bold" />
+              <ArrowRight size="24" className=" mx-auto font-bold hidden md:inline-block" />
             </Button>
           </div>
         </div>

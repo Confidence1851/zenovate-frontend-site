@@ -39,16 +39,16 @@ const BlogInfoPage = ({ params }: { params: { id: string } }) => {
 
   return (
     <main>
-      <section className="w-full h-[600px] bg-OffWhite-100 flex justify-center items-center">
+      <section className="w-full h-[300px] md:h-[500px] xl:h-[60dvh] xl:min-h-[500px] bg-OffWhite-100 flex justify-center items-center">
         <h1 className="text-2xl md:text-4xl lg:text-8xl font-bold">
           IMAGE HERE
         </h1>
       </section>
 
-      <section className="bg-White-100 py-10 md:py-20 lg:py-32">
-        <div className="w-full max-w-[800px] mx-auto space-y-14 px-2">
-          <div className="space-y-4">
-            <h1 className="text-2xl md:text-3xl lg:text-5xl font-semibold">
+      <section className="bg-White-100 py-10 md:py-16 lg:pt-24 px-[5vw] sm:px-[3vw] lg:px-[3.5vw] ">
+        <div className="w-full max-w-[800px] mx-auto space-y-14">
+          <div className="space-y-4 lg:space-y-8">
+            <h1 className="text-2xl md:text-3xl lg:text-5xl lg:leading-tight font-semibold">
               The Power of Personalized Nutrition: How Targeted Nutrient Therapy
               Can Transform Your Health
             </h1>
@@ -104,7 +104,7 @@ const BlogInfoPage = ({ params }: { params: { id: string } }) => {
         </div>
       </section>
 
-      <section className="py-10 md:py-20 px-2">
+      <section className="py-10 md:py-20 px-[5vw] sm:px-[3vw] lg:px-[3.5vw]">
         <BlogSectionWrapper heading="read more of our articles">
           <Carousel
             opts={{
@@ -122,7 +122,7 @@ const BlogInfoPage = ({ params }: { params: { id: string } }) => {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <div className="flex justify-end gap-10 items-center">
+            <div className="flex justify-end gap-10 items-center mt-4">
               <CarouselPrevious className="!relative !left-0 !top-0  border-0 shadow-none p-0 translate-y-0" />
               <CarouselNext className="!relative !left-0 !top-0  border-0 shadow-none p-0 translate-y-0" />
             </div>

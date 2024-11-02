@@ -21,10 +21,13 @@ const Subscription = () => {
             variant="lemon"
             className="flex justify-between items-center p-4 gap-2 w-full max-w-[300px] border border-Green-100 h-11"
           >
-            <span className="uppercase text-xl font-semibold">
+            <span className="uppercase text-xl font-semibold mx-auto">
               subscribe & save
             </span>
-            <ArrowRight size="24" className=" font-bold" />
+            <ArrowRight
+              size="24"
+              className=" font-bold hidden md:inline-block"
+            />
           </Button>
         </div>
       </div>

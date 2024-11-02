@@ -2,15 +2,10 @@ import CustomersFeedback from "@/components/home-page/CustomersFeedback";
 import UniqueQualities from "@/components/home-page/UniqueQualities";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "iconsax-react";
-import { Courier_Prime } from "next/font/google";
+
 import Image from "next/image";
 import nutritionImg from "@/assets/images/nutrition.jpg";
 // import heroVideo from "@/assets/videos/energy1.mp4";
-
-const courier = Courier_Prime({
-  weight: ["400", "700", "400", "700"],
-  subsets: ["latin"],
-});
 
 const HomePage = () => {
   return (
@@ -21,7 +16,7 @@ const HomePage = () => {
         <div className="absolute z-20 top-0 left-0 h-full w-full bg-black opacity-50"></div>
 
         <div className="w-full relative z-30 max-w-[1550px] mx-auto h-full flex justify-end flex-col pb-16 md:pb-[6rem] lg:pb-40 ">
-          <div className="w-full max-w-[600px] flex flex-col gap-1 md:gap-4 lg:gap-4">
+          <div className="w-full max-w-[600px] flex flex-col gap-1 md:gap-4 ">
             <h3 className="text-OffWhite-100 text-2xl md:text-4xl lg:text-5xl leading-[44px] uppercase font-bold">
               energize
             </h3>
@@ -30,6 +25,15 @@ const HomePage = () => {
               performance, and reinforced cellular defenses.
             </p>
           </div>
+          <Button className="flex justify-between mt-5 sm:mt-6 py-3  items-center flex-wrap px-8 md:py-4 h-fit gap-x-6 gap-y-3 transition-colors duration-300 ease-in-out bg-Green-100 text-White-100 hover:bg-Green-300 w-fit">
+            <span className="uppercase mx-auto text-wrap text-sm md:text-base xl:text-xl self-center font-semibold">
+              Get Started Today
+            </span>
+            <ArrowRight
+              size="24"
+              className="text-secondary-foreground font-bold"
+            />
+          </Button>
         </div>
 
         <video
@@ -44,7 +48,7 @@ const HomePage = () => {
       <section className="bg-White-100 px-[5vw] sm:px-[3.5vw] lg:px-[3vw]  py-10 md:py-16 ">
         <div className="w-full  mx-auto flex flex-col gap-5 lg:gap-12">
           <p
-            className={`text-Black-100 ${courier.className} max-w-[800px] lg:max-w-[900px]  text-lg sm:text-xl font-medium leading-6 md:text-2xl lg:text-[1.8rem] lg:leading-9`}
+            className={`text-Black-100 max-w-[800px] lg:max-w-[900px]  text-lg sm:text-xl font-medium leading-6 md:text-2xl lg:text-[1.8rem] lg:leading-9`}
           >
             <span className="text-Green-100 font-semibold">
               Welcome to Zenovate,
@@ -55,7 +59,7 @@ const HomePage = () => {
             can be challenging amidst the demands of modern life.
           </p>
           <p
-            className={`text-Black-100 ${courier.className} max-w-[800px] lg:text-right lg:max-w-[900px] lg:ml-auto text-lg sm:text-xl font-medium leading-6 md:text-2xl lg:text-[1.8rem] lg:leading-9`}
+            className={`text-Black-100 max-w-[800px] lg:text-right lg:max-w-[900px] lg:ml-auto text-lg sm:text-xl font-medium leading-6 md:text-2xl lg:text-[1.8rem] lg:leading-9`}
           >
             That&apos;s why we&apos;ve revolutionized{" "}
             <span className="text-Green-100 font-semibold">
@@ -83,18 +87,18 @@ const HomePage = () => {
         <div className="absolute z-20 top-0 left-0 h-full w-full bg-black opacity-60"></div>
         <div className="flex flex-col gap-3 justify-center w-full max-w-[1100px] mx-auto h-full px-2">
           <h1
-            className={`text-4xl ${courier.className} relative z-30 md:text-5xl lg:text-6xl lg:leading-[1.1] text-center  tracking-wider font-bold text-white`}
+            className={`text-4xl relative z-30 md:text-5xl lg:text-6xl lg:leading-[1.1] text-center  tracking-wider font-bold text-white`}
           >
-            Your Journey to Optimal Health Starts Here
+            Your Journey to Optimal Health
           </h1>
           <Image
             src={nutritionImg}
             alt="healthy food"
             className="w-full z-10 h-full object-cover absolute top-0 left-0"
           />
-          {/* <h1 className="text-4xl md:text-5xl lg:text-6xl text-center lg:text-right tracking-wider lg:pr-20 font-bold text-Green-100 italic lowercase">
-            starts here
-          </h1> */}
+          <h1 className="text-4xl relative z-30 md:text-5xl lg:text-6xl text-center lg:text-right tracking-wider lg:pr-20 font-bold text-white italic ">
+            Starts Here
+          </h1>
         </div>
       </section>
 
@@ -114,13 +118,13 @@ const HomePage = () => {
           </div>
 
           <div className="px-[5vw] sm:px-[3.5vw] xl:pl-16 xl:pr-[3vw] border-t mt-10 pt-10 md:mt-16 md:pt-16 xl:mt-0 xl:pt-0 xl:border-none">
-            <Button className="flex justify-between items-center flex-wrap p-4 gap-x-6 gap-y-3 w-full sm:w-fit xl:w-full md:gap-x-16  min-h-12 h-fit bg-Black-100 text-White-100 hover:bg-Black-100 sm:mx-auto">
+            <Button className="flex justify-between items-center flex-wrap p-4 gap-x-6 gap-y-3 w-full sm:w-fit xl:w-full md:gap-x-16  min-h-12 h-fit bg-Green-100 transition-colors duration-300 ease-in-out text-White-100 hover:bg-Green-300 sm:mx-auto">
               <span className="uppercase mx-auto text-wrap text-sm md:text-base xl:text-xl self-center font-semibold">
                 Start Your Zenovate Journey Today
               </span>
               <ArrowRight
                 size="24"
-                className="text-secondary-foreground mx-auto font-bold"
+                className="text-secondary-foreground mx-auto hidden md:inline-block font-bold"
               />
             </Button>
           </div>

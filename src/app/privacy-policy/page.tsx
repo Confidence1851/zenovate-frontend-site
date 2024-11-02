@@ -98,7 +98,7 @@ const PrivacyPolicyPage = () => {
                 <span className="uppercase text-sm font-semibold">
                   read full privacy policy
                 </span>
-                <ArrowRight size="24" className=" font-bold" />
+                <ArrowRight size="24" className=" font-bold hidden md:inline-block" />
               </Button>
             </div>
           </div>

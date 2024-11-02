@@ -57,9 +57,9 @@ const FAQPage = () => {
         heading="Frequently Asked Questions"
       />
 
-      <div className="bg-White-100 py-10 md:py-20 lg:py-32 pb-0 space-y-20 md:space-y-32">
+      <div className="bg-White-100 py-10 md:py-20 lg:py-24 pb-0 space-y-20 md:space-y-24">
         {/* ACCORDDION */}
-        <div className=" max-w-[900px] mx-auto  w-full px-2">
+        <div className=" max-w-[900px] mx-auto  w-full px-[5vw] sm:px-[3.5vw] lg:px-[3vw]">
           <Accordion type="multiple" className="gap-5 flex flex-col  w-full ">
             {accordionData.map((item, i) => (
               <AccordionItem
@@ -67,15 +67,15 @@ const FAQPage = () => {
                 className="border-Gray-100 border "
                 key={i}
               >
-                <AccordionTrigger className="uppercase transition-transform duration-500 text-[14px] md:text-base px-2 font-semibold border-b-0 data-[state=open]:bg-Black-100 data-[state=open]:text-White-100 data-[state=open]:no-underline  ">
+                <AccordionTrigger className="uppercase hover:no-underline text-left  transition-colors duration-300 text-[14px] md:text-base px-4 font-semibold border-b-0 data-[state=open]:bg-Black-100 data-[state=open]:text-White-100 data-[state=open]:no-underline  ">
                   {item.heading}
                 </AccordionTrigger>
                 <AccordionContent className="p-4 leading-4 md:leading-6 text-base md:text-lg">
                   <p>{item.description}</p>
                   {item.list && (
-                    <ul>
+                    <ul className="flex flex-col gap-1.5 pl-0 ml-[1.0625rem] mt-2">
                       {item.list.map((item, i) => (
-                        <li className="list-decimal list-inside" key={i}>
+                        <li className="list-decimal " key={i}>
                           {item}
                         </li>
                       ))}
@@ -88,19 +88,19 @@ const FAQPage = () => {
         </div>
 
         <section className="w-full">
-          <div className="w-full max-w-[1400px] mx-auto h-full flex justify-center items-center gap-10 flex-col bg-Green-200 p-10 md:p-28">
+          <div className="w-full max-w-[1400px] px-[5vw] lg:px-[3vw] mx-auto h-full flex justify-center items-center gap-10 flex-col bg-Green-200 py-10 md:py-28">
             <h1 className="text-3xl md:text-4xl uppercase  tracking-wider font-bold text-center">
               Ready to Optimize Your Health?
             </h1>
 
             <Button
               variant="lemon"
-              className="flex justify-between items-center p-4 gap-2 w-fit border border-Green-100 h-11"
+              className="flex justify-between items-center flex-wrap p-4 gap-x-6 gap-y-3 w-full sm:w-fit md:gap-x-16  min-h-11 h-fit border border-Green-100"
             >
-              <span className="uppercase text-base lg:text-xl font-semibold">
+              <span className="uppercase text-base lg:text-xl font-semibold mx-auto text-wrap">
                 start your zenovate journey today
               </span>
-              <ArrowRight size="24" className=" font-bold" />
+              <ArrowRight size="24" className=" font-bold hidden md:inline-block" />
             </Button>
           </div>
         </section>

@@ -73,11 +73,11 @@ const CustomersFeedback = () => {
           <CarouselContent>
             {feedback.map((item, i) => (
               <CarouselItem className="md:basis-1/2 lg:basis-1/3 " key={i}>
-                <div className="flex flex-col justify-between gap-10 lg:gap-28 bg-White-100 border border-Black-100 p-5 sm:p-8  h-full">
-                  <h4 className="text-xl lg:text-2xl font-semibold">
+                <div className="flex flex-col justify-between gap-10 lg:gap-20 bg-White-100 border border-Black-100 p-5 sm:p-8  h-full">
+                  <h4 className="text-lg lg:text-xl font-semibold">
                     {item.text}
                   </h4>
-                  <h5 className="text-lg uppercase lg:text-xl font-semibold">
+                  <h5 className="text-base uppercase lg:text-lg font-semibold">
                     {item.user} , {item.age} , {item.profession}
                   </h5>
                 </div>

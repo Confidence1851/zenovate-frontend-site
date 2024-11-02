@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { MoveUpRight } from "lucide-react";
+import { ArrowUpRight, MoveUpRight } from "lucide-react";
 import Link from "next/link";
 
 type ArticleType = {
@@ -16,9 +16,11 @@ const ArticleCard: React.FC<ArticleCardProps> = ({ article }) => {
       <CardContent className="flex flex-col items-center p-0 gap-4">
         <div className="h-[300px] w-full bg-OffWhite-100" />
         <div className="flex justify-between w-full">
-          <p className="text-sm font-semibold max-w-[70%]">{article.content}</p>
+          <p className="text-sm font-semibold max-w-[70%] line-clamp-2">
+            {article.content}
+          </p>
           <Link href={`/blog/${article.id}`}>
-            <MoveUpRight size={16} />
+            <ArrowUpRight size={20} />
           </Link>
         </div>
       </CardContent>
