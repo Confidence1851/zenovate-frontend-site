@@ -8,11 +8,7 @@ cmds = [
 
 [phases.build]
 cmds = [
-    'ls -la src/components/ui',
-    'ls -la src/components/about-page',
-    'ls -la src/components/blogs',
-    'ls -la src/components/common',
-    'node node_modules/next/dist/bin/next build',
+    'bun node_modules/next/dist/bin/next build',
 ]
 [start]
 cmd = 'bun start'
