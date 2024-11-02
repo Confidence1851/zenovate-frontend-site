@@ -1,15 +1,14 @@
 [phases.setup]
-nixPkgs = ['bun']
+nixPkgs = ['nodejs', 'bun']
 
 [phases.install]
 cmds = [
     'bun install --frozen-lockfile --production',
-    'bun add -d tsconfig-paths'
 ]
 
 [phases.build]
 cmds = [
-    'bun run build'
+    'node node_modules/next/dist/bin/next build',
 ]
 
 [start]
