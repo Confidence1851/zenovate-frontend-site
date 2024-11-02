@@ -8,9 +8,9 @@ cmds = [
 
 [phases.build]
 cmds = [
+    'ls -la src/components',  # Add this to debug
     'node node_modules/next/dist/bin/next build',
 ]
-
 [start]
 cmd = 'bun start'
 
