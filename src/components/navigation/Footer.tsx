@@ -1,8 +1,7 @@
 import { navLinks } from "@/utils/navigation";
 import Logo from "./Logo";
 import Link from "next/link";
-import { Call, Facebook, Instagram, Location } from "iconsax-react";
-import { Linkedin, Twitter } from "lucide-react";
+import { Call, Location } from "iconsax-react";
 import linkedinLogo from "@/assets/images/linkedin.png";
 import instaLogo from "@/assets/images/instagram.png";
 import facebookLogo from "@/assets/images/facebook.png";
