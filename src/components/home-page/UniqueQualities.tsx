@@ -24,13 +24,13 @@ const uniqueQualities = [
 ];
 const UniqueQualities = () => {
   return (
-    <section className="bg-Green-200 space-y-12 md:space-y-14 xl:space-y-24 pb-12 md:pb-16 lg:pb-20 xl:pb-40">
+    <section className="bg-Green-200 space-y-12 md:space-y-14 xl:space-y-16 pb-12 md:pb-16 lg:pb-20 ">
       <div className="w-full mb-[-8px] md:mb-0 max-w-[1550px] mx-auto h-full flex justify-end flex-col  px-[5vw] sm:px-[3.5vw] lg:px-[3vw]">
-        <div className="flex flex-col gap-0 lg:gap-3  pt-12 md:pt-16 lg:pt-20 xl:pt-32 w-full max-w-[1500px] mx-auto">
-          <h1 className="text-3xl md:text-[44px] md:leading-tight xl:text-8xl uppercase  tracking-wider font-bold text-Green-100">
+        <div className="flex flex-col gap-0 lg:gap-3  pt-12 md:pt-16 lg:pt-20  w-full max-w-[1500px] mx-auto">
+          <h1 className="text-3xl md:text-[44px] md:leading-tight xl:text-7xl uppercase  tracking-wider font-bold text-Green-100">
             discover the
           </h1>
-          <h1 className="text-3xl md:text-[44px] md:leading-tight xl:text-8xl uppercase min-[1400px]:text-right tracking-wider  min-[1400px]:pr-20  font-bold text-Green-100">
+          <h1 className="text-3xl md:text-[44px] md:leading-tight xl:text-7xl uppercase min-[1400px]:text-right tracking-wider  min-[1400px]:pr-[14rem]  font-bold text-Green-100">
             zenovate differences
           </h1>
         </div>

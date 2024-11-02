@@ -3,41 +3,44 @@ import Logo from "./Logo";
 import Link from "next/link";
 import { Call, Facebook, Instagram, Location } from "iconsax-react";
 import { Linkedin, Twitter } from "lucide-react";
+import linkedinLogo from "@/assets/images/linkedin.png";
+import instaLogo from "@/assets/images/instagram.png";
+import facebookLogo from "@/assets/images/facebook.png";
+import xLogo from "@/assets/images/x.png";
+import Image from "next/image";
+
+// (
+//   <Instagram size={30} className="text-White-100 hover:text-Green-400" />
+// ),
 
 const socialMedia = [
   {
     name: "X",
     link: "#",
-    icon: <Twitter size={30} className="text-White-100 hover:text-Green-400" />,
+    icon: xLogo,
     // icon: <X size={30} className="text-Green-400" />,
   },
   {
     name: "instagram",
     link: "#",
-    icon: (
-      <Instagram size={30} className="text-White-100 hover:text-Green-400" />
-    ),
+    icon: instaLogo,
   },
   {
     name: "facebook",
     link: "#",
-    icon: (
-      <Facebook size={30} className="text-White-100 hover:text-Green-400" />
-    ),
+    icon: facebookLogo,
   },
   {
     name: "linkedin",
     link: "#",
-    icon: (
-      <Linkedin size={30} className="text-White-100 hover:text-Green-400" />
-    ),
+    icon: linkedinLogo,
   },
 ];
 
 const Footer = () => {
   return (
     <>
-      <nav className="bg-Green-100 py-10 md:pt-16 md:pb-12 xl:pt-24 px-[5vw] sm:px-[3.5vw] lg:px-[3vw] ">
+      <nav className="bg-Green-100 py-10 md:pt-16 md:pb-12 xl:pt-16 px-[5vw] sm:px-[3.5vw] lg:px-[3vw] ">
         <div className="xl:grid grid-cols-2 w-full max-w-[1550px] mx-auto space-y-12 md:space-y-16 lg:space-y-20 xl:space-y-0">
           <div className="flex justify-between flex-col gap-10">
             <h3 className="text-White-100 uppercase text-2xl font-semibold lg:text-4xl xl:text-[2.625rem] xl:leading-[2.75rem] max-w-[240px] lg:max-w-[254px] xl:max-w-[294px]">
@@ -83,10 +86,10 @@ const Footer = () => {
                   <h3 className="text-White-100 uppercase text-base font-semibold lg:text-xl">
                     follow us on social media
                   </h3>
-                  <div className="flex gap-4 items-center">
+                  <div className="flex gap-5 items-center">
                     {socialMedia.map((item) => (
                       <Link href={item.link} key={item.name}>
-                        {item.icon}
+                        <Image src={item.icon} alt={item.name} className="size-8" />
                       </Link>
                     ))}
                   </div>
@@ -109,7 +112,7 @@ const Footer = () => {
         </div>
       </nav>
 
-      <div className="bg-Black-100 px-[5vw] sm:px-[3.5vw] lg:px-[3vw] py-10 ">
+      <div className="bg-Black-100 px-[5vw] sm:px-[3.5vw] lg:px-[3vw] py-8 ">
         <div className="w-full max-w-[1550px] mx-auto flex flex-col lg:flex-row justify-between gap-6">
           <div className="flex gap-4 items-center">
             <Call size="32" className="text-Green-400" />

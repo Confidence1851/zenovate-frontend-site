@@ -71,7 +71,7 @@ const products = [
 
 const FeatureProducts = () => {
   return (
-    <section className="bg-White-100-100 space-y-24 py-12 md:py-16 lg:py-24 px-[5vw] sm:px-[3.5vw] lg:px-[3vw]">
+    <section className="bg-White-100-100 space-y-16 py-12 md:py-16 lg:py-16 px-[5vw] sm:px-[3.5vw] lg:px-[3vw]">
       <div className="w-full max-w-[1550px] mx-auto  space-y-20">
         <div className="max-w-[1550px] mx-auto">
           <Carousel

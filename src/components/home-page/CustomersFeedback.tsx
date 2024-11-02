@@ -46,13 +46,13 @@ const feedback = [
 ];
 const CustomersFeedback = () => {
   return (
-    <section className="bg-OffWhite-100 space-y-12 md:space-y-14 xl:space-y-24 pb-12 md:pb-16 lg:pb-20 xl:pb-40">
-      <div className="w-full max-w-[1550px] mx-auto h-full flex justify-end flex-col px-[5vw] sm:px-[3.5vw] lg:px-[3vw]   ">
-        <div className="flex flex-col gap-1.5 md:gap-3 xl:gap-5 pt-12 md:pt-16 lg:pt-20 xl:pt-32 w-full mx-auto">
-          <h2 className="text-lg md:text-[28px] md:leading-9 xl:text-5xl uppercase text-Green-300 font-semibold">
+    <section className="bg-OffWhite-100 space-y-12 md:space-y-14 xl:space-y-16 pb-12 md:pb-16 lg:pb-20 ">
+      <div className="w-full max-w-[1550px] mx-auto h-full flex justify-end flex-col    ">
+        <div className="flex flex-col gap-1.5 md:gap-3 xl:gap-5 pt-12 md:pt-16 lg:pt-20  w-full mx-auto px-[5vw] sm:px-[3.5vw] lg:px-[3vw]">
+          <h2 className="text-lg md:text-[28px] md:leading-9 xl:text-4xl uppercase text-Green-300 font-semibold">
             Real Stories, Real Transformations
           </h2>
-          <h1 className="text-[28px] leading-9 md:text-[44px] md:leading-tight xl:text-8xl uppercase  tracking-wider font-bold">
+          <h1 className="text-[28px] leading-9 md:text-[44px] md:leading-tight xl:text-7xl uppercase  tracking-wider font-bold">
             What our customers are saying
           </h1>
           {/* <h1 className="text-4xl md:text-5xl xl:text-8xl uppercase xl:text-right tracking-wider lg:pr-20 font-bold">
@@ -73,7 +73,7 @@ const CustomersFeedback = () => {
           <CarouselContent>
             {feedback.map((item, i) => (
               <CarouselItem className="md:basis-1/2 lg:basis-1/3 " key={i}>
-                <div className="flex flex-col justify-between gap-10 lg:gap-28 bg-White-100 border border-Black-100  p-8  h-full">
+                <div className="flex flex-col justify-between gap-10 lg:gap-28 bg-White-100 border border-Black-100 p-5 sm:p-8  h-full">
                   <h4 className="text-xl lg:text-2xl font-semibold">
                     {item.text}
                   </h4>

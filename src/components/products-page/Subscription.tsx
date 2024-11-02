@@ -4,8 +4,8 @@ import { ArrowRight } from "iconsax-react";
 
 const Subscription = () => {
   return (
-    <section className=" py-0  lg:py-24 lg:px-[3vw]">
-      <div className="w-full max-w-[1400px] mx-auto h-full  bg-Green-200 py-14 md:py-16 lg:py-24 px-[5vw] md:px-[3.5vw]">
+    <section className=" py-0  lg:py-16 lg:px-[3vw]">
+      <div className="w-full max-w-[1400px] mx-auto h-full  bg-Green-200 py-14 md:py-16 lg:py-20 px-[5vw] md:px-[3.5vw]">
         <div className="flex justify-center items-center gap-7 md:gap-10 flex-col max-w-[600px] mx-auto">
           <h1 className="text-3xl md:text-4xl lg:text-[2.625rem] lg:leading-tight  uppercase  tracking-wider font-bold text-center">
             get up to 10% off with an active subscription

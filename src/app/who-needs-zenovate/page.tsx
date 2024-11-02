@@ -61,7 +61,7 @@ const WhoNeedsZenovatePage = () => {
         description="Zenovate&lsquo;s personalized nutrient therapy is designed to support individuals from all walks of life in achieving optimal health and well-being."
         heading="Personalized Nutrient Therapy for Every Lifestyle"
       />
-      <section className="py-12 md:py-16 lg:py-24 px-[5vw] sm:px-[3.5vw] lg:px-[3vw]">
+      <section className="py-12 md:py-16 lg:py-16 px-[5vw] sm:px-[3.5vw] lg:px-[3vw]">
         <div className="w-full max-w-[1550px] mx-auto">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-[1200px] mx-auto">
             {cardDetails.map((item, i) => (

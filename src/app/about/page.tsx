@@ -69,22 +69,22 @@ const AboutPage = () => {
       {/* THE team */}
       {/* <Team /> */}
 
-      <section className=" lg:p-20">
-        <div className="w-full max-w-[1400px] mx-auto h-full flex justify-center items-center gap-10 flex-col bg-Green-200 py-10 md:p-28">
+      <section className=" py-0  lg:py-16 lg:px-[3vw]">
+        <div className="w-full max-w-[1400px] mx-auto h-full flex justify-center items-center gap-10 flex-col bg-Green-200 py-14 md:py-16 lg:py-20 px-[5vw] md:px-[3.5vw]">
           <div className="flex justify-center items-center gap-10 flex-col max-w-[800px] mx-auto">
-            <h1 className="text-3xl md:text-4xl uppercase  tracking-wider font-bold text-center">
+            <h1 className="text-3xl md:text-4xl lg:text-[2.625rem] lg:leading-tight  uppercase  tracking-wider font-bold text-center">
               Join the Zenovate community today and experience the
               transformative power of personalized nutrient therapy.
             </h1>
 
             <Button
               variant="lemon"
-              className="flex justify-between items-center p-4 md:gap-20 gap-3 w-fit border border-Green-100 h-11"
+              className="flex justify-between items-center flex-wrap p-4 gap-x-6 gap-y-3 w-full sm:w-fit  md:gap-x-16 md:gap-20 gap-3  border border-Green-100 min-h-11 h-fit "
             >
-              <span className="uppercase text-sm md:text-xl font-semibold">
+              <span className="uppercase mx-auto text-sm md:text-xl font-semibold">
                 Start Your Journey to Optimal Health Now
               </span>
-              <ArrowRight size="24" className=" font-bold" />
+              <ArrowRight size="24" className=" mx-auto font-bold" />
             </Button>
           </div>
         </div>

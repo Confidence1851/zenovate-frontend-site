@@ -26,9 +26,9 @@ const feedback = [
 ];
 const CustomerReviews = () => {
   return (
-    <section className="bg-OffWhite-100 space-y-12 md:space-y-16 lg:space-y-24 pb-12 md:pb-16 lg:pb-24 ">
+    <section className="bg-OffWhite-100 space-y-12 md:space-y-16 lg:space-y-16 pb-12 md:pb-16 lg:pb-16 ">
       <div className="w-full max-w-[1550px] mx-auto h-full flex justify-end flex-col px-[5vw] sm:px-[3.5vw] lg:px-[3vw]">
-        <div className="flex flex-col gap-1 md:gap-3 lg:gap-3 pt-12 md:pt-16 lg:pt-24 w-full mx-auto max-w-[900px]">
+        <div className="flex flex-col gap-1 md:gap-3 lg:gap-3 pt-12 md:pt-16 lg:pt-16 w-full mx-auto max-w-[900px]">
           <h1 className="text-4xl leading-10 md:text-5xl lg:text-8xl uppercase  tracking-wider font-bold">
             customer
           </h1>

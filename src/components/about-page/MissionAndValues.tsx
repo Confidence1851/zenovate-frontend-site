@@ -31,13 +31,13 @@ const values = [
 
 const MissionAndValues = () => {
   return (
-    <section className="bg-White-100 space-y-24 pb-20 lg:pb-40">
-      <div className="w-full max-w-[1550px] mx-auto h-full flex justify-end flex-col  px-2">
-        <div className="flex flex-col gap-3 pt-8 lg:pt-20 w-full mx-auto">
-          <h1 className="text-4xl md:text-5xl lg:text-8xl uppercase  tracking-wider font-bold">
+    <section className="bg-White-100 space-y-7 md:space-y-14 xl:space-y-16 pb-12 md:pb-16 lg:pb-20 ">
+      <div className="w-full max-w-[1550px] mx-auto h-full flex justify-end flex-col px-[5vw] sm:px-[3.5vw] lg:px-[3vw] ">
+        <div className="flex flex-col gap-0 md:gap-3 xl:gap-4 pt-8 lg:pt-20 w-full mx-auto">
+          <h1 className="text-[28px] leading-9 md:text-[44px] md:leading-tight xl:text-7xl uppercase  tracking-wider font-bold">
             our approach
           </h1>
-          <h1 className="text-4xl md:text-5xl lg:text-8xl uppercase lg:text-right tracking-wider lg:pr-20 font-bold text-Green-300">
+          <h1 className="text-[28px] leading-9 md:text-[44px] md:leading-tight xl:text-7xl uppercase lg:text-right tracking-wider lg:pr-20 font-bold text-Green-300">
             what makes us different
           </h1>
         </div>
@@ -45,20 +45,20 @@ const MissionAndValues = () => {
       {/* DIVIDER */}
       <div className="border w-full bg-Black-100" />
 
-      <div className=" w-full max-w-[1550px] mx-auto px-2 xl:px-0">
+      <div className=" w-full max-w-[1550px] mx-auto px-[5vw] sm:px-[3.5vw] lg:px-[3vw]">
         <Carousel className="flex flex-col gap-10">
-          <CarouselContent className="gap-8 ml-4">
+          <CarouselContent className=" ">
             {values.map((item, i) => (
               <CarouselItem
-                className="md:basis-1/2 lg:basis-1/3 flex flex-col justify-between gap-10 lg:gap-28 bg-White-100  pl-0 md:pl-4"
+                className="md:basis-1/2 lg:basis-1/3 flex flex-col justify-between gap-10 lg:gap-28 bg-White-100 "
                 key={i}
               >
                 <div
                   className=" gap-4 w-full flex flex-col justify-between flex-shrink-0"
                   key={i}
                 >
-                  <h1 className="text-3xl uppercase font-bold">
-                    Title goes here
+                  <h1 className=" text-2xl md:text-3xl uppercase font-bold">
+                    {item.heading}
                   </h1>
                   <h3>
                     We understand that each individual&apos;s health journey is

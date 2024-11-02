@@ -3,6 +3,7 @@ import "./globals.css";
 import { Barlow } from "next/font/google";
 import Navbar from "@/components/navigation/Navbar";
 import Footer from "@/components/navigation/Footer";
+import { ReactLenis } from "@/utils/lenis";
 const barlow = Barlow({
   weight: ["400", "100", "200", "300", "500", "900", "700", "400", "600"],
   subsets: ["latin"],
@@ -19,11 +20,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${barlow.className} antialiased`}>
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
-      </body>
+      <ReactLenis root>
+        <body className={`${barlow.className} antialiased`}>
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
+        </body>
+      </ReactLenis>
     </html>
   );
 }
