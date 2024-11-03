@@ -27,45 +27,58 @@ const ContactForm = () => {
       <Form {...form}>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="space-y-11 py-4 max-w-[1200px]"
+          className=" space-y-8 md:space-y-11 py-4 max-w-[1200px]"
         >
-          <div className="grid lg:grid-cols-2 gap-6">
-            <FormInputText
-              name="fullname"
-              label="full name"
-              placeholder="email@domain.com"
-              control={control}
-              errors={errors}
-            />
-            <FormInputText
-              name="email"
-              label="Email address"
-              placeholder="email@domain.com"
-              control={control}
-              errors={errors}
-            />
-            <FormInputText
-              name="phone"
-              label="Phone"
-              placeholder="+1 234 567 890"
-              control={control}
-              errors={errors}
-            />
-            <FormInputText
-              name="subject"
-              label="subject"
-              placeholder="I have an enquiry"
-              control={control}
-              errors={errors}
-            />
+          <div className="grid lg:grid-cols-2 gap-4 md:gap-5 lg:gap-6">
+            <div className="col-span-2 md:col-span-1">
+              <FormInputText
+                name="fullname"
+                label="full name"
+                placeholder="email@domain.com"
+                control={control}
+                errors={errors}
+                className="1border !border-[#162C15] !h-12 !text-base "
+              />
+            </div>
+            <div className="col-span-2 md:col-span-1">
+              <FormInputText
+                name="email"
+                label="Email address"
+                placeholder="email@domain.com"
+                control={control}
+                errors={errors}
+                className="1border !border-[#162C15] !h-12 !text-base "
+              />
+            </div>
+            <div className="col-span-2 md:col-span-1">
+              <FormInputText
+                name="phone"
+                label="Phone"
+                placeholder="+1 234 567 890"
+                control={control}
+                errors={errors}
+                className="1border !border-[#162C15] !h-12 !text-base "
+              />
+            </div>
+            <div className="col-span-2 md:col-span-1">
+              <FormInputText
+                name="subject"
+                label="subject"
+                placeholder="I have an enquiry"
+                control={control}
+                errors={errors}
+                className="1border !border-[#162C15] !h-12 !text-base "
+              />
+            </div>
             <div className="col-span-2">
               <FormTextArea
                 rows={5}
                 name="message"
-                label="message"
+                label="MESSAGE"
                 placeholder="your message goes here...."
                 control={control}
                 errors={errors}
+                className="1border !border-[#162C15] !text-base"
               />
             </div>
           </div>

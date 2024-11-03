@@ -13,7 +13,7 @@ const HomePage = () => {
       {/* HERO */}
       <section className=" relative h-[calc(100dvh-60px)] sm:max-h-[600px] xl:max-h-fit  bg-Gray-200 px-[5vw] sm:px-[3.5vw] lg:px-[3vw]">
         {/* overlay */}
-        <div className="absolute z-20 top-0 left-0 h-full w-full bg-black opacity-50"></div>
+        <div className="absolute z-20 top-0 left-0 h-full w-full bg-black opacity-60"></div>
 
         <div className="w-full relative z-30 max-w-[1550px] mx-auto h-full flex justify-end flex-col pb-16 md:pb-[6rem] lg:pb-40 ">
           <div className="w-full max-w-[600px] flex flex-col gap-1 md:gap-4 ">
@@ -37,7 +37,7 @@ const HomePage = () => {
         </div>
 
         <video
-          src="/videos/energy1.mp4"
+          src="/videos/energy3.mp4"
           autoPlay
           loop
           muted

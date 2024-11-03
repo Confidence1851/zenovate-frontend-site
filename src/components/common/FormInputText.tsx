@@ -53,7 +53,7 @@ const FormInputText = <TFormValues extends Record<string, unknown>>({
           <p
             className={`${
               hasError ? "text-red-600" : "text-Green-100"
-            }  text-base font-semibold uppercase`}
+            }  text-sm lg:text-base font-semibold uppercase`}
           >
             {label}
           </p>

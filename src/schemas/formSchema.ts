@@ -4,12 +4,12 @@ import * as z from "zod";
 export const contactSchema = z.object({
   fullname: z
     .string({ required_error: "Full name is required" })
-    .email({ message: "Inavlid email" })
     .refine((data) => data.trim() !== "", {
       message: "Full name is required",
     }),
   email: z
     .string({ required_error: "Email is required" })
+    .email({ message: "Inavlid email" })
     .refine((data) => data.trim() !== "", {
       message: "Email is required",
     }),
