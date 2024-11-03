@@ -19,8 +19,13 @@ type CarouselProps = {
   orientation?: "horizontal" | "vertical";
   setApi?: (api: CarouselApi) => void;
   autoplayInterval?: number; // Optional prop to set autoplay interval in milliseconds
+  carouselRef?: ReturnType<typeof useEmblaCarousel>[0];
+  api?: CarouselApi;
+  scrollPrev?: () => void;
+  scrollNext?: () => void;
+  canScrollPrev?: boolean;
+  canScrollNext?: boolean;
 };
-
 const CarouselContext = React.createContext<CarouselProps | null>(null);
 
 function useCarousel() {
