@@ -21,6 +21,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <ReactLenis root>
+        <head>
+          <script defer data-domain="zenovate.health" src="https://analytics.aes-studio.com/js/script.js"></script>
+        </head>
         <body className={`${barlow.className} antialiased`}>
           <Navbar />
           <main>{children}</main>
