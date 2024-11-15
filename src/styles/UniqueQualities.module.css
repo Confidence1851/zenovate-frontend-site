@@ -1,0 +1,7 @@
+.header {
+	@apply text-3xl md:text-[44px] md:leading-tight xl:text-7xl uppercase tracking-wider font-bold text-Green-100;
+}
+
+.headerLeft {
+	@apply min-[1400px]:text-right  min-[1400px]:pr-[14rem];
+}

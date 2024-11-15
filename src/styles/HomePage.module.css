@@ -1,0 +1,11 @@
+.section {
+	@apply bg-White-100 px-[5vw];
+	@apply sm:px-[3.5vw] lg:px-[3vw];
+	@apply py-10 md:py-16;
+}
+
+.paragraph {
+	@apply text-Black-100 leading-6 font-medium;
+	@apply max-w-[800px] lg:max-w-[900px];
+	@apply text-lg sm:text-xl md:text-lg lg:text-2xl;
+}

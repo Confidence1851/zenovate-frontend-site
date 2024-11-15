@@ -1,9 +1,9 @@
 const promises = [
-  "Personalized, science-backed nutrient therapy formulations",
-  "Expert medical guidance and support",
-  "Convenient, at-home delivery and administration",
-  "A commitment to your success and satisfaction",
-];
+	'Personalized, science-backed nutrient therapy formulations',
+	'Expert medical guidance and support',
+	'Convenient, at-home delivery and administration',
+	'A commitment to your success and satisfaction'
+]
 const OurPromise = () => {
   return (
     <section className="bg-White-100 py-10 lg:py-16 px-[5vw] sm:px-[3.5vw] lg:px-[3vw]">
@@ -37,4 +37,4 @@ const OurPromise = () => {
   );
 };
 
-export default OurPromise;
+export default OurPromise

@@ -1,33 +1,27 @@
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "../ui/carousel";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '../ui/carousel'
 
 const values = [
-  {
-    heading: "Personalization",
-    content:
-      "We understand that each individual&apos;s health journey is unique. That's why we work closely with you to develop a tailored treatment plan that addresses your specific needs and goals",
-  },
-  {
-    heading: "Scientific Experitse",
-    content:
-      "Our team of licensed physicians and nutrition experts stays at the forefront of the latest research to ensure that our formulations are both safe and effective.",
-  },
-  {
-    heading: "Convenience",
-    content:
-      "We believe that prioritizing your health shouldn't come at the cost of your busy lifestyle. With our at-home injections and telemedicine platform, you can experience the benefits of personalized nutrient therapy without disrupting your daily routine",
-  },
-  {
-    heading: "Empowerment",
-    content:
-      "We&apos;re committed to empowering you with the knowledge and tools you need to take control of your health. Our team is here to support you every step of the way, from initial consultation to ongoing progress tracking and optimization.",
-  },
-];
+	{
+		heading: 'Personalization',
+		content:
+			"We understand that each individual&apos;s health journey is unique. That's why we work closely with you to develop a tailored treatment plan that addresses your specific needs and goals"
+	},
+	{
+		heading: 'Scientific Experitse',
+		content:
+			'Our team of licensed physicians and nutrition experts stays at the forefront of the latest research to ensure that our formulations are both safe and effective.'
+	},
+	{
+		heading: 'Convenience',
+		content:
+			"We believe that prioritizing your health shouldn't come at the cost of your busy lifestyle. With our at-home injections and telemedicine platform, you can experience the benefits of personalized nutrient therapy without disrupting your daily routine"
+	},
+	{
+		heading: 'Empowerment',
+		content:
+			'We&apos;re committed to empowering you with the knowledge and tools you need to take control of your health. Our team is here to support you every step of the way, from initial consultation to ongoing progress tracking and optimization.'
+	}
+]
 
 const MissionAndValues = () => {
   return (
@@ -89,4 +83,4 @@ const MissionAndValues = () => {
   );
 };
 
-export default MissionAndValues;
+export default MissionAndValues
