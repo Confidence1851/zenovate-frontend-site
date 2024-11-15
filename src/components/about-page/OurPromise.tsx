@@ -6,10 +6,10 @@ const promises = [
 ];
 const OurPromise = () => {
   return (
-    <section className="bg-OffWhite-100 py-10 lg:py-16 px-[5vw] sm:px-[3.5vw] lg:px-[3vw]">
+    <section className="bg-White-100 py-10 lg:py-16 px-[5vw] sm:px-[3.5vw] lg:px-[3vw]">
       <div className="w-full max-w-[1550px] mx-auto flex gap-6 lg:gap-16 flex-col xl:flex-row items-center">
         <div className="flex flex-col gap-4 lg:gap-10">
-          <h1 className="text-4xl md:text-5xl lg:text-7xl uppercase  tracking-wider font-bold">
+          <h1 className="text-[28px] leading-9 md:text-[44px] md:leading-none xl:text-7xl uppercase  tracking-wider font-bold">
             our promise
           </h1>
           <div>

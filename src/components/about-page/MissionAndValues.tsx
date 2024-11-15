@@ -31,14 +31,14 @@ const values = [
 
 const MissionAndValues = () => {
   return (
-    <section className="bg-White-100 space-y-7 md:space-y-14 xl:space-y-16 pb-12 md:pb-16 lg:pb-20 ">
+    <section className="bg-White-100 space-y-7 md:space-y-10 xl:space-y-16 pb-12 md:pb-16 lg:pb-20 ">
       <div className="px-[5vw] sm:px-[3.5vw] lg:px-[3vw] ">
         <div className="w-full max-w-[1550px] mx-auto h-full flex justify-end flex-col ">
           <div className="flex flex-col gap-0 md:gap-3 xl:gap-4 pt-8 lg:pt-20 w-full mx-auto">
-            <h1 className="text-[28px] leading-9 md:text-[44px] md:leading-tight xl:text-7xl uppercase  tracking-wider font-bold">
+            <h1 className="text-[28px] leading-9 md:text-[44px] md:leading-none xl:text-7xl uppercase  tracking-wider font-bold">
               our approach
             </h1>
-            <h1 className="text-[28px] leading-9 md:text-[44px] md:leading-tight xl:text-7xl uppercase lg:text-right tracking-wider lg:pr-20 font-bold text-Green-300">
+            <h1 className="text-[28px] leading-9 md:text-[44px] md:leading-none xl:text-7xl uppercase lg:text-right tracking-wider lg:pr-20 font-bold text-Green-300">
               what makes us different
             </h1>
           </div>
@@ -48,7 +48,12 @@ const MissionAndValues = () => {
       <div className="border w-full bg-Black-100" />
       <div className="px-[5vw] sm:px-[3.5vw] lg:px-[3vw] ">
         <div className=" w-full max-w-[1550px] mx-auto ">
-          <Carousel className="flex flex-col gap-10">
+          <Carousel
+            opts={{
+              align: "start",
+            }}
+            className="flex flex-col gap-10"
+          >
             <CarouselContent className=" ">
               {values.map((item, i) => (
                 <CarouselItem
