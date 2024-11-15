@@ -1,0 +1,15 @@
+.section {
+	@apply bg-OffWhite-100 px-[5vw];
+	@apply space-y-12 md:space-y-14 xl:space-y-16;
+	@apply pb-12 md:pb-16 lg:pb-20;
+}
+
+.headerTwo {
+	@apply font-barlow uppercase text-Green-300 font-semibold leading-tight tracking-tight;
+	@apply text-lg md:text-lg xl:text-2xl;
+}
+
+.headerOne {
+	@apply font-raleway uppercase font-medium leading-tight tracking-tight;
+	@apply text-[28px] md:text-[44px] xl:text-7xl;
+}
