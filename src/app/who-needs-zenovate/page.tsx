@@ -49,8 +49,8 @@ const WhoNeedsZenovatePage = () => {
 	return (
 		<main>
 			<PageHeroWrapper
-				description='Zenovate&lsquo;s personalized nutrient therapy is designed to support individuals from all walks of life in achieving optimal health and well-being.'
-				heading='Personalized Nutrient Therapy for Every Lifestyle'
+				description='Zenovate&lsquo;s personalized plan is designed to support individuals from all walks of life in achieving optimal health and well-being.'
+				heading='Personalized for Every Lifestyle'
 			/>
 			<section className='py-12 md:py-16 lg:py-16 px-[5vw] sm:px-[3.5vw] lg:px-[3vw]'>
 				<div className='w-full max-w-[1550px] mx-auto'>

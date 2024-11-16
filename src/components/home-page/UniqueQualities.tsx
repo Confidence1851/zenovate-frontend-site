@@ -8,25 +8,24 @@ const uniqueQualities = [
 	{
 		heading: 'Expert Medical Guidance',
 		description:
-			'Our licensed physicians work closely with you to develop a personalized treatment plan tailored to your specific needs and goals.',
+			'Our licensed prescribers work closely with you to develop a personalized treatment plan tailored to your specific needs and goals.',
 		image: doctor
 	},
 	{
 		heading: 'Science-Backed Formulations',
 		description:
-			'We leverage the latest research to create precision-targeted nutrient blends that deliver optimal results.',
+			'We leverage the latest research to create precision-targeted  wellness shots that deliver optimal results.',
 		image: tube
 	},
 	{
 		heading: 'Convenient At-Home Injections',
-		description:
-			'Our easy-to-use subcutaneous injections allow you to prioritize your health without disrupting your busy lifestyle.',
+		description: 'Our easy-to-use shots allow you to prioritize your health without disrupting your busy lifestyle.',
 		image: needle
 	},
 	{
 		heading: 'Telemedicine Platform',
 		description:
-			'Access expert support, track your progress, and manage your personalized therapy through our user-friendly app.',
+			'Access expert support, track your progress, and manage your personalized therapy through our user-friendly website.',
 		image: phone
 	}
 ]

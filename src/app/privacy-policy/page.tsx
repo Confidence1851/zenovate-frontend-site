@@ -14,7 +14,7 @@ const policies = [
 	{
 		heading: 'How We Use Your Information',
 		list: [
-			'To provide you with personalized nutrient therapy recommendations and services',
+			'To provide you with personalized wellness plan recommendations and services',
 			'To communicate with you about your treatment plan and progress',
 			'To improve our products, services, and website experience  ',
 			'To send you relevant information, updates, and promotional offers (with your consent)',

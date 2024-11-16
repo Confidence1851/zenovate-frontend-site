@@ -16,7 +16,7 @@ const data = [
 	{
 		heading: 'Convenient At-Home Delivery',
 		description:
-			"Once your personalized nutrient therapy plan is developed, we'll deliver your precision-formulated injections right to your doorstep. Our easy-to-use subcutaneous injections come with clear instructions and all the necessary supplies for safe and effective administration in the comfort of your own home."
+			"Once your personalized plan is developed, we'll deliver your precision-formulated injections right to your doorstep. Our easy-to-use subcutaneous injections come with clear instructions and all the necessary supplies for safe and effective administration in the comfort of your own home."
 	},
 	{
 		heading: 'Ongoing Support and Optimization',
@@ -29,7 +29,7 @@ const faq = [
 	{
 		heading: 'How do I know if Zenovate is right for me?',
 		description:
-			" Zenovate's personalized nutrient therapy is designed to support individuals from all walks of life in achieving optimal health and well-being. Whether you're a busy professional, an athlete, a wellness enthusiast, or anyone seeking to elevate their health, Zenovate can help you reach your goals."
+			" Zenovate's personalized plans is designed to support individuals from all walks of life in achieving optimal health and well-being. Whether you're a busy professional, an athlete, a wellness enthusiast, or anyone seeking to elevate their health, Zenovate can help you reach your goals."
 	},
 	{
 		heading: ' Is Zenovate safe?',
@@ -39,14 +39,14 @@ const faq = [
 	{
 		heading: 'How long does it take to see results?',
 		description:
-			"   While individual results may vary, many of our clients report feeling the benefits of Zenovate's personalized nutrient therapy within the first few weeks of treatment. Our team will work with you to monitor your progress and make any necessary adjustments to optimize your results."
+			'While individual results may vary, many of our clients report feeling the benefits within the first few weeks of starting their wellness plan. Our team will work with you to monitor your progress and make any necessary adjustments to optimize your results.'
 	}
 ]
 const HowItWorksPage = () => {
 	return (
 		<main>
 			<PageHeroWrapper
-				description="At Zenovate, we've made personalized nutrient therapy easy and accessible. Here's how it works:"
+				description="At Zenovate, we've made personalized wellness easy and accessible. Here's how it works:"
 				heading='ACHIEVE OPTIMAL HEALTH IN 4 Simple Steps'
 			/>
 			<section className='bg-White-100 py-10 lg:py-20'>

@@ -16,7 +16,7 @@ const values = [
 	{
 		heading: 'Convenience',
 		content:
-			"We believe that prioritizing your health shouldn't come at the cost of your busy lifestyle. With our at-home injections and telemedicine platform, you can experience the benefits of personalized nutrient therapy without disrupting your daily routine"
+			"We believe that prioritizing your health shouldn't come at the cost of your busy lifestyle. With our at-home injections and telemedicine platform, you can experience the benefits of personalized wellness without disrupting your daily routine"
 	},
 	{
 		heading: 'Empowerment',

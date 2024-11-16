@@ -21,7 +21,7 @@ const accordionData = [
 	{
 		heading: 'Is Zenovate right for me?',
 		description:
-			"Zenovate's personalized nutrient therapy is designed to support a wide range of individuals, from busy professionals and athletes to wellness enthusiasts and those managing chronic health conditions. Our expert team will work with you to determine if Zenovate is the right fit for your unique health needs and goals."
+			"Zenovate's personalized plan is designed to support a wide range of individuals, from busy professionals and athletes to wellness enthusiasts and those managing chronic health conditions. Our expert team will work with you to determine if Zenovate is the right fit for your unique health needs and goals."
 	},
 	{
 		heading: "Are Zenovate's nutrient therapies safe?",

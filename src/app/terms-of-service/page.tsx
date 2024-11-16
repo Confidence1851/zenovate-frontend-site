@@ -21,7 +21,7 @@ const TermsOfServicePage = () => {
 						<div className='max-w-[700px] space-y-6'>
 							<h3 className='text-lg md:text-xl font-semibold text-Black-100'>Use of Services</h3>
 							<p className='text-Black-100 text-base'>
-								Zenovate&apos;s personalized nutrient therapy services are intended for individuals aged 18 and over. By
+								Zenovate&apos;s personalized wellness services are intended for individuals aged 18 and over. By
 								using our services, you represent that you are of legal age and that the information you provide is
 								accurate and complete
 							</p>

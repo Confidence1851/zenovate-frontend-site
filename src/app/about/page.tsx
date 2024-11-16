@@ -59,7 +59,7 @@ const AboutPage = () => {
 
 			<PageHeroWrapper
 				heading='The Zenovate Story'
-				description=' Founded by a team of passionate healthcare professionals and wellness enthusiasts, Zenovate was born out of a shared vision: to make personalized, effective nutrient therapy accessible to all. We saw a need for a solution that combines the power of precision nutrition with the convenience of telehealth and at-home delivery'
+				description=' Founded by a team of passionate healthcare professionals and wellness enthusiasts, Zenovate was born out of a shared vision: to make personalized, effective  wellness shots accessible to all. We saw a need for a solution that combines the power of precision nutrition with the convenience of telehealth and at-home delivery'
 			/>
 
 			{/* Mission and values */}
