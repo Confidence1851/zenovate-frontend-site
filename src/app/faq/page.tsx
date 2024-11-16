@@ -7,14 +7,14 @@ const accordionData = [
 	{
 		heading: 'What is Zenovate?',
 		description:
-			'Zenovate is a revolutionary nutrient therapy platform that combines personalized, science-backed formulations with the convenience of telemedicine and at-home delivery. Our mission is to empower individuals to achieve optimal health and well-being through precision nutrition and expert medical guidance.'
+			'Zenovate is a revolutionary wellness platform that combines personalized, science-backed formulations with the convenience of telemedicine and at-home delivery. Our mission is to empower individuals to achieve optimal health and well-being through precision wellness shots and expert medical guidance.'
 	},
 	{
 		heading: 'How does Zenovate work?',
 		description: 'Zenovate works in three simple steps:',
 		list: [
 			' Complete a comprehensive online health assessment and consultation with a licensed physician.',
-			'Receive your personalized nutrient therapy, delivered right to your doorstep.',
+			'Receive your personalized wellness shots therapy, delivered right to your doorstep.',
 			'Access ongoing support, progress tracking, and treatment plan adjustments through our telemedicine platform.'
 		]
 	},
@@ -26,22 +26,22 @@ const accordionData = [
 	{
 		heading: "Are Zenovate's nutrient therapies safe?",
 		description:
-			"Yes, all of Zenovate's nutrient therapy formulations are developed by licensed physicians and nutrition experts, using only the highest quality, scientifically-backed ingredients. Our team works closely with you to ensure that your personalized treatment plan is safe and effective."
+			"Yes, all of Zenovate's formulations are developed by licensed prescribers, using only the highest quality, scientifically-backed ingredients. Our team works closely with you to ensure that your personalized treatment plan is safe and effective."
 	},
 	{
 		heading: 'How long does it take to see results with Zenovate?',
 		description:
-			"Individual results may vary, but many of our clients report experiencing the benefits of Zenovate's personalized nutrient therapy within the first few weeks of treatment. Our team will monitor your progress and make any necessary adjustments to optimize your results."
+			"Individual results may vary, but many of our clients report experiencing the benefits of Zenovate's personalized plans within the first few weeks. Our team will monitor your progress and make any necessary adjustments to optimize your results."
 	},
 	{
 		heading: 'Is Zenovate covered by insurance?',
 		description:
-			"At this time, Zenovate's services are not typically covered by insurance. However, we strive to make our personalized nutrient therapy as accessible and affordable as possible. Please contact our team to discuss pricing and payment options."
+			"At this time, Zenovate's services are not typically covered by insurance. However, we strive to make our products as accessible and affordable as possible. Please contact our team to discuss pricing and payment options."
 	},
 	{
 		heading: 'How do I get started with Zenovate?',
 		description:
-			"Getting started with Zenovate is easy! Simply visit our website and click on the 'Get Started' button to begin your comprehensive online health assessment and consultation with a licensed physician. From there, our team will work with you to develop your personalized nutrient therapy plan and arrange for convenient at-home delivery."
+			'Getting started with Zenovate is easy! Simply visit our website and click on the "Get Started" button to begin your comprehensive online health assessment and consultation with a licensed prescriber. From there, our team will work with you to develop your personalized plan and arrange for convenient at-home delivery.'
 	}
 ]
 const FAQPage = () => {

@@ -34,7 +34,7 @@ const faq = [
 	{
 		heading: ' Is Zenovate safe?',
 		description:
-			'   Absolutely. All of our nutrient therapy formulations are developed by licensed physicians and nutrition experts, using only the highest quality, scientifically-backed ingredients. Our team works closely with you to ensure that your treatment plan is safe and effective for your unique needs.'
+			'Absolutely. All of our formulations are developed by licensed prescribers, using only the highest quality, scientifically-backed ingredients. Our team works closely with you to ensure that your wellness plan is safe and effective for your unique needs.'
 	},
 	{
 		heading: 'How long does it take to see results?',
@@ -47,7 +47,7 @@ const HowItWorksPage = () => {
 		<main>
 			<PageHeroWrapper
 				description="At Zenovate, we've made personalized nutrient therapy easy and accessible. Here's how it works:"
-				heading='ACHIEVE OPTIMAL HEALTH IN 3 Simple Steps'
+				heading='ACHIEVE OPTIMAL HEALTH IN 4 Simple Steps'
 			/>
 			<section className='bg-White-100 py-10 lg:py-20'>
 				<div className='w-full max-w-[1550px] mx-auto px-[5vw] sm:px-[3.5vw]'>

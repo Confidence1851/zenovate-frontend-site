@@ -5,7 +5,7 @@ import BlogSectionWrapper from './BlogSectionWrapper'
 const expertInsights = [
 	{
 		id: '1',
-		content: 'Zenovate Launches Revolutionary Telemedicine Platform for Personalized Nutrient Therapy '
+		content: 'Zenovate Launches Revolutionary Telemedicine Platform for Personalized  Wellness Shots '
 	},
 	{
 		id: '2',

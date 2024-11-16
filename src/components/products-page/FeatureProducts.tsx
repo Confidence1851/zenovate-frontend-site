@@ -67,9 +67,9 @@ const FeatureProducts = () => {
 					>
 						<div className='flex  justify-between items-end'>
 							<p className='text-xl md:text-2xl max-w-[700px] font-semibold'>
-								Zenovate offers a range of personalized nutrient therapies designed to support specific health goals and
-								address individual needs. Our precision-formulated injections are developed by licensed physicians and
-								nutrition experts, ensuring safe and effective results.
+								Zenovate offers a range of personalized wellness shots designed to support specific health goals and
+								address individual needs. Our precision-formulated injections are developed by licensed prescribers,
+								ensuring safe and effective results.
 							</p>
 							<div className='lg:flex justify-end gap-10 items-center hidden'>
 								<CarouselPrevious className='!relative !left-0 !top-0  border-0 shadow-none p-0 translate-y-0' />

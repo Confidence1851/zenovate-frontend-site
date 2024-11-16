@@ -5,7 +5,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 const featuredArticles = [
 	{
 		id: '1',
-		content: 'The Power of Personalized Nutrition: How Targeted Nutrient Therapy Can Transform Your Health'
+		content: 'The Power of Personalized Nutrition: How Targeted optimized plans Can Transform Your Health'
 	},
 	{
 		id: '2',

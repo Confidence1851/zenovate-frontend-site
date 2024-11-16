@@ -5,7 +5,7 @@ import BlogSectionWrapper from './BlogSectionWrapper'
 const expertInsights = [
 	{
 		id: '1',
-		content: 'Q&A with Dr. Olivia Thompson: The Role of Nutrient Therapy in Immune Function'
+		content: 'Q&A with Dr. Olivia Thompson: The Role of wellness ijections in Immune Function'
 	},
 	{
 		id: '2',
@@ -13,7 +13,7 @@ const expertInsights = [
 	},
 	{
 		id: '3',
-		content: 'Fueling Peak Performance: How Zenovate Helped Alex Take His Athletic Career to the Next Level '
+		content: 'Nutritional Genomics: Unlocking the Potential of Personalized Nutrition with Dr. Mark Hyman'
 	},
 	{
 		id: '4',

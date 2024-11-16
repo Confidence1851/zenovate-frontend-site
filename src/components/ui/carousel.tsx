@@ -16,7 +16,6 @@ type CarouselProps = {
 	plugins?: CarouselPlugin
 	orientation?: 'horizontal' | 'vertical'
 	setApi?: (api: CarouselApi) => void
-	autoplayInterval?: number // Optional prop to set autoplay interval in milliseconds
 	carouselRef?: ReturnType<typeof useEmblaCarousel>[0]
 	api?: CarouselApi
 	scrollPrev?: () => void
@@ -24,6 +23,7 @@ type CarouselProps = {
 	canScrollPrev?: boolean
 	canScrollNext?: boolean
 }
+
 const CarouselContext = React.createContext<CarouselProps | null>(null)
 
 function useCarousel() {
@@ -33,22 +33,13 @@ function useCarousel() {
 }
 
 const Carousel = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement> & CarouselProps>(
-	(
-		{ orientation = 'horizontal', opts, setApi, plugins, className, children, autoplayInterval = 6000, ...props },
-		ref
-	) => {
+	({ orientation = 'horizontal', opts, setApi, plugins, className, children, ...props }, ref) => {
 		const [carouselRef, api] = useEmblaCarousel(
 			{ ...opts, axis: orientation === 'horizontal' ? 'x' : 'y', loop: true },
 			plugins
 		)
 		const [canScrollPrev, setCanScrollPrev] = React.useState(false)
 		const [canScrollNext, setCanScrollNext] = React.useState(false)
-		const autoplayRef = React.useRef<NodeJS.Timeout | null>(null)
-
-		const resetAutoplay = React.useCallback(() => {
-			if (autoplayRef.current) clearInterval(autoplayRef.current)
-			autoplayRef.current = setInterval(() => api?.scrollNext(), autoplayInterval)
-		}, [api, autoplayInterval])
 
 		const onSelect = React.useCallback((api: CarouselApi) => {
 			if (!api) return
@@ -58,13 +49,11 @@ const Carousel = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivEl
 
 		const scrollNext = React.useCallback(() => {
 			api?.scrollNext()
-			resetAutoplay() // Reset the autoplay interval on button click
-		}, [api, resetAutoplay])
+		}, [api])
 
 		const scrollPrev = React.useCallback(() => {
 			api?.scrollPrev()
-			resetAutoplay() // Reset the autoplay interval on button click
-		}, [api, resetAutoplay])
+		}, [api])
 
 		React.useEffect(() => {
 			if (!api) return
@@ -72,15 +61,10 @@ const Carousel = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivEl
 			onSelect(api)
 			api.on('select', onSelect)
 
-			// Start the autoplay when the component mounts
-			resetAutoplay()
-
-			// Cleanup on component unmount
 			return () => {
 				api.off('select', onSelect)
-				if (autoplayRef.current) clearInterval(autoplayRef.current)
 			}
-		}, [api, setApi, onSelect, resetAutoplay])
+		}, [api, setApi, onSelect])
 
 		return (
 			<CarouselContext.Provider
