@@ -7,12 +7,12 @@ import Image from 'next/image'
 const SubscriptionComponent = () => {
     return (
         <div className='md:px-[3.5vw] lg:px-[3vw]'>
-            <div className='bg-Green-200 w-full max-w-[1550px] mx-auto relative'>
+            <div className='w-full max-w-[1550px] mx-auto relative'>
                 <Image
                     src={bgImage}
                     alt="Sign up Newsletter background image"
                     fill
-                    className="object-cover opacity-80 mix-blend-darken"
+                    className="object-cover"
 
                 />
                 <div className='relative flex flex-col gap-10 lg:py-20 py-10 px-[5vw] sm:px-[3.5vw] lg:px-4'>
@@ -25,7 +25,7 @@ const SubscriptionComponent = () => {
                     <div className='flex flex-col md:flex-row gap-4 w-full max-w-[550px] mx-auto'>
                         <Input
                             placeholder='email@domain.com'
-                            className='h-11 border border-Green-100 placeholder:uppercase'
+                            className='h-11 border border-White-100 placeholder:uppercase placeholder:text-White-100 text-White-100'
                         />
                         <Button className='w-full sm:w-fit bg-[#fafafa] text-Green-100 hover:text-Green-100 hover:bg-[#fafafa] h-11 uppercase'>
                             subscribe

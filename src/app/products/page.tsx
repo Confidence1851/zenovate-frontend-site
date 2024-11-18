@@ -1,20 +1,22 @@
 import PageHeroWrapper from '@/components/common/PageHeroWrapper'
-import CustomerReviews from '@/components/products-page/CustomerReviews'
+import SubscriptionComponent from '@/components/common/SubscriptionComponent'
+import CustomersFeedback from '@/components/home-page/CustomersFeedback'
 import FeatureProducts from '@/components/products-page/FeatureProducts'
-import Subscription from '@/components/products-page/Subscription'
 import { ArrowRight } from 'iconsax-react'
+import heroImage from "@/assets/images/d703c9c47427018598d7fc12827.png";
 
 const ProductsPage = () => {
 	return (
 		<main>
 			{/* HERO */}
-
 			<PageHeroWrapper
-				heading='your journey to a healthier you'
-				description=' Discover premium wellness products designed to nourish your body,
-              mind, and spirit. From natural supplements to holistic self-care
-              essentials, we’ve got everything you need to thrive'
-				coloredHeading='starts here'
+				heading='your journey to a healthier you starts here'
+				description=' Discover premium wellness products designed to nourish your body, mind, and spirit. From natural supplements to holistic self-care essentials, we’ve got everything you need to thrive'
+				variant='white'
+				image={{
+					src: heroImage,
+					alt: "Product page hero image"
+				}}
 			/>
 
 			{/* FEATURED PRODUTCS */}
@@ -29,10 +31,11 @@ const ProductsPage = () => {
 			</section>
 
 			{/* CUSTOMER REVIEW */}
-			<CustomerReviews />
+			<CustomersFeedback />
 
-			{/* SUBSCRIPTION */}
-			<Subscription />
+			<section className='w-full bg-White-100 lg:py-20'>
+				<SubscriptionComponent />
+			</section>
 		</main>
 	)
 }

@@ -1,7 +1,7 @@
 import PageHeroWrapper from '@/components/common/PageHeroWrapper'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
-import { Button } from '@/components/ui/button'
-import { ArrowRight } from 'iconsax-react'
+import SubscriptionComponent from '@/components/common/SubscriptionComponent'
+import heroImage from "@/assets/images/8625c8212b0d703c9c47427018598d7fc12827.png";
 
 const data = [
 	{
@@ -42,21 +42,25 @@ const faq = [
 			'While individual results may vary, many of our clients report feeling the benefits within the first few weeks of starting their wellness plan. Our team will work with you to monitor your progress and make any necessary adjustments to optimize your results.'
 	}
 ]
+
 const HowItWorksPage = () => {
 	return (
 		<main>
 			<PageHeroWrapper
 				description="At Zenovate, we've made personalized wellness easy and accessible. Here's how it works:"
 				heading='ACHIEVE OPTIMAL HEALTH IN 4 Simple Steps'
+				image={{
+					src: heroImage,
+					alt: "How it works page hero image"
+				}}
 			/>
 			<section className='bg-White-100 py-10 lg:py-20'>
 				<div className='w-full max-w-[1550px] mx-auto px-[5vw] sm:px-[3.5vw]'>
 					<div className='grid xl:grid-cols-2 gap-y-6 md:gap-y-8 xl:gap-y-10 gap-x-20 w-full max-w-[800px] lg:max-w-[1100px] mx-auto'>
 						{data.map((Item, i) => (
 							<div
-								className={`flex gap-4 md:gap-8 lg:even:pt-16 ${
-									i === 0 ? 'min-h-[100px] xl:min-h-[250px]' : ' min-h-[100px] xl:min-h-[250px]'
-								}`}
+								className={`flex gap-4 md:gap-8 lg:even:pt-16 ${i === 0 ? 'min-h-[100px] xl:min-h-[250px]' : ' min-h-[100px] xl:min-h-[250px]'
+									}`}
 								key={i}
 							>
 								<h1 className={`text-Gray-100 text-7xl md:text-7xl xl:text-8xl font-bold`}>{i + 1}</h1>
@@ -102,25 +106,10 @@ const HowItWorksPage = () => {
 			</section>
 
 			<section className='w-full bg-White-100 lg:py-20'>
-				<div className='w-full max-w-[1400px] mx-auto h-full  bg-Green-200 p-10 md:p-20'>
-					<div className='flex justify-center items-center gap-10 flex-col w-full max-w-[650px] mx-auto'>
-						<h1 className='text-3xl md:text-4xl lg:text-5xl md:leading-tight uppercase  tracking-wider font-bold text-center'>
-							Ready to Start Your Zenovate Journey?
-						</h1>
-
-						<Button
-							variant='lemon'
-							className='flex justify-between items-center flex-wrap p-4 gap-x-6 gap-y-3 w-full sm:w-fit  md:gap-x-16 md:gap-20 gap-3  border border-Green-100 min-h-11 h-fit '
-						>
-							<span className='uppercase mx-auto text-wrap text-sm md:text-xl font-semibold'>
-								Book Your Personalized Consultation Now
-							</span>
-							<ArrowRight size='24' className=' mx-auto font-bold hidden md:inline-block' />
-						</Button>
-					</div>
-				</div>
+				<SubscriptionComponent />
 			</section>
-		</main>
+
+		</main >
 	)
 }
 
