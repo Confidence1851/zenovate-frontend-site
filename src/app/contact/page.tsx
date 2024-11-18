@@ -1,36 +1,43 @@
 import PageHeroWrapper from '@/components/common/PageHeroWrapper'
 import ContactForm from '@/components/forms/ContactForm'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
+// import { Button } from '@/components/ui/button'
+// import { Input } from '@/components/ui/input'
 
-import { Facebook, Instagram } from 'iconsax-react'
-import { Linkedin, Twitter } from 'lucide-react'
+// import { Facebook, Instagram } from 'iconsax-react'
+// import { Linkedin, Twitter } from 'lucide-react'
 import linkedin from '@/assets/images/linkedin-dark.png'
 import facebook from '@/assets/images/facebook-dark.png'
 import insta from '@/assets/images/insta-dark.png'
 import x from '@/assets/images/x-dark.png'
 import Image from 'next/image'
+import heroImage from "@/assets/images/ad6e850434c58cfdca5ed066a828ed0c9771e9faf8e15c.png";
+// import { url } from 'inspector'
+import SubscriptionComponent from '@/components/common/SubscriptionComponent'
 
 const socialMedia = [
 	{
 		name: 'X',
-		handle: '@ZenovateHealth',
-		icon: x
+		handle: '@zenovateHealth',
+		icon: x,
+		url: 'https://twitter.com/zenovateHealth'
 	},
 	{
 		name: 'instagram',
-		handle: '@Zenovate',
-		icon: insta
+		handle: '@zenovate',
+		icon: insta,
+		url: 'https://instagram.com/zenovate'
 	},
 	{
 		name: 'facebook',
-		handle: '@ZenovateWellness',
-		icon: facebook
+		handle: '@zenovatewellness',
+		icon: facebook,
+		url: 'https://facebook.com/zenovatewellness'
 	},
 	{
 		name: 'linkedin',
-		handle: '@Zenovate',
-		icon: linkedin
+		handle: '@zenovate',
+		icon: linkedin,
+		url: 'https://linkedin.com/company/zenovate'
 	}
 ]
 
@@ -40,9 +47,13 @@ const ContactPage = () => {
 			<PageHeroWrapper
 				heading='get in touch with zenovate'
 				description="Have a question, comment, or concern? We're here to help! Our friendly and knowledgeable team is dedicated to providing you with the support you need on your personalized wellness journey"
+				image={{
+					src: heroImage,
+					alt: "Contact page hero image"
+				}}
 			/>
 
-			<section className='bg-White-100   py-10 md:py-16 lg:py-20 px-[5vw] sm:px-[3.5vw] lg:px-[3vw]'>
+			<section className='bg-White-100 py-10 md:py-16 lg:py-20 px-[5vw] sm:px-[3.5vw] lg:px-[3vw]'>
 				<div className='w-full max-w-[1550px] mx-auto  space-y-4 md:space-y-8 lg:space-y-14'>
 					<h2 className='text-2xl  md:text-3xl lg:text-5xl font-bold uppercase'>contact information</h2>
 
@@ -86,38 +97,24 @@ const ContactPage = () => {
 						<h1 className='text-2xl md:text-3xl xl:text-5xl uppercase font-bold'>connect with us on social media </h1>
 						<div className=' grid grid-cols-2 gap-y-6 gap-x-10 md:flex md:gap-10 md:flex-wrap'>
 							{socialMedia.map((item) => (
-								<div key={item.name} className='flex gap-3 items-center'>
-									<Image src={item.icon} alt={item.name} className='size-7' />
-									<p className='font-semibold'>{item.handle}</p>
-								</div>
+								<a
+									key={item.name}
+									href={item.url}
+									target="_blank"
+									rel="noopener noreferrer"
+									className="hover:opacity-80 transition-opacity"
+								>
+									<div className='flex gap-3 items-center'>
+										<Image src={item.icon} alt={item.name} className='size-7' />
+										<p className='font-semibold'>{item.handle}</p>
+									</div>
+								</a>
 							))}
 						</div>
 					</div>
 				</div>
 
-				<div className='md:px-[3.5vw] lg:px-[3vw]'>
-					<div className='bg-Green-200 w-full max-w-[1550px] mx-auto '>
-						<div className='flex flex-col gap-10 lg:py-20 py-10 px-[5vw] sm:px-[3.5vw] lg:px-4'>
-							<h2 className='text-2xl md:text-3xl lg:text-5xl uppercase font-bold text-center'>
-								sign up for our newsletter
-							</h2>
-							<p className='text-center text-base md:text-xl max-w-[650px] mx-auto text-Green-300'>
-								Stay up-to-date with the latest news, exclusive offers, and expert insights from Zenovate. 
-							</p>
-							<div className='flex flex-col md:flex-row  gap-4 w-full  max-w-[550px] mx-auto'>
-								<Input placeholder='email@domain.com' className='h-11 border border-Green-100 placeholder:uppercase' />
-								<Button className=' w-full sm:w-fit bg-Green-100 text-White-100 h-11 uppercase hover:bg-Green-300'>
-									subscribe{' '}
-								</Button>
-							</div>
-						</div>
-						<div className='bg-Green-100 p-4'>
-							<h3 className='text-base text-White-100 text-center'>
-								We look forward to hearing from you and supporting you on your journey to optimal health and well-being!
-							</h3>
-						</div>
-					</div>
-				</div>
+				<SubscriptionComponent />
 			</section>
 		</main>
 	)

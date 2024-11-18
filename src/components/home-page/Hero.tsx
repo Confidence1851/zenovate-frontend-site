@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import Autoplay from 'embla-carousel-autoplay'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
 import { Overlay } from '@/components/common/Overlay';
+import styles from '@/styles/HeroCarousel.module.css'
 
 export default function HeroCarousel() {
     const slides = [
@@ -41,9 +42,10 @@ export default function HeroCarousel() {
             <CarouselContent className='gap-0 !ml-0'>
                 {slides.map((slide, index) => (
                     <CarouselItem key={index} className='!pl-0'>
-                        <section className='relative px-[5vw] sm:px-[3.5vw] lg:px-[3vw] h-[calc(100dvh-60px)]  sm:max-h-[600px] xl:max-h-fit bg-Gray-200'>
+                        <section className='relative px-[5vw] sm:px-[3.5vw] lg:px-[3vw] h-[calc(92dvh-60px)]  sm:max-h-[600px] xl:max-h-fit bg-Gray-200'>
                             <Overlay />
-                            <div className='w-full relative z-30 max-w-7xl mx-auto h-full flex justify-end flex-col pb-16 md:pb-[6rem] lg:pb-40 '>
+                            <div className={styles['hero-content']}>
+                                {/* content of hero  */}
                                 <div className='w-full max-w-[600px] flex flex-col gap-1 md:gap-2'>
                                     <h3 className='text-OffWhite-100 text-2xl md:text-4xl lg:text-5xl leading-[44px] uppercase font-bold'>
                                         {slide.title}
@@ -56,7 +58,6 @@ export default function HeroCarousel() {
                                     </span>
                                 </Button>
                             </div>
-
                             <video
                                 src={slide.videoSrc}
                                 autoPlay
@@ -68,12 +69,11 @@ export default function HeroCarousel() {
                     </CarouselItem>
                 ))}
             </CarouselContent>
-            {/* <CarouselPrevious /> */}
             <div className='absolute top-1/2 hidden md:inline-block left-[7vw]'>
-                <CarouselPrevious className='text-white hover:text-white size-11' />
+                <CarouselPrevious variant='carousel-nav' className='text-white hover:text-white size-11' />
             </div>
             <div className='absolute top-1/2 hidden md:inline-block right-[7vw]'>
-                <CarouselNext className='text-white hover:text-white size-11' />
+                <CarouselNext variant='carousel-nav' className='text-white hover:text-white size-11' />
             </div>
         </Carousel>
     )

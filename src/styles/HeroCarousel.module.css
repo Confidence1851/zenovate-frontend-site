@@ -1,0 +1,5 @@
+.hero-content {
+	@apply w-full relative z-30 max-w-7xl mx-auto h-full flex justify-end flex-col;
+	@apply pl-16 xl:pl-0;
+	@apply pb-16 md:pb-[6rem] lg:pb-40;
+}
