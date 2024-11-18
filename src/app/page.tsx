@@ -5,42 +5,14 @@ import { ArrowRight } from 'iconsax-react'
 import styles from '@/styles/HomePage.module.css'
 import HeroCarousel from '@/components/home-page/Hero'
 import Image from 'next/image'
-import nutritionImg from '@/assets/images/nutrition.jpg'
-// import heroVideo from "@/assets/videos/energy1.mp4";
+import nutritionImg from '@/assets/images/25fb59cf13000745b76aeef34030a78ac99dea2b6.png'
+import { Overlay } from '@/components/common/Overlay';
+
 
 const HomePage = () => {
 	return (
 		<main className='mb-6 lg:mb-0'>
 			{/* HERO */}
-			{/* <section className='relative h-[calc(100dvh-60px)] sm:max-h-[600px] xl:max-h-fit  bg-Gray-200 px-[5vw] sm:px-[3.5vw] lg:px-[3vw]'>
-
-        <div className='absolute z-20 top-0 left-0 h-full w-full bg-Green-100 opacity-10'></div>
-
-        <div className='w-full relative z-30 max-w-7xl mx-auto h-full flex justify-end flex-col pb-16 md:pb-[6rem] lg:pb-40 '>
-          <div className='w-full max-w-[600px] flex flex-col gap-1 md:gap-4 '>
-            <h3 className='text-OffWhite-100 text-2xl md:text-4xl lg:text-5xl leading-[44px] uppercase font-bold'>
-              energize
-            </h3>
-            <p className='text-OffWhite-100 text-lg md:text-xl'>
-              Experience a better, healthier and longer life one shot at a time
-            </p>
-          </div>
-          <Button className='flex justify-between mt-5 sm:mt-6 py-3  items-center flex-wrap px-8 md:py-4 h-fit gap-x-6 gap-y-3 transition-colors duration-300 ease-in-out bg-Green-100 text-White-100 hover:bg-Green-300 w-fit'>
-            <span className='uppercase mx-auto text-wrap text-sm md:text-base xl:text-xl self-center font-semibold'>
-              Get Started Today
-            </span>
-            <ArrowRight size='24' className='text-secondary-foreground font-bold' />
-          </Button>
-        </div>
-
-        <video
-          src='/videos/energy3.mp4'
-          autoPlay
-          loop
-          muted
-          className='w-full z-10 h-full object-cover absolute top-0 left-0'
-        />
-      </section> */}
 			<HeroCarousel />
 
 			<section className={styles.section}>
@@ -66,10 +38,10 @@ const HomePage = () => {
 			<UniqueQualities />
 
 			<section className='relative h-[300px] md:h-[400px] xl:h-[600px] px-[5vw] sm:px-[3.5vw] lg:px-[3vw]'>
-				<div className='absolute z-20 top-0 left-0 h-full w-full bg-black opacity-60'></div>
+				<Overlay />
 				<div className='flex flex-col gap-3 justify-center w-full max-w-[1100px] mx-auto h-full px-2'>
 					<h1
-						className={`text-4xl relative z-30 md:text-5xl lg:text-6xl lg:leading-[1.1] text-center  tracking-wider font-bold text-white`}
+						className={`text-4xl relative z-30 md:text-5xl lg:text-6xl lg:leading-[1.1] text-center tracking-wider text-white`}
 					>
 						Your Journey to Optimal Health
 					</h1>
@@ -78,7 +50,7 @@ const HomePage = () => {
 						alt='healthy food'
 						className='w-full z-10 h-full object-cover absolute top-0 left-0'
 					/>
-					<h1 className='text-4xl relative z-30 md:text-5xl lg:text-6xl text-center lg:text-right tracking-wider lg:pr-20 font-bold text-white italic '>
+					<h1 className='text-4xl relative z-30 md:text-5xl lg:text-6xl text-center lg:text-right tracking-wider lg:pr-20 text-white italic'>
 						Starts Here
 					</h1>
 				</div>
