@@ -1,0 +1,7 @@
+.linksContainer {
+	@apply md:flex gap-12 hidden;
+}
+
+.HambergerMenu {
+	@apply md:hidden text-Black-100  cursor-pointer;
+}

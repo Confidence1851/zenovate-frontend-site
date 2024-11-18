@@ -1,30 +1,39 @@
 export const navLinks = [
 	{
-		label: 'products',
+		label: 'plans',
 		link: '/products'
 	},
 	{
-		label: 'subscriptions',
+		label: 'Support',
 		link: '/subscriptions'
 	},
 	{
-		label: 'about us',
+		label: 'Company',
 		link: '/about'
-	},
-	{
-		label: 'how it works',
-		link: '/how-it-works'
-	},
-	{
-		label: 'faq',
-		link: '/faq'
-	},
-	{
-		label: 'blog',
-		link: '/blog'
-	},
-	{
-		label: 'contact us',
-		link: '/contact'
 	}
 ]
+
+
+// export const navLinks = [
+// 	{
+// 	  label: 'Plans',
+// 	  items: [
+// 		{ label: 'Subscriptions', link: '/subscriptions' },
+// 		{ label: 'How It Works', link: '/how-it-works' }
+// 	  ]
+// 	},
+// 	{
+// 	  label: 'Support',
+// 	  items: [
+// 		{ label: 'FAQ', link: '/faq' },
+// 		{ label: 'Contact Us', link: '/contact' }
+// 	  ]
+// 	},
+// 	{
+// 	  label: 'Company',
+// 	  items: [
+// 		{ label: 'About Us', link: '/about' },
+// 		{ label: 'Blog', link: '/blog' }
+// 	  ]
+// 	}
+//   ]
