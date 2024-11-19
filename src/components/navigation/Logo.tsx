@@ -13,7 +13,7 @@ interface LogoProps {
 const Logo: React.FC<LogoProps> = ({ className }) => {
 	return (
 		<Link href='/'>
-			<h4 className={cn(className, `font-extrabold text-secondary tracking-wider capitalize ${raleway.className}`)}>
+			<h4 className={cn(className, `font-bold text-secondary tracking-wider capitalize ${raleway.className}`)}>
 				Zenovate
 			</h4>
 		</Link>

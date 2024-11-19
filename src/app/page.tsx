@@ -8,6 +8,17 @@ import Image from 'next/image'
 import nutritionImg from '@/assets/images/25fb59cf13000745b76aeef34030a78ac99dea2b6.png'
 import { Overlay } from '@/components/common/Overlay';
 
+import { createMetadata } from '@/lib/metadata'
+
+export const metadata = createMetadata({
+	title: 'Zenovate Health - Personalized Wellness, Elevated',
+	description: 'A world of aesthetics that believes in a client-centric approach that empowers people to shape their unique aesthetic and wellness journey.',
+	openGraph: {
+		title: 'Zenovate Health - Personalized Wellness, Elevated',
+		description: 'A world of aesthetics that believes in a client-centric approach that empowers people to shape their unique aesthetic and wellness journey.',
+		url: '/',
+	},
+})
 
 const HomePage = () => {
 	return (
@@ -18,15 +29,16 @@ const HomePage = () => {
 			<section className={styles.section}>
 				<div className='w-full max-w-7xl mx-auto flex flex-col gap-5 lg:gap-12'>
 					<p className={styles.paragraph}>
-						Your partner in precision nutrition and wellness. We understand that achieving optimal health can be
-						challenging amidst the demands of modern life.
-					</p>
-					<p className={`${styles.paragraph} lg:text-right lg:ml-auto`}>
-						That's why we've revolutionized wellness shots, combining cutting-edge science with the convenience of
+						Welcome to Zenovate, your partner in precision nutrition and wellness. We understand that
+						achieving optimal health can be challenging amidst the demands of modern life. That's why
+						we've revolutionized wellness shots, combining cutting-edge science with the convenience of
 						at-home delivery to support your unique health journey.
 					</p>
 				</div>
 			</section>
+
+			{/* UNIQUENESS */}
+			<UniqueQualities />
 
 			{/* CUSTOMER FEEDBACK */}
 			<CustomersFeedback />
@@ -34,8 +46,7 @@ const HomePage = () => {
 			{/* ENDORSEMENT */}
 			{/* <Endorsement /> */}
 
-			{/* UNIQUENESS */}
-			<UniqueQualities />
+
 
 			<section className='relative h-[300px] md:h-[400px] xl:h-[600px] px-[5vw] sm:px-[3.5vw] lg:px-[3vw]'>
 				<Overlay />

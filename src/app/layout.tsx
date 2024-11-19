@@ -4,6 +4,7 @@ import { Barlow, Raleway } from 'next/font/google'
 import Navbar from '@/components/navigation/Navbar'
 import Footer from '@/components/navigation/Footer'
 import { ReactLenis } from '@/utils/lenis'
+import { createMetadata } from '@/lib/metadata'
 const barlow = Barlow({
 	weight: ['400', '100', '200', '300', '500', '900', '700', '400', '600'],
 	subsets: ['latin'],
@@ -15,10 +16,7 @@ const raleway = Raleway({
 	variable: '--font-raleway'
 })
 
-export const metadata: Metadata = {
-	title: 'Zenovate',
-	description: 'Health & Wellness'
-}
+export const metadata = createMetadata()
 
 export default function RootLayout({
 	children

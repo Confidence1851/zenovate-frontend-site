@@ -5,3 +5,7 @@
 .headerLeft {
 	@apply min-[1400px]:text-right  min-[1400px]:pr-[14rem];
 }
+
+.gridContainer {
+	@apply w-full grid grid-cols-2 md:grid-cols-4 xl:grid-cols-4 gap-5 pb-5;
+}
