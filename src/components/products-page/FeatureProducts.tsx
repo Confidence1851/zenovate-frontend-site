@@ -1,60 +1,25 @@
+'use client';
+
 import { ArrowRight } from 'iconsax-react'
 import { Button } from '../ui/button'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '../ui/carousel'
-const products = [
-	{
-		name: 'tripleDefense',
-		description: 'Enhanced defense system',
-		content: 'Optimized protection through a triple-component strategy.',
-		items: ['Calcium', 'Magnesium', 'Glucosamine'],
-		price: 39.99
-	},
-	{
-		name: 'shapeup',
-		description: 'Fitness and health conditioning',
-		content: 'A holistic approach to improving physical fitness and overall well-being.',
-		items: ['Personalized Workout Plans', 'Nutritional Guidance', 'Progress Tracking'],
-		price: 49.99
-	},
-	{
-		name: 'phoslim',
-		description: 'Metabolic & weight management',
-		content: 'Designed to support a healthy metabolism and assist in weight control.',
-		price: 34.99
-	},
-	{
-		name: 'methylB12',
-		description: 'Brain & nerve function',
-		content: 'Vitamin B12 in its most bioavailable form to support neurological health.',
-		price: 29.99
-	},
-	{
-		name: 'nadCreation',
-		description: 'Boosts cellular energy and repair',
-		content: 'Critical for energy metabolism and cellular health.',
-		price: 44.99
-	},
-	{
-		name: 'biotinLixer',
-		description: 'Biotin to strengthen hair & skin',
-		content: 'A rich blend of biotin to strengthen and beautify hair, skin, and nails.',
-		price: 24.99
-	},
-	{
-		name: 'glutathione',
-		description: 'Powerful antioxidant for detoxification and immune support',
-		content: 'Supports detox processes and enhances antioxidant defenses.',
-		price: 54.99
-	},
-	{
-		name: 'vitaminD3',
-		description: 'Essential for bone health and immune function',
-		content: 'Critical for maintaining bone density and supporting immune system health.',
-		price: 19.99
-	}
-]
+import { useEffect, useState } from 'react';
+import { productList } from '@/server-actions/api.actions';
+
 
 const FeatureProducts = () => {
+
+	const [products, setProducts] = useState<Product[]>([]);
+	useEffect(() => {
+		function list() {
+			productList().then((v) => {
+				setProducts(v.data);
+			});
+		}
+		list();
+	}, []);
+
+
 	return (
 		<section className='bg-White-100-100 space-y-16 py-12 md:py-16 lg:py-16 px-[5vw] sm:px-[3.5vw] lg:px-[3vw]'>
 			<div className='w-full max-w-[1550px] mx-auto  space-y-20'>
@@ -89,7 +54,7 @@ const FeatureProducts = () => {
 												<h3 className='text-lg font-semibold text-Black-100 uppercase'>{item.name}</h3>
 												<h4 className='text-base text-Gray-100 uppercase'>{item.description}</h4>
 											</div>
-											<p className='text-base text-Gray-100'>{item.content}</p>
+											<p className='text-base text-Gray-100'>{item.description}</p>
 										</div>
 
 										<Button
