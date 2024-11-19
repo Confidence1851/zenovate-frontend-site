@@ -43,7 +43,7 @@ const FeatureProducts = () => {
 						</div>
 
 						<CarouselContent>
-							{products.map((item, i) => (
+							{(products ?? []).map((item, i) => (
 								<CarouselItem key={i} className='md:basis-1/2 lg:basis-1/3 xl:basis-1/4  '>
 									<div
 										className='border gap-4 h-80 w-full p-8 flex flex-col justify-between flex-shrink-0'
