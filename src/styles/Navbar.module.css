@@ -1,3 +1,10 @@
+.nav {
+	@apply py-4 bg-white  px-[5vw] sm:px-[3.5vw] lg:px-[3vw];
+}
+.navContainer {
+	@apply flex justify-between w-full max-w-7xl mx-auto items-center h-12;
+}
+
 .linksContainer {
 	@apply md:flex gap-12 hidden;
 }

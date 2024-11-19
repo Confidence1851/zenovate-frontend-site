@@ -9,8 +9,8 @@ import styles from '@/styles/Navbar.module.css'
 const Navbar = () => {
 	return (
 		<NavCont>
-			<nav className='py-4 bg-white  px-[5vw] sm:px-[3.5vw] lg:px-[3vw]'>
-				<div className='flex justify-between w-full max-w-[1550px] mx-auto items-center'>
+			<nav className={styles.nav} >
+				<div className={styles.navContainer} >
 					<Logo className='text-xl lg:text-2xl' />
 					{/* Navlinks */}
 					<div className={styles.linksContainer}>
