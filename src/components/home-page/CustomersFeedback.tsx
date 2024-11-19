@@ -6,28 +6,28 @@ import styles from '@/styles/CustomersFeedback.module.css'
 
 const feedback = [
 	{
-		user: 'john doe',
-		text: 'Zenovate has been a game-changer for my health and productivity. The personalized blends keep me energized and focused throughout my busy workday  ',
-		profession: 'footballer',
+		user: 'Michael',
+		text: `Zenovate has changed my life. Coming to terms with getting older has been difficult
+especially as someone who’s always led an active lifestyle. Recovery started to take longer,
+dropping a couple of pounds became a herculean task but zenovate has changed all that. I
+feel 25 and my body moves like it’s 25! I feel great!`,
+		profession: 'Busy Professional',
 		age: 45
 	},
 	{
-		user: 'Marco',
-		text: 'As an athlete, Zenovate has taken my performance to new heights. The targeted nutrition has been crucial for my recovery and overall physical condition.',
-		profession: 'athlete',
+		user: 'Sarah',
+		text: `Zenovate has taken my performance to new heights. It’s helped balance my hormones and
+boy, the difference that makes. I just ran the NY marathon and finished in record time and a
+new PB. I’ve told everyone i know about them`,
+		profession: 'Athlete',
 		age: 28
 	},
 	{
-		user: 'Sara T',
-		text: "I was skeptical at first, but the personalized approach really works! I've seen significant improvements in my energy levels and overall health.",
-		profession: 'footballer',
-		age: '30'
-	},
-	{
-		user: 'Mark R',
-		text: 'The convenience of having high-quality health products delivered right to my door is a game changer. I can’t imagine going back!',
-		profession: 'footballer',
-		age: '30'
+		user: 'Dani',
+		text: `I’ve never experienced such swift delivery, it blew my mind. The process was super fast and
+seamless. I’m in my first month and I see visible changes already`,
+		profession: 'New Mom',
+		age: '33'
 	}
 ]
 const CustomersFeedback = () => {

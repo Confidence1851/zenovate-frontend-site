@@ -18,11 +18,9 @@ const HomePage = () => {
 			<section className={styles.section}>
 				<div className='w-full max-w-7xl mx-auto flex flex-col gap-5 lg:gap-12'>
 					<p className={styles.paragraph}>
-						Your partner in precision nutrition and wellness. We understand that achieving optimal health can be
-						challenging amidst the demands of modern life.
-					</p>
-					<p className={`${styles.paragraph} lg:text-right lg:ml-auto`}>
-						That's why we've revolutionized wellness shots, combining cutting-edge science with the convenience of
+						Welcome to Zenovate, your partner in precision nutrition and wellness. We understand that
+						achieving optimal health can be challenging amidst the demands of modern life. That's why
+						we've revolutionized wellness shots, combining cutting-edge science with the convenience of
 						at-home delivery to support your unique health journey.
 					</p>
 				</div>
