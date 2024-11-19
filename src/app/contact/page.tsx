@@ -1,18 +1,24 @@
 import PageHeroWrapper from '@/components/common/PageHeroWrapper'
 import ContactForm from '@/components/forms/ContactForm'
-// import { Button } from '@/components/ui/button'
-// import { Input } from '@/components/ui/input'
-
-// import { Facebook, Instagram } from 'iconsax-react'
-// import { Linkedin, Twitter } from 'lucide-react'
 import linkedin from '@/assets/images/linkedin-dark.png'
 import facebook from '@/assets/images/facebook-dark.png'
 import insta from '@/assets/images/insta-dark.png'
 import x from '@/assets/images/x-dark.png'
 import Image from 'next/image'
 import heroImage from "@/assets/images/ad6e850434c58cfdca5ed066a828ed0c9771e9faf8e15c.png";
-// import { url } from 'inspector'
 import SubscriptionComponent from '@/components/common/SubscriptionComponent'
+
+import { createMetadata } from '@/lib/metadata'
+
+export const metadata = createMetadata({
+	title: 'Contact | Zenovate Health - Personalized Wellness, Elevated',
+	description: 'A world of aesthetics that believes in a client-centric approach that empowers people to shape their unique aesthetic and wellness journey.',
+	openGraph: {
+		title: 'Contact | Zenovate Health - Personalized Wellness, Elevated',
+		description: 'A world of aesthetics that believes in a client-centric approach that empowers people to shape their unique aesthetic and wellness journey.',
+		url: '/',
+	},
+})
 
 const socialMedia = [
 	{

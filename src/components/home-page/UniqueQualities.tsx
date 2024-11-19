@@ -35,7 +35,7 @@ const UniqueQualities = () => {
 			<div className='w-full mb-[-8px] md:mb-0 max-w-7xl mx-auto h-full flex justify-end flex-col  '>
 				<div className='flex flex-col gap-0 lg:gap-3  pt-12 md:pt-16 lg:pt-20  w-full max-w-[1500px] mx-auto '>
 					<h1 className={`${styles.header}`}>discover the</h1>
-					<h1 className={`${styles.header} ${styles.headerLeft}`}>zenovate differences</h1>
+					<h1 className={`${styles.header} ${styles.headerLeft}`}>zenovate difference</h1>
 				</div>
 			</div>
 
