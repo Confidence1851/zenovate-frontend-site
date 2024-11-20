@@ -1,3 +1,5 @@
+'use client'
+
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
 import ArticleCard from './ArticleCard'
 import BlogSectionWrapper from './BlogSectionWrapper'
@@ -25,12 +27,12 @@ const featuredArticles = [
 	}
 ]
 
-const FeaturedArticles = async () => {
-	const articles = await new Promise<typeof featuredArticles>((resolve) => {
-		setTimeout(() => {
-			resolve(featuredArticles)
-		}, 3000) // logic for api call
-	})
+const FeaturedArticles = () => {
+	// const articles = await new Promise<typeof featuredArticles>((resolve) => {
+	// 	setTimeout(() => {
+	// 		resolve(featuredArticles)
+	// 	}, 3000) // logic for api call
+	// })
 	return (
 		<BlogSectionWrapper heading='featured articles'>
 			<Carousel
@@ -40,7 +42,7 @@ const FeaturedArticles = async () => {
 				className='w-full'
 			>
 				<CarouselContent>
-					{articles.map((item, index) => (
+					{featuredArticles.map((item, index) => (
 						<CarouselItem key={index} className='md:basis-1/2 lg:basis-1/3 xl:basis-1/4 '>
 							<ArticleCard article={item} />
 						</CarouselItem>

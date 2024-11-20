@@ -19,7 +19,7 @@
 }
 
 body {
-	@apply font-barlow;
+	@apply font-barlow overflow-x-hidden;
 }
 
 @layer utilities {
