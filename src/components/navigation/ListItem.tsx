@@ -8,8 +8,8 @@ interface ListItemProps {
 	description?: string
 	href: string
 	className?: string
-	onMouseEnter?: () => void
-	onMouseLeave?: () => void
+	// onMouseEnter?: () => void
+	// onMouseLeave?: () => void
 }
 
 const ListItem = React.forwardRef<React.ElementRef<typeof Link>, ListItemProps>(

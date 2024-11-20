@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+// import { useState } from 'react'
 import * as React from 'react'
 import Logo from './Logo'
 // import Link from 'next/link'
@@ -22,7 +22,7 @@ import { ChevronRight, Menu } from 'lucide-react'
 import Link from 'next/link'
 import ListItem from './ListItem'
 import FeaturedArticles from '../blogs/FeaturedArticles'
-import Test from './DropdownCardsCont'
+// import Test from './DropdownCardsCont'
 import NavFeatureProducts from '../products-page/NavFeaturedProducts'
 import DropdownCardsCont from './DropdownCardsCont'
 
@@ -99,7 +99,7 @@ const navLinks: NavSection[] = [
 ]
 
 export default function Navbar() {
-	const [activeImage, setActiveImage] = useState<string | null>(null)
+	// const [activeImage, setActiveImage] = useState<string | null>(null)
 
 	return (
 		<NavCont>
@@ -128,8 +128,8 @@ export default function Navbar() {
 														href={subItem.href}
 														title={subItem.title}
 														description={subItem.description}
-														onMouseEnter={() => setActiveImage(subItem.image)}
-														onMouseLeave={() => setActiveImage(null)}
+														// onMouseEnter={() => setActiveImage(subItem.image)}
+														// onMouseLeave={() => setActiveImage(null)}
 													/>
 												)
 											})}
