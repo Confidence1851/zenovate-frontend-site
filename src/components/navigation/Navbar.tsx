@@ -22,7 +22,9 @@ import { ChevronRight, Menu } from 'lucide-react'
 import Link from 'next/link'
 import ListItem from './ListItem'
 import FeaturedArticles from '../blogs/FeaturedArticles'
-import Test from './test'
+import Test from './DropdownCardsCont'
+import NavFeatureProducts from '../products-page/NavFeaturedProducts'
+import DropdownCardsCont from './DropdownCardsCont'
 
 interface NavItem {
 	title: string
@@ -81,6 +83,12 @@ const navLinks: NavSection[] = [
 				description: 'Learn more about our company and mission.'
 			},
 			{
+				title: 'Products',
+				href: '/products',
+				image: '/placeholder.png?height=400&width=600',
+				description: 'Shop our range of personalized wellness shots '
+			},
+			{
 				title: 'Blog',
 				href: '/blog',
 				image: '/placeholder.png?height=400&width=600',
@@ -132,7 +140,17 @@ export default function Navbar() {
 							<NavigationMenuItem>
 								<NavigationMenuTrigger>Blog</NavigationMenuTrigger>
 								<NavigationMenuContent className='md:w-full bg-white md:px-[3vw]'>
-									<Test />
+									<DropdownCardsCont>
+										<FeaturedArticles />
+									</DropdownCardsCont>
+								</NavigationMenuContent>
+							</NavigationMenuItem>
+							<NavigationMenuItem>
+								<NavigationMenuTrigger>Products</NavigationMenuTrigger>
+								<NavigationMenuContent className='md:w-full bg-white md:px-[3vw]'>
+									<DropdownCardsCont>
+										<NavFeatureProducts />
+									</DropdownCardsCont>
 								</NavigationMenuContent>
 							</NavigationMenuItem>
 						</NavigationMenuList>
