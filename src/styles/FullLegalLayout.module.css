@@ -1,0 +1,12 @@
+.headerSection {
+	@apply lg:h-[25vh] lg:min-h-[200px] max-h-[300px] bg-transparent relative;
+}
+
+.titleHeader {
+	@apply text-2xl md:text-4xl lg:text-5xl leading-normal md:leading-[1.3] lg:leading-[1.3] uppercase font-bold lg:tracking-wider;
+}
+
+.bodySection {
+	@apply pt-10 md:pt-14;
+	@apply pb-64;
+}
