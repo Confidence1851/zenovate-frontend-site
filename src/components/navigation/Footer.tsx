@@ -1,7 +1,7 @@
 import { navLinks } from '@/utils/navigation'
 import Logo from './Logo'
 import Link from 'next/link'
-import { Call, Location } from 'iconsax-react'
+// import { Call, Location } from 'iconsax-react'
 import linkedinLogo from '@/assets/images/linkedin.png'
 import instaLogo from '@/assets/images/instagram.png'
 import facebookLogo from '@/assets/images/facebook.png'
@@ -95,8 +95,9 @@ const Footer = () => {
 						<div className='space-y-6'>
 							<h3 className='text-White-100 uppercase text-base font-semibold lg:text-xl'>trust & certifications</h3>
 							<p className='text-White-100 text-sm max-w-[70%] xl:max-w-[85%]'>
-								Your health is our priority. We proudly display our certifications and partnerships with trusted health
-								organizations to ensure you receive only the best.
+								Your health is our priority. We proudly display <Link href='/privacy-policy' className='text-red-500'>our certifications </Link>
+								and <Link href='/terms-of-service' className='text-red-500'>partnerships with trusted health organizations</Link>  to ensure you
+								receive only the best.
 							</p>
 						</div>
 					</div>

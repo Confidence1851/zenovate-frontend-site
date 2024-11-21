@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+// import type { Metadata } from 'next'
 import './globals.css'
 import { Barlow, Raleway } from 'next/font/google'
 import Navbar from '@/components/navigation/Navbar'

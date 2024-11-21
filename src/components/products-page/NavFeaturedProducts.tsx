@@ -8,6 +8,7 @@ import { productList } from '@/server-actions/api.actions'
 import BlogSectionWrapper from '../blogs/BlogSectionWrapper'
 import { useQuery } from '@tanstack/react-query'
 import { Skeleton } from '../ui/skeleton'
+import Autoplay from 'embla-carousel-autoplay'
 
 const NavFeatureProducts = () => {
 	const {
@@ -38,6 +39,7 @@ const NavFeatureProducts = () => {
 						opts={{
 							align: 'start'
 						}}
+						plugins={[Autoplay({ delay: 5000, stopOnMouseEnter: true })]}
 						className='w-full '
 					>
 						<CarouselContent>

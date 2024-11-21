@@ -183,6 +183,9 @@ export default function Navbar() {
 											</Link> */}
 										</div>
 									))}
+									<Button className='bg-[#1B2B1B] hover:bg-[#2C442C] text-white w-fit mt-2'>
+										JOIN NOW <ChevronRight className='ml-2 h-4 w-4' />
+									</Button>
 								</nav>
 							</SheetContent>
 						</Sheet>
