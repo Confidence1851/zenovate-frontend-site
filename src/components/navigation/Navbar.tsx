@@ -158,7 +158,7 @@ export default function Navbar() {
 
 					<div className='flex items-center gap-4'>
 						<Button className='bg-[#1B2B1B] hover:bg-[#2C442C] text-white hidden lg:inline-block'>
-							JOIN NOW <ChevronRight className='ml-2 h-4 w-4' />
+							JOIN NOW
 						</Button>
 
 						<Sheet>
