@@ -22,6 +22,8 @@ const FeatureProducts = () => {
 		return <h2>An error occured</h2>
 	}
 
+	console.log(products?.data)
+
 	return (
 		<section className='bg-White-100-100 space-y-16 py-12 md:py-16 lg:py-16 px-[5vw] sm:px-[3.5vw] lg:px-[3vw]'>
 			<div className='w-full max-w-[1550px] mx-auto  space-y-20'>
@@ -53,7 +55,7 @@ const FeatureProducts = () => {
 							</div>
 						) : (
 							<CarouselContent>
-								{(products.data ?? []).map((item, i) => (
+								{(products.data ?? []).map((item: Product, i: number) => (
 									<CarouselItem key={i} className='md:basis-1/2 lg:basis-1/3 xl:basis-1/4  '>
 										<div
 											className='border gap-4 h-80 w-full p-8 flex flex-col justify-between flex-shrink-0'
