@@ -2,10 +2,11 @@ import { Separator } from '@/components/ui/separator'
 import { SidebarInset, SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
 import { Breadcrumb, BreadcrumbItem, BreadcrumbList, BreadcrumbPage } from '@/components/ui/breadcrumb'
 import { AppSidebar } from '@/components/dashboard/AppSidebar'
+import ActiveLink from '@/components/dashboard/ActiveLink'
 
-export default function layout({ children }: { children: React.ReactNode }) {
+export default function Layout({ children }: { children: React.ReactNode }) {
 	return (
-		<div className='relative w-full'>
+		<div className='relative w-[100vw] max-w-[100vw]'>
 			<SidebarProvider>
 				<AppSidebar />
 				<SidebarInset>
@@ -16,13 +17,17 @@ export default function layout({ children }: { children: React.ReactNode }) {
 							<Breadcrumb>
 								<BreadcrumbList>
 									<BreadcrumbItem>
-										<BreadcrumbPage className='text-[#000000]'>Orders</BreadcrumbPage>
+										<BreadcrumbPage className='text-[#000000] capitalize text-base'>
+											<ActiveLink />
+										</BreadcrumbPage>
 									</BreadcrumbItem>
 								</BreadcrumbList>
 							</Breadcrumb>
 						</div>
 					</header>
-					<div className='flex flex-1 flex-col gap-4 p-4'>{children}</div>
+					<div className='flex flex-1 flex-col gap-4 px-[5vw] sm:px-[3.5vw] xl:px-4 py-6 md:py-10 w-full'>
+						{children}
+					</div>
 				</SidebarInset>
 			</SidebarProvider>
 		</div>
