@@ -3,27 +3,37 @@
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
 import ArticleCard from './ArticleCard'
 import BlogSectionWrapper from './BlogSectionWrapper'
+import mental from '@/assets/images/mental.jpg'
+import nuts from '@/assets/images/nuts.jpg'
+import covid from '@/assets/images/covid.jpg'
+import drugs from '@/assets/images/drugs.jpg'
+import Autoplay from 'embla-carousel-autoplay'
 
 const featuredArticles = [
 	{
 		id: '1',
-		content: 'The Power of Personalized Nutrition: How Targeted Nutrient Therapy Can Transform Your Health'
+		content: 'The Power of Personalized Nutrition: How Targeted Nutrient Therapy Can Transform Your Health',
+		img: nuts
 	},
 	{
 		id: '2',
-		content: 'Navigating the Supplement Landscape: What You Need to Know'
+		content: 'Navigating the Supplement Landscape: What You Need to Know',
+		img: drugs
 	},
 	{
 		id: '3',
-		content: 'Nutrient Deficiencies and Chronic Disease: Exploring the Connection'
+		content: 'Nutrient Deficiencies and Chronic Disease: Exploring the Connection',
+		img: covid
 	},
 	{
 		id: '4',
-		content: 'The Gut-Brain Axis: How Your Microbiome Influences Mental Health'
+		content: 'The Gut-Brain Axis: How Your Microbiome Influences Mental Health',
+		img: mental
 	},
 	{
 		id: '5',
-		content: 'Revolutionizing Wellness: The Future of Telemedicine and Personalized Care'
+		content: 'Revolutionizing Wellness: The Future of Telemedicine and Personalized Care',
+		img: nuts
 	}
 ]
 
@@ -39,6 +49,7 @@ const FeaturedArticles = () => {
 				opts={{
 					align: 'start'
 				}}
+				plugins={[Autoplay({ delay: 5000, stopOnMouseEnter: true })]}
 				className='w-full'
 			>
 				<CarouselContent>
