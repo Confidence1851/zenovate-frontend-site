@@ -1,8 +1,10 @@
+"use client";
 import { Separator } from '@/components/ui/separator'
 import { SidebarInset, SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
 import { Breadcrumb, BreadcrumbItem, BreadcrumbList, BreadcrumbPage } from '@/components/ui/breadcrumb'
 import { AppSidebar } from '@/components/dashboard/AppSidebar'
 import ActiveLink from '@/components/dashboard/ActiveLink'
+
 
 export default function Layout({ children }: { children: React.ReactNode }) {
 	return (

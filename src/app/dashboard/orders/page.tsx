@@ -1,3 +1,4 @@
+"use client";
 import searchIcon from '@/assets/svgs/search-icon.svg'
 import { Input } from '@/components/ui/input'
 import Image from 'next/image'
@@ -21,8 +22,13 @@ import {
 	PaginationNext,
 	PaginationPrevious
 } from '@/components/ui/pagination'
+import { useSession, signIn, signOut } from "next-auth/react";
 
 export default function Order() {
+	const { data: session } = useSession();
+
+	console.log(session);
+	
 	return (
 		<div className='max-w-7xl mx-auto w-full'>
 			<div className='w-full grid grid-cols-1 sm:flex sm:justify-end gap-3 sm:items-center '>

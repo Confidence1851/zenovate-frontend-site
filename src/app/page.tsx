@@ -20,7 +20,9 @@ export const metadata = createMetadata({
 	},
 })
 
+
 const HomePage = () => {
+	
 	return (
 		<main className='mb-6 lg:mb-0'>
 			{/* HERO */}

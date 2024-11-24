@@ -7,6 +7,8 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import logOutIcon from '@/assets/svgs/log-out.svg'
 import Image from 'next/image'
+import {  signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const sideLinks = [
 	{ label: 'profile', url: '' },
@@ -15,7 +17,13 @@ const sideLinks = [
 ]
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-	const pathname = usePathname()
+	const pathname = usePathname();
+	const router = useRouter();
+
+	function handleLogout(){
+		signOut();
+		router.replace("/");
+	}
 
 	return (
 		<Sidebar {...props}>
@@ -34,7 +42,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 				})}
 			</SidebarContent>
 			<SidebarFooter className='pb-6 px-5'>
-				<button className='w-fit flex gap-1 justify-start items-center uppercase text-lg font-semibold text-[#000000]'>
+				<button onClick={handleLogout} className='w-fit flex gap-1 justify-start items-center uppercase text-lg font-semibold text-[#000000]'>
 					{' '}
 					<Image className='size-5' src={logOutIcon} alt='logout' /> Logout
 				</button>

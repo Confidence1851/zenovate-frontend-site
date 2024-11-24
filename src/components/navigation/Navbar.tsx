@@ -25,6 +25,7 @@ import FeaturedArticles from '../blogs/FeaturedArticles'
 // import Test from './DropdownCardsCont'
 import NavFeatureProducts from '../products-page/NavFeaturedProducts'
 import DropdownCardsCont from './DropdownCardsCont'
+import { useSession } from "next-auth/react";
 
 interface NavItem {
 	title: string
@@ -100,6 +101,7 @@ const navLinks: NavSection[] = [
 
 export default function Navbar() {
 	// const [activeImage, setActiveImage] = useState<string | null>(null)
+	const { data: session } = useSession();
 
 	return (
 		<NavCont>
@@ -128,8 +130,8 @@ export default function Navbar() {
 														href={subItem.href}
 														title={subItem.title}
 														description={subItem.description}
-														// onMouseEnter={() => setActiveImage(subItem.image)}
-														// onMouseLeave={() => setActiveImage(null)}
+													// onMouseEnter={() => setActiveImage(subItem.image)}
+													// onMouseLeave={() => setActiveImage(null)}
 													/>
 												)
 											})}
@@ -157,9 +159,16 @@ export default function Navbar() {
 					</NavigationMenu>
 
 					<div className='flex items-center gap-4'>
-						<Button className='bg-[#1B2B1B] hover:bg-[#2C442C] text-white hidden lg:inline-block'>
-							JOIN NOW
-						</Button>
+						{!session ? <Link href='/auth/login'>
+							<Button className='bg-[#1B2B1B] hover:bg-[#2C442C] text-white hidden lg:inline-block'>
+								JOIN NOW
+							</Button>
+						</Link> : <Link href='/dashboard/orders'>
+							<Button className='bg-[#1B2B1B] hover:bg-[#2C442C] text-white hidden lg:inline-block'>
+								DASHBOARD
+							</Button>
+						</Link>}
+
 
 						<Sheet>
 							<SheetTrigger asChild>
