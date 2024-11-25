@@ -7,10 +7,13 @@ import React, { useState } from 'react'
 
 export default function Provider({ children }: { children: React.ReactNode }) {
 	const [queryClient] = useState(() => new QueryClient())
+	const [showDevtools, setShowDevtools] = React.useState(false);
+
 	return (
 		<SessionProvider>
 		<QueryClientProvider client={queryClient}>
-			<ReactQueryDevtools initialIsOpen={false} />
+			{/* <ReactQueryDevtools initialIsOpen={false} /> */}
+			{showDevtools && <ReactQueryDevtools initialIsOpen={false} />}
 			{children}
 		</QueryClientProvider>
 		</SessionProvider>

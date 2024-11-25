@@ -43,7 +43,7 @@ const CustomersFeedback = () => {
 				</div>
 			</div>
 			{/* DIVIDER */}
-			<div className='border border-Green-300 w-full' />
+			<div className='border border-muted-foreground w-full' />
 
 			<div className='max-w-[1550px] mx-auto px-[5vw] sm:px-[3.5vw] lg:px-[3vw] '>
 				<Carousel
@@ -60,15 +60,15 @@ const CustomersFeedback = () => {
 									<h4 className={styles.carouselHeader}>{item.text}</h4>
 									<h5 className={styles.carouselText}>
 										{item.user} , {item.age} <br />
-										<span className='font-medium'>{item.profession}</span>
+										<span className='font-medium text-primary'>{item.profession}</span>
 									</h5>
 								</div>
 							</CarouselItem>
 						))}
 					</CarouselContent>
 					<div className='flex justify-end gap-10 items-center max-w-[1550px] mx-auto'>
-						<CarouselPrevious className='!relative !left-0 !top-0  border-0 shadow-none p-0 translate-y-0 text-Green-300' />
-						<CarouselNext className='!relative !left-0 !top-0  border-0 shadow-none p-0 translate-y-0 text-Green-300' />
+						<CarouselPrevious className='text-primary !relative !left-0 !top-0  border-0 shadow-none p-0 translate-y-0' />
+						<CarouselNext className='text-primary !relative !left-0 !top-0  border-0 shadow-none p-0 translate-y-0' />
 					</div>
 				</Carousel>
 			</div>

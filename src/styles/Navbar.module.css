@@ -12,3 +12,12 @@
 .HambergerMenu {
 	@apply md:hidden text-Black-100  cursor-pointer;
 }
+
+.trigggerLabel {
+	@apply text-sm uppercase;
+	@apply data-[active]:!bg-transparent data-[state=open]:!bg-transparent focus:!bg-transparent !bg-transparent hover:!bg-transparent;
+}
+
+.listItms {
+	@apply gap-10 py-5 mx-auto w-full max-w-[80rem] flex justify-start items-start;
+}

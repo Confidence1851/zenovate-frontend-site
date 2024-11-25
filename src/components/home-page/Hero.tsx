@@ -6,28 +6,11 @@ import Autoplay from 'embla-carousel-autoplay'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
 import { Overlay } from '@/components/common/Overlay';
 import styles from '@/styles/HeroCarousel.module.css'
+import Link from 'next/link'
+import { siteConfig } from '@/utils/siteConfig';
 
 export default function HeroCarousel() {
-    const slides = [
-        {
-            title: 'Energize',
-            description: 'Experience a better, healthier and longer life one shot at a time',
-            buttonText: 'Get Started Today',
-            videoSrc: '/videos/0762b1e1f802becd8900b5fc0336418b0582d7db2f821df7026c54850283c965.mp4',
-        },
-        {
-            title: 'Revitalize',
-            description: "Unlock your body's potential with our natural energy boosters",
-            buttonText: 'Discover More',
-            videoSrc: '/videos/a381fff7e10dd19b9ed4ee.mp4'
-        },
-        {
-            title: 'Transform',
-            description: 'Embrace a new you with our revolutionary wellness solutions',
-            buttonText: 'Start Your Journey',
-            videoSrc: '/videos/e10dd19b9ed4eeb5563358b674378dee.mp4'
-        }
-    ]
+    const { heroSlides } = siteConfig;
 
     return (
         <Carousel
@@ -40,7 +23,7 @@ export default function HeroCarousel() {
             plugins={[Autoplay({ delay: 16000 })]}
         >
             <CarouselContent className='gap-0 !ml-0'>
-                {slides.map((slide, index) => (
+                {heroSlides.map((slide, index) => (
                     <CarouselItem key={index} className='!pl-0'>
                         <section className='relative px-[5vw] sm:px-[3.5vw] lg:px-[3vw] h-[calc(92dvh-60px)]  sm:max-h-[600px] xl:max-h-fit bg-Gray-200'>
                             <Overlay />
@@ -52,11 +35,13 @@ export default function HeroCarousel() {
                                     </h3>
                                     <p className='text-OffWhite-100 text-lg md:text-xl'>{slide.description}</p>
                                 </div>
-                                <Button className='flex justify-between mt-5 sm:mt-6 py-3 items-center flex-wrap px-8 md:py-4 h-fit gap-x-6 gap-y-3 transition-colors duration-300 ease-in-out bg-Green-100 text-White-100 hover:bg-Green-300 w-fit'>
-                                    <span className='uppercase mx-auto text-wrap text-sm md:text-base xl:text-xl self-center font-semibold'>
-                                        {slide.buttonText}
-                                    </span>
-                                </Button>
+                                <Link href={slide.link}>
+                                    <Button className='flex justify-between mt-5 sm:mt-6 py-3 items-center flex-wrap px-8 md:py-4 h-fit gap-x-6 gap-y-3 transition-colors duration-300 ease-in-out text-White-100 w-fit'>
+                                        <span className='uppercase mx-auto text-wrap text-sm md:text-base xl:text-xl self-center font-semibold'>
+                                            {slide.buttonText}
+                                        </span>
+                                    </Button>
+                                </Link>
                             </div>
                             <video
                                 src={slide.videoSrc}

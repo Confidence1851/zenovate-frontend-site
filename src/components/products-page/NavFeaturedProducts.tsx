@@ -26,7 +26,7 @@ const NavFeatureProducts = () => {
 	}
 
 	return (
-		<BlogSectionWrapper heading='featured products'>
+		<BlogSectionWrapper heading=''>
 			<div className='max-w-[80rem] px-0'>
 				{isLoading ? (
 					<div className='grid w-[90vw] pb-12 max-w-[80rem] grid-cols-3 xl:grid-cols-4 gap-4 *:h-80 *:w-full *:rounded-md'>
@@ -50,17 +50,15 @@ const NavFeatureProducts = () => {
 										className='border gap-4 h-80 w-full p-8 flex flex-col justify-between flex-shrink-0'
 										key={item.name}
 									>
-										<div className='space-y-10'>
-											<div>
-												<h3 className='text-lg font-semibold text-Black-100 uppercase'>{item.name}</h3>
-												<h4 className='text-base text-Gray-100 uppercase'>{item.description}</h4>
-											</div>
-											<p className='text-base text-Gray-100'>{item.description}</p>
+										<div className='space-y-4'>
+											<h3 className='text-lg font-semibold text-foreground uppercase'>{item.name}</h3>
+											<p className='text-sm text-muted-foreground text-pretty'>{item.description}</p>
 										</div>
 
 										<Button
 											onClick={() => redirectToProductForm(item.id)}
 											type='button'
+											variant='default'
 											className='flex justify-between items-center uppercase  h-11 w-fit gap-4 shadow-none border'
 										>
 											<span>Select</span>
@@ -72,8 +70,8 @@ const NavFeatureProducts = () => {
 						</CarouselContent>
 
 						<div className='flex justify-end gap-10 items-center mt-4'>
-							<CarouselPrevious className='!relative !left-0 !top-0  border-0 shadow-none p-0 translate-y-0' />
-							<CarouselNext className='!relative !left-0 !top-0  border-0 shadow-none p-0 translate-y-0' />
+							<CarouselPrevious variant='outline' className='text-primary !relative !left-0 !top-0  border-0 shadow-none p-0 translate-y-0 ' />
+							<CarouselNext variant='outline' className='text-primary !relative !left-0 !top-0  border-0 shadow-none p-0 translate-y-0 ' />
 						</div>
 					</Carousel>
 				)}

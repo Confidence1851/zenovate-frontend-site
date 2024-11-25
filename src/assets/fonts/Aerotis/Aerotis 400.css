@@ -1,0 +1,9 @@
+@font-face {
+	font-family: 'Aerotis';
+	src:
+		url('Aerotis 400.woff2') format('woff2'),
+		url('Aerotis 400.woff') format('woff'),
+		url('Aerotis 400.otf') format('opentype');
+	font-style: normal;
+	font-weight: 400;
+}

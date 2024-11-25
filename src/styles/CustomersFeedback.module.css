@@ -5,25 +5,24 @@
 }
 
 .headerTwo {
-	@apply font-barlow uppercase text-Green-300 font-semibold leading-tight tracking-tight;
+	@apply font-barlow uppercase text-foreground font-semibold leading-tight tracking-tight;
 	@apply text-sm md:text-lg;
 }
 
 .headerOne {
-	@apply font-raleway uppercase font-medium leading-tight tracking-tight;
+	@apply font-barlow uppercase font-medium leading-tight tracking-tight;
 	@apply text-2xl md:text-4xl xl:text-5xl;
 }
 
 .carouselItem {
 	@apply flex flex-col justify-between;
 	@apply gap-10 lg:gap-20;
-	/* @apply bg-White-100; */
-	@apply border border-Green-300;
+	@apply border;
 	@apply p-5 sm:p-8 h-full;
 }
 
 .carouselHeader {
-	@apply text-lg font-raleway;
+	@apply text-lg font-barlow;
 }
 
 .carouselText {

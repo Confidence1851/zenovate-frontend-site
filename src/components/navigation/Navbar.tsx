@@ -1,12 +1,8 @@
 'use client'
 
-// import { useState } from 'react'
 import * as React from 'react'
 import Logo from './Logo'
-// import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-// import { cn } from '@/lib/utils'
-// import { ArrowRight, HambergerMenu } from 'iconsax-react'
 import NavCont from './NavCont'
 import styles from '@/styles/Navbar.module.css'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
@@ -19,47 +15,64 @@ import {
 	navigationMenuTriggerStyle
 } from '@/components/ui/navigation-menu'
 import { ChevronRight, Menu } from 'lucide-react'
-import Link from 'next/link'
 import ListItem from './ListItem'
 import FeaturedArticles from '../blogs/FeaturedArticles'
-// import Test from './DropdownCardsCont'
 import NavFeatureProducts from '../products-page/NavFeaturedProducts'
 import DropdownCardsCont from './DropdownCardsCont'
 import { useSession } from "next-auth/react";
+import Link from 'next/link'
 
-interface NavItem {
-	title: string
-	href: string
-	image: string
-	description: string
-}
-
-interface NavSection {
+interface NavItemWithDropdown {
 	label: string
-	items: NavItem[]
+	items: {
+		title: string
+		href: string
+		image: string
+		description: string
+	}[]
+	type: 'dropdown'
 }
 
-const navLinks: NavSection[] = [
+interface NavItemCustom {
+	label: string
+	type: 'custom'
+	component: React.ReactNode
+}
+
+interface NavItemSimple {
+	label: string
+	href: string
+	type: 'link'
+}
+
+type NavItem = NavItemWithDropdown | NavItemSimple | NavItemCustom
+
+const navLinks: NavItem[] = [
 	{
-		label: 'Plans',
-		items: [
-			{
-				title: 'Subscriptions',
-				href: '/subscriptions',
-				image: '/placeholder.png?height=400&width=600',
-				description: 'Choose from our flexible subscription plans.'
-			},
-			{
-				title: 'How It Works',
-				href: '/how-it-works',
-				image: '/placeholder.png?height=400&width=600',
-				description: 'Learn about our service and process.'
-			}
-		]
+		label: 'How it works',
+		href: '/how-it-works',
+		type: 'link'
 	},
 	{
-		label: 'Support',
+		label: 'Products',
+		type: 'custom',
+		component: <NavFeatureProducts />
+	},
+	{
+		label: 'Blog',
+		type: 'custom',
+		component: <FeaturedArticles />
+	},
+	{
+		label: 'About Us',
+		type: 'dropdown',
 		items: [
+			{
+				title: 'About',
+				href: '/faq',
+				image: '/placeholder.png?height=400&width=600',
+				description: 'Learn about our mission, values, the team.'
+			},
 			{
 				title: 'FAQ',
 				href: '/faq',
@@ -71,29 +84,6 @@ const navLinks: NavSection[] = [
 				href: '/contact',
 				image: '/placeholder.png?height=400&width=600',
 				description: 'Get in touch with our support team.'
-			}
-		]
-	},
-	{
-		label: 'Company',
-		items: [
-			{
-				title: 'About Us',
-				href: '/about',
-				image: '/placeholder.png?height=400&width=600',
-				description: 'Learn more about our company and mission.'
-			},
-			{
-				title: 'Products',
-				href: '/products',
-				image: '/placeholder.png?height=400&width=600',
-				description: 'Shop our range of personalized wellness shots '
-			},
-			{
-				title: 'Blog',
-				href: '/blog',
-				image: '/placeholder.png?height=400&width=600',
-				description: 'Read our latest news and articles.'
 			}
 		]
 	}
@@ -113,48 +103,45 @@ export default function Navbar() {
 						<NavigationMenuList>
 							{navLinks.map((item) => (
 								<NavigationMenuItem key={item.label}>
-									<NavigationMenuTrigger className={navigationMenuTriggerStyle()}>{item.label}</NavigationMenuTrigger>
-									<NavigationMenuContent className='md:w-full bg-white md:px-[3vw]'>
-										<ul className=' gap-10 py-5 mx-auto w-full max-w-[80rem] flex justify-start items-start'>
-											{item.items.map((subItem) => {
-												// const hrefValue = `${subItem.href}`
-												// console.log('Mapping subItem:', {
-												// 	raw: subItem.href,
-												// 	processed: hrefValue,
-												// 	type: typeof subItem.href,
-												// 	fullItem: subItem
-												// })
-												return (
-													<ListItem
-														key={subItem.title}
-														href={subItem.href}
-														title={subItem.title}
-														description={subItem.description}
-													// onMouseEnter={() => setActiveImage(subItem.image)}
-													// onMouseLeave={() => setActiveImage(null)}
-													/>
-												)
-											})}
-										</ul>
-									</NavigationMenuContent>
+									{item.type === 'link' ? (
+										<a href={item.href} className={`${navigationMenuTriggerStyle()} ${styles.trigggerLabel}`}>
+											{item.label}
+										</a>
+									) : item.type === 'dropdown' ? (
+										<>
+											{/* about us  */}
+											<NavigationMenuTrigger className={`${navigationMenuTriggerStyle()} ${styles.trigggerLabel}`}>
+												{item.label}
+											</NavigationMenuTrigger>
+											<NavigationMenuContent className='md:w-full bg-background md:px-[3vw]'>
+												{/* <ul className={`abt-transparent ${styles.listItms} `}> */}
+												<ul className='abt-transparent gap-10 py-5 mx-auto w-full max-w-[80rem] flex justify-start items-start'>
+													{item.items.map((subItem) => (
+														<ListItem
+															key={subItem.title}
+															href={subItem.href}
+															title={subItem.title}
+															description={subItem.description}
+														/>
+													))}
+												</ul>
+											</NavigationMenuContent>
+										</>
+									) : (
+										<>
+											{/* featured articles  */}
+											<NavigationMenuTrigger className={styles.trigggerLabel}>
+												{item.label}
+											</NavigationMenuTrigger>
+											<NavigationMenuContent className='md:w-full bg-background md:px-[3vw] !focus:bg-background'>
+												<DropdownCardsCont>
+													{item.component}
+												</DropdownCardsCont>
+											</NavigationMenuContent>
+										</>
+									)}
 								</NavigationMenuItem>
 							))}
-							<NavigationMenuItem>
-								<NavigationMenuTrigger>Blog</NavigationMenuTrigger>
-								<NavigationMenuContent className='md:w-full bg-white md:px-[3vw]'>
-									<DropdownCardsCont>
-										<FeaturedArticles />
-									</DropdownCardsCont>
-								</NavigationMenuContent>
-							</NavigationMenuItem>
-							<NavigationMenuItem>
-								<NavigationMenuTrigger>Products</NavigationMenuTrigger>
-								<NavigationMenuContent className='md:w-full bg-white md:px-[3vw]'>
-									<DropdownCardsCont>
-										<NavFeatureProducts />
-									</DropdownCardsCont>
-								</NavigationMenuContent>
-							</NavigationMenuItem>
 						</NavigationMenuList>
 					</NavigationMenu>
 
@@ -177,22 +164,29 @@ export default function Navbar() {
 									<span className='sr-only'>Toggle menu</span>
 								</Button>
 							</SheetTrigger>
-							<SheetContent side='right' className='bg-white'>
+							<SheetContent side='right' className='bg-background'>
 								<nav className='flex flex-col gap-4'>
 									{navLinks.map((item) => (
 										<div key={item.label} className='flex flex-col gap-2'>
 											<h2 className='text-lg font-semibold'>{item.label}</h2>
-											{item.items.map((subItem) => (
-												<Link key={subItem.title} href={subItem.href} className='text-sm hover:underline'>
-													{subItem.title}
-												</Link>
-											))}
-											{/* <Link key={'Blog'} href={'/blog'} className='text-sm hover:underline'>
-												{'Blog'}
-											</Link> */}
+											{item.type === 'link' ? (
+												<a href={item.href} className='text-sm hover:underline'>
+													{item.label}
+												</a>
+											) : item.type === 'dropdown' ? (
+												item.items.map((subItem) => (
+													<a key={subItem.title} href={subItem.href} className='text-sm hover:underline'>
+														{subItem.title}
+													</a>
+												))
+											) : (
+												<a href={`/${item.label.toLowerCase()}`} className='text-sm hover:underline'>
+													{item.label}
+												</a>
+											)}
 										</div>
 									))}
-									<Button className='bg-[#1B2B1B] hover:bg-[#2C442C] text-white w-fit mt-2'>
+									<Button className='bg-primary hover:bg-primary-foreground text-background w-fit mt-2'>
 										JOIN NOW <ChevronRight className='ml-2 h-4 w-4' />
 									</Button>
 								</nav>

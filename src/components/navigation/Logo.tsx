@@ -1,11 +1,7 @@
 import { cn } from '@/lib/utils'
-import { Raleway } from 'next/font/google'
 import Link from 'next/link'
 import React from 'react'
-const raleway = Raleway({
-	weight: ['400', '100', '200', '300', '500', '900', '800', '700', '400', '600'],
-	subsets: ['latin']
-})
+
 
 interface LogoProps {
 	className?: string
@@ -13,7 +9,7 @@ interface LogoProps {
 const Logo: React.FC<LogoProps> = ({ className }) => {
 	return (
 		<Link href='/'>
-			<h4 className={cn(className, `font-bold text-secondary tracking-wider capitalize ${raleway.className}`)}>
+			<h4 className={cn(className, `font-semibold text-muted-foreground tracking-wider capitalize font-barlow`)}>
 				Zenovate
 			</h4>
 		</Link>

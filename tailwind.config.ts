@@ -12,6 +12,7 @@ const config: Config = {
 			colors: {
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
+				'background-accent': 'hsl(var(--background-accent))',
 				card: {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
@@ -51,7 +52,7 @@ const config: Config = {
 					'5': 'hsl(var(--chart-5))'
 				},
 				Green: {
-					'100': '#162C15',
+					'100': '#48696E',
 					'200': '#E6EC9C',
 					'300': '#2E522A',
 					'400': '#8DA650'
@@ -99,7 +100,11 @@ const config: Config = {
 			},
 			fontFamily: {
 				barlow: ['var(--font-barlow)'],
-				raleway: ['var(--font-raleway)']
+				aerotis: ['var(--font-aerotis)']
+
+			},
+			letterSpacing: {
+				'script': '0.02em',
 			}
 		}
 	},
