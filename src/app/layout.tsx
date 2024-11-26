@@ -5,6 +5,7 @@ import Navbar from '@/components/navigation/Navbar'
 import Footer from '@/components/navigation/Footer'
 import { ReactLenis } from '@/utils/lenis'
 import { createMetadata } from '@/lib/metadata'
+import { Toaster } from 'react-hot-toast'
 import Provider from '@/utils/Providers'
 const barlow = Barlow({
 	weight: ['400', '100', '200', '300', '500', '900', '700', '400', '600'],
@@ -31,6 +32,7 @@ export default function RootLayout({
 					<script defer data-domain='zenovate.health' src='https://analytics.aes-studio.com/js/script.js'></script>
 				</head>
 				<body className={`${barlow.variable} ${raleway.variable} antialiased`}>
+					<Toaster />
 					<Provider>
 						<Navbar />
 						<main>{children}</main>
