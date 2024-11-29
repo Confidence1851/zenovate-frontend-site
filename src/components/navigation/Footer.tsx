@@ -40,8 +40,9 @@ const socialMedia = [
 ]
 
 const Footer = () => {
-	const pathname = usePathname();
-	const isDashboard = pathname?.includes('dashboard')
+	const pathname = usePathname()
+	const keywords = ['dashboard', 'auth']
+	const isDashboard = keywords.some((keyword) => pathname?.includes(keyword))
 
 	return (
 		<>
