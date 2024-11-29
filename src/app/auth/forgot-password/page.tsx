@@ -6,7 +6,7 @@ import GenericInput from '@/components/auth-form/GenericInput'
 import SubmitButton from '@/components/auth-form/SubmitButton'
 import BottomCta from '@/components/auth-form/BottomCta'
 
-export default function LoginPage() {
+export default function ForgotPassword() {
 	const [email, setEmail] = useState<string>('')
 
 	// tempoary until functionality for page is worked on

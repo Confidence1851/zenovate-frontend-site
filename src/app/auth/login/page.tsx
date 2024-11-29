@@ -71,7 +71,7 @@ export default function LoginPage() {
 						placeholder='email@domain.com'
 						label='Email address'
 					/>
-					<PasswordInput value={password} setValue={setPassword} placeholder='password' label='Password' />
+					<PasswordInput value={password} setValue={setPassword} placeholder='password' label='password' />
 					<div className='flex justify-end'>
 						<p className='text-xs text-[#2E522A] font-semibold'>
 							Forgot your password?{' '}
