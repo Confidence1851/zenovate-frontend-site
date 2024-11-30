@@ -19,38 +19,32 @@ export default function LoginPage() {
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault()
-		setIsloading(true)
 
-		// const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/login`, {
-		//   method: "POST",
-		//   headers: { "Content-Type": "application/json" },
-		//   body: JSON.stringify({
-		//     email: email,
-		//     password: password,
-		//   }),
-		// });
+		if (email && password) {
+			setIsloading(true)
 
-		// console.log(res);
+			const result = await signIn('credentials', {
+				email,
+				password,
+				redirect: false
+			})
 
-		const result = await signIn('credentials', {
-			email,
-			password,
-			redirect: false
-		})
+			console.log(result)
 
-		console.log(result)
-
-		if (result?.error) {
-			setIsloading(false)
-			const errorData = JSON.parse(result.error)
-			if (errorData?.message) {
-				toast.error(errorData.message)
+			if (result?.error) {
+				setIsloading(false)
+				const errorData = JSON.parse(result.error)
+				if (errorData?.message) {
+					toast.error(errorData.message)
+				} else {
+					toast.error('An error occured')
+				}
 			} else {
-				toast.error('An error occured')
+				router.push('/dashboard/orders')
+				setIsloading(false)
 			}
 		} else {
-			router.push('/dashboard/orders')
-			setIsloading(false)
+			toast.error('All fields are required!')
 		}
 	}
 
@@ -82,7 +76,9 @@ export default function LoginPage() {
 							</span>
 						</p>
 					</div>
-					<SubmitButton isLoading={isLoading} text='sign in' />
+					<div className='pt-2'>
+						<SubmitButton isLoading={isLoading} text='sign in' />
+					</div>
 					<BottomCta />
 				</form>
 			</Wrapper>

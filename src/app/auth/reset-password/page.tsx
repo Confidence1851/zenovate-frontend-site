@@ -27,7 +27,9 @@ export default function Reset() {
 				<form onSubmit={handleSubmit} className='mt-6 space-y-6'>
 					<PasswordInput value={password} setValue={setPassword} label='new password' />
 					<PasswordInput value={confirmPassword} setValue={setConfirmPassword} label='new password' />
-					<SubmitButton isLoading={isLoading} text='reset password' />
+					<div className='pt-2'>
+						<SubmitButton isLoading={isLoading} text='reset password' />
+					</div>
 					<BottomCta type='back' />
 				</form>
 			</Wrapper>
