@@ -7,6 +7,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { productList } from '@/server-actions/api.actions'
 import { useQuery } from '@tanstack/react-query'
 import { Skeleton } from '../ui/skeleton'
+import { redirectToProductForm } from '@/utils/functions'
 
 const FeatureProducts = () => {
 	const {
@@ -21,9 +22,6 @@ const FeatureProducts = () => {
 	if (error) {
 		return <h2>An error occured</h2>
 	}
-
-	console.log(products?.data)
-
 	return (
 		<section className='bg-White-100-100 space-y-16 py-12 md:py-16 lg:py-16 px-[5vw] sm:px-[3.5vw] lg:px-[3vw]'>
 			<div className='w-full max-w-[1550px] mx-auto  space-y-20'>
@@ -70,6 +68,7 @@ const FeatureProducts = () => {
 											</div>
 
 											<Button
+												onClick={() => redirectToProductForm(item.id)}
 												type='button'
 												className='flex justify-between items-center uppercase  h-11 w-fit gap-4 shadow-none border'
 											>

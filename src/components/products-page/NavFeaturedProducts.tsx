@@ -9,6 +9,7 @@ import BlogSectionWrapper from '../blogs/BlogSectionWrapper'
 import { useQuery } from '@tanstack/react-query'
 import { Skeleton } from '../ui/skeleton'
 import Autoplay from 'embla-carousel-autoplay'
+import { redirectToProductForm } from '@/utils/functions'
 
 const NavFeatureProducts = () => {
 	const {
@@ -58,6 +59,7 @@ const NavFeatureProducts = () => {
 										</div>
 
 										<Button
+											onClick={() => redirectToProductForm(item.id)}
 											type='button'
 											className='flex justify-between items-center uppercase  h-11 w-fit gap-4 shadow-none border'
 										>
