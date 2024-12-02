@@ -44,8 +44,6 @@ const howItWorks = [
 	}
 ]
 
-
-
 interface Section {
 	heading: string;
 	description: string;
