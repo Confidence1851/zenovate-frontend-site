@@ -1,11 +1,11 @@
 'use client'
 
-import { navLinks } from '@/utils/navigation'
+// import { navLinks } from '@/utils/navigation'
 import Logo from './Logo'
 import Link from 'next/link'
 // import { Call, Location } from 'iconsax-react'
 import { ExIcon, FacebookIcon, InstagramIcon, LinkedinIcon } from '@/assets/icons';
-import Image from 'next/image'
+// import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { siteConfig } from '@/utils/siteConfig'
 import styles from '@/styles/Footer.module.css'
@@ -15,28 +15,29 @@ const socialMedia = [
 		name: 'X',
 		link: siteConfig.socialLinks.x.url,
 		handle: siteConfig.socialLinks.x.handle,
-		icon: <ExIcon className="text-foreground" />,
+		Icon: ExIcon,
 	},
 	{
 		name: 'Instagram',
 		link: siteConfig.socialLinks.instagram.url,
 		handle: siteConfig.socialLinks.instagram.handle,
-		icon: <InstagramIcon className="text-foreground" />,
+		Icon: InstagramIcon,
 	},
 	{
 		name: 'Facebook',
 		link: siteConfig.socialLinks.facebook.url,
 		handle: siteConfig.socialLinks.facebook.handle,
-		icon: <FacebookIcon className="text-foreground" />,
+		Icon: FacebookIcon,
 	},
 	{
 		name: 'Linkedin',
 		link: siteConfig.socialLinks.linkedin.url,
 		handle: siteConfig.socialLinks.linkedin.handle,
-		icon: <LinkedinIcon className="text-foreground" />,
+		Icon: LinkedinIcon,
 	}
 ]
 
+// text-foreground
 const Footer = () => {
 	const pathname = usePathname()
 	const keywords = ['dashboard', 'auth']
@@ -108,7 +109,8 @@ const Footer = () => {
 															href={item.link}
 															key={item.name}
 														>
-															{item.icon}
+															<item.Icon className="size-6" />
+															{/* {item.name} */}
 														</Link>
 													))}
 												</div>
@@ -116,67 +118,9 @@ const Footer = () => {
 										</div>
 									</div>
 								</div>
-
-								<div className='space-y-12 flex-1 lg:flex lg:flex-col lg:justify-between'>
-									{/* Community */}
-									<div className='space-y-6'>
-										<h3 className='text-White-100 uppercase text-base font-semibold lg:text-xl'>join our community</h3>
-										<p className='text-White-100 text-sm'>
-											Sign up today to receive exclusive offers, health tips, and updates on our latest products.
-										</p>
-									</div>
-									{/* Trust & Certifications + Social Media */}
-									<div className='space-y-12'>
-										<div className='space-y-6'>
-											<h3 className='text-foreground uppercase text-base font-semibold lg:text-xl'>
-												trust & certifications
-											</h3>
-											<p className='text-foreground text-sm'>
-												Your health is our priority. We proudly display{' '}
-												<Link href='/privacy-policy' className='text-[#7f1d1d]'>
-													our certifications
-												</Link>{' '}
-												and{' '}
-												<Link href='/terms-of-service' className='text-[#7f1d1d]'>
-													partnerships with trusted health organizations
-												</Link>{' '}
-												to ensure you receive only the best.
-											</p>
-										</div>
-
-										{/* Social media */}
-										<div className='space-y-6'>
-											<h3 className='text-White-100 uppercase text-base font-semibold lg:text-xl'>
-												follow us on social media
-											</h3>
-											<div className='flex gap-4 items-center'>
-												{socialMedia.map((item) => (
-													<Link href={item.link} key={item.name}>
-														<Image src={item.icon} alt={item.name} className='size-6' />
-													</Link>
-												))}
-											</div>
-										</div>
-									</div>
-								</div>
-
-								{/* trust and cert */}
-								<div className='space-y-6'>
-									<h3 className='text-White-100 uppercase text-base font-semibold lg:text-xl'>trust & certifications</h3>
-									<p className='text-White-100 text-sm max-w-[70%] xl:max-w-[85%]'>
-										Your health is our priority. We proudly display{' '}
-										<Link href='/privacy-policy' className='text-red-500'>
-											our certifications{' '}
-										</Link>
-										and{' '}
-										<Link href='/terms-of-service' className='text-red-500'>
-											partnerships with trusted health organizations
-										</Link>{' '}
-										to ensure you receive only the best.
-									</p>
-								</div>
 							</div>
 						</div>
+					</div>
 				</nav>
 
 				{/* Bottom Section - Copyright and Legal Links */}
