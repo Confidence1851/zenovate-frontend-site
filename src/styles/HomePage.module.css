@@ -30,41 +30,43 @@
 .main {
 	margin-top: 50vh;
 	margin-bottom: 50vh;
+	@apply w-full;
 }
-/* @media (min-width: 1024px) {
-	.main {
-		margin-top: 50vh;
-		margin-bottom: 50vh;
-	}
-} */
 
 .cardContainer {
-	height: 100vh;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	position: sticky;
-	top: 0;
+	@apply flex top-0;
+	@apply h-full align-middle justify-center sticky;
+	@apply w-full md:w-auto;
 }
 
 .card {
-	@apply flex flex-col justify-between;
+	@apply flex flex-col md:flex-row  justify-between;
 	@apply relative rounded-sm;
-	@apply w-full h-auto lg:h-[100vh] p-6 lg:px-10 lg:pt-10 lg:pb-5;
-	transform-origin: top;
+	@apply w-full h-auto lg:h-[100vh];
+	@apply px-4 py-12 lg:px-24 lg:pt-[10rem] lg:pb-[5rem];
 	@apply gap-8 lg:gap-16;
+	transform-origin: top;
+}
+/* px-[10rem] pt-[12rem] pb-[5rem]  */
+
+@media (max-width: 1024px) {
+	.card {
+		width: 90%;
+		height: auto;
+		min-height: 400px;
+	}
 }
 
-@media (min-width: 1024px) {
+@media (max-width: 768px) {
 	.card {
-		@apply flex flex-row;
-		@apply relative;
-		@apply px-[10rem] pt-[12rem] pb-[5rem];
+		padding: 1.5rem;
+		min-height: auto;
+		height: auto;
 	}
 }
 
 .heading2 {
-	@apply m-0 text-5xl font-semibold text-left uppercase;
+	@apply m-0 text-lg md:text-2xl xl:text-5xl font-semibold text-left uppercase;
 }
 
 .leftSection {
@@ -111,12 +113,6 @@
 }
 
 @media (max-width: 1024px) {
-	.card {
-		width: 90%;
-		height: auto;
-		min-height: 400px;
-	}
-
 	.body {
 		flex-direction: column;
 	}
@@ -128,12 +124,6 @@
 }
 
 @media (max-width: 768px) {
-	.card {
-		padding: 1.5rem;
-		min-height: auto;
-		height: auto;
-	}
-
 	.leftSection,
 	.rightSection {
 		padding: 0;
