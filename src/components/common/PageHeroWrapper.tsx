@@ -4,8 +4,8 @@ import Image, { StaticImageData } from 'next/image'
 
 
 interface PageHeroWrapperProps {
-	heading: string
-	description: string
+	heading?: string
+	description?: string
 	coloredHeading?: string
 	variant?: 'black' | 'white'
 	image?: {
@@ -15,7 +15,7 @@ interface PageHeroWrapperProps {
 }
 const PageHeroWrapper: React.FC<PageHeroWrapperProps> = ({ description, heading, coloredHeading, image, variant = 'black', }) => {
 
-	const textColor = variant === 'white' ? 'text-[#fafafa]' : 'text-Black-100'
+	const textColor = variant === 'white' ? 'text-background' : 'text-foreground'
 
 	return (
 		<section className={styles.section}>

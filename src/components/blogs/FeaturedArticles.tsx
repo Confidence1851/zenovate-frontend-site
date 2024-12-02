@@ -3,43 +3,21 @@
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
 import ArticleCard from './ArticleCard'
 import BlogSectionWrapper from './BlogSectionWrapper'
-import notFound from '@/assets/images/notfound.jpg'
 import Autoplay from 'embla-carousel-autoplay'
+import { siteConfig } from '@/utils/siteConfig'
 
-const featuredArticles = [
-	{
-		id: '1',
-		content: 'The Power of Personalized Nutrition: How Targeted Nutrient Therapy Can Transform Your Health',
-		img: notFound
-	},
-	{
-		id: '2',
-		content: 'Navigating the Supplement Landscape: What You Need to Know',
-		img: notFound
-	},
-	{
-		id: '3',
-		content: 'Nutrient Deficiencies and Chronic Disease: Exploring the Connection',
-		img: notFound
-	},
-	{
-		id: '4',
-		content: 'The Gut-Brain Axis: How Your Microbiome Influences Mental Health',
-		img: notFound
-	},
-	{
-		id: '5',
-		content: 'Revolutionizing Wellness: The Future of Telemedicine and Personalized Care',
-		img: notFound
-	}
-]
+const parseDate = (dateStr: string) => new Date(dateStr);
+const featuredArticles = siteConfig.blogPosts
+	.filter(post => post.featured)
+	.sort((a, b) => parseDate(b.date).getTime() - parseDate(a.date).getTime())
+	.slice(0, 12)
+	.map(post => ({
+		id: post.slug,
+		content: post.title,
+		img: post.images[0]
+	}));
 
 const FeaturedArticles = () => {
-	// const articles = await new Promise<typeof featuredArticles>((resolve) => {
-	// 	setTimeout(() => {
-	// 		resolve(featuredArticles)
-	// 	}, 3000) // logic for api call
-	// })
 	return (
 		<BlogSectionWrapper heading='featured articles'>
 			<Carousel

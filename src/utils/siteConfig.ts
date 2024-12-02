@@ -1,4 +1,5 @@
 type SocialPlatform = 'x' | 'instagram' | 'facebook' | 'linkedin';
+import { StaticImageData } from 'next/image';
 
 interface SocialLink {
     url: string;
@@ -18,14 +19,74 @@ interface HeroSlide {
     link: string;
 }
 
+// declare module '*.jpg' {
+//     const content: string;
+//     export default content;
+// }
+
+// declare module '*.md' {
+//     const content: string;
+//     export default content;
+// }
+
+interface BlogPost {
+    id: string;
+    title: string;
+    subtitle?: string;
+    images: StaticImageData[];
+    date: string;
+    content: string;
+    author?: string;
+    readTime?: string;
+    tags?: string[];
+    featured?: boolean;
+}
+
+function createSlug(title: string): string {
+    return title
+        .toLowerCase()
+        .replace(/[^\w\s-]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-');
+}
+
+type BlogPostWithSlug = BlogPost & {
+    slug: string;
+};
+
+function addSlugToBlogPost(post: BlogPost): BlogPostWithSlug {
+    return {
+        ...post,
+        slug: createSlug(post.title)
+    };
+}
+
+export function getRelatedArticles(currentPost: BlogPostWithSlug, allPosts: BlogPostWithSlug[], limit: number = 4) {
+    return allPosts
+        .filter(post =>
+            post.id !== currentPost.id &&
+            post.tags?.some(tag => currentPost.tags?.includes(tag))
+        )
+        .slice(0, limit);
+}
+
+
+
 interface SiteConfig {
     socialLinks: Record<SocialPlatform, SocialLink>;
     legalLinks: LinkItem[];
     footerLinks: LinkItem[];
     heroSlides: HeroSlide[];
+    blogPosts: BlogPostWithSlug[];
 }
 
 
+
+
+import image1 from '@/assets/images/101589e1a6decdc226f18a128678c504.jpg'
+import image2 from '@/assets/images/1c2f243cdf51a73f0c1d326159aaa492.jpg'
+import content1 from '@/assets/blogs/article-1.md'
+import content2 from '@/assets/blogs/article-2.md'
 
 export const siteConfig: SiteConfig = {
     socialLinks: {
@@ -82,5 +143,26 @@ export const siteConfig: SiteConfig = {
             videoSrc: '/videos/e10dd19b9ed4eeb5563358b674378dee.mp4',
             link: 'https://application.zenovate.health'
         }
+    ],
+    blogPosts: [
+        addSlugToBlogPost({
+            id: '1',
+            title: 'The Power of NAD+: Your Key to Better Aging and Cellular Health',
+            date: '2024-12-02',
+            images: [image1],
+            content: content1,
+            tags: ['nutrition', 'health', 'wellness'],
+            featured: true
+        }),
+        addSlugToBlogPost({
+            id: '2',
+            title: 'The Wonders of Glutathione: Your Secret Weapon for Wellness and Radiance',
+            date: '2024-12-02',
+            images: [image2],
+            content: content2,
+            tags: ['nutrition', 'health', 'wellness'],
+            featured: true
+        }),
     ]
 } as const;
+export type { BlogPost, BlogPostWithSlug };

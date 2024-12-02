@@ -1,7 +1,7 @@
 import PageHeroWrapper from '@/components/common/PageHeroWrapper'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
-import { Button } from '@/components/ui/button'
-import { ArrowRight } from 'iconsax-react'
+// import { Button } from '@/components/ui/button'
+// import { ArrowRight } from 'iconsax-react'
 import heroImage from "@/assets/images/8625c8212b0d703c9c47427018598d7fc12827.png";
 import { createMetadata } from '@/lib/metadata'
 import SubscriptionComponent from '@/components/common/SubscriptionComponent';
