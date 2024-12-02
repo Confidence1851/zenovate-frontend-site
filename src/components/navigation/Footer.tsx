@@ -1,11 +1,8 @@
 'use client'
 
-// import { navLinks } from '@/utils/navigation'
 import Logo from './Logo'
 import Link from 'next/link'
-// import { Call, Location } from 'iconsax-react'
 import { ExIcon, FacebookIcon, InstagramIcon, LinkedinIcon } from '@/assets/icons';
-// import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { siteConfig } from '@/utils/siteConfig'
 import styles from '@/styles/Footer.module.css'

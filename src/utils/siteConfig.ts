@@ -19,19 +19,11 @@ interface HeroSlide {
     link: string;
 }
 
-// declare module '*.jpg' {
-//     const content: string;
-//     export default content;
-// }
-
-// declare module '*.md' {
-//     const content: string;
-//     export default content;
-// }
 
 interface BlogPost {
     id: string;
     title: string;
+    description?: string;
     subtitle?: string;
     images: StaticImageData[];
     date: string;
@@ -108,10 +100,10 @@ export const siteConfig: SiteConfig = {
         }
     },
     legalLinks: [
-        { label: 'Privacy Policy', href: '/privacy-policy' },
-        { label: 'Terms of Service', href: '/terms-of-service' },
-        { label: 'Cookie Policy', href: '/cookie-policy' },
-        { label: 'Accessibility', href: '/accessibility' }
+        { label: 'Privacy Policy', href: '/legal/privacy-policy' },
+        { label: 'Terms of Service', href: '/legal/terms-of-service' },
+        { label: 'Cookie Policy', href: '/legal/cookie-policy' },
+        { label: 'Accessibility', href: '/legal/accessibility' }
     ],
     footerLinks: [
         { label: 'How it Works', href: '/how-it-works' },
@@ -148,6 +140,7 @@ export const siteConfig: SiteConfig = {
         addSlugToBlogPost({
             id: '1',
             title: 'The Power of NAD+: Your Key to Better Aging and Cellular Health',
+            description: 'The Power of NAD+: Your Key to Better Aging and Cellular Health',
             date: '2024-12-02',
             images: [image1],
             content: content1,
@@ -157,6 +150,7 @@ export const siteConfig: SiteConfig = {
         addSlugToBlogPost({
             id: '2',
             title: 'The Wonders of Glutathione: Your Secret Weapon for Wellness and Radiance',
+            description: 'The Power of NAD+: Your Key to Better Aging and Cellular Health',
             date: '2024-12-02',
             images: [image2],
             content: content2,

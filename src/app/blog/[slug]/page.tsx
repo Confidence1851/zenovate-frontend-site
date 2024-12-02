@@ -4,23 +4,49 @@ import { siteConfig, getRelatedArticles, type BlogPostWithSlug } from '@/utils/s
 import { markdownToHtml } from '@/lib/markdown';
 import { notFound } from 'next/navigation';
 import { createMetadata } from '@/lib/metadata'
+import { Metadata } from 'next'
 import PageHeroWrapper from '@/components/common/PageHeroWrapper';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
-
-export const metadata = createMetadata({
-	title: 'FAQ | Zenovate Health - Personalized Wellness, Elevated',
-	description: 'A world of aesthetics that believes in a client-centric approach that empowers people to shape their unique aesthetic and wellness journey.',
-	openGraph: {
-		title: 'FAQ | Zenovate Health - Personalized Wellness, Elevated',
-		description: 'A world of aesthetics that believes in a client-centric approach that empowers people to shape their unique aesthetic and wellness journey.',
-		url: '/',
-	},
-})
 
 type Props = {
 	params: {
 		slug: string
 	}
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+	const post = siteConfig.blogPosts.find((post) => post.slug === params.slug)
+	if (!post) {
+		return createMetadata()
+	}
+	return createMetadata({
+		title: post.title,
+		description: post.description || `Read about ${post.title} on Zenovate Health`,
+		openGraph: {
+			title: post.title,
+			description: post.description || `Read about ${post.title} on Zenovate Health`,
+			url: `/blog/${post.slug}`,
+			images: post.images.map(image => ({
+				url: image.src,
+				width: 1200,
+				height: 630,
+				alt: post.title,
+			})),
+		},
+		twitter: {
+			card: 'summary_large_image',
+			title: post.title,
+			description: post.subtitle || `Read about ${post.title} on Zenovate Health`,
+			images: post.images.map(image => image.src),
+		},
+	})
+}
+
+
+export async function generateStaticParams() {
+	return siteConfig.blogPosts.map((post) => ({
+		slug: post.slug,
+	}))
 }
 
 
@@ -99,11 +125,4 @@ export default async function BlogInfoPage({ params }: Props) {
 			</section>
 		</main>
 	)
-}
-
-
-export async function generateStaticParams() {
-	return siteConfig.blogPosts.map((post) => ({
-		slug: post.slug,
-	}));
 }
