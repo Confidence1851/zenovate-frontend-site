@@ -1,13 +1,10 @@
 import PageHeroWrapper from '@/components/common/PageHeroWrapper'
 import ContactForm from '@/components/forms/ContactForm'
-import linkedin from '@/assets/images/linkedin-dark.png'
-import facebook from '@/assets/images/facebook-dark.png'
-import insta from '@/assets/images/insta-dark.png'
-import x from '@/assets/images/x-dark.png'
-import Image from 'next/image'
+import { siteConfig } from '@/utils/siteConfig'
+import { ExIcon, FacebookIcon, InstagramIcon, LinkedinIcon } from '@/assets/icons';
+import Link from 'next/link'
 import heroImage from "@/assets/images/ad6e850434c58cfdca5ed066a828ed0c9771e9faf8e15c.png";
 import SubscriptionComponent from '@/components/common/SubscriptionComponent'
-
 import { createMetadata } from '@/lib/metadata'
 
 export const metadata = createMetadata({
@@ -23,27 +20,27 @@ export const metadata = createMetadata({
 const socialMedia = [
 	{
 		name: 'X',
-		handle: '@zenovateHealth',
-		icon: x,
-		url: 'https://twitter.com/zenovateHealth'
+		link: siteConfig.socialLinks.x.url,
+		handle: siteConfig.socialLinks.x.handle,
+		Icon: ExIcon,
 	},
 	{
-		name: 'instagram',
-		handle: '@zenovate',
-		icon: insta,
-		url: 'https://instagram.com/zenovate'
+		name: 'Instagram',
+		link: siteConfig.socialLinks.instagram.url,
+		handle: siteConfig.socialLinks.instagram.handle,
+		Icon: InstagramIcon,
 	},
 	{
-		name: 'facebook',
-		handle: '@zenovatewellness',
-		icon: facebook,
-		url: 'https://facebook.com/zenovatewellness'
+		name: 'Facebook',
+		link: siteConfig.socialLinks.facebook.url,
+		handle: siteConfig.socialLinks.facebook.handle,
+		Icon: FacebookIcon,
 	},
 	{
-		name: 'linkedin',
-		handle: '@zenovate',
-		icon: linkedin,
-		url: 'https://linkedin.com/company/zenovate'
+		name: 'Linkedin',
+		link: siteConfig.socialLinks.linkedin.url,
+		handle: siteConfig.socialLinks.linkedin.handle,
+		Icon: LinkedinIcon,
 	}
 ]
 
@@ -69,13 +66,10 @@ const ContactPage = () => {
 
 							<ul className='space-y-2 md:space-y-3 *:text-sm *:md:text-base'>
 								<li className='uppercase'>
-									phone: <span>+234 4449 990</span>
+									phone: <Link href="tel:1233456789">+123 345 6789</Link>
 								</li>
 								<li className='uppercase'>
-									email: <span>+support@zenovate.com</span>
-								</li>
-								<li className='uppercase'>
-									address: <span>+support@zenovate.com</span>
+									email: <Link href="info@zenovate.health">info@zenovate.health</Link>
 								</li>
 							</ul>
 						</div>
@@ -103,18 +97,16 @@ const ContactPage = () => {
 						<h1 className='text-2xl md:text-3xl xl:text-5xl uppercase font-bold'>connect with us on social media </h1>
 						<div className=' grid grid-cols-2 gap-y-6 gap-x-10 md:flex md:gap-10 md:flex-wrap'>
 							{socialMedia.map((item) => (
-								<a
+								<Link
 									key={item.name}
-									href={item.url}
-									target="_blank"
-									rel="noopener noreferrer"
-									className="hover:opacity-80 transition-opacity"
+									href={item.link}
+									aria-label={`${item.name} icon - Follow us on ${item.name} at ${item.link}`}
 								>
 									<div className='flex gap-3 items-center'>
-										<Image src={item.icon} alt={item.name} className='size-7' />
-										<p className='font-semibold'>{item.handle}</p>
+										<item.Icon aria-label={item.name} className="size-7" />
+										<p className='font-medium uppercase'>{item.handle}</p>
 									</div>
-								</a>
+								</Link>
 							))}
 						</div>
 					</div>

@@ -30,20 +30,20 @@ interface SiteConfig {
 export const siteConfig: SiteConfig = {
     socialLinks: {
         x: {
-            url: 'https://x.com/@zenovate',
-            handle: '@zenovate'
+            url: 'https://x.com/ZenovateInfo',
+            handle: 'ZenovateInfo'
         },
         instagram: {
-            url: 'https://instagram.com/zenovate',
-            handle: '@zenovate'
+            url: 'https://instagram.com/zenovate.health',
+            handle: 'zenovate.health'
         },
         facebook: {
-            url: 'https://facebook.com/zenovate',
-            handle: '@zenovate'
+            url: 'https://www.facebook.com/profile.php?id=61569482751880&sk=about',
+            handle: 'zenovate-health'
         },
         linkedin: {
-            url: 'https://linkedin.com/company/zenovate',
-            handle: 'zenovate'
+            url: 'https://www.linkedin.com/in/zenovate-health-913b54339',
+            handle: 'zenovate-health'
         }
     },
     legalLinks: [

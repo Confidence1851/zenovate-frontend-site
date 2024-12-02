@@ -1,3 +1,5 @@
+import styles from '@/styles/HomePage.module.css'
+
 const howItWorks = [
 	{
 		heading: 'sign up',
@@ -42,3 +44,4 @@ const HowItWorks = () => {
 }
 
 export default HowItWorks
+
