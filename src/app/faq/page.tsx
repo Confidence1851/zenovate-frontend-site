@@ -95,6 +95,7 @@ const FAQPage = () => {
 					</Accordion>
 				</div>
 			</div>
+
 			<section className='bg-White-100 pt-12 md:py-16 lg:py-20 space-y-10 md:space-y-16  lg:space-y-20 '>
 				<SubscriptionComponent />
 			</section>
