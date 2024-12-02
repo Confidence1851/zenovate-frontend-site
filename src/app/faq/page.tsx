@@ -2,6 +2,20 @@ import PageHeroWrapper from '@/components/common/PageHeroWrapper'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { Button } from '@/components/ui/button'
 import { ArrowRight } from 'iconsax-react'
+import heroImage from "@/assets/images/8625c8212b0d703c9c47427018598d7fc12827.png";
+import { createMetadata } from '@/lib/metadata'
+import SubscriptionComponent from '@/components/common/SubscriptionComponent';
+
+export const metadata = createMetadata({
+	title: 'FAQ | Zenovate Health - Personalized Wellness, Elevated',
+	description: 'A world of aesthetics that believes in a client-centric approach that empowers people to shape their unique aesthetic and wellness journey.',
+	openGraph: {
+		title: 'FAQ | Zenovate Health - Personalized Wellness, Elevated',
+		description: 'A world of aesthetics that believes in a client-centric approach that empowers people to shape their unique aesthetic and wellness journey.',
+		url: '/',
+	},
+})
+
 
 const accordionData = [
 	{
@@ -50,6 +64,11 @@ const FAQPage = () => {
 			<PageHeroWrapper
 				description='Find answers to common questions about our products, services, and more.'
 				heading='Frequently Asked Questions'
+				variant='white'
+				image={{
+					src: heroImage,
+					alt: "FAQ page hero image"
+				}}
 			/>
 
 			<div className='bg-White-100 py-10 md:py-20 lg:py-24 pb-0 space-y-20 md:space-y-24'>
@@ -77,25 +96,10 @@ const FAQPage = () => {
 						))}
 					</Accordion>
 				</div>
-
-				<section className='w-full'>
-					<div className='w-full max-w-[1400px] px-[5vw] lg:px-[3vw] mx-auto h-full flex justify-center items-center gap-10 flex-col bg-Green-200 py-10 md:py-28'>
-						<h1 className='text-3xl md:text-4xl uppercase  tracking-wider font-bold text-center'>
-							Ready to Optimize Your Health?
-						</h1>
-
-						<Button
-							variant='lemon'
-							className='flex justify-between items-center flex-wrap p-4 gap-x-6 gap-y-3 w-full sm:w-fit md:gap-x-16  min-h-11 h-fit border border-Green-100'
-						>
-							<span className='uppercase text-base lg:text-xl font-semibold mx-auto text-wrap'>
-								start your zenovate journey today
-							</span>
-							<ArrowRight size='24' className=' font-bold hidden md:inline-block' />
-						</Button>
-					</div>
-				</section>
 			</div>
+			<section className='bg-White-100 pt-12 md:py-16 lg:py-20 space-y-10 md:space-y-16  lg:space-y-20 '>
+				<SubscriptionComponent />
+			</section>
 		</main>
 	)
 }
