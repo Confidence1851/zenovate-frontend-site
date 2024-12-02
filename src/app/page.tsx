@@ -48,8 +48,6 @@ const HomePage = () => {
 			{/* ENDORSEMENT */}
 			{/* <Endorsement /> */}
 
-
-
 			<section className='relative h-[300px] md:h-[400px] xl:h-[600px] px-[5vw] sm:px-[3.5vw] lg:px-[3vw]'>
 				<Overlay />
 				<div className='flex flex-col gap-3 justify-center w-full max-w-[1100px] mx-auto h-full px-2'>

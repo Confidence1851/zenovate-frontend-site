@@ -41,7 +41,11 @@ interface NavItemCustom {
 
 interface NavItemSimple {
 	label: string
-	href: string
+	href: string | {
+		path: string,
+		scroll: boolean,
+		onClick?: (e: React.MouseEvent) => void
+	}
 	type: 'link'
 }
 
@@ -50,7 +54,25 @@ type NavItem = NavItemWithDropdown | NavItemSimple | NavItemCustom
 const navLinks: NavItem[] = [
 	{
 		label: 'How it works',
-		href: '/how-it-works',
+		href: {
+			path: '/#howItWorks',
+			scroll: false,
+			onClick: (e) => {
+				e.preventDefault()
+				if (window.location.pathname === '/') {
+					window.location.href = '/#howItWorks'
+				} else {
+					// Let Next.js Link handle the navigation without default scroll
+					window.location.href = '/#howItWorks'
+					// After navigation, smooth scroll to element
+					setTimeout(() => {
+						document.getElementById('howItWorks')?.scrollIntoView({
+							behavior: 'smooth'
+						})
+					}, 100)
+				}
+			}
+		},
 		type: 'link'
 	},
 	{
@@ -104,9 +126,14 @@ export default function Navbar() {
 							{navLinks.map((item) => (
 								<NavigationMenuItem key={item.label}>
 									{item.type === 'link' ? (
-										<a href={item.href} className={`${navigationMenuTriggerStyle()} ${styles.trigggerLabel}`}>
+										<Link
+											href={typeof item.href === 'string' ? item.href : item.href.path}
+											scroll={typeof item.href === 'string' ? true : item.href.scroll}
+											onClick={typeof item.href === 'string' ? undefined : item.href.onClick}
+											className={`${navigationMenuTriggerStyle()} ${styles.trigggerLabel}`}
+										>
 											{item.label}
-										</a>
+										</Link>
 									) : item.type === 'dropdown' ? (
 										<>
 											{/* about us  */}

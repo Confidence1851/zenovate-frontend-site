@@ -111,7 +111,7 @@ const Section: React.FC<Section> = ({ heading, description, bgColor, color, i })
 
 export default function HowItWorks() {
 	return (
-		<main className={styles.main}>
+		<main id="howItWorks" className={styles.main}>
 			{howItWorks.map((section, i) => (
 				<Section key={`section_${i}`} {...section} i={i} />
 			))}
