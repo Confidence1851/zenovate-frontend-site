@@ -7,7 +7,7 @@ import HeroCarousel from '@/components/home-page/Hero'
 import Image from 'next/image'
 import nutritionImg from '@/assets/images/25fb59cf13000745b76aeef34030a78ac99dea2b6.png'
 import { Overlay } from '@/components/common/Overlay';
-
+import HowItWorks from '@/components/home-page/HowItWorks'
 import { createMetadata } from '@/lib/metadata'
 import Link from 'next/link';
 
@@ -23,7 +23,7 @@ export const metadata = createMetadata({
 
 
 const HomePage = () => {
-	
+
 	return (
 		<main className='mb-6 lg:mb-0'>
 			{/* HERO */}
@@ -44,7 +44,7 @@ const HomePage = () => {
 
 			{/* CUSTOMER FEEDBACK */}
 			<CustomersFeedback />
-
+			<HowItWorks />
 			{/* ENDORSEMENT */}
 			{/* <Endorsement /> */}
 

@@ -26,3 +26,81 @@
 	@apply py-4 px-8;
 	@apply gap-x-6 gap-y-3  md:gap-x-12  sm:mx-auto;
 }
+
+.main {
+	margin-top: 50vh;
+	margin-bottom: 50vh;
+}
+
+.cardContainer {
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: sticky;
+	top: 0;
+}
+
+.card {
+	@apply flex flex-row justify-between relative rounded-sm;
+	@apply w-[100vw] h-[100vh] px-[10rem] pt-[12rem] pb-[5rem];
+	transform-origin: top;
+	gap: 4rem;
+}
+
+.heading2 {
+	@apply m-0 text-5xl font-semibold text-left uppercase;
+}
+
+.leftSection {
+	@apply flex flex-1 flex-col gap-2 items-start space-y-16;
+}
+
+.rightSection {
+	@apply flex flex-1 flex-col items-start gap-2 space-y-4;
+}
+.stepNumber {
+	@apply text-9xl font-semibold leading-4 text-foreground;
+}
+
+.description {
+	@apply relative;
+	font-size: 16px;
+	line-height: 1.6;
+}
+
+.contentRight {
+	position: relative;
+	width: 60%;
+	height: 100%;
+	border-radius: 25px;
+	overflow: hidden;
+}
+
+.imageContainer {
+	@apply relative h-full overflow-hidden rounded-sm;
+	width: 80%;
+}
+
+.inner {
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+
+@media (max-width: 1024px) {
+	.card {
+		width: 90%;
+		height: auto;
+		min-height: 400px;
+	}
+
+	.body {
+		flex-direction: column;
+	}
+
+	.description,
+	.contentRight {
+		width: 100%;
+	}
+}
