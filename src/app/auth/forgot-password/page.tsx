@@ -5,31 +5,18 @@ import Wrapper from '@/components/auth-form/Wrapper'
 import GenericInput from '@/components/auth-form/GenericInput'
 import SubmitButton from '@/components/auth-form/SubmitButton'
 import BottomCta from '@/components/auth-form/BottomCta'
-import { forgotPassword } from '@/server-actions/api.actions'
-import toast from 'react-hot-toast'
+import useForgotPassword from '@/hooks/useForgotPassword'
 
 export default function ForgotPassword() {
 	const [email, setEmail] = useState<string>('')
-	const [isLoading, setIsloading] = useState<boolean>(false)
+
+	const { mutate, isPending } = useForgotPassword()
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault()
-		if (email) {
-			setIsloading(true)
-			try {
-				const result = await forgotPassword({
-					email: email
-				})
-
-				toast.success('Registration successful')
-				// router.push('/auth/login')
-			} catch (err) {
-				console.error(err instanceof Error ? err.message : 'an error occured')
-				toast.error(err instanceof Error ? err.message : 'an error occured')
-			} finally {
-				setIsloading(false)
-			}
-		}
+		mutate({
+			email: email
+		})
 	}
 
 	return (
@@ -51,7 +38,7 @@ export default function ForgotPassword() {
 						required
 					/>
 					<div className='pt-2'>
-						<SubmitButton isLoading={isLoading} text='send reset link' />
+						<SubmitButton isLoading={isPending} text='send reset link' />
 					</div>
 					<BottomCta />
 				</form>

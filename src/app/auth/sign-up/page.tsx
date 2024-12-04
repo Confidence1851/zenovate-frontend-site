@@ -1,18 +1,11 @@
 'use client' // Required for client-side hooks
-
-import { useState } from 'react'
-
-import GenericInput from '@/components/auth-form/GenericInput'
-import PasswordInput from '@/components/auth-form/PasswordInput'
 import SubmitButton from '@/components/auth-form/SubmitButton'
 import BottomCta from '@/components/auth-form/BottomCta'
 import Wrapper from '@/components/auth-form/Wrapper'
 import { FieldValues, useForm } from 'react-hook-form'
 import ValidationInput from '@/components/auth-form/ValidationInput'
 import ValidatePasswordInput from '@/components/auth-form/ValidatePasswordInput'
-import { registerUser } from '@/server-actions/api.actions'
-import toast from 'react-hot-toast'
-import { useRouter } from 'next/navigation'
+import useRegisterUser from '@/hooks/useRegister'
 
 export default function SignUp() {
 	const {
@@ -22,33 +15,16 @@ export default function SignUp() {
 		getValues,
 		reset
 	} = useForm()
-	const [isLoading, setIsloading] = useState<boolean>(false)
-	const router = useRouter()
+
+	const { mutate, isPending } = useRegisterUser(reset)
 
 	const onSubmit = async (data: FieldValues) => {
-		setIsloading(true)
-		try {
-			const result = await registerUser({
-				first_name: data.firstName,
-				last_name: data.lastName,
-				email: data.email,
-				password: data.password
-			})
-
-			toast.success('Registration successful')
-			router.push('/auth/login')
-			reset()
-
-			// Store token
-			// if (result.token) {
-			// 	localStorage.setItem('token', result.token)
-			// }
-		} catch (err) {
-			console.error(err instanceof Error ? err.message : 'Registration failed')
-			toast.error(err instanceof Error ? err.message : 'Registration failed')
-		} finally {
-			setIsloading(false)
-		}
+		mutate({
+			first_name: data.firstName,
+			last_name: data.lastName,
+			email: data.email,
+			password: data.password
+		})
 	}
 
 	return (
@@ -105,7 +81,7 @@ export default function SignUp() {
 					/>
 
 					<div className='pt-2'>
-						<SubmitButton isLoading={isLoading} text='sign up' />
+						<SubmitButton isLoading={isPending} text='sign up' />
 					</div>
 					<BottomCta type='signin' />
 				</form>

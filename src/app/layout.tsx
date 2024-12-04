@@ -18,7 +18,6 @@ const aerotis = localFont({
 	variable: '--font-aerotis'
 })
 
-
 export const metadata = createMetadata()
 
 export default function RootLayout({
@@ -34,6 +33,7 @@ export default function RootLayout({
 				</head>
 				<body className={`${barlow.variable} ${aerotis.variable} antialiased`}>
 					<Provider>
+						<Toaster />
 						<Navbar />
 						<main>{children}</main>
 						<Footer />
