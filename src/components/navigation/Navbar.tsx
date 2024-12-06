@@ -19,7 +19,7 @@ import ListItem from './ListItem'
 import FeaturedArticles from '../blogs/FeaturedArticles'
 import NavFeatureProducts from '../products-page/NavFeaturedProducts'
 import DropdownCardsCont from './DropdownCardsCont'
-import { useSession } from "next-auth/react";
+import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 
 interface NavItemWithDropdown {
@@ -41,11 +41,13 @@ interface NavItemCustom {
 
 interface NavItemSimple {
 	label: string
-	href: string | {
-		path: string,
-		scroll: boolean,
-		onClick?: (e: React.MouseEvent) => void
-	}
+	href:
+		| string
+		| {
+				path: string
+				scroll: boolean
+				onClick?: (e: React.MouseEvent) => void
+		  }
 	type: 'link'
 }
 
@@ -113,7 +115,7 @@ const navLinks: NavItem[] = [
 
 export default function Navbar() {
 	// const [activeImage, setActiveImage] = useState<string | null>(null)
-	const { data: session } = useSession();
+	const { data: session } = useSession()
 
 	return (
 		<NavCont>
@@ -157,13 +159,9 @@ export default function Navbar() {
 									) : (
 										<>
 											{/* featured articles  */}
-											<NavigationMenuTrigger className={styles.trigggerLabel}>
-												{item.label}
-											</NavigationMenuTrigger>
+											<NavigationMenuTrigger className={styles.trigggerLabel}>{item.label}</NavigationMenuTrigger>
 											<NavigationMenuContent className='md:w-full bg-background md:px-[3vw] !focus:bg-background'>
-												<DropdownCardsCont>
-													{item.component}
-												</DropdownCardsCont>
+												<DropdownCardsCont >{item.component}</DropdownCardsCont>
 											</NavigationMenuContent>
 										</>
 									)}
@@ -173,16 +171,15 @@ export default function Navbar() {
 					</NavigationMenu>
 
 					<div className='flex items-center gap-4'>
-						{!session ? <Link href='/auth/login'>
-							<Button className='bg-[#1B2B1B] hover:bg-[#2C442C] text-white hidden lg:inline-block'>
-								JOIN NOW
-							</Button>
-						</Link> : <Link href='/dashboard/orders'>
-							<Button className='bg-[#1B2B1B] hover:bg-[#2C442C] text-white hidden lg:inline-block'>
-								DASHBOARD
-							</Button>
-						</Link>}
-
+						{!session ? (
+							<Link href='/auth/login'>
+								<Button className='bg-[#1B2B1B] hover:bg-[#2C442C] text-white hidden lg:inline-block'>JOIN NOW</Button>
+							</Link>
+						) : (
+							<Link href='/dashboard/orders'>
+								<Button className='bg-[#1B2B1B] hover:bg-[#2C442C] text-white hidden lg:inline-block'>DASHBOARD</Button>
+							</Link>
+						)}
 
 						<Sheet>
 							<SheetTrigger asChild>
