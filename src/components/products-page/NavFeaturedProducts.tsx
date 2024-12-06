@@ -9,7 +9,7 @@ import BlogSectionWrapper from '../blogs/BlogSectionWrapper'
 import { useQuery } from '@tanstack/react-query'
 import { Skeleton } from '../ui/skeleton'
 import Autoplay from 'embla-carousel-autoplay'
-import { redirectToProductForm } from '@/utils/functions'
+import Link from 'next/link'
 
 const NavFeatureProducts = () => {
 	const {
@@ -55,15 +55,16 @@ const NavFeatureProducts = () => {
 											<p className='text-sm text-muted-foreground text-pretty'>{item.description}</p>
 										</div>
 
-										<Button
-											onClick={() => redirectToProductForm(item.id)}
-											type='button'
-											variant='default'
-											className='flex justify-between items-center uppercase  h-11 w-fit gap-4 shadow-none border'
-										>
-											<span>Select</span>
-											<ArrowRight size={16} />
-										</Button>
+										<Link href={`/products/${item.id}`}>
+											<Button
+												type='button'
+												variant='default'
+												className='flex justify-between items-center uppercase  h-11 w-fit gap-4 shadow-none border'
+											>
+												<span>Select</span>
+												<ArrowRight size={16} />
+											</Button>
+										</Link>
 									</div>
 								</CarouselItem>
 							))}

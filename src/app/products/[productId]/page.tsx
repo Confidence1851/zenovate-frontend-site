@@ -1,3 +1,5 @@
+'use client'
+
 import {
 	Carousel,
 	CarouselMainContainer,
@@ -11,9 +13,38 @@ import {
 import starFilled from '@/assets/svgs/starFilled.svg'
 import starEmpty from '@/assets/svgs/starEmpty.svg'
 import Image from 'next/image'
+import { redirectToProductForm } from '@/utils/functions'
+import { useQuery } from '@tanstack/react-query'
+import { productInfo } from '@/server-actions/api.actions'
 
 export default function ProductDetails({ params }: { params: { productId: string } }) {
 	const productId = params.productId
+	let product: Product | undefined = undefined;
+
+	const {
+		data: productData,
+		isLoading,
+		error
+	} = useQuery({
+		queryKey: ['product-info'],
+		queryFn: () => productInfo(productId)
+	})
+
+	if (error) {
+		return <h2>An error occured</h2>
+	}
+
+	console.log(productData);
+	
+	if (productData && productData.data) {
+		product = productData.data as Product;
+	}
+
+	if (!product) {
+		return <h2>No product found</h2>
+	}
+
+
 	return (
 		<div className='w-[90vw] sm:w-[93vw] lg:w-[94vw] max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 pt-9 pb-10 md:pt-14  md:pb-16 '>
 			{' '}
@@ -48,15 +79,14 @@ export default function ProductDetails({ params }: { params: { productId: string
 				</CarouselThumbsContainer>
 			</Carousel>
 			<div className='text-blck'>
-				<h2 className=' uppercase text-3xl sm:text-[42px] sm:leading-tight  font-semibold '>product name goes here</h2>
+				<h2 className=' uppercase text-3xl sm:text-[42px] sm:leading-tight  font-semibold '>{product.name}</h2>
 				<p className='text-base  pt-2.5'>
-					Discover premium wellness products designed to nourish your body, mind, and spirit. From natural supplements
-					to holistic self-care essentials, we’ve got everything you need to thrive.
+					{product.description}
 				</p>
 				<div>
 					<hr className='bg-black h-[1px] w-full m-0 p-0 border-none mt-16 mb-4' />
 					<div className='flex justify-between flex-wrap gap-5 items-center'>
-						<p className=' text-base leading-4 md:leading-5 md:text-xl font-semibold'>$00.00</p>
+						<p className=' text-base leading-4 md:leading-5 md:text-xl font-semibold'>{product.price}</p>
 						<div className='flex justify-center items-center gap-2'>
 							<div className='flex items-center gap-0 md:gap-[0.5px] *:h-[20px] *:md:h-[25px]'>
 								<Image src={starFilled} alt='rating' />
@@ -69,7 +99,8 @@ export default function ProductDetails({ params }: { params: { productId: string
 						</div>
 					</div>
 				</div>
-				<button type='submit' className='h-[43px] bg-black flex justify-center items-center px-4 w-full mt-10'>
+				<button type='submit' className='h-[43px] bg-black flex justify-center items-center px-4 w-full mt-10'
+					onClick={() => redirectToProductForm(product.id)}>
 					<div className='w-full justify-between items-center flex'>
 						<p className='text-white text-base font-semibold uppercase'>order product</p>
 						<svg

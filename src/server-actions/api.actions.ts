@@ -11,7 +11,24 @@ export async function productList() {
 		return response.data // Adjust according to the API response structure
 	} catch (error) {
 		if (axios.isAxiosError(error)) {
-			console.log(error)
+			if (error.response?.data?.message) {
+				throw new Error(error.response.data.message)
+			} else {
+				throw new Error((error as Error).message || 'Failed to fetch products')
+			}
+		} else {
+			throw new Error('An unexpected error occurred')
+		}
+	}
+}
+
+export async function productInfo(id:string) {
+	const url = baseUrl('/form/products/'+id)
+	try {
+		const response = await axios.get(url)
+		return response.data // Adjust according to the API response structure
+	} catch (error) {
+		if (axios.isAxiosError(error)) {
 			if (error.response?.data?.message) {
 				throw new Error(error.response.data.message)
 			} else {
