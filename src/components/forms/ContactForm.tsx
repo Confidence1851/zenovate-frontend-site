@@ -3,10 +3,12 @@
 import FormInputText from '@/components/common/FormInputText'
 import { Form } from '@/components/ui/form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
+import { FieldValues, useForm } from 'react-hook-form'
 import { ArrowRight } from 'iconsax-react'
 import { contactSchema } from '@/schemas/formSchema'
 import FormTextArea from '../common/FormTextArea'
+import useContactUs from '@/hooks/useContactUs'
+import ScaleLoader from 'react-spinners/ScaleLoader'
 
 const ContactForm = () => {
 	const form = useForm({
@@ -17,10 +19,20 @@ const ContactForm = () => {
 	const {
 		control,
 		handleSubmit,
-		formState: { errors }
+		formState: { errors },
+		reset
 	} = form
-	const onSubmit = async () => {
-		console.log('submitted')
+
+	const { mutate, isPending } = useContactUs(reset)
+
+	const onSubmit = async (data: FieldValues) => {
+		mutate({
+			email: data.email,
+			name: data.fullname,
+			phone: data.phone,
+			subject: data.subject,
+			message: data.message
+		})
 	}
 	return (
 		<div>
@@ -82,10 +94,16 @@ const ContactForm = () => {
 
 					<button
 						type='submit'
-						className='w-full bg-Black-100 text-White-100 h-11 flex justify-between items-center p-4 max-w-[250px]'
+						className={`w-full bg-Black-100 text-White-100 h-11 flex ${isPending ? 'justify-center' : 'justify-between'} items-center p-4 max-w-[190px]`}
 					>
-						<span className='uppercase'>send message</span>
-						<ArrowRight size='24' className='text-secondary-foreground' />
+						{isPending ? (
+							<ScaleLoader color='#FFFFFF' height={18} />
+						) : (
+							<>
+								<span className='uppercase'>send message</span>
+								<ArrowRight size='24' className='text-white' />
+							</>
+						)}
 					</button>
 				</form>
 			</Form>

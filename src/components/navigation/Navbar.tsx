@@ -82,7 +82,7 @@ const navLinks: NavItem[] = [
 		type: 'custom',
 		component: <NavFeatureProducts />
 	},
-	{
+	{	
 		label: 'Blog',
 		type: 'custom',
 		component: <FeaturedArticles />
