@@ -10,6 +10,7 @@ import { useQuery } from '@tanstack/react-query'
 import { Skeleton } from '../ui/skeleton'
 import Autoplay from 'embla-carousel-autoplay'
 import Link from 'next/link'
+import { Product } from '@/types'
 
 const NavFeatureProducts = () => {
 	const {

@@ -1,3 +1,5 @@
+import { DefaultSession } from "next-auth";
+
 interface Product {
 	id: number
 	name: string
@@ -40,3 +42,18 @@ type ForgotPasswordResponse = {
 	success: boolean
 	code: number
 }
+
+
+
+// export interface Session extends DefaultSession {
+//   user: {
+//     id: string;
+//     firstName: string;
+//     lastName: string;
+//     email: string;
+//     role: string;
+//     team: string;
+//     token: string;
+//   } & DefaultSession["user"];
+//   accessToken?: string;
+// }

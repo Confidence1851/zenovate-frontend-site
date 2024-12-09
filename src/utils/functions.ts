@@ -15,6 +15,11 @@ const redirectToForm = (data: object) => {
     window.location.href = url;
 }
 
+export const decodeRedirectHash = (hash: string) => {
+    const data = decryptWithAES(atob(decodeURIComponent(hash)));
+    return data;
+  }
+
 
 const encryptWithAES = (text: any) => {
     const secretKey = process.env.NEXT_PUBLIC_ENCRYPTION_KEY;

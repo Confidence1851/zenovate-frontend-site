@@ -213,9 +213,15 @@ export default function Navbar() {
 											)}
 										</div>
 									))}
-									<Button className='bg-primary hover:bg-primary-foreground text-background w-fit mt-2'>
-										JOIN NOW <ChevronRight className='ml-2 h-4 w-4' />
-									</Button>
+									{!session ? <Link href='/auth/login'>
+										<Button className='bg-primary hover:bg-primary-foreground text-background w-fit mt-2'>
+											JOIN NOW <ChevronRight className='ml-2 h-4 w-4' />
+										</Button>
+									</Link> : <Link href='/dashboard/orders'>
+										<Button className='bg-primary hover:bg-primary-foreground text-background w-fit mt-2'>
+											DASHBOARD <ChevronRight className='ml-2 h-4 w-4' />
+										</Button>
+									</Link>}
 								</nav>
 							</SheetContent>
 						</Sheet>

@@ -11,9 +11,9 @@ import {  signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 const sideLinks = [
-	{ label: 'profile', url: '' },
+	// { label: 'profile', url: '' },
 	{ label: 'orders', url: '/dashboard/orders' },
-	{ label: 'subscriptions', url: '' }
+	// { label: 'subscriptions', url: '' }
 ]
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {

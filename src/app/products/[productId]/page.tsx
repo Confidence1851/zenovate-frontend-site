@@ -16,6 +16,7 @@ import Image from 'next/image'
 import { redirectToProductForm } from '@/utils/functions'
 import { useQuery } from '@tanstack/react-query'
 import { productInfo } from '@/server-actions/api.actions'
+import { Product } from '@/types'
 
 export default function ProductDetails({ params }: { params: { productId: string } }) {
 	const productId = params.productId

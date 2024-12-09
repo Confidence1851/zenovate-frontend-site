@@ -8,6 +8,7 @@ import { productList } from '@/server-actions/api.actions'
 import { useQuery } from '@tanstack/react-query'
 import { Skeleton } from '../ui/skeleton'
 import { redirectToProductForm } from '@/utils/functions'
+import { Product } from '@/types'
 
 const FeatureProducts = () => {
 	const {
