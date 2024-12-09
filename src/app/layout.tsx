@@ -1,9 +1,6 @@
-// import type { Metadata } from 'next'
 import './globals.css'
 import { Poppins } from 'next/font/google'
 import localFont from 'next/font/local'
-import Navbar from '@/components/navigation/Navbar'
-import Footer from '@/components/navigation/Footer'
 import { ReactLenis } from '@/utils/lenis'
 import { createMetadata } from '@/lib/metadata'
 import { Toaster } from 'react-hot-toast'
@@ -34,9 +31,7 @@ export default function RootLayout({
 				<body className={`${barlow.variable} ${aerotis.variable} antialiased`}>
 					<Provider>
 						<Toaster />
-						<Navbar />
 						<main>{children}</main>
-						<Footer />
 					</Provider>
 				</body>
 			</ReactLenis>

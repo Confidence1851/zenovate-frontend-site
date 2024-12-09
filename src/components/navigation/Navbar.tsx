@@ -171,13 +171,34 @@ export default function Navbar() {
 
 					<div className='flex items-center gap-4'>
 						{!session ? (
-							<Link href='/auth/login'>
-								<Button className='bg-[#1B2B1B] hover:bg-[#2C442C] text-white hidden lg:inline-block'>JOIN NOW</Button>
-							</Link>
+							<>
+								<Link href='https://application.zenovate.health'>
+									<Button className='bg-primary hover:bg-primary-foreground text-background hidden lg:inline-block px-8'>
+										JOIN
+									</Button>
+								</Link>
+
+								<Link href='/auth/login'>
+									<Button className='bg-primary hover:bg-primary-foreground text-background hidden lg:inline-block px-8'>
+										LOGIN
+									</Button>
+								</Link>
+							</>
+
 						) : (
-							<Link href='/dashboard/orders'>
-								<Button className='bg-[#1B2B1B] hover:bg-[#2C442C] text-white hidden lg:inline-block'>DASHBOARD</Button>
-							</Link>
+							<>
+								<Link href='/dashboard/orders'>
+									<Button className='bg-primary hover:bg-primary-foreground text-background hidden lg:inline-block'>
+										ORDERS
+									</Button>
+								</Link>
+								<Link href='/api/auth/signout'>
+									<Button className='bg-primary hover:bg-primary-foreground text-background hidden lg:inline-block'>
+										SIGN OUT
+									</Button>
+								</Link>
+							</>
+
 						)}
 
 						<Sheet>
