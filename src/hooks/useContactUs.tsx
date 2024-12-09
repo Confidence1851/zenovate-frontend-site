@@ -1,6 +1,8 @@
 import { useMutation } from '@tanstack/react-query'
 import toast from 'react-hot-toast'
 import { contactUsApi } from '@/server-actions/api.actions'
+import type { ContactResponse, ContactInfoSent } from '@/types'
+
 
 const useContactUs = (reset: () => void) => {
 	return useMutation<ContactResponse, Error, ContactInfoSent>({

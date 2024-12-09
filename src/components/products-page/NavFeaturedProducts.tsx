@@ -13,7 +13,7 @@ import Link from 'next/link'
 import { Product } from '@/types'
 import { NavigationMenuLink } from '../ui/navigation-menu'
 
-const NavFeatureProducts = (zz) => {
+const NavFeatureProducts = (zz: any) => {
 	const {
 		data: products,
 		isLoading,
