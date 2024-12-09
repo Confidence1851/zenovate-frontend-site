@@ -42,12 +42,12 @@ interface NavItemCustom {
 interface NavItemSimple {
 	label: string
 	href:
-		| string
-		| {
-				path: string
-				scroll: boolean
-				onClick?: (e: React.MouseEvent) => void
-		  }
+	| string
+	| {
+		path: string
+		scroll: boolean
+		onClick?: (e: React.MouseEvent) => void
+	}
 	type: 'link'
 }
 
@@ -64,7 +64,6 @@ const navLinks: NavItem[] = [
 				if (window.location.pathname === '/') {
 					window.location.href = '/#howItWorks'
 				} else {
-					// Let Next.js Link handle the navigation without default scroll
 					window.location.href = '/#howItWorks'
 					// After navigation, smooth scroll to element
 					setTimeout(() => {
@@ -82,7 +81,7 @@ const navLinks: NavItem[] = [
 		type: 'custom',
 		component: <NavFeatureProducts />
 	},
-	{	
+	{
 		label: 'Blog',
 		type: 'custom',
 		component: <FeaturedArticles />
@@ -194,9 +193,13 @@ export default function Navbar() {
 										<div key={item.label} className='flex flex-col gap-2'>
 											<h2 className='text-lg font-semibold'>{item.label}</h2>
 											{item.type === 'link' ? (
-												<a href={item.href} className='text-sm hover:underline'>
+												<Link
+													href={
+														(typeof item.href === 'string' ? item.href : item.href.path) as any
+													}
+													className='text-sm hover:underline'>
 													{item.label}
-												</a>
+												</Link>
 											) : item.type === 'dropdown' ? (
 												item.items.map((subItem) => (
 													<a key={subItem.title} href={subItem.href} className='text-sm hover:underline'>
@@ -204,9 +207,9 @@ export default function Navbar() {
 													</a>
 												))
 											) : (
-												<a href={`/${item.label.toLowerCase()}`} className='text-sm hover:underline'>
+												<Link href={`/${item.label.toLowerCase()}`} className='text-sm hover:underline'>
 													{item.label}
-												</a>
+												</Link>
 											)}
 										</div>
 									))}
