@@ -11,8 +11,9 @@ import { Skeleton } from '../ui/skeleton'
 import Autoplay from 'embla-carousel-autoplay'
 import Link from 'next/link'
 import { Product } from '@/types'
+import { NavigationMenuLink } from '../ui/navigation-menu'
 
-const NavFeatureProducts = () => {
+const NavFeatureProducts = (zz) => {
 	const {
 		data: products,
 		isLoading,
@@ -55,25 +56,32 @@ const NavFeatureProducts = () => {
 											<h3 className='text-lg font-semibold text-foreground uppercase'>{item.name}</h3>
 											<p className='text-sm text-muted-foreground text-pretty'>{item.description}</p>
 										</div>
-
-										<Link href={`/products/${item.id}`}>
-											<Button
-												type='button'
-												variant='default'
-												className='flex justify-between items-center uppercase  h-11 w-fit gap-4 shadow-none border'
-											>
-												<span>Select</span>
-												<ArrowRight size={16} />
-											</Button>
-										</Link>
+										<NavigationMenuLink asChild>
+											<Link href={`/products/${item.id}`}>
+												<Button
+													type='button'
+													variant='default'
+													className='flex justify-between items-center uppercase  h-11 w-fit gap-4 shadow-none border'
+												>
+													<span>Select</span>
+													<ArrowRight size={16} />
+												</Button>
+											</Link>
+										</NavigationMenuLink>
 									</div>
 								</CarouselItem>
 							))}
 						</CarouselContent>
 
 						<div className='flex justify-end gap-10 items-center mt-4'>
-							<CarouselPrevious variant='outline' className='text-primary !relative !left-0 !top-0  border-0 shadow-none p-0 translate-y-0 ' />
-							<CarouselNext variant='outline' className='text-primary !relative !left-0 !top-0  border-0 shadow-none p-0 translate-y-0 ' />
+							<CarouselPrevious
+								variant='outline'
+								className='text-primary !relative !left-0 !top-0  border-0 shadow-none p-0 translate-y-0 '
+							/>
+							<CarouselNext
+								variant='outline'
+								className='text-primary !relative !left-0 !top-0  border-0 shadow-none p-0 translate-y-0 '
+							/>
 						</div>
 					</Carousel>
 				)}

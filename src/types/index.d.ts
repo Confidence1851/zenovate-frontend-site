@@ -26,6 +26,21 @@ type User = {
 	id: number
 }
 
+type ContactInfoSent = {
+	email: string
+	name: string
+	phone: string
+	subject: string
+	message: string
+}
+
+type ContactResponse = {
+	message: string
+	data: null
+	success: boolean
+	code: number
+}
+
 type RegisterUserResponse = {
 	message: string
 	data: {

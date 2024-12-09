@@ -17,10 +17,11 @@ import { redirectToProductForm } from '@/utils/functions'
 import { useQuery } from '@tanstack/react-query'
 import { productInfo } from '@/server-actions/api.actions'
 import { Product } from '@/types'
+import { Skeleton } from '@/components/ui/skeleton'
 
 export default function ProductDetails({ params }: { params: { productId: string } }) {
 	const productId = params.productId
-	let product: Product | undefined = undefined;
+	let product: Product | undefined = undefined
 
 	const {
 		data: productData,
@@ -35,19 +36,41 @@ export default function ProductDetails({ params }: { params: { productId: string
 		return <h2>An error occured</h2>
 	}
 
-	console.log(productData);
-	
+	console.log(productData)
+
 	if (productData && productData.data) {
-		product = productData.data as Product;
+		product = productData.data as Product
+	}
+
+	if (isLoading) {
+		return (
+			<div className='w-[90vw] sm:w-[93vw] lg:w-[94vw] max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 pt-9 pb-10 md:pt-14  md:pb-16 '>
+				<div>
+					<Skeleton className='w-full aspect-square max-h-[480px] rounded-xl' />
+					<div className='mt-3 grid grid-cols-3 xl:grid-col-4 gap-3'>
+						<Skeleton className='h-[100px] rounded-xl' />
+						<Skeleton className='h-[100px] rounded-xl' />
+					</div>
+				</div>
+
+				<div className='text-blck'>
+					<Skeleton className='h-[100px] rounded-xl' />
+					<Skeleton className='h-[30px] rounded-xl mt-2' />
+				</div>
+			</div>
+		)
 	}
 
 	if (!product) {
-		return <h2>No product found</h2>
+		return (
+			<div className='w-full h-[50vh] min-h-[300px] flex justify-center items-center'>
+				<h2 className='text-2xl font-bold'>No product found</h2>
+			</div>
+		)
 	}
 
-
 	return (
-		<div className='w-[90vw] sm:w-[93vw] lg:w-[94vw] max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 pt-9 pb-10 md:pt-14  md:pb-16 '>
+		<div className='w-[90vw] sm:w-[93vw] lg:w-[94vw] max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-10 pt-9 pb-10 md:pt-14  md:pb-16 '>
 			{' '}
 			<Carousel>
 				{/* <CarouselNext className='top-1/3 -translate-y-1/3' />
@@ -81,9 +104,7 @@ export default function ProductDetails({ params }: { params: { productId: string
 			</Carousel>
 			<div className='text-blck'>
 				<h2 className=' uppercase text-3xl sm:text-[42px] sm:leading-tight  font-semibold '>{product.name}</h2>
-				<p className='text-base  pt-2.5'>
-					{product.description}
-				</p>
+				<p className='text-base  pt-2.5'>{product.description}</p>
 				<div>
 					<hr className='bg-black h-[1px] w-full m-0 p-0 border-none mt-16 mb-4' />
 					<div className='flex justify-between flex-wrap gap-5 items-center'>
@@ -100,8 +121,11 @@ export default function ProductDetails({ params }: { params: { productId: string
 						</div>
 					</div>
 				</div>
-				<button type='submit' className='h-[43px] bg-black flex justify-center items-center px-4 w-full mt-10'
-					onClick={() => redirectToProductForm(product.id)}>
+				<button
+					type='submit'
+					className='h-[43px] bg-black flex justify-center items-center px-4 w-full mt-10'
+					onClick={() => redirectToProductForm(product.id)}
+				>
 					<div className='w-full justify-between items-center flex'>
 						<p className='text-white text-base font-semibold uppercase'>order product</p>
 						<svg

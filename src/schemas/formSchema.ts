@@ -14,7 +14,7 @@ export const contactSchema = z.object({
 	subject: z.string({ required_error: 'Subject is required' }).refine((data) => data.trim() !== '', {
 		message: 'Subject is required'
 	}),
-	phone: z.number({ required_error: 'phone is required' }),
+	phone: z.string({ required_error: 'phone is required' }),
 	message: z.string({ required_error: 'Message is required' }).refine((data) => data.trim() !== '', {
 		message: 'Message is required'
 	})

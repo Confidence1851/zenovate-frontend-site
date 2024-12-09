@@ -11,8 +11,9 @@ const useRegisterUser = (reset: () => void) => {
 		onSuccess: (result) => {
 			const { message } = result
 			toast.success(message)
+			document.cookie = `token=${result.data.token}; path=/; secure; HttpOnly`
 			reset()
-			router.push('/auth/login')
+			router.push('/dashboard/orders')
 		},
 		onError: (err) => {
 			const errorMessage = err instanceof Error ? err.message : 'Registration failed'
