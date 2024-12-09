@@ -1,10 +1,9 @@
-"use client";
+'use client'
 import { Separator } from '@/components/ui/separator'
 import { SidebarInset, SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
 import { Breadcrumb, BreadcrumbItem, BreadcrumbList, BreadcrumbPage } from '@/components/ui/breadcrumb'
 import { AppSidebar } from '@/components/dashboard/AppSidebar'
 import ActiveLink from '@/components/dashboard/ActiveLink'
-
 
 export default function Layout({ children }: { children: React.ReactNode }) {
 	return (
@@ -12,7 +11,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 			<SidebarProvider>
 				<AppSidebar />
 				<SidebarInset>
-					<header className='border-b px-[5vw] sm:px-[3.5vw] xl:px-4'>
+					<header className='border-b sticky top-0 bg-[#F7F7F5] px-[5vw] sm:px-[3.5vw] xl:px-4'>
 						<div className='flex h-16 shrink-0 items-center gap-2  w-full max-w-7xl mx-auto'>
 							<SidebarTrigger className='-ml-1 text-[#000000]' />
 							<Separator orientation='vertical' className='mr-2 h-4 bg-[#000000]' />
