@@ -1,11 +1,13 @@
-'use client' // Required for client-side hooks
+'use client'
 import SubmitButton from '@/components/auth-form/SubmitButton'
 import BottomCta from '@/components/auth-form/BottomCta'
-import Wrapper from '@/components/auth-form/Wrapper'
+import AuthLayout from '@/app/layouts/AuthLayout'
 import { FieldValues, useForm } from 'react-hook-form'
 import ValidationInput from '@/components/auth-form/ValidationInput'
 import ValidatePasswordInput from '@/components/auth-form/ValidatePasswordInput'
 import useRegisterUser from '@/hooks/useRegister'
+
+import LoginImage from '@/assets/images/f35ccf45b3bd9fcfb4b68977aed32fa1.jpg'
 
 export default function SignUp() {
 	const {
@@ -29,30 +31,36 @@ export default function SignUp() {
 
 	return (
 		<>
-			<Wrapper
+			<AuthLayout
 				heading='create an account'
-				mobParagraph='Create your account and start your journey to better health and wellness'
-				paragraph="Ready to embark on your Zenovate wellness adventure? Creating an account is the first step towards unlocking your full potential. Fill out the form below, and let's start crafting your personalized nutrient therapy plan together!"
+				backgroundImage={LoginImage}
+				paragraph="Ready to embark? Fill out the form below, and let's start your plan together!"
 			>
-				<form onSubmit={handleSubmit(onSubmit)} className='mt-6 space-y-6'>
-					<ValidationInput
-						name='firstName'
-						errors={errors}
-						register={register}
-						errorMsg='first name is required'
-						type='text'
-						placeholder='john'
-						label='first name'
-					/>
-					<ValidationInput
-						name='lastName'
-						errors={errors}
-						register={register}
-						errorMsg='last name is required'
-						type='text'
-						placeholder='doe'
-						label='last name'
-					/>
+				<form onSubmit={handleSubmit(onSubmit)} className='mt-6 space-y-2'>
+					<div className='flex gap-2'>
+						<div className='flex-1'>
+							<ValidationInput
+								name='firstName'
+								errors={errors}
+								register={register}
+								errorMsg='first name is required'
+								type='text'
+								placeholder='John'
+								label='first name'
+							/>
+						</div>
+						<div className='flex-1'>
+							<ValidationInput
+								name='lastName'
+								errors={errors}
+								register={register}
+								errorMsg='last name is required'
+								type='text'
+								placeholder='Doe'
+								label='last name'
+							/>
+						</div>
+					</div>
 					<ValidationInput
 						name='email'
 						errors={errors}
@@ -85,7 +93,7 @@ export default function SignUp() {
 					</div>
 					<BottomCta type='signin' />
 				</form>
-			</Wrapper>
+			</AuthLayout>
 		</>
 	)
 }

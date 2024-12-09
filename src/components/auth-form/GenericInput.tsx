@@ -1,5 +1,6 @@
 import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
+import styles from '@/styles/Auth.module.css'
 
 type GenericInputType = {
 	type: 'text' | 'number' | 'email'
@@ -8,6 +9,7 @@ type GenericInputType = {
 	setValue: React.Dispatch<React.SetStateAction<string>> | React.Dispatch<React.SetStateAction<string | number>>
 	required: boolean
 	label: string
+	autoComplete?: string;
 }
 
 export default function GenericInput({
@@ -16,18 +18,20 @@ export default function GenericInput({
 	placeholder,
 	setValue,
 	required = false,
-	label
+	label,
+	autoComplete
 }: GenericInputType) {
 	return (
 		<div>
-			<Label className='text-xs text-[#162C15] uppercase font-semibold'>{label}</Label>
+			<Label className={styles.inputLabel}>{label}</Label>
 			<Input
 				type={type}
 				value={value}
 				onChange={(e) => setValue(e.target.value)}
 				required={required}
-				className='border border-[#CBD5E1] placeholder:uppercase placeholder:text-sm placeholder:text-[#94A3B8] rounded-none outline-none h-[43px] px-3 mt-2'
+				className={styles.inputField}
 				placeholder={placeholder}
+				autoComplete={autoComplete}
 			/>
 		</div>
 	)

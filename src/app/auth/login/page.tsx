@@ -11,6 +11,8 @@ import SubmitButton from '@/components/auth-form/SubmitButton'
 import BottomCta from '@/components/auth-form/BottomCta'
 import AuthLayout from '@/app/layouts/AuthLayout'
 
+import LoginImage from '@/assets/images/f35ccf45b3bd9fcfb4b68977aed32fa1.jpg'
+
 export default function LoginPage() {
 	const [email, setEmail] = useState<string>('')
 	const [password, setPassword] = useState<string>('')
@@ -50,9 +52,9 @@ export default function LoginPage() {
 
 	return (
 		<AuthLayout
-			heading='welcome back!'
-			mobParagraph='sign in to continue your health journey with us'
-			paragraph="Welcome back, wellness warrior! Please enter your email and password below to access your personalized nutrient therapy dashboard. Let's pick up where you left off on your journey to optimal health!"
+			heading='Welcome back!'
+			mobParagraph='Sign in to pick up where you left off'
+			backgroundImage={LoginImage}
 		>
 
 			<form onSubmit={handleSubmit} className='mt-6 space-y-6'>
@@ -63,13 +65,20 @@ export default function LoginPage() {
 					required
 					placeholder='email@domain.com'
 					label='Email address'
+					autoComplete='email'
 				/>
-				<PasswordInput value={password} setValue={setPassword} placeholder='password' label='password' />
+				<PasswordInput
+					value={password}
+					setValue={setPassword}
+					placeholder='password'
+					label='password'
+					autoComplete='current-password'
+				/>
 				<div className='flex justify-end'>
-					<p className='text-xs text-[#2E522A] font-semibold'>
+					<p className='text-xs text-foreground font-regular'>
 						Forgot your password?{' '}
 						<span>
-							<Link className='underline' href={'/auth/forgot-password'}>
+							<Link className='font-semibold' href={'/auth/forgot-password'}>
 								Reset it here
 							</Link>
 						</span>

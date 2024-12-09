@@ -1,11 +1,14 @@
-'use client' // Required for client-side hooks
+'use client'
 
 import { useState } from 'react'
-import Wrapper from '@/components/auth-form/Wrapper'
+import AuthLayout from '@/app/layouts/AuthLayout'
 import GenericInput from '@/components/auth-form/GenericInput'
 import SubmitButton from '@/components/auth-form/SubmitButton'
 import BottomCta from '@/components/auth-form/BottomCta'
 import useForgotPassword from '@/hooks/useForgotPassword'
+
+import LoginImage from '@/assets/images/f35ccf45b3bd9fcfb4b68977aed32fa1.jpg'
+
 
 export default function ForgotPassword() {
 	const [email, setEmail] = useState<string>('')
@@ -21,12 +24,10 @@ export default function ForgotPassword() {
 
 	return (
 		<>
-			<Wrapper
+			<AuthLayout
 				heading='forgot your password?'
-				paragraph="Oops! Did your password go on a vacation without you? No worries! Just enter your email below, and we'll
-								send a reset link to help you get back into your account. Let's make sure your wellness journey doesn't
-								miss a beat!"
 				mobParagraph='Enter your email address to receive a password reset link'
+				backgroundImage={LoginImage}
 			>
 				<form onSubmit={handleSubmit} className='mt-6 space-y-6'>
 					<GenericInput
@@ -42,7 +43,7 @@ export default function ForgotPassword() {
 					</div>
 					<BottomCta />
 				</form>
-			</Wrapper>
+			</AuthLayout>
 		</>
 	)
 }

@@ -1,6 +1,7 @@
 import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form'
+import styles from '@/styles/Auth.module.css'
 
 type ValidationInputType = {
 	type: 'text' | 'number' | 'email'
@@ -23,13 +24,13 @@ export default function ValidationInput({
 }: ValidationInputType) {
 	return (
 		<div className='relative'>
-			<Label className='text-xs text-[#162C15] uppercase font-semibold'>{label}</Label>
+			<Label className={styles.inputLabel}>{label}</Label>
 			<Input
 				type={type}
 				{...register(name, {
 					required: `${errorMsg}`
 				})}
-				className={`border ${errors[name] ? 'border-red-500' : 'border-[#CBD5E1]'}  placeholder:uppercase placeholder:text-sm placeholder:text-[#94A3B8] rounded-none outline-none h-[43px] px-3 mt-2`}
+				className={`border ${errors[name] ? 'border-red-500' : 'border-muted-foreground'} ${styles.inputField}`}
 				placeholder={placeholder}
 			/>
 			{errors[name] && (

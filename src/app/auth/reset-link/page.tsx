@@ -1,12 +1,15 @@
-'use client' // Required for client-side hooks
+'use client'
 
 import { useState } from 'react'
 
-import PasswordInput from '@/components/auth-form/PasswordInput'
 import SubmitButton from '@/components/auth-form/SubmitButton'
 import BottomCta from '@/components/auth-form/BottomCta'
-import Wrapper from '@/components/auth-form/Wrapper'
+import AuthLayout from '@/app/layouts/AuthLayout'
 import Link from 'next/link'
+import styles from '@/styles/Auth.module.css'
+
+import LoginImage from '@/assets/images/f35ccf45b3bd9fcfb4b68977aed32fa1.jpg'
+
 
 export default function SentLink() {
 	const [isLoading, setIsloading] = useState<boolean>(false)
@@ -19,13 +22,16 @@ export default function SentLink() {
 
 	return (
 		<>
-			<Wrapper customHeading>
+			<AuthLayout
+				customHeading
+				backgroundImage={LoginImage}
+			>
 				<div className='text-center sm:text-left'>
-					<h1 className='text-black uppercase text-3xl sm:text-[42px] sm:leading-tight  font-semibold '>
+					<h1 className={styles.mainHeader}>
 						check your email
 					</h1>
-					<p className='text-sm mt-[5px] uppercase  text-[#94A3B8] sm:text-base max-w-[70%] xl:max-w-full mx-auto'>
-						We’ve sent a password reset link to <span className='text-[#162C15]'>{email} </span> Please check your inbox
+					<p className={styles.mainParagraph}>
+						We’ve sent a password reset link to <span className='text-foreground'>{email} </span> Please check your inbox
 					</p>
 				</div>
 				<div className='mt-6 space-y-6'>
@@ -42,7 +48,7 @@ export default function SentLink() {
 					</div>
 					<BottomCta type='signup' />
 				</div>
-			</Wrapper>
+			</AuthLayout>
 		</>
 	)
 }
