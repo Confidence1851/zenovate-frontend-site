@@ -19,7 +19,7 @@ import ListItem from './ListItem'
 import FeaturedArticles from '../blogs/FeaturedArticles'
 import NavFeatureProducts from '../products-page/NavFeaturedProducts'
 import DropdownCardsCont from './DropdownCardsCont'
-import { useSession } from 'next-auth/react'
+import { signOut, useSession } from 'next-auth/react'
 import Link from 'next/link'
 
 interface NavItemWithDropdown {
@@ -116,6 +116,12 @@ export default function Navbar() {
 	// const [activeImage, setActiveImage] = useState<string | null>(null)
 	const { data: session } = useSession()
 
+	function handleLogout() {
+		signOut({
+			callbackUrl: '/' // Redirect the user after logout
+		})
+	}
+
 	return (
 		<NavCont>
 			<nav className={styles.nav}>
@@ -192,11 +198,11 @@ export default function Navbar() {
 										ORDERS
 									</Button>
 								</Link>
-								<Link href='/api/auth/signout'>
-									<Button className='bg-primary hover:bg-primary-foreground text-background hidden lg:inline-block'>
-										SIGN OUT
-									</Button>
-								</Link>
+								<Button
+									onClick={handleLogout}
+									className='bg-primary hover:bg-primary-foreground text-background hidden lg:inline-block'>
+									SIGN OUT
+								</Button>
 							</>
 
 						)}

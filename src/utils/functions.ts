@@ -9,16 +9,25 @@ export const redirectToProductForm = (id: string | number) => {
     return redirectToForm(data);
 }
 
+
+export const redirectToRecreateSession = (value: { id: string | number, token: string }) => {
+    const data = {
+        "key": "recreate_session",
+        "value": value
+    };
+    return redirectToForm(data);
+}
+
 const redirectToForm = (data: object) => {
     const hash = btoa(encryptWithAES(data));
     const url = `${process.env.NEXT_PUBLIC_FORM_URL}\\redirect\\${hash}`;
-    window.location.href = url;
+    window.open(url, '_blank');
 }
 
 export const decodeRedirectHash = (hash: string) => {
     const data = decryptWithAES(atob(decodeURIComponent(hash)));
     return data;
-  }
+}
 
 
 const encryptWithAES = (text: any) => {
@@ -45,7 +54,7 @@ const encryptWithAES = (text: any) => {
 const decryptWithAES = (ciphertext: string) => {
     const secretKey = process.env.NEXT_PUBLIC_ENCRYPTION_KEY;
     const secretIv = process.env.NEXT_PUBLIC_ENCRYPTION_IV;
-    
+
 
     const Sha256 = CryptoJS.SHA256;
     const Hex = CryptoJS.enc.Hex;
