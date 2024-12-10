@@ -36,8 +36,6 @@ export const authOptions: AuthOptions = {
 
           }
 
-
-
           if (data.success) {
             const { user, token } = data.data;
             return {
@@ -79,7 +77,7 @@ export const authOptions: AuthOptions = {
         customSession.user = token.user;
         customSession.accessToken = token.accessToken || "";
       }
-      return session;
+      return customSession;
     },
   },
   session: {

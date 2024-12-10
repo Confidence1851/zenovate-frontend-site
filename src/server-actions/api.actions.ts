@@ -91,10 +91,57 @@ export async function forgotPassword(data: { email: string }): Promise<ForgotPas
 			if (error.response?.data?.message) {
 				throw new Error(error.response.data.message)
 			} else {
-				throw new Error(error.message || 'An error occurred')
+				throw new Error(error.message || 'Failed to process request')
 			}
 		} else {
 			throw new Error('An unexpected error occurred')
 		}
 	}
 }
+
+
+export async function resetPassword(data: { password: string  , hash: string }): Promise<ForgotPasswordResponse> {
+	const url = baseUrl('/auth/reset-password')
+
+	try {
+		const response = await axios.post(url, data)
+		return response.data
+	} catch (error) {
+		if (axios.isAxiosError(error)) {
+			console.log(error)
+			if (error.response?.data?.message) {
+				throw new Error(error.response.data.message)
+			} else {
+				throw new Error(error.message || 'Failed to reset password')
+			}
+		} else {
+			throw new Error('An unexpected error occurred')
+		}
+	}
+}
+
+export async function ordersList(
+	token: string,
+	query: { search: string; status: string , page:number}
+  ) {
+	const url = baseUrl('/dashboard/orders');
+	try {
+	  const response = await axios.get(url, {
+		headers: {
+		  Authorization: `Bearer ${token}`,
+		},
+		params: query, 
+	  });
+	  return response.data;
+	} catch (error) {
+	  if (axios.isAxiosError(error)) {
+		if (error.response?.data?.message) {
+		  throw new Error(error.response.data.message);
+		} else {
+		  throw new Error(error.message || 'Failed to fetch orders');
+		}
+	  } else {
+		throw new Error('An unexpected error occurred');
+	  }
+	}
+  }

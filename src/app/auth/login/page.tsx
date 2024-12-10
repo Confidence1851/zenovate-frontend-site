@@ -31,15 +31,13 @@ export default function LoginPage() {
 				redirect: false
 			})
 
-			console.log(result)
-
 			if (result?.error) {
 				setIsloading(false)
 				const errorData = JSON.parse(result.error)
 				if (errorData?.message) {
 					toast.error(errorData.message)
 				} else {
-					toast.error('An error occured')
+					toast.error('Invalid credentials')
 				}
 			} else {
 				router.push('/dashboard/orders')
