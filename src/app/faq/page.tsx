@@ -3,6 +3,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import heroImage from "@/assets/images/8625c8212b0d703c9c47427018598d7fc12827.png";
 import { createMetadata } from '@/lib/metadata'
 import SubscriptionComponent from '@/components/common/SubscriptionComponent';
+import MainLayout from '../layouts/MainLayout';
 
 export const metadata = createMetadata({
 	title: 'FAQ | Zenovate Health - Personalized Wellness, Elevated',
@@ -58,48 +59,51 @@ const accordionData = [
 ]
 const FAQPage = () => {
 	return (
-		<main>
-			<PageHeroWrapper
-				description='Find answers to common questions about our products, services, and more.'
-				heading='Frequently Asked Questions'
-				variant='white'
-				image={{
-					src: heroImage,
-					alt: "FAQ page hero image"
-				}}
-			/>
+		<MainLayout>
+			<main>
+				<PageHeroWrapper
+					description='Find answers to common questions about our products, services, and more.'
+					heading='Frequently Asked Questions'
+					variant='white'
+					image={{
+						src: heroImage,
+						alt: "FAQ page hero image"
+					}}
+				/>
 
-			<div className='bg-White-100 py-10 md:py-20 lg:py-24 pb-0 space-y-20 md:space-y-24'>
-				{/* ACCORDDION */}
-				<div className=' max-w-[900px] mx-auto  w-full px-[5vw] sm:px-[3.5vw] lg:px-[3vw]'>
-					<Accordion type='multiple' className='gap-5 flex flex-col  w-full '>
-						{accordionData.map((item, i) => (
-							<AccordionItem value={item.heading} className='border-Gray-100 border ' key={i}>
-								<AccordionTrigger className='uppercase hover:no-underline text-left  transition-colors duration-300 text-[14px] md:text-base px-4 font-semibold border-b-0 data-[state=open]:bg-Black-100 data-[state=open]:text-White-100 data-[state=open]:no-underline  '>
-									{item.heading}
-								</AccordionTrigger>
-								<AccordionContent className='p-4 leading-4 md:leading-6 text-base md:text-lg'>
-									<p>{item.description}</p>
-									{item.list && (
-										<ul className='flex flex-col gap-1.5 pl-0 ml-[1.0625rem] mt-2'>
-											{item.list.map((item, i) => (
-												<li className='list-decimal ' key={i}>
-													{item}
-												</li>
-											))}
-										</ul>
-									)}
-								</AccordionContent>
-							</AccordionItem>
-						))}
-					</Accordion>
+				<div className='bg-White-100 py-10 md:py-20 lg:py-24 pb-0 space-y-20 md:space-y-24'>
+					{/* ACCORDDION */}
+					<div className=' max-w-[900px] mx-auto  w-full px-[5vw] sm:px-[3.5vw] lg:px-[3vw]'>
+						<Accordion type='multiple' className='gap-5 flex flex-col  w-full '>
+							{accordionData.map((item, i) => (
+								<AccordionItem value={item.heading} className='border-Gray-100 border ' key={i}>
+									<AccordionTrigger className='uppercase hover:no-underline text-left  transition-colors duration-300 text-[14px] md:text-base px-4 font-semibold border-b-0 data-[state=open]:bg-Black-100 data-[state=open]:text-White-100 data-[state=open]:no-underline  '>
+										{item.heading}
+									</AccordionTrigger>
+									<AccordionContent className='p-4 leading-4 md:leading-6 text-base md:text-lg'>
+										<p>{item.description}</p>
+										{item.list && (
+											<ul className='flex flex-col gap-1.5 pl-0 ml-[1.0625rem] mt-2'>
+												{item.list.map((item, i) => (
+													<li className='list-decimal ' key={i}>
+														{item}
+													</li>
+												))}
+											</ul>
+										)}
+									</AccordionContent>
+								</AccordionItem>
+							))}
+						</Accordion>
+					</div>
 				</div>
-			</div>
 
-			<section className='bg-White-100 pt-12 md:py-16 lg:py-20 space-y-10 md:space-y-16  lg:space-y-20 '>
-				<SubscriptionComponent />
-			</section>
-		</main>
+				<section className='bg-White-100 pt-12 md:py-16 lg:py-20 space-y-10 md:space-y-16  lg:space-y-20 '>
+					<SubscriptionComponent />
+				</section>
+			</main>
+		</MainLayout>
+
 	)
 }
 

@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import { LegalLayout } from '@/components/legal/LegalLayout'
 import { createMetadata } from '@/lib/metadata'
 import { Metadata } from 'next'
+import MainLayout from '@/app/layouts/MainLayout'
 
 type Props = {
     params: {
@@ -49,11 +50,16 @@ export default function LegalDocument({ params }: Props) {
     }
 
     return (
-        <LegalLayout
-            title={document.title}
-            intro={document.summary.intro}
-            sections={document.summary.sections}
-            fullVersionLink={`/legal/${params.document}/raw`}
-        />
+        <>
+            <MainLayout>
+                <LegalLayout
+                    title={document.title}
+                    intro={document.summary.intro}
+                    sections={document.summary.sections}
+                    fullVersionLink={`/legal/${params.document}/raw`}
+                />
+            </MainLayout>
+        </>
+
     )
 }

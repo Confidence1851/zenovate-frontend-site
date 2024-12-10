@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import { FullLegalLayout } from '@/components/legal/FullLegalLayout'
 import { createMetadata } from '@/lib/metadata'
 import { Metadata } from 'next'
+import MainLayout from '@/app/layouts/MainLayout'
 
 type Props = {
     params: {
@@ -53,10 +54,16 @@ export default async function LegalDocumentRaw({ params }: Props) {
 
 
     return (
-        <FullLegalLayout
-            title={document.title}
-            intro={document.fullVersion.intro}
-            content={htmlContent}
-        />
+        <>
+            <MainLayout>
+                <FullLegalLayout
+                    title={document.title}
+                    intro={document.fullVersion.intro}
+                    content={htmlContent}
+                />
+            </MainLayout>
+
+        </>
+
     )
 }
