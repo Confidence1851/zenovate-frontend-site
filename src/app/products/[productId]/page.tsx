@@ -145,6 +145,5 @@ export default function ProductDetails({ params }: { params: { productId: string
 				</div>
 			</div>
 		</MainLayout>
-
 	)
 }

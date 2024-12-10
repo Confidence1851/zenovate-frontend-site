@@ -1,5 +1,11 @@
 import axios, { AxiosError } from 'axios'
-import type { ContactResponse, ContactInfoSent, RegisterUserResponse, RegisterUserInput, ForgotPasswordResponse } from '@/types'
+import type {
+	ContactResponse,
+	ContactInfoSent,
+	RegisterUserResponse,
+	RegisterUserInput,
+	ForgotPasswordResponse
+} from '@/types'
 
 function baseUrl(path = '') {
 	return process.env.NEXT_PUBLIC_SERVER_URL + path

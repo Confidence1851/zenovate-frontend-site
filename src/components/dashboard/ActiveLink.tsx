@@ -4,6 +4,11 @@ import { usePathname } from 'next/navigation'
 
 export default function ActiveLink() {
 	const pathname = usePathname()
-	const lastSegment = pathname?.split('/').filter(Boolean).pop()
-	return <>{lastSegment}</>
+
+	const segments = pathname?.split('/').filter(Boolean)
+	const lastSegment = segments?.pop()
+
+	const isOrderDetailsPage = segments?.[0] === 'dashboard' && segments[1] === 'orders' && lastSegment
+
+	return <>{isOrderDetailsPage ? `order - ${lastSegment}` : lastSegment}</>
 }
