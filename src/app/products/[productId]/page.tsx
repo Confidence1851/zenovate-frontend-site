@@ -37,7 +37,7 @@ export default function ProductDetails({ params }: { params: { productId: string
 		return <h2>An error occured</h2>
 	}
 
-	console.log(productData)
+	// console.log(productData)
 
 	if (productData && productData.data) {
 		product = productData.data as Product

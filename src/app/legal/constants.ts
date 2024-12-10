@@ -139,51 +139,90 @@ export const LEGAL_DOCUMENTS: LegalDocument[] = [
         title: 'Legal Disclaimer',
         shortTitle: 'Legal Disclaimer',
         summary: {
-            intro: 'At Zenovate, we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy outlines how we collect, use, disclose, and safeguard your data when you visit our website or use our services.',
-            sections: [
+            "intro": "This document outlines important information about Zenovate's services, limitations, and mutual responsibilities. Please review carefully:",
+            "sections": [
                 {
-                    heading: 'Information We Collect',
-                    list: [
-                        '2Personal information you provide during the health assessment and consultation process',
-                        'Demographic information such as age, gender, and location',
-                        'Health information, including medical history and lifestyle factors',
-                        'Website usage data collected through cookies and analytics tools'
+                    "heading": "About Our Services",
+                    "list": [
+                        "Zenovate is an information platform and provider network - we facilitate connections to independent healthcare professionals but do not provide direct medical care",
+                        "Our content and services are for informational purposes only and not intended to replace professional medical advice or treatment",
+                        "While we strive for accuracy, we cannot guarantee the completeness or timeliness of information provided",
+                        "Services are restricted to users 18 and older, and not intended for emergency situations"
                     ]
                 },
                 {
-                    heading: 'How We Use Your Information',
-                    list: [
-                        'To provide you with personalized wellness plan recommendations and services',
-                        'To communicate with you about your treatment plan and progress',
-                        'To improve our products, services, and website experience  ',
-                        'To send you relevant information, updates, and promotional offers (with your consent)',
-                        'To comply with legal obligations and protect our rights'
+                    "heading": "Service Limitations",
+                    "list": [
+                        "Healthcare providers maintain full responsibility for all medical advice, treatments, and prescriptions",
+                        "Treatment decisions, including prescriptions, remain at the sole discretion of healthcare providers",
+                        "Telehealth services may not be suitable for all medical conditions",
+                        "Technical limitations may affect service delivery"
                     ]
                 },
                 {
-                    heading: 'How We Protect Your Information',
-                    list: [
-                        '2We implement strict security measures to safeguard your personal and health data ',
-                        'We limit access to your information to authorized personnel only',
-                        'We use encryption and secure storage technologies to protect your data',
-                        'We do not sell, rent, or lease your personal information to third parties'
-                    ]
-                },
-                {
-                    heading: 'Your Rights and Choices  ',
-                    list: [
-                        'You have the right to access, update, and correct your personal information',
-                        'You can opt-out of promotional communications at any time',
-                        'You can request the deletion of your personal data, subject to legal requirements',
-                        'You can contact us with any questions or concerns regarding your privacy'
+                    "heading": "Data and Privacy Practices",
+                    "list": [
+                        "We implement industry-standard security measures to protect user information",
+                        "Information collection and storage complies with applicable healthcare privacy laws",
+                        "Access to user data is restricted to authorized personnel as required for service delivery",
+                        "Third-party services may be subject to their own terms and privacy policies"
                     ]
                 }
-
             ]
         },
         fullVersion: {
-            intro: 'At Zenovate, we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy outlines how we collect, use, disclose, and safeguard your data when you visit our website or use our services.',
-            content: legalContent['terms-of-service']
+            intro: '',
+            content: legalContent['legal-disclaimer']
+        }
+    },
+    {
+        id: 'website-disclaimer',
+        title: 'Website Disclaimer',
+        shortTitle: 'Website Terms',
+        summary: {
+            "intro": "By accessing or using our platform, you acknowledge and agree to these terms. This document outlines legal limitations, disclaimers, and your obligations.",
+            "sections": [
+                {
+                    "heading": "Service & Liability Limitations",
+                    "list": [
+                        "All services and content provided 'AS IS' without warranties",
+                        "We are not liable for any damages arising from platform use",
+                        "Platform is for informational purposes only - not medical advice",
+                        "We reserve the right to modify terms without notice"
+                    ]
+                },
+                {
+                    "heading": "Medical & Product Disclaimers",
+                    "list": [
+                        "No doctor-patient relationship is created through platform use",
+                        "Not responsible for healthcare provider decisions or outcomes",
+                        "Products not evaluated by FDA/Health Canada unless stated",
+                        "Individual results may vary; no guaranteed outcomes"
+                    ]
+                },
+                {
+                    "heading": "User Obligations & Restrictions",
+                    "list": [
+                        "Must be 18+ and legally able to enter binding contracts",
+                        "Grant us perpetual license to use submitted content",
+                        "Agree to telehealth limitations and risks",
+                        "Prohibited from unauthorized content reproduction"
+                    ]
+                },
+                {
+                    "heading": "Legal Rights & Governance",
+                    "list": [
+                        "All intellectual property rights reserved",
+                        "Disputes governed by [jurisdiction] law",
+                        "Mandatory arbitration for all claims",
+                        "Class action waiver in effect"
+                    ]
+                }
+            ]
+        },
+        fullVersion: {
+            intro: '',
+            content: legalContent['website-disclaimer']
         }
     }
 ] as const;

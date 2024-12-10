@@ -103,7 +103,8 @@ export const siteConfig: SiteConfig = {
         { label: 'Privacy Policy', href: '/legal/privacy-policy' },
         { label: 'Terms of Service', href: '/legal/terms-of-service' },
         { label: 'Cookie Policy', href: '/legal/cookie-policy' },
-        { label: 'Accessibility', href: '/legal/accessibility' }
+        { label: 'Website Disclaimer', href: '/legal/website-disclaimer' },
+        { label: 'Legal Disclaimer', href: '/legal/legal-disclaimer' }
     ],
     footerLinks: [
         { label: 'How it Works', href: '/how-it-works' },
