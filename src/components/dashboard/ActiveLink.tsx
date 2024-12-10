@@ -10,5 +10,5 @@ export default function ActiveLink() {
 
 	const isOrderDetailsPage = segments?.[0] === 'dashboard' && segments[1] === 'orders' && lastSegment
 
-	return <>{isOrderDetailsPage ? `order - ${lastSegment}` : lastSegment}</>
+	return <>{isOrderDetailsPage ? `order - details` : lastSegment}</>
 }

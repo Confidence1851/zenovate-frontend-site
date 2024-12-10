@@ -19,34 +19,54 @@ import { OrdersListResponse } from '@/types'
 import { ordersList } from '@/server-actions/api.actions'
 import { redirectToRecreateSession } from '@/utils/functions'
 import Link from 'next/link'
+import { useQuery } from '@tanstack/react-query'
+import ScaleLoader from 'react-spinners/ScaleLoader'
 
 export default function Order() {
 	const { data: session } = useSession()
-	const [orders, setOrders] = useState<OrdersListResponse | null>(null)
+	// const [orders, setOrders] = useState<OrdersListResponse | null>(null)s
 	const [search, setSearch] = useState<string>('')
 	const [status, setStatus] = useState<string>('')
 	const [currentPage, setCurrentPage] = useState<number>(1)
-	const [totalPages, setTotalPages] = useState<number>(1)
+	// const [totalPages, setTotalPages] = useState<number>(1)
 	const statuses = ['Pending', 'Processing', 'Awaiting_Review', 'Awaiting_Confirmation', 'Declined', 'Completed']
 
-	// Fetch Orders with Pagination
-	const fetchOrders = () => {
-		if (!session?.accessToken) {
-			return
-		}
-		ordersList(session?.accessToken ?? '', {
-			search,
-			status,
-			page: currentPage
-		}).then((result) => {
-			setOrders(result)
-			setTotalPages(result?.data?.meta?.total_pages ?? 1)
-		})
-	}
+	// // Fetch Orders with Pagination
+	// const fetchOrders = () => {
+	// 	if (!session?.accessToken) {
+	// 		return
+	// 	}
+	// 	ordersList(session?.accessToken ?? '', {
+	// 		search,
+	// 		status,
+	// 		page: currentPage
+	// 	}).then((result) => {
+	// 		setOrders(result)
+	// 		setTotalPages(result?.data?.meta?.total_pages ?? 1)
+	// 	})
+	// }
 
-	useEffect(() => {
-		fetchOrders()
-	}, [currentPage, search, status, session])
+	// useEffect(() => {
+	// 	fetchOrders()
+	// }, [currentPage, search, status, session])
+
+	const {
+		data: ordersData,
+		isLoading,
+	} = useQuery<OrdersListResponse>({
+		queryKey: ['orders', session?.accessToken, search, status, currentPage],
+		queryFn: async () => {
+			if (!session?.accessToken) {
+				throw new Error('No access token available')
+			}
+			return ordersList(session.accessToken, { search, status, page: currentPage })
+		}
+	})
+
+	const totalPages = ordersData?.data?.pagination_meta?.total ?? 1
+
+	console.log(ordersData)
+	console.log(ordersData?.data?.pagination_meta?.total)
 
 	// Pagination Handlers
 	const handlePageChange = (page: number) => {
@@ -88,60 +108,68 @@ export default function Order() {
 			<div className='grid grid-cols-1 mt-6 md:mt-7'>
 				<div className='overflow-x-auto max-w-full'>
 					<div className='min-w-[700px]'>
-						<Table>
-							<TableHeader>
-								<TableRow className='*:text-[#94A3B8] *:font-semibold *:uppercase border-[#CBD5E1] *:py-4'>
-									<TableHead className='w-[120px]'>Reference</TableHead>
-									<TableHead>Date</TableHead>
-									<TableHead>Selected Products</TableHead>
-									<TableHead>Total Cost</TableHead>
-									<TableHead>Status</TableHead>
-									<TableHead className='text-right'>Actions</TableHead>
-								</TableRow>
-							</TableHeader>
-							<TableBody>
-								{orders?.data.data.map((order) => (
-									<TableRow
-										key={order.id}
-										className='*:text-[#000000] *:font-semibold *:uppercase border-[#CBD5E1] *:py-4'
-									>
-										<TableCell>{order.reference}</TableCell>
-										<TableCell>{order.created_at}</TableCell>
-										<TableCell>{order.total_products}</TableCell>
-										<TableCell>{order.total_cost}</TableCell>
-										<TableCell>{order.status.replace('_', ' ')}</TableCell>
-										<TableCell className='text-right'>
-											<div className='flex justify-end items-center gap-3 *:border *:border-[#CBD5E1] *:px-2.5 *:py-[5px] *:text-[#000000] *:uppercase *:text-sm *:font-semibold'>
-												<Link href={`/dashboard/orders/${order.id}`}>View</Link>
-												<button onClick={() => handleRecreate(order.id)}>Re-Create</button>
-											</div>
-										</TableCell>
+						{isLoading ? (
+							<div className='w-full mt-4 flex justify-center'>
+								<ScaleLoader color='#94A3B8' />
+							</div>
+						) : (
+							<Table>
+								<TableHeader>
+									<TableRow className='*:text-[#94A3B8] *:font-semibold *:uppercase border-[#CBD5E1] *:py-4'>
+										<TableHead className='w-[200px]'>Reference</TableHead>
+										<TableHead>Date</TableHead>
+										<TableHead>Selected Products</TableHead>
+										<TableHead>Total Cost</TableHead>
+										<TableHead>Status</TableHead>
+										<TableHead className='text-right'>Actions</TableHead>
 									</TableRow>
-								))}
-							</TableBody>
-						</Table>
+								</TableHeader>
+								<TableBody>
+									{ordersData?.data.data.map((order) => (
+										<TableRow
+											key={order.id}
+											className='*:text-[#000000] *:font-semibold *:uppercase border-[#CBD5E1] *:py-4'
+										>
+											<TableCell>{order.reference}</TableCell>
+											<TableCell>{order.created_at}</TableCell>
+											<TableCell>{order.total_products}</TableCell>
+											<TableCell>{order.total_cost}</TableCell>
+											<TableCell>{order.status.replace('_', ' ')}</TableCell>
+											<TableCell className='text-right'>
+												<div className='flex justify-end items-center gap-3 *:border *:border-[#CBD5E1] *:px-2.5 *:py-[5px] *:text-[#000000] *:uppercase *:text-sm *:font-semibold'>
+													<Link href={`/dashboard/orders/${order.id}`}>View</Link>
+													<button onClick={() => handleRecreate(order.id)}>Re-Create</button>
+												</div>
+											</TableCell>
+										</TableRow>
+									))}
+								</TableBody>
+							</Table>
+						)}
 					</div>
 				</div>
 			</div>
-			<div className='mt-8'>
-				<Pagination>
-					<PaginationContent>
-						<PaginationItem>
-							<PaginationPrevious href='#' onClick={() => handlePageChange(currentPage - 1)} />
-						</PaginationItem>
-						{Array.from({ length: totalPages }, (_, i) => (
-							<PaginationItem key={i}>
-								<PaginationLink href='#' isActive={currentPage === i + 1} onClick={() => handlePageChange(i + 1)}>
-									{i + 1}
-								</PaginationLink>
+			{totalPages > 1 && (
+				<div className='mt-8'>
+					<Pagination>
+						<PaginationContent>
+							<PaginationItem>
+								<PaginationPrevious href='#' onClick={() => handlePageChange(currentPage - 1)} />
 							</PaginationItem>
-						))}
-						<PaginationItem>
-							<PaginationNext href='#' onClick={() => handlePageChange(currentPage + 1)} />
-						</PaginationItem>
-					</PaginationContent>
-				</Pagination>
-			</div>
+							{Array.from({ length: totalPages }, (_, i) => (
+								<PaginationItem key={i}>
+									<PaginationLink href='#' isActive={currentPage === i + 1} onClick={() => handlePageChange(i + 1)}>
+										{i + 1}
+									</PaginationLink>
+								</PaginationItem>
+							))}
+							<PaginationItem>
+								<PaginationNext href='#' onClick={() => handlePageChange(currentPage + 1)} />
+							</PaginationItem>
+						</PaginationContent>
+					</Pagination>
+				</div>
+			)}
 		</div>
 	)
 }

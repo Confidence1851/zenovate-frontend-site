@@ -105,8 +105,7 @@ export async function forgotPassword(data: { email: string }): Promise<ForgotPas
 	}
 }
 
-
-export async function resetPassword(data: { password: string  , hash: string }): Promise<ForgotPasswordResponse> {
+export async function resetPassword(data: { password: string; hash: string }): Promise<ForgotPasswordResponse> {
 	const url = baseUrl('/auth/reset-password')
 
 	try {
@@ -126,28 +125,46 @@ export async function resetPassword(data: { password: string  , hash: string }):
 	}
 }
 
-export async function ordersList(
-	token: string,
-	query: { search: string; status: string , page:number}
-  ) {
-	const url = baseUrl('/dashboard/orders');
+export async function ordersList(token: string, query: { search: string; status: string; page: number }) {
+	const url = baseUrl('/dashboard/orders')
 	try {
-	  const response = await axios.get(url, {
-		headers: {
-		  Authorization: `Bearer ${token}`,
-		},
-		params: query, 
-	  });
-	  return response.data;
+		const response = await axios.get(url, {
+			headers: {
+				Authorization: `Bearer ${token}`
+			},
+			params: query
+		})
+		return response.data
 	} catch (error) {
-	  if (axios.isAxiosError(error)) {
-		if (error.response?.data?.message) {
-		  throw new Error(error.response.data.message);
+		if (axios.isAxiosError(error)) {
+			if (error.response?.data?.message) {
+				throw new Error(error.response.data.message)
+			} else {
+				throw new Error(error.message || 'Failed to fetch orders')
+			}
 		} else {
-		  throw new Error(error.message || 'Failed to fetch orders');
+			throw new Error('An unexpected error occurred')
 		}
-	  } else {
-		throw new Error('An unexpected error occurred');
-	  }
 	}
-  }
+}
+export async function ordersListDetails(token: string, id: string) {
+	const url = baseUrl(`/dashboard/orders/${id}`)
+	try {
+		const response = await axios.get(url, {
+			headers: {
+				Authorization: `Bearer ${token}`
+			}
+		})
+		return response.data
+	} catch (error) {
+		if (axios.isAxiosError(error)) {
+			if (error.response?.data?.message) {
+				throw new Error(error.response.data.message)
+			} else {
+				throw new Error(error.message || 'Failed to fetch order details')
+			}
+		} else {
+			throw new Error('An unexpected error occurred')
+		}
+	}
+}
