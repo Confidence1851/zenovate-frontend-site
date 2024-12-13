@@ -38,7 +38,7 @@ export default function SentLink() {
 					<div className=''>
 						<button
 							onClick={handleClick}
-							className='h-[43px] px-4 mb-3 text-left bg-transparent text-xs font-semibold border border-[#CBD5E1] w-full uppercase text-black'
+							className='h-[43px] px-4 mb-3 text-left bg-transparent text-xs font-semibold border border-[#CBD5E1] w-full uppercase text-foreground'
 						>
 							resend link
 						</button>

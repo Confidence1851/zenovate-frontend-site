@@ -58,10 +58,10 @@ const config: Config = {
 					'400': '#8DA650'
 				},
 				Black: {
-					'100': '#0a0a0a'
+					'100': '#09090b'
 				},
 				White: {
-					'100': '#FFFFFF'
+					'100': '#fafafa'
 				},
 				OffWhite: {
 					'100': '#EBEBE6'

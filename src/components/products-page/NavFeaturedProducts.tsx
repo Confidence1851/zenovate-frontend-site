@@ -52,9 +52,19 @@ const NavFeatureProducts = (zz: any) => {
 										className='border gap-4 h-80 w-full p-8 flex flex-col justify-between flex-shrink-0'
 										key={item.name}
 									>
+										<div
+											className={`
+												w-6 h-6 rounded-full ${item.name === 'Nadiva' ? 'bg-[#90B9AC]' :
+													item.name === 'Gloria' ? 'bg-[#AEA581]' :
+														item.name === 'Immuna' ? 'bg-[#6E6D6B]' :
+															item.name === 'Energia' ? 'bg-[#DBD7D6]' :
+																item.name === 'Activa' ? 'bg-[#CEF3E9]' :
+																	'bg-gray-500'
+												}`}
+										/>
 										<div className='space-y-4'>
 											<h3 className='text-lg font-semibold text-foreground uppercase'>{item.name}</h3>
-											<p className='text-sm text-muted-foreground text-pretty'>{item.description}</p>
+											<p className='text-sm text-muted-foreground text-pretty'>{item.subtitle}</p>
 										</div>
 										<NavigationMenuLink asChild>
 											<Link href={`/products/${item.id}`}>

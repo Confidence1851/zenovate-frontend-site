@@ -20,7 +20,7 @@ export const metadata = createMetadata({
 
 const socialMedia = [
 	{
-		name: 'X',
+		name: 'x.com',
 		link: siteConfig.socialLinks.x.url,
 		handle: siteConfig.socialLinks.x.handle,
 		Icon: ExIcon,
@@ -106,7 +106,7 @@ const ContactPage = () => {
 									>
 										<div className='flex gap-3 items-center'>
 											<item.Icon aria-label={item.name} className="size-7" />
-											<p className='font-medium uppercase'>{item.handle}</p>
+											<p className='font-medium uppercase'>{item.name}</p>
 										</div>
 									</Link>
 								))}

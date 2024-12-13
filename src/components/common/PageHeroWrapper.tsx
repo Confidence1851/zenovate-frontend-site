@@ -11,14 +11,16 @@ interface PageHeroWrapperProps {
 	image?: {
 		src: string | StaticImageData
 		alt: string
-	}
+	};
+	size?: 'default' | 'short';
 }
-const PageHeroWrapper: React.FC<PageHeroWrapperProps> = ({ description, heading, coloredHeading, image, variant = 'black', }) => {
+const PageHeroWrapper: React.FC<PageHeroWrapperProps> = ({ description, heading, coloredHeading, image, variant = 'black', size = 'default', }) => {
 
 	const textColor = variant === 'white' ? 'text-background' : 'text-foreground'
+	const sectionClasses = size === 'short' ? `${styles.section} ${styles.sectionShort}` : styles.section;
 
 	return (
-		<section className={styles.section}>
+		<section className={sectionClasses}>
 			{image && (
 				<Image
 					src={image.src}

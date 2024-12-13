@@ -13,7 +13,7 @@ export default function Wrapper({ children, heading, mobParagraph, paragraph, cu
 				<div className='w-full max-w-[454px] mx-auto'>
 					{!customHeading && (
 						<div className='text-center sm:text-left'>
-							<h1 className='text-black uppercase text-3xl sm:text-[42px] sm:leading-tight  font-semibold '>
+							<h1 className='text-foreground uppercase text-3xl sm:text-[42px] sm:leading-tight  font-semibold '>
 								{heading}
 							</h1>
 							<p className='text-sm mt-[5px] uppercase  text-[#94A3B8] sm:hidden max-w-[70%] mx-auto'>{mobParagraph}</p>

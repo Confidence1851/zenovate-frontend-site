@@ -9,6 +9,7 @@ import { useQuery } from '@tanstack/react-query'
 import { Skeleton } from '../ui/skeleton'
 import { redirectToProductForm } from '@/utils/functions'
 import { Product } from '@/types'
+import Link from 'next/link'
 
 const FeatureProducts = () => {
 	const {
@@ -60,22 +61,31 @@ const FeatureProducts = () => {
 											className='border gap-4 h-80 w-full p-8 flex flex-col justify-between flex-shrink-0'
 											key={item.name}
 										>
+											<div
+												className={`
+												w-6 h-6 rounded-full ${item.name === 'Nadiva' ? 'bg-[#90B9AC]' :
+														item.name === 'Gloria' ? 'bg-[#AEA581]' :
+															item.name === 'Immuna' ? 'bg-[#6E6D6B]' :
+																item.name === 'Energia' ? 'bg-[#DBD7D6]' :
+																	item.name === 'Activa' ? 'bg-[#CEF3E9]' :
+																		'bg-gray-500'
+													}`}
+											/>
 											<div className='space-y-10'>
 												<div>
 													<h3 className='text-lg font-semibold text-Black-100 uppercase'>{item.name}</h3>
-													<h4 className='text-base text-Gray-100 uppercase'>{item.description}</h4>
+													<h4 className='text-base text-Gray-100 uppercase'>{item.subtitle}</h4>
 												</div>
-												<p className='text-base text-Gray-100'>{item.description}</p>
 											</div>
-
-											<Button
-												onClick={() => redirectToProductForm(item.id)}
-												type='button'
-												className='flex justify-between items-center uppercase  h-11 w-fit gap-4 shadow-none border'
-											>
-												<span>Select</span>
-												<ArrowRight size={16} />
-											</Button>
+											<Link href={`/products/${item.id}`}>
+												<Button
+													type='button'
+													className='flex justify-between items-center uppercase  h-11 w-fit gap-4 shadow-none border'
+												>
+													<span>Select</span>
+													<ArrowRight size={16} />
+												</Button>
+											</Link>
 										</div>
 									</CarouselItem>
 								))}

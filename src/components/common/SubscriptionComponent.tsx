@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import bgImage from '@/assets/images/8444c50c5bea09d5b957398fe37cc1e606c138.png'
+import bgImage from '@/assets/images/67ea83927edd7f56d0f7.png'
 import Image from 'next/image'
 import axios from 'axios'
 import ScaleLoader from 'react-spinners/ScaleLoader'

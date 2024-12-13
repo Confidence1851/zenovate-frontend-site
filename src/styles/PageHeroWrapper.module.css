@@ -3,3 +3,7 @@
 	@apply bg-OffWhite-100;
 	@apply relative px-[5vw] sm:px-[3.5vw] lg:px-[3vw];
 }
+
+.sectionShort {
+	@apply h-[30vh] min-h-[400px] max-h-[600px];
+}
