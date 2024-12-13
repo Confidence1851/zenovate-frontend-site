@@ -92,7 +92,7 @@ const navLinks: NavItem[] = [
 		items: [
 			{
 				title: 'About',
-				href: '/faq',
+				href: '/about',
 				image: '/placeholder.png?height=400&width=600',
 				description: 'Learn about our mission, values, the team.'
 			},
@@ -125,7 +125,7 @@ export default function Navbar() {
 	return (
 		<NavCont>
 			<nav className={styles.nav}>
-				<div className={styles.navContainer}>
+				<div className={`md-container ${styles.navContainer}`}>
 					<Logo className='text-xl lg:text-2xl' />
 
 					<NavigationMenu className='hidden lg:inline-block'>

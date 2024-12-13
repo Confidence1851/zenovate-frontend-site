@@ -45,7 +45,7 @@ const Footer = () => {
 			<footer>
 				<nav className={styles.SectionTopContainerParent}>
 					<div className={styles.SectionContent}>
-						<div className={`${styles.SectionContentParent} px-6 sm:px-8`}> {/* Added base padding */}
+						<div className={`md-container`}>
 							<div className='grid grid-cols-1 lg:grid-cols-12 w-full gap-12 lg:gap-16'>
 								{/* Left Column */}
 								<div className='lg:col-span-4 flex flex-col justify-between gap-10'>
@@ -123,7 +123,7 @@ const Footer = () => {
 				{/* Bottom Section - Copyright and Legal Links */}
 				<div className={styles.SectionBottomContainerParent}>
 					<div className={styles.SectionContent}>
-						<div className={`${styles.SectionContentParent} px-6 sm:px-8`}>
+						<div className={`md-container`}>
 							<div className="w-full flex flex-col lg:flex-row justify-between items-center gap-6">
 								<p className="text-foreground text-[0.725rem] tracking-normal">
 									© {new Date().getFullYear()} Zenovate Health. All rights reserved.

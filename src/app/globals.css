@@ -76,6 +76,24 @@ body {
 		--sidebar-border: 240 3.7% 15.9%;
 		--sidebar-ring: 217.2 91.2% 59.8%;
 	}
+
+	.main-layout {
+		@apply mx-auto w-full max-w-container-sm lg:max-w-container-md xl:max-w-container-lg;
+		/* @apply lg:px-gutter-lg md:px-gutter-md px-gutter-sm; */
+		@apply mb-6 lg:mb-0;
+	}
+	.md-container {
+		@apply mx-auto w-full max-w-container-md;
+		@apply lg:px-gutter-lg md:px-gutter-md px-gutter-sm;
+	}
+	.title {
+		@apply text-Black-100 text-2xl lg:text-5xl lg:leading-tight uppercase font-bold;
+	}
+	.smaller-title {
+		@apply text-base md:text-[19px] md:leading-7 text-foreground uppercase font-semibold;
+	}
+
+	/* <div className={`md-container ${styles.navContainer}`}> */
 }
 
 /* SCROLL_BAR */

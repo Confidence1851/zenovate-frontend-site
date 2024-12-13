@@ -181,14 +181,14 @@ const FAQPage = () => {
 
 				<div className='bg-background py-10 md:py-20 lg:py-24 pb-0 space-y-20 md:space-y-24'>
 					{/* ACCORDDION */}
-					<div className=' max-w-[900px] mx-auto  w-full px-[5vw] sm:px-[3.5vw] lg:px-[3vw]'>
-						<Accordion type='multiple' className='gap-5 flex flex-col  w-full '>
+					<div className='md-container'>
+						<Accordion type='multiple' className='gap-5 flex flex-col  w-full'>
 							{accordionData.map((item, i) => (
 								<AccordionItem value={item.heading} className='border-muted-foreground border' key={i}>
 									<AccordionTrigger className='uppercase hover:no-underline text-left transition-colors duration-300 text-[14px] md:text-base px-4 font-semibold border-b-0 data-[state=open]:bg-primary data-[state=open]:text-background data-[state=open]:no-underline'>
 										{item.heading}
 									</AccordionTrigger>
-									<AccordionContent className='p-4 leading-4 md:leading-6 text-base md:text-md'>
+									<AccordionContent className='p-4 leading-4 md:leading-6 text-base md:text-md py-5'>
 										<p>{item.description}</p>
 										{item.list && (
 											<ul className='flex flex-col gap-1.5 pl-0 ml-[1.0625rem] mt-2'>

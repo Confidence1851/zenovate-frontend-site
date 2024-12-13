@@ -56,10 +56,11 @@ const ContactPage = () => {
 						src: heroImage,
 						alt: "Contact page hero image"
 					}}
+					size='short'
 				/>
 
-				<section className='bg-White-100 py-10 md:py-16 lg:py-20 px-[5vw] sm:px-[3.5vw] lg:px-[3vw]'>
-					<div className='w-full max-w-[1550px] mx-auto  space-y-4 md:space-y-8 lg:space-y-14'>
+				<section className='py-10 md:py-16 lg:py-20'>
+					<div className='md-container space-y-4 md:space-y-8 lg:space-y-14'>
 						<h2 className='text-2xl  md:text-3xl lg:text-5xl font-bold uppercase'>contact information</h2>
 
 						<div className='flex flex-col md:flex-row md:justify-between w-full max-w-[1000px] gap-6'>
@@ -84,19 +85,17 @@ const ContactPage = () => {
 					</div>
 				</section>
 
-				<section className=' bg-OffWhite-100 py-10 md:py-16 lg:py-20 space-y-3 md:space-y-5 lg:space-y-14 px-[5vw] sm:px-[3.5vw] lg:px-[3vw]'>
-					<h3 className='text-Black-100 text-2xl lg:text-5xl lg:leading-tight uppercase font-bold  w-full max-w-[1550px] mx-auto '>
+				<section className='bg-background-accent md-container py-10 md:py-16 lg:py-20 space-y-3 md:space-y-5 lg:space-y-14'>
+					<h3 className='title'>
 						send a message
 					</h3>
-					<div className='w-full max-w-[1550px] mx-auto'>
-						<ContactForm />
-					</div>
+					<ContactForm />
 				</section>
 
-				<section className='bg-White-100 pt-12 md:py-16 lg:py-20 space-y-10 md:space-y-16  lg:space-y-20 '>
-					<div className='w-full max-w-[1550px] mx-auto '>
+				<section className='pt-12 md:py-16 lg:py-20 space-y-10 md:space-y-16  lg:space-y-20 '>
+					<div className='md-container'>
 						<div className='space-y-6 md:space-y-10 px-[5vw] sm:px-[3.5vw] lg:px-[3vw]'>
-							<h1 className='text-2xl md:text-3xl xl:text-5xl uppercase font-bold'>connect with us on social media </h1>
+							<h1 className='title'>connect with us</h1>
 							<div className=' grid grid-cols-2 gap-y-6 gap-x-10 md:flex md:gap-10 md:flex-wrap'>
 								{socialMedia.map((item) => (
 									<Link
@@ -113,7 +112,6 @@ const ContactPage = () => {
 							</div>
 						</div>
 					</div>
-
 					<SubscriptionComponent />
 				</section>
 			</main>

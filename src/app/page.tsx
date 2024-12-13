@@ -27,73 +27,72 @@ const HomePage = () => {
 
 	return (
 		<MainLayout>
-			<main className='mb-6 lg:mb-0'>
-				{/* HERO */}
-				<HeroCarousel />
-				<section className={styles.section}>
-					<div className='w-full max-w-7xl mx-auto flex flex-col gap-5 lg:gap-12'>
-						<p className={styles.paragraph}>
-							Welcome to Zenovate, your partner in precision nutrition and wellness. We understand that
-							achieving optimal health can be challenging amidst the demands of modern life. That's why
-							we've revolutionized wellness shots, combining cutting-edge science with the convenience of
-							at-home delivery to support your unique health journey.
+			{/* HERO */}
+			<HeroCarousel />
+
+			<section className={styles.section}>
+				<div className='w-full max-w-7xl mx-auto flex flex-col gap-5 lg:gap-12'>
+					<p className={styles.paragraph}>
+						Welcome to Zenovate, your partner in precision nutrition and wellness. We understand that
+						achieving optimal health can be challenging amidst the demands of modern life. That's why
+						we've revolutionized wellness shots, combining cutting-edge science with the convenience of
+						at-home delivery to support your unique health journey.
+					</p>
+				</div>
+			</section>
+
+			{/* UNIQUENESS */}
+			<UniqueQualities />
+
+			{/* CUSTOMER FEEDBACK */}
+			<CustomersFeedback />
+
+			{/* HOW IT WORKS */}
+			<HowItWorks />
+
+			<section className='relative h-[300px] md:h-[400px] xl:h-[600px]'>
+				<Overlay />
+				<div className='flex flex-col gap-3 justify-center w-full h-full'>
+					<h1
+						className={`text-4xl relative z-30 md:text-5xl lg:text-6xl lg:leading-[1.1] text-center tracking-normal text-background`}
+					>
+						Your Journey to Optimal Health
+					</h1>
+					<Image
+						src={nutritionImg}
+						alt='healthy food'
+						className='w-full z-10 h-full object-cover absolute top-0 left-0'
+					/>
+					<h1 className='text-4xl relative z-30 md:text-5xl lg:text-6xl text-center tracking-normal lg:text-right lg:pr-20 text-background'>
+						Starts Here
+					</h1>
+				</div>
+			</section>
+
+			<section className='md-container py-12 md:py-16 xl:py-0 '>
+				<div className='grid lg:grid-cols-2 md:items-center'>
+					<div className={styles.GetStartedLeft}>
+						<p className='text-lg md:text-xl leading-8'>
+							Whether you&apos;re a busy professional, an athlete, a wellness enthusiast, or anyone seeking to optimize
+							their health, Zenovate is here to support you. Our personalized wellness shots, delivered right to your
+							doorstep, makes prioritizing your well-being simple and effective.
 						</p>
+						<p className='text-lg md:text-xl'>Take the First Step Towards Your Healthiest Self</p>
 					</div>
-				</section>
 
-				{/* UNIQUENESS */}
-				<UniqueQualities />
+					<div className={styles.GetStartedRight}>
+						<Link href="https://application.zenovate.health">
+							<Button size="lg" className={styles.GetStartedButton}>
+								<span className='uppercase mx-auto text-wrap text-sm md:text-base xl:text-xl self-center font-semibold'>
+									Get Started
+								</span>
+								<ArrowRight size='24' className='text-background mx-auto hidden md:inline-block font-bold' />
+							</Button>
+						</Link>
 
-				{/* CUSTOMER FEEDBACK */}
-				<CustomersFeedback />
-				<HowItWorks />
-				{/* ENDORSEMENT */}
-				{/* <Endorsement /> */}
-
-				<section className='relative h-[300px] md:h-[400px] xl:h-[600px] px-[5vw] sm:px-[3.5vw] lg:px-[3vw]'>
-					<Overlay />
-					<div className='flex flex-col gap-3 justify-center w-full max-w-[1100px] mx-auto h-full px-2'>
-						<h1
-							className={`text-4xl relative z-30 md:text-5xl lg:text-6xl lg:leading-[1.1] text-center tracking-normal text-background`}
-						>
-							Your Journey to Optimal Health
-						</h1>
-						<Image
-							src={nutritionImg}
-							alt='healthy food'
-							className='w-full z-10 h-full object-cover absolute top-0 left-0'
-						/>
-						<h1 className='text-4xl relative z-30 md:text-5xl lg:text-6xl text-center tracking-normal lg:text-right lg:pr-20 text-background'>
-							Starts Here
-						</h1>
 					</div>
-				</section>
-
-				<section className='bg-background border-t border-foreground py-12 md:py-16 xl:py-0 '>
-					<div className='w-full max-w-7xl mx-auto grid  lg:grid-cols-2  md:items-center'>
-						<div className={styles.GetStartedLeft}>
-							<p className='text-lg md:text-xl leading-8'>
-								Whether you&apos;re a busy professional, an athlete, a wellness enthusiast, or anyone seeking to optimize
-								their health, Zenovate is here to support you. Our personalized wellness shots, delivered right to your
-								doorstep, makes prioritizing your well-being simple and effective.
-							</p>
-							<p className='text-lg md:text-xl'>Take the First Step Towards Your Healthiest Self</p>
-						</div>
-
-						<div className={styles.GetStartedRight}>
-							<Link href="https://application.zenovate.health">
-								<Button size="lg" className={styles.GetStartedButton}>
-									<span className='uppercase mx-auto text-wrap text-sm md:text-base xl:text-xl self-center font-semibold'>
-										Get Started
-									</span>
-									<ArrowRight size='24' className='text-background mx-auto hidden md:inline-block font-bold' />
-								</Button>
-							</Link>
-
-						</div>
-					</div>
-				</section>
-			</main>
+				</div>
+			</section>
 		</MainLayout>
 
 	)

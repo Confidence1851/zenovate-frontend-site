@@ -1,8 +1,6 @@
 import MissionAndValues from '@/components/about-page/MissionAndValues'
 import OurPromise from '@/components/about-page/OurPromise'
 import PageHeroWrapper from '@/components/common/PageHeroWrapper'
-import { Button } from '@/components/ui/button'
-import { ArrowRight } from 'iconsax-react'
 import MainLayout from '../layouts/MainLayout'
 import HeroImage from '@/assets/images/5c23607bf90d411a649.png'
 import SubscriptionComponent from '@/components/common/SubscriptionComponent'
@@ -49,7 +47,7 @@ const AboutPage = () => {
 				{/* THE team */}
 				{/* <Team /> */}
 
-				<section className='bg-White-100 pt-12 md:py-16 lg:py-20 space-y-10 md:space-y-16  lg:space-y-20 '>
+				<section className='bg-White-100 pt-12 md:py-16 lg:py-20 space-y-10 md:space-y-16 lg:space-y-20 '>
 					<SubscriptionComponent />
 				</section>
 			</main>

@@ -8,9 +8,9 @@
 	@apply pb-12;
 }
 
-.SectionContentParent {
-	@apply mx-auto max-w-7xl w-full;
-}
+/* .SectionContentParent {
+	@apply mx-auto max-w-container-md w-full;
+} */
 .SectionContent {
-	@apply px-0 [&>*]:mx-auto [&>*]:max-w-7xl lg:px-[3vw] sm:px-[3.5vw];
+	@apply [&>*]:mx-auto [&>*]:max-w-container-md;
 }

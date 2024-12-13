@@ -38,7 +38,7 @@ Whether you’re looking to improve your overall health, support your liver, or 
 
 As always, consult with your healthcare provider to ensure it’s right for you—and get ready to feel the glow!
 
-## References
+## Footnotes
 
 1. Wu, G., et al. (2004). Glutathione metabolism and its implications for health. Journal of Nutrition, 134(3), 489-492. [PubMed ID: 14988435](https://pubmed.ncbi.nlm.nih.gov/14988435)
 2. Lu, S. C. (2013). Glutathione synthesis. Biochimica et Biophysica Acta (BBA) - General Subjects, 1830(5), 3143-3153. [PubMed ID: 19751299](https://pubmed.ncbi.nlm.nih.gov/19751299)

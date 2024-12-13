@@ -27,8 +27,9 @@ const BlogPage = () => {
 						src: heroImage,
 						alt: 'blog hero image'
 					}}
+					size='short'
 				/>
-				<div className='px-[5vw] sm:px-[3vw] lg:px-[3.5vw]'>
+				<div className='md-container'>
 					<div className='space-y-10 md:space-y-16 py-12 md:py-16 lg:py-[4.5rem] '>
 						<FeaturedArticles />
 						{/* <SuccessStories />

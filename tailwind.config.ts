@@ -105,6 +105,16 @@ const config: Config = {
 			},
 			letterSpacing: {
 				'script': '0.02em',
+			},
+			maxWidth: {
+				'container-sm': '800px',
+				'container-md': '1200px',
+				'container-lg': '1600px',
+			},
+			padding: {
+				'gutter-sm': '2.5vw',
+				'gutter-md': '3vw',
+				'gutter-lg': '1.75vw',
 			}
 		}
 	},

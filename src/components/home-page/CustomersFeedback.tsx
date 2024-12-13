@@ -33,7 +33,7 @@ seamless. I’m in my first month and I see visible changes already`,
 const CustomersFeedback = () => {
 	return (
 		<section className={styles.section}>
-			<div className='w-full max-w-7xl mx-auto h-full flex justify-end flex-col'>
+			<div className='w-full max-w-container-md mx-auto h-full flex justify-end flex-col'>
 				<div className='flex flex-col gap-1.5 md:gap-3 xl:gap-5 pt-12 md:pt-16 lg:pt-20  w-full mx-auto px-[5vw] sm:px-[3.5vw] lg:px-[3vw]'>
 					<h2 className={styles.headerTwo}>Real Stories, Real Transformations</h2>
 					<h1 className={styles.headerOne}>What our customers are saying</h1>
@@ -45,7 +45,7 @@ const CustomersFeedback = () => {
 			{/* DIVIDER */}
 			<div className='border border-muted-foreground w-full' />
 
-			<div className='max-w-[1550px] mx-auto px-[5vw] sm:px-[3.5vw] lg:px-[3vw] '>
+			<div className='max-w-container-md mx-auto w-full'>
 				<Carousel
 					opts={{
 						align: 'start'

@@ -30,7 +30,7 @@ const PageHeroWrapper: React.FC<PageHeroWrapperProps> = ({ description, heading,
 					priority
 				/>
 			)}
-			<div className='relative w-full max-w-[1550px] mx-auto h-full flex justify-end flex-col pb-10 sm:pb-16 '>
+			<div className='relative md-container h-full flex justify-end flex-col pb-10 sm:pb-16 '>
 				<div className='w-full max-w-[750px] flex flex-col gap-3 md:gap-5'>
 					<h3 className={`${textColor} text-2xl md:text-4xl lg:text-5xl leading-normal md:leading-[1.3] lg:leading-[1.3] uppercase font-bold lg:tracking-wider`}>
 						{heading} {coloredHeading && <span className='text-Green-300'>{coloredHeading}</span>}

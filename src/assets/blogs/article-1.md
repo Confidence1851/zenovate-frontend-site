@@ -34,7 +34,9 @@ NAD+ isn’t just another trendy buzzword in the wellness world—it’s a scien
 
 With products like NADcreation (NADiva), you’re not just taking a step towards better health—you’re taking control of how you age, live, and thrive.
 
-## References
+---
+
+### Footnotes
 
 1. Verdin, E. (2015). NAD+ in aging, metabolism, and neurodegeneration. Science, 350(6265), 1208-1213. [PubMed ID: 26785480](https://pubmed.ncbi.nlm.nih.gov/26785480)
 2. Sinclair, D. A., & Guarente, L. (2014). Small-molecule allosteric activators of sirtuins. Annual Review of Pharmacology and Toxicology, 54, 363-380. [PubMed ID: 24215331](https://pubmed.ncbi.nlm.nih.gov/24215331)

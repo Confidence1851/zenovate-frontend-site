@@ -12,13 +12,15 @@
 
 .GetStartedLeft {
 	@apply lg:border-r xl:py-16 space-y-6;
-	@apply px-[5vw] sm:px-[3.5vw] xl:pr-16 xl:pl-[3vw];
+	@apply xl:pr-16;
+	/* @apply xl:pl-[3vw] px-[5vw] sm:px-[3.5vw]; */
 }
 
 .GetStartedRight {
 	@apply border-t lg:mt-0 lg:pt-0 lg:border-none;
-	@apply px-[5vw] sm:px-[3.5vw] xl:pl-16 xl:pr-[3vw] md:pt-16;
+	@apply xl:pl-16 xl:pr-[3vw] md:pt-16;
 	@apply pt-10;
+	/* @apply px-[5vw] sm:px-[3.5vw]; */
 }
 
 .GetStartedButton {

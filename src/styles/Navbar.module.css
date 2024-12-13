@@ -1,8 +1,8 @@
 .nav {
-	@apply py-3 bg-white  px-[5vw] sm:px-[3.5vw] lg:px-[3vw] border-b border-black;
+	@apply py-3 bg-white w-full border-b border-black;
 }
 .navContainer {
-	@apply flex justify-between w-full max-w-7xl mx-auto items-center h-12;
+	@apply flex justify-between items-center h-12;
 }
 
 .linksContainer {
