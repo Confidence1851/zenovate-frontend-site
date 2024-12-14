@@ -77,7 +77,7 @@ const FeatureProducts = () => {
 													<h4 className='text-base text-Gray-100 uppercase'>{item.subtitle}</h4>
 												</div>
 											</div>
-											<Link href={`/products/${item.id}`}>
+											<Link href={`/products/${item.slug}`}>
 												<Button
 													type='button'
 													className='flex justify-between items-center uppercase  h-11 w-fit gap-4 shadow-none border'

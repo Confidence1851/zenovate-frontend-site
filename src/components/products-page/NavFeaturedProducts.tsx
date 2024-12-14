@@ -67,7 +67,7 @@ const NavFeatureProducts = (zz: any) => {
 											<p className='text-sm text-muted-foreground text-pretty'>{item.subtitle}</p>
 										</div>
 										<NavigationMenuLink asChild>
-											<Link href={`/products/${item.id}`}>
+											<Link href={`/products/${item.slug}`}>
 												<Button
 													type='button'
 													variant='default'

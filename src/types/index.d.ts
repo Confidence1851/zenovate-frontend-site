@@ -2,6 +2,7 @@ import { DefaultSession } from "next-auth";
 
 interface Product {
 	id: number
+	slug: string
 	name: string
 	description: string
 	subtitle: string
