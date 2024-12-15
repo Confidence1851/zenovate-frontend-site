@@ -1,7 +1,7 @@
 .section {
 	/* @apply bg-[#fafafa] px-[5vw]; */
 	@apply space-y-12 md:space-y-14 xl:space-y-16;
-	@apply pb-12 md:pb-16 lg:pb-20;
+	@apply pt-12 pb-12 md:pb-16 lg:pb-20;
 }
 
 .headerTwo {
@@ -22,11 +22,9 @@
 }
 
 .carouselHeader {
-	@apply text-lg font-barlow;
+	@apply text-base font-barlow;
 }
 
 .carouselText {
 	@apply text-base uppercase font-barlow pt-4;
 }
-
-/* max-w-7xl */

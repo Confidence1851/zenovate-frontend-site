@@ -17,12 +17,12 @@ const buttonVariants = cva(
 				ghost: 'hover:bg-accent hover:text-accent-foreground',
 				link: 'text-primary underline-offset-4 hover:underline',
 				'carousel-nav': 'bg-transparent border-0 hover:bg-transparent shadow-none opacity-40 hover:opacity-90 transition-opacity',
-				withIcon: 'bg-primary text-background shadow hover:bg-primary/90 flex items-center justify-between',
+				withIcon: 'bg-primary text-background shadow flex items-center justify-between w-fit',
 			},
 			size: {
 				default: 'h-9 px-4 py-2',
-				sm: 'h-8 rounded-md px-3 text-xs',
-				lg: 'h-12 rounded-md px-2 text-lg',
+				sm: 'h-10 rounded-md px-2 text-xs',
+				lg: 'h-12 rounded-md px-4 text-lg',
 				icon: 'h-9 w-9'
 			}
 		},

@@ -6,34 +6,53 @@ import styles from '@/styles/CustomersFeedback.module.css'
 
 import starFilled from '@/assets/svgs/starFilled.svg'
 import Image from 'next/image'
+import { useState } from 'react'
 
 const feedback = [
 	{
 		user: 'Michael',
-		text: `Zenovate has changed my life. Coming to terms with getting older has been difficult
-especially as someone who’s always led an active lifestyle. Recovery started to take longer,
-dropping a couple of pounds became a herculean task but zenovate has changed all that. I
-feel 25 and my body moves like it’s 25! I feel great!`,
+		text: `
+				Zenovate has changed my life. Coming to terms with getting older has been difficult
+				especially as someone who’s always led an active lifestyle. Recovery started to take longer,
+				dropping a couple of pounds became a herculean task but zenovate has changed all that. I
+				feel 25 and my body moves like it’s 25! I feel great!`,
 		profession: 'Busy Professional',
 		age: 45
 	},
 	{
 		user: 'Sarah',
-		text: `Zenovate has taken my performance to new heights. It’s helped balance my hormones and
-boy, the difference that makes. I just ran the NY marathon and finished in record time and a
-new PB. I’ve told everyone i know about them`,
+		text: `
+				Zenovate has taken my performance to new heights. It’s helped balance my hormones and
+				boy, the difference that makes. I just ran the NY marathon and finished in record time and a
+				new PB. I’ve told everyone i know about them`,
 		profession: 'Athlete',
 		age: 28
 	},
 	{
 		user: 'Dani',
-		text: `I’ve never experienced such swift delivery, it blew my mind. The process was super fast and
-seamless. I’m in my first month and I see visible changes already`,
+		text: `
+				I’ve never experienced such swift delivery, it blew my mind. The process was super fast and
+				seamless. I’m in my first month and I see visible changes already`,
 		profession: 'New Mom',
 		age: '33'
 	}
 ]
+
+interface ExpandedReviews {
+	[key: number]: boolean;
+}
+
+
 const CustomersFeedback = () => {
+	const [expandedReviews, setExpandedReviews] = useState<ExpandedReviews>({})
+
+	const toggleReview = (index: number): void => {
+		setExpandedReviews(prev => ({
+			...prev,
+			[index]: !prev[index]
+		}))
+	}
+
 	return (
 		<section className={styles.section}>
 			<div className='w-full max-w-container-md mx-auto h-full flex justify-end flex-col'>
@@ -51,8 +70,17 @@ const CustomersFeedback = () => {
 						{feedback.map((item, i) => (
 							<CarouselItem className='md:basis-1/2 lg:basis-1/3 ' key={i}>
 								<div className={styles.carouselItem}>
-
-									<h4 className={styles.carouselHeader}>{item.text}</h4>
+									<div>
+										<p className={`${styles.carouselHeader} ${!expandedReviews[i] ? 'line-clamp-4' : ''}`}>
+											{item.text}
+										</p>
+										<button
+											onClick={() => toggleReview(i)}
+											className="text-foreground text-sm font-semibold mt-2 cursor-pointer"
+										>
+											{expandedReviews[i] ? 'See Less' : 'See More'}
+										</button>
+									</div>
 									<div>
 										<div className='flex items-center gap-0 md:gap-[0.5px]'>
 											<Image src={starFilled} alt='rating star' />

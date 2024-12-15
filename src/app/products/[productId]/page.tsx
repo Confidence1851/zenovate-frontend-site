@@ -151,7 +151,7 @@ export default function ProductDetails({ params }: { params: { productId: string
 
 	const productDetails: ProductDetailsType = {
 		energia: {
-			tag: "Advanced B12 Energy & Nerve Support",
+			tag: "B12 Energy & Nerve Support",
 			description: "Energia (MethylB12Pro) is a high-potency injectable methylcobalamin solution (10mg/mL) designed to support energy production, neurological health, and optimal B12 levels.",
 			format: "10ml Injectable Solution",
 			keyBenefits: [
@@ -162,7 +162,7 @@ export default function ProductDetails({ params }: { params: { productId: string
 			],
 		},
 		gloria: {
-			tag: "Advanced Antioxidant & Skin Brightening Solution",
+			tag: "Antioxidant & Skin Brightening Solution",
 			description: "Gloria (Glutathione) is a premium injectable solution containing 200mg/ml of pharmaceutical-grade glutathione designed to support antioxidant defense, skin health, and cellular detoxification.",
 			format: "10ml Injectable Solution",
 			keyBenefits: [
@@ -173,7 +173,7 @@ export default function ProductDetails({ params }: { params: { productId: string
 			],
 		},
 		nadiva: {
-			tag: "Advanced Cellular Regeneration & Anti-Aging Solution",
+			tag: "Cellular Regeneration & Anti-Aging",
 			description: "NADiva (NADcreation) is a premium injectable NAD+ solution designed to support cellular repair, metabolic function, and age-management processes.",
 			format: "10ml Injectable Solution",
 			keyBenefits: [
@@ -184,7 +184,7 @@ export default function ProductDetails({ params }: { params: { productId: string
 			],
 		},
 		immuna: {
-			tag: "Advanced Immune Defense Complex",
+			tag: "Immune Defense Complex",
 			description: "Immuna (TripleDefense) is a premium injectable solution combining Glutathione, Ascorbic Acid, and Zinc Sulfate designed to provide comprehensive immune support and antioxidant protection.",
 			format: "10ml Injectable Solution",
 			keyBenefits: [
@@ -224,15 +224,6 @@ export default function ProductDetails({ params }: { params: { productId: string
 		return productDetails[key];
 	};
 
-	// const formatPrice = () => {
-	// 	if (product.price && Array.isArray(product.price) && product.price.length > 0) {
-	// 		const usdPrices = product.price.map(price => price.value);
-	// 		const lowestPrice = Math.min(...usdPrices);
-	// 		const currency = product.price[0]?.currency || 'USD';
-	// 		return `Starting at $${lowestPrice} ${currency}`;
-	// 	}
-	// 	return null;
-	// };
 	const productDetail = getProductDetails(product.name);
 	return (
 		<MainLayout>
@@ -255,24 +246,9 @@ export default function ProductDetails({ params }: { params: { productId: string
 							</AspectRatio>
 						))}
 					</CarouselMainContainer>
-					{/* <CarouselThumbsContainer>
-						{getProductImages(product.name).map((imgSrc: StaticImageData, index: number) => (
-							<SliderThumbItem key={index} index={index} className='bg-transparent cursor-pointer'>
-								<div
-									className='size-full overflow-hidden flex items-center justify-center rounded-xl bg-[#F7F7F5]'
-								>
-									<img
-										src={imgSrc.src}
-										alt={`${product.name} thumbnail ${index + 1}`}
-										className='min-w-full min-h-full object-cover object-center'
-									/>
-								</div>{' '}
-							</SliderThumbItem>
-						))}
-					</CarouselThumbsContainer> */}
 				</Carousel>
 				<div className='text-block'>
-					<div className='pb-4'>
+					{/* <div className='pb-4'>
 						<div
 							className={`w-6 h-6 rounded-full ${product.name === 'Nadiva' ? 'bg-[#90B9AC]' :
 								product.name === 'Gloria' ? 'bg-[#AEA581]' :
@@ -282,7 +258,7 @@ export default function ProductDetails({ params }: { params: { productId: string
 												'bg-gray-500'
 								}`}
 						/>
-					</div>
+					</div> */}
 
 					<div className='space-y-2'>
 						<h2 className='uppercase text-sm text-muted-foreground'>{productDetail.tag}</h2>
@@ -315,18 +291,15 @@ export default function ProductDetails({ params }: { params: { productId: string
 						</div>
 					</div>
 
-					<div className='py-6'>
-						{/* <div className='border border-gray-200 w-full border-1' /> */}
-					</div>
-
+					<div className='py-6'></div>
 					<CTAButton
 						type='submit'
 						onClick={() => redirectToProductForm(product.id)}
 						aria-label="Get started"
+						size='lg'
 					>
 						GET STARTED
 					</CTAButton>
-
 				</div>
 			</div>
 			<CustomersFeedback />

@@ -14,6 +14,7 @@ import { Product } from '@/types'
 import { NavigationMenuLink } from '../ui/navigation-menu'
 import PixelatedImage from '@/assets/svgs/VialPixalated.svg'
 import Image from 'next/image'
+import { CTAButton } from '../common/CTAButton'
 
 
 const NavFeatureProducts = (zz: any) => {
@@ -62,14 +63,22 @@ const NavFeatureProducts = (zz: any) => {
 										<div className='flex items-end justify-between gap-4'>
 											<NavigationMenuLink asChild>
 												<Link href={`/products/${item.slug}`}>
-													<Button
+													{/* <Button
 														type='button'
 														variant='default'
 														className='flex justify-between items-center uppercase  h-11 w-fit gap-4 shadow-none border'
 													>
 														<span>Select</span>
 														<ArrowRight size={16} />
-													</Button>
+													</Button> */}
+													<CTAButton
+														type='submit'
+														aria-label="Select"
+														// className='min-w-[140px] gap-4 min-h-[40px]'
+														size='sm'
+													>
+														Select
+													</CTAButton>
 												</Link>
 											</NavigationMenuLink>
 											<div className="flex flex-row items-end justify-between space-x-4">

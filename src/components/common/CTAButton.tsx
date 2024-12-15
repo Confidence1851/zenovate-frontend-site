@@ -4,8 +4,33 @@ import ArrowIcon from '@/assets/icons/ArrowIcon';
 import { ButtonProps } from "@/components/ui/button"
 import { useState } from 'react';
 
-export const CTAButton = ({ children, className, ...props }: ButtonProps) => {
+export const CTAButton = ({ children, className, size = 'lg', ...props }: ButtonProps) => {
     const [isHovered, setIsHovered] = useState(false);
+
+    const getAnimationConfig = (buttonSize: "default" | "sm" | "lg" | "icon" | null) => {
+        switch (size) {
+            case 'sm':
+                return {
+                    textMove: "2rem",
+                    minWidth: "150px",
+                    iconSize: "size-4"
+                };
+            case 'lg':
+                return {
+                    textMove: "4rem",
+                    minWidth: "240px",
+                    iconSize: "size-5"
+                };
+            default:
+                return {
+                    textMove: "3rem",
+                    minWidth: "180px",
+                    iconSize: "size-4"
+                };
+        }
+    };
+
+    const config = getAnimationConfig(size);
 
     const SPRING_CONFIG = {
         type: "spring",
@@ -16,22 +41,21 @@ export const CTAButton = ({ children, className, ...props }: ButtonProps) => {
 
     return (
         <Button
+            size={size}
             variant='withIcon'
-            size='lg'
-            className={`bg-primary hover:bg-primary-foreground text-background hidden lg:inline-block px-8 ${className}`}
+            className={`bg-primary text-background hidden lg:inline-flex px-8
+                ${size === 'sm' ? 'min-w-[150px] text-sm' : 'min-w-[240px]'} 
+                ${className}`}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
             {...props}
         >
-            <div
-                className='relative flex items-center justify-between w-full gap-24 min-w-full'
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
-                style={{ minHeight: '40px', minWidth: '200px' }}
-            >
+            <div className='relative flex items-center justify-between w-full gap-14'>
                 <motion.span
                     initial={{ x: 0 }}
-                    animate={{ x: isHovered ? "4rem" : 0 }}
+                    animate={{ x: isHovered ? config.textMove : 0 }}
                     transition={SPRING_CONFIG}
-                    className="absolute left-0"
+                    className="absolute left-0 whitespace-nowrap"
                 >
                     {children}
                 </motion.span>
@@ -47,7 +71,7 @@ export const CTAButton = ({ children, className, ...props }: ButtonProps) => {
                     transition={SPRING_CONFIG}
                     className="absolute right-0"
                 >
-                    <ArrowIcon className='size-5 text-background' />
+                    <ArrowIcon className={config.iconSize + ' text-background'} />
                 </motion.div>
 
                 {/* Arrow that appears from the left */}
@@ -61,7 +85,7 @@ export const CTAButton = ({ children, className, ...props }: ButtonProps) => {
                     transition={SPRING_CONFIG}
                     className="absolute left-0"
                 >
-                    <ArrowIcon className='size-5 text-background' />
+                    <ArrowIcon className={config.iconSize + ' text-background'} />
                 </motion.div>
             </div>
         </Button>
