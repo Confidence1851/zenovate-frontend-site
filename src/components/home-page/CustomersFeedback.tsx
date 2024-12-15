@@ -4,6 +4,9 @@ import Autoplay from 'embla-carousel-autoplay'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '../ui/carousel'
 import styles from '@/styles/CustomersFeedback.module.css'
 
+import starFilled from '@/assets/svgs/starFilled.svg'
+import Image from 'next/image'
+
 const feedback = [
 	{
 		user: 'Michael',
@@ -34,17 +37,8 @@ const CustomersFeedback = () => {
 	return (
 		<section className={styles.section}>
 			<div className='w-full max-w-container-md mx-auto h-full flex justify-end flex-col'>
-				<div className='flex flex-col gap-1.5 md:gap-3 xl:gap-5 pt-12 md:pt-16 lg:pt-20  w-full mx-auto px-[5vw] sm:px-[3.5vw] lg:px-[3vw]'>
-					<h2 className={styles.headerTwo}>Real Stories, Real Transformations</h2>
-					<h1 className={styles.headerOne}>What our customers are saying</h1>
-					{/* <h1 className="text-4xl md:text-5xl xl:text-8xl uppercase xl:text-right tracking-wider lg:pr-20 font-bold">
-            are saying
-          </h1> */}
-				</div>
+				<h1 className={styles.headerOne}>Voices of Change</h1>
 			</div>
-			{/* DIVIDER */}
-			<div className='border border-muted-foreground w-full' />
-
 			<div className='max-w-container-md mx-auto w-full'>
 				<Carousel
 					opts={{
@@ -57,11 +51,22 @@ const CustomersFeedback = () => {
 						{feedback.map((item, i) => (
 							<CarouselItem className='md:basis-1/2 lg:basis-1/3 ' key={i}>
 								<div className={styles.carouselItem}>
+
 									<h4 className={styles.carouselHeader}>{item.text}</h4>
-									<h5 className={styles.carouselText}>
-										{item.user} , {item.age} <br />
-										<span className='font-medium text-primary'>{item.profession}</span>
-									</h5>
+									<div>
+										<div className='flex items-center gap-0 md:gap-[0.5px]'>
+											<Image src={starFilled} alt='rating star' />
+											<Image src={starFilled} alt='rating star' />
+											<Image src={starFilled} alt='rating star' />
+											<Image src={starFilled} alt='rating star' />
+											<Image src={starFilled} alt='rating star' />
+										</div>
+										<h5 className={styles.carouselText}>
+											{item.user} , {item.age} <br />
+											<span className='font-medium text-foreground'>{item.profession}</span>
+										</h5>
+									</div>
+
 								</div>
 							</CarouselItem>
 						))}

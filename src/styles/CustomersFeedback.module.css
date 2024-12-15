@@ -1,5 +1,5 @@
 .section {
-	@apply bg-[#fafafa] px-[5vw];
+	/* @apply bg-[#fafafa] px-[5vw]; */
 	@apply space-y-12 md:space-y-14 xl:space-y-16;
 	@apply pb-12 md:pb-16 lg:pb-20;
 }
@@ -16,7 +16,7 @@
 
 .carouselItem {
 	@apply flex flex-col justify-between;
-	@apply gap-10 lg:gap-20;
+	@apply gap-5 lg:gap-10;
 	@apply border;
 	@apply p-5 sm:p-8 h-full;
 }
@@ -26,7 +26,7 @@
 }
 
 .carouselText {
-	@apply text-base uppercase font-barlow;
+	@apply text-base uppercase font-barlow pt-4;
 }
 
 /* max-w-7xl */

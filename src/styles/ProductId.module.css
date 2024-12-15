@@ -1,0 +1,25 @@
+.productDetailsContainer {
+	@apply pt-4 pb-4 space-y-4 text-base text-muted-foreground;
+}
+
+.checkmarkIcon {
+	@apply h-5 w-5;
+}
+
+.pillIcon {
+	@apply h-5 w-5;
+}
+/* <p>
+
+</p> */
+
+/* <div className={styles.productDetailsContainer}>
+<p className='text-foreground font-semibold'>
+    Key Benefits
+</p>
+<p>
+    Activa is an injectable vitamin and nutrient solution containing B-vitamins (B1, B6, B12),
+    L-Carnitine, and essential nutrients designed to support your body's natural processes.
+
+</p>
+</div> */

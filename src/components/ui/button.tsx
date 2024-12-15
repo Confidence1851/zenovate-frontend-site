@@ -16,12 +16,13 @@ const buttonVariants = cva(
 				secondary: 'bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80',
 				ghost: 'hover:bg-accent hover:text-accent-foreground',
 				link: 'text-primary underline-offset-4 hover:underline',
-				'carousel-nav': 'bg-transparent border-0 hover:bg-transparent shadow-none opacity-40 hover:opacity-90 transition-opacity'
+				'carousel-nav': 'bg-transparent border-0 hover:bg-transparent shadow-none opacity-40 hover:opacity-90 transition-opacity',
+				withIcon: 'bg-primary text-background shadow hover:bg-primary/90 flex items-center justify-between',
 			},
 			size: {
 				default: 'h-9 px-4 py-2',
 				sm: 'h-8 rounded-md px-3 text-xs',
-				lg: 'h-10 rounded-md px-8',
+				lg: 'h-12 rounded-md px-2 text-lg',
 				icon: 'h-9 w-9'
 			}
 		},
@@ -36,6 +37,7 @@ export interface ButtonProps
 	extends React.ButtonHTMLAttributes<HTMLButtonElement>,
 	VariantProps<typeof buttonVariants> {
 	asChild?: boolean
+	icon?: React.ReactNode
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -44,6 +46,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 		return <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} />
 	}
 )
+
+
+
 Button.displayName = 'Button'
 
 export { Button, buttonVariants }

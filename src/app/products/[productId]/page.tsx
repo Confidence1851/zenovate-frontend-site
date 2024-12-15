@@ -3,15 +3,12 @@
 import {
 	Carousel,
 	CarouselMainContainer,
-	// CarouselNext,
-	// CarouselPrevious,
-	SliderMainItem,
-	CarouselThumbsContainer,
-	SliderThumbItem
+	// SliderMainItem,
+	// CarouselThumbsContainer,
+	// SliderThumbItem
 } from '@/components/mixcnui/Carousel'
 
-import starFilled from '@/assets/svgs/starFilled.svg'
-import starEmpty from '@/assets/svgs/starEmpty.svg'
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 import Image from 'next/image'
 import { redirectToProductForm } from '@/utils/functions'
 import { useQuery } from '@tanstack/react-query'
@@ -19,6 +16,21 @@ import { productInfo } from '@/server-actions/api.actions'
 import { Product } from '@/types'
 import { Skeleton } from '@/components/ui/skeleton'
 import MainLayout from '@/app/layouts/MainLayout'
+import CustomersFeedback from '@/components/home-page/CustomersFeedback'
+import { StaticImageData } from 'next/image';
+import ProductImagesActiva1 from '@/assets/images/u18nD58H5v2EH.png'
+import ProductImagesGloria1 from '@/assets/images/1duXn1s.png'
+import ProductImagesImmuna1 from '@/assets/images/2HQyRBbVQmOWWZhM.png'
+import ProductImagesEnergia1 from '@/assets/images/6LxAAhJso7Dk.png'
+import ProductImagesNadia1 from '@/assets/images/l7lA2QieckkRg.png'
+import { CTAButton } from '@/components/common/CTAButton';
+import CheckMark from '@/assets/icons/CheckMark';
+import styles from '@/styles/ProductId.module.css';
+import PillIcon from '@/assets/icons/PillIcon';
+
+
+
+
 
 export default function ProductDetails({ params }: { params: { productId: string } }) {
 	const productId = params.productId
@@ -70,80 +82,199 @@ export default function ProductDetails({ params }: { params: { productId: string
 		)
 	}
 
+	let lowestPrice = null;
+	if (product.price && Array.isArray(product.price) && product.price.length > 0) {
+		const usdPrices = product.price.map(price => price.value);
+		lowestPrice = Math.min(...usdPrices);
+	}
+
+	type ProductName = 'Energia' | 'Gloria' | 'Nadiva' | 'Immuna' | 'Activa';
+	const isValidProductName = (name: string): name is ProductName => {
+		return ['Energia', 'Gloria', 'Nadiva', 'Immuna', 'Activa'].includes(name);
+	};
+
+
+	interface ProductImagesType {
+		energia: StaticImageData[];
+		gloria: StaticImageData[];
+		nadiva: StaticImageData[];
+		immuna: StaticImageData[];
+		activa: StaticImageData[];
+		default: StaticImageData[];
+	}
+
+	const productImages: ProductImagesType = {
+		energia: [
+			ProductImagesEnergia1,
+
+		],
+		gloria: [
+			ProductImagesGloria1,
+
+		],
+		nadiva: [
+			ProductImagesNadia1,
+
+		],
+		immuna: [
+			ProductImagesImmuna1,
+
+		],
+		activa: [
+			ProductImagesActiva1,
+
+		],
+		default: [
+			ProductImagesActiva1,
+
+		]
+	};
+
+	const getProductImages = (productName: string): StaticImageData[] => {
+		const normalizedName = productName.toLowerCase();
+		const key = isValidProductName(productName) ? normalizedName as keyof ProductImagesType : 'default';
+		return productImages[key];
+	};
+
+	// const formatPrice = () => {
+	// 	if (product.price && Array.isArray(product.price) && product.price.length > 0) {
+	// 		const usdPrices = product.price.map(price => price.value);
+	// 		const lowestPrice = Math.min(...usdPrices);
+	// 		const currency = product.price[0]?.currency || 'USD';
+	// 		return `Starting at $${lowestPrice} ${currency}`;
+	// 	}
+	// 	return null;
+	// };
+
 	return (
 		<MainLayout>
 			<div className='w-[90vw] sm:w-[93vw] lg:w-[94vw] max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-10 pt-9 pb-10 md:pt-14  md:pb-16 '>
 				{' '}
 				<Carousel>
-					{/* <CarouselNext className='top-1/3 -translate-y-1/3' />
-				<CarouselPrevious className='top-1/3 -translate-y-1/3' /> */}
-					<CarouselMainContainer className='w-full aspect-square max-h-[480px]'>
-						{Array.from({ length: 5 }).map((_, index) => (
-							<SliderMainItem key={index} className='bg-transparent'>
-								<div
-									className='  size-full overflow-hidden flex items-center justify-center
-            rounded-xl bg-[#F7F7F5]'
-								>
-									Slide {index + 1}
-									{/* <img src="" alt="" className='min-w-full min-h-full object-cover object-center' /> */}
+					<CarouselMainContainer className='w-full'>
+						{getProductImages(product.name).map((imgSrc: StaticImageData, index: number) => (
+							<AspectRatio ratio={1}>
+								<div className="rounded-sm">
+									<Image
+										src={imgSrc.src}
+										alt={`${product.name} product view ${index + 1}`}
+										className="object-contain object-center"
+										fill
+										sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+										style={{ objectFit: 'contain' }}
+									/>
 								</div>
-							</SliderMainItem>
+							</AspectRatio>
 						))}
 					</CarouselMainContainer>
-					<CarouselThumbsContainer>
-						{Array.from({ length: 5 }).map((_, index) => (
+					{/* <CarouselThumbsContainer>
+						{getProductImages(product.name).map((imgSrc: StaticImageData, index: number) => (
 							<SliderThumbItem key={index} index={index} className='bg-transparent cursor-pointer'>
 								<div
-									className='  size-full overflow-hidden flex items-center
-            justify-center rounded-xl bg-[#F7F7F5]'
+									className='size-full overflow-hidden flex items-center justify-center rounded-xl bg-[#F7F7F5]'
 								>
-									Slide {index + 1}
-									{/* <img src="" alt="" className='min-w-full min-h-full object-cover object-center' /> */}
+									<img
+										src={imgSrc.src}
+										alt={`${product.name} thumbnail ${index + 1}`}
+										className='min-w-full min-h-full object-cover object-center'
+									/>
 								</div>{' '}
 							</SliderThumbItem>
 						))}
-					</CarouselThumbsContainer>
+					</CarouselThumbsContainer> */}
 				</Carousel>
-				<div className='text-blck'>
-					<h2 className=' uppercase text-3xl sm:text-[42px] sm:leading-tight  font-semibold '>{product.name}</h2>
-					<p className='text-base  pt-2.5'>{product.description}</p>
-					<div>
-						<hr className='bg-black h-[1px] w-full m-0 p-0 border-none mt-16 mb-4' />
-						<div className='flex justify-between flex-wrap gap-5 items-center'>
-							<p className=' text-base leading-4 md:leading-5 md:text-xl font-semibold'>{product.price}</p>
-							<div className='flex justify-center items-center gap-2'>
-								<div className='flex items-center gap-0 md:gap-[0.5px] *:h-[20px] *:md:h-[25px]'>
-									<Image src={starFilled} alt='rating' />
-									<Image src={starFilled} alt='rating' />
-									<Image src={starFilled} alt='rating' />
-									<Image src={starFilled} alt='rating' />
-									<Image src={starEmpty} alt='rating' />
-								</div>
-								<p className=' text-base leading-4 md:leading-5 md:text-xl font-semibold'>(20 reviews)</p>
+				<div className='text-block'>
+					<div className='pb-4'>
+						<div
+							className={`w-6 h-6 rounded-full ${product.name === 'Nadiva' ? 'bg-[#90B9AC]' :
+								product.name === 'Gloria' ? 'bg-[#AEA581]' :
+									product.name === 'Immuna' ? 'bg-[#6E6D6B]' :
+										product.name === 'Energia' ? 'bg-[#DBD7D6]' :
+											product.name === 'Activa' ? 'bg-[#CEF3E9]' :
+												'bg-gray-500'
+								}`}
+						/>
+					</div>
+
+					<div className='space-y-2'>
+						<h2 className='uppercase text-sm text-muted-foreground'>Wellness & Vitality Solution</h2>
+						<h1 className=' uppercase text-3xl sm:text-[42px] sm:leading-tight  font-semibold '>{product.name}</h1>
+					</div>
+					{/* <div className='pt-8 space-y-2 text-base'>
+						<p className='text-foreground font-semibold'>
+							Your path to enhanced wellness begins here.
+						</p>
+						<p className='text-muted-foreground'>
+							Get a personalized prescription from licensed healthcare professionals delivered discreetly to your door.
+						</p>
+					</div> */}
+					<div className={styles.productDetailsContainer}>
+						<h3 className='text-foreground font-semibold'>
+							Product Details
+						</h3>
+						<p>
+							Activa is an injectable vitamin and nutrient solution containing B-vitamins (B1, B6, B12),
+							L-Carnitine, and essential nutrients designed to support your body's natural processes.
+
+						</p>
+						<div className="flex items-center gap-4 pt-4">
+							<PillIcon className={styles.pillIcon} />
+							<span>Format: 10ml Injectable Solution</span>
+						</div>
+					</div>
+
+					<div className={styles.productDetailsContainer}>
+						<p className='text-foreground font-semibold'>
+							Key Benefits
+						</p>
+						<div className='space-y-3'>
+							<div className="flex items-center gap-4">
+								<CheckMark className={styles.checkmarkIcon} />
+								<span>Supports natural energy production and metabolism</span>
+							</div>
+							<div className="flex items-center gap-4">
+								<CheckMark className={styles.checkmarkIcon} />
+								<span>Enhances physical endurance and recovery</span>
+							</div>
+							<div className="flex items-center gap-4">
+								<CheckMark className={styles.checkmarkIcon} />
+								<span>Promotes mental clarity and focus</span>
+							</div>
+							<div className="flex items-center gap-4">
+								<CheckMark className={styles.checkmarkIcon} />
+								<span>Supports overall metabolic wellness</span>
 							</div>
 						</div>
 					</div>
-					<button
-						type='submit'
-						className='h-[43px] bg-black flex justify-center items-center px-4 w-full mt-10'
-						onClick={() => redirectToProductForm(product.id)}
-					>
-						<div className='w-full justify-between items-center flex'>
-							<p className='text-white text-base font-semibold uppercase'>order product</p>
-							<svg
-								xmlns='http://www.w3.org/2000/svg'
-								fill='none'
-								viewBox='0 0 24 24'
-								strokeWidth='1.5'
-								stroke='currentColor'
-								className='size-5 text-white'
-							>
-								<path strokeLinecap='round' strokeLinejoin='round' d='M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3' />
-							</svg>
+
+					{/* <p className='text-base pt-2.5'>{product.description}</p> */}
+					{/* <div>
+						<hr className='bg-black h-[1px] w-full m-0 p-0 border-none mt-16 mb-4' />
+						<div className='flex justify-between flex-wrap gap-5 items-center'>
+							{formatPrice() && (
+								<p className='text-base leading-4 md:leading-5 md:text-xl font-semibold'>
+									{formatPrice()}
+								</p>
+							)}
+
 						</div>
-					</button>
+					</div> */}
+
+					<div className='py-6'>
+						<div className='border border-gray-200 w-full border-1' />
+					</div>
+
+					<CTAButton
+						type='submit'
+						onClick={() => redirectToProductForm(product.id)}
+						aria-label="Get started"
+					>
+						GET STARTED
+					</CTAButton>
+
 				</div>
 			</div>
+			<CustomersFeedback />
 		</MainLayout>
 	)
 }

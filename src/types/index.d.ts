@@ -6,7 +6,7 @@ interface Product {
 	name: string
 	description: string
 	subtitle: string
-	price: number
+	price: string
 }
 
 type RegisterUserInput = {
@@ -68,10 +68,10 @@ type Product = {
 	subtitle: string;
 	description: string;
 	price: string;
-  };
-  
-  // Type for the raw metadata within the metadata field
-  type RawMetadata = {
+};
+
+// Type for the raw metadata within the metadata field
+type RawMetadata = {
 	first_name: string;
 	last_name: string;
 	email: string;
@@ -99,17 +99,17 @@ type Product = {
 	needle_fear: string;
 	family_medical_history: string;
 	additional_info: string;
-  };
-  
-  // Type for the metadata field
-  type Metadata = {
+};
+
+// Type for the metadata field
+type Metadata = {
 	user_agent: string;
 	location: string | null;
 	raw: RawMetadata;
-  };
-  
-  // Type for a single order
-  type Order = {
+};
+
+// Type for a single order
+type Order = {
 	id: string;
 	reference: string;
 	total_products: number;
@@ -118,10 +118,10 @@ type Product = {
 	status: string;
 	comment: string | null;
 	created_at: string;
-  };
-  
-  // Type for the pagination meta field
-  type PaginationMeta = {
+};
+
+// Type for the pagination meta field
+type PaginationMeta = {
 	current_page: number;
 	first_page_url: string;
 	from: number;
@@ -134,22 +134,22 @@ type Product = {
 	to: number;
 	total: number;
 	can_load_more: boolean;
-  };
-  
-  // Type for the main data field
-  type ResponseData = {
+};
+
+// Type for the main data field
+type ResponseData = {
 	pagination_meta: PaginationMeta;
 	data: Order[];
-  };
-  
-  // Type for the entire API response
-  type OrdersListResponse = {
+};
+
+// Type for the entire API response
+type OrdersListResponse = {
 	message: string;
 	data: ResponseData;
 	success: boolean;
 	code: number;
-  };
-  
+};
+
 // export interface Session extends DefaultSession {
 //   user: {
 //     id: string;
