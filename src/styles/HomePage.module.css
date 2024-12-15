@@ -44,9 +44,9 @@
 .card {
 	@apply flex flex-col md:flex-row  justify-between;
 	@apply relative rounded-sm;
-	@apply w-full h-auto lg:h-[100vh];
+	@apply w-full h-auto lg:h-[80vh];
 	@apply px-4 py-12 lg:px-24 lg:pt-[10rem] lg:pb-[5rem];
-	@apply gap-8 lg:gap-16;
+	@apply gap-8 lg:gap-24;
 	transform-origin: top;
 }
 /* px-[10rem] pt-[12rem] pb-[5rem]  */
@@ -68,21 +68,21 @@
 }
 
 .heading2 {
-	@apply m-0 text-lg md:text-2xl xl:text-5xl font-semibold text-left uppercase;
+	@apply m-0 text-lg md:text-2xl xl:text-3xl font-semibold text-left uppercase;
 }
 
 .leftSection {
-	@apply flex flex-col gap-4 lg:gap-2 items-start lg:space-y-16;
-	@apply w-full lg:flex-1;
+	@apply flex flex-col gap-4 lg:gap-2 items-start lg:space-y-8;
+	@apply w-full lg:w-1/3;
+	overflow: visible;
 }
 
 .rightSection {
-	@apply flex flex-col items-start gap-4 lg:gap-2 lg:space-y-4;
-	@apply w-full lg:flex-1;
+	@apply flex flex-col items-end gap-4 lg:gap-2 lg:space-y-4;
+	@apply w-full lg:w-2/3;
 }
 .stepNumber {
-	@apply text-6xl lg:text-9xl font-semibold leading-none lg:leading-4 text-foreground;
-	margin-bottom: 1rem;
+	@apply text-2xl font-normal text-muted-foreground;
 }
 
 .description {
@@ -100,7 +100,7 @@
 }
 
 .imageContainer {
-	@apply relative w-full lg:w-[80%] aspect-square lg:h-full overflow-hidden rounded-sm;
+	@apply relative w-full lg:w-[80%] lg:h-full overflow-hidden rounded-sm;
 	@apply mb-8 lg:mb-0;
 }
 

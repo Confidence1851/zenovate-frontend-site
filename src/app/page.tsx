@@ -45,10 +45,15 @@ const HomePage = () => {
 			<UniqueQualities />
 
 			{/* CUSTOMER FEEDBACK */}
-			<CustomersFeedback />
+			<div className='pt-12 md:pt-20 lg:pt-24'>
+				<CustomersFeedback />
+			</div>
+
 
 			{/* HOW IT WORKS */}
-			<HowItWorks />
+			<div className='mt-[-12rem] lg:mt-[-20rem] mb-[-12rem] lg:mb-[-20rem]'>
+				<HowItWorks />
+			</div>
 
 			<section className='relative h-[300px] md:h-[400px] xl:h-[600px]'>
 				<Overlay />
