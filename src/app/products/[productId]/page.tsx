@@ -136,6 +136,97 @@ export default function ProductDetails({ params }: { params: { productId: string
 		return productImages[key];
 	};
 
+	interface ProductDetailsType {
+		energia: ProductDetail;
+		gloria: ProductDetail;
+		nadiva: ProductDetail;
+		immuna: ProductDetail;
+		activa: ProductDetail;
+		default: ProductDetail;
+	}
+
+	interface ProductDetail {
+		tag: string;
+		description: string;
+		format: string;
+		keyBenefits: string[];
+	}
+
+	const productDetails: ProductDetailsType = {
+		energia: {
+			tag: "Advanced B12 Energy & Nerve Support",
+			description: "Energia (MethylB12Pro) is a high-potency injectable methylcobalamin solution (10mg/mL) designed to support energy production, neurological health, and optimal B12 levels.",
+			format: "10ml Injectable Solution",
+			keyBenefits: [
+				"Boosts natural energy production and vitality",
+				"Supports neurological health and function",
+				"Enhances cognitive performance and mental clarity",
+				"Helps maintain healthy B12 levels for vegetarians/vegans",
+			],
+		},
+		gloria: {
+			tag: "Advanced Antioxidant & Skin Brightening Solution",
+			description: "Gloria (Glutathione) is a premium injectable solution containing 200mg/ml of pharmaceutical-grade glutathione designed to support antioxidant defense, skin health, and cellular detoxification.",
+			format: "10ml Injectable Solution",
+			keyBenefits: [
+				"Powerful antioxidant protection against free radicals",
+				"Supports natural detoxification and liver function",
+				"Promotes skin brightening and even tone",
+				"Enhances cellular health and anti-aging benefits",
+			],
+		},
+		nadiva: {
+			tag: "Advanced Cellular Regeneration & Anti-Aging Solution",
+			description: "NADiva (NADcreation) is a premium injectable NAD+ solution designed to support cellular repair, metabolic function, and age-management processes.",
+			format: "10ml Injectable Solution",
+			keyBenefits: [
+				"Supports DNA repair and cellular regeneration",
+				"Enhances metabolic health and energy production",
+				"Promotes neuroprotection and cognitive function",
+				"Aids in biological age management",
+			],
+		},
+		immuna: {
+			tag: "Advanced Immune Defense Complex",
+			description: "Immuna (TripleDefense) is a premium injectable solution combining Glutathione, Ascorbic Acid, and Zinc Sulfate designed to provide comprehensive immune support and antioxidant protection.",
+			format: "10ml Injectable Solution",
+			keyBenefits: [
+				"Enhances immune system function and defense",
+				"Provides powerful antioxidant protection",
+				"Promotes skin health and radiance",
+				"Supports natural detoxification processes",
+				"Improves cognitive function and mood stability"
+			],
+		},
+		activa: {
+			tag: "Wellness & Vitality Solution",
+			description: "Activa is an injectable vitamin and nutrient solution containing B-vitamins (B1, B6, B12), L-Carnitine, and essential nutrients designed to support your body's natural processes.",
+			format: "10ml Injectable Solution",
+			keyBenefits: [
+				"Supports natural energy production and metabolism",
+				"Enhances physical endurance and recovery",
+				"Promotes mental clarity and focus",
+				"Supports overall metabolic wellness",
+			],
+		},
+		default: {
+			tag: "",
+			description: "Default product description. Please specify a valid product name.",
+			format: "10ml Injectable Solution",
+			keyBenefits: [
+				"Default benefit 1",
+				"Default benefit 2",
+				"Default benefit 3",
+			],
+		},
+	};
+
+	const getProductDetails = (productName: string): ProductDetail => {
+		const normalizedName = productName.toLowerCase();
+		const key = isValidProductName(productName) ? normalizedName as keyof ProductDetailsType : 'default';
+		return productDetails[key];
+	};
+
 	// const formatPrice = () => {
 	// 	if (product.price && Array.isArray(product.price) && product.price.length > 0) {
 	// 		const usdPrices = product.price.map(price => price.value);
@@ -145,7 +236,7 @@ export default function ProductDetails({ params }: { params: { productId: string
 	// 	}
 	// 	return null;
 	// };
-
+	const productDetail = getProductDetails(product.name);
 	return (
 		<MainLayout>
 			<div className='w-[90vw] sm:w-[93vw] lg:w-[94vw] max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-10 pt-9 pb-10 md:pt-14  md:pb-16 '>
@@ -197,29 +288,19 @@ export default function ProductDetails({ params }: { params: { productId: string
 					</div>
 
 					<div className='space-y-2'>
-						<h2 className='uppercase text-sm text-muted-foreground'>Wellness & Vitality Solution</h2>
+						<h2 className='uppercase text-sm text-muted-foreground'>{productDetail.tag}</h2>
 						<h1 className=' uppercase text-3xl sm:text-[42px] sm:leading-tight  font-semibold '>{product.name}</h1>
 					</div>
-					{/* <div className='pt-8 space-y-2 text-base'>
-						<p className='text-foreground font-semibold'>
-							Your path to enhanced wellness begins here.
-						</p>
-						<p className='text-muted-foreground'>
-							Get a personalized prescription from licensed healthcare professionals delivered discreetly to your door.
-						</p>
-					</div> */}
 					<div className={styles.productDetailsContainer}>
 						<h3 className='text-foreground font-semibold'>
 							Product Details
 						</h3>
 						<p>
-							Activa is an injectable vitamin and nutrient solution containing B-vitamins (B1, B6, B12),
-							L-Carnitine, and essential nutrients designed to support your body's natural processes.
-
+							{productDetail.description}
 						</p>
 						<div className="flex items-center gap-4 pt-4">
 							<PillIcon className={styles.pillIcon} />
-							<span>Format: 10ml Injectable Solution</span>
+							<span>Format: {productDetail.format}</span>
 						</div>
 					</div>
 
@@ -228,37 +309,14 @@ export default function ProductDetails({ params }: { params: { productId: string
 							Key Benefits
 						</p>
 						<div className='space-y-3'>
-							<div className="flex items-center gap-4">
-								<CheckMark className={styles.checkmarkIcon} />
-								<span>Supports natural energy production and metabolism</span>
-							</div>
-							<div className="flex items-center gap-4">
-								<CheckMark className={styles.checkmarkIcon} />
-								<span>Enhances physical endurance and recovery</span>
-							</div>
-							<div className="flex items-center gap-4">
-								<CheckMark className={styles.checkmarkIcon} />
-								<span>Promotes mental clarity and focus</span>
-							</div>
-							<div className="flex items-center gap-4">
-								<CheckMark className={styles.checkmarkIcon} />
-								<span>Supports overall metabolic wellness</span>
-							</div>
+							{productDetail.keyBenefits.map((benefit, index) => (
+								<div key={index} className="flex items-center gap-4">
+									<CheckMark className={styles.checkmarkIcon} />
+									<span>{benefit}</span>
+								</div>
+							))}
 						</div>
 					</div>
-
-					{/* <p className='text-base pt-2.5'>{product.description}</p> */}
-					{/* <div>
-						<hr className='bg-black h-[1px] w-full m-0 p-0 border-none mt-16 mb-4' />
-						<div className='flex justify-between flex-wrap gap-5 items-center'>
-							{formatPrice() && (
-								<p className='text-base leading-4 md:leading-5 md:text-xl font-semibold'>
-									{formatPrice()}
-								</p>
-							)}
-
-						</div>
-					</div> */}
 
 					<div className='py-6'>
 						<div className='border border-gray-200 w-full border-1' />
