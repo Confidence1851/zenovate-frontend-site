@@ -12,6 +12,9 @@ import Autoplay from 'embla-carousel-autoplay'
 import Link from 'next/link'
 import { Product } from '@/types'
 import { NavigationMenuLink } from '../ui/navigation-menu'
+import PixelatedImage from '@/assets/svgs/VialPixalated.svg'
+import Image from 'next/image'
+
 
 const NavFeatureProducts = (zz: any) => {
 	const {
@@ -52,32 +55,50 @@ const NavFeatureProducts = (zz: any) => {
 										className='border gap-4 h-80 w-full p-8 flex flex-col justify-between flex-shrink-0'
 										key={item.name}
 									>
-										<div
-											className={`
-												w-6 h-6 rounded-full ${item.name === 'Nadiva' ? 'bg-[#90B9AC]' :
-													item.name === 'Gloria' ? 'bg-[#AEA581]' :
-														item.name === 'Immuna' ? 'bg-[#6E6D6B]' :
-															item.name === 'Energia' ? 'bg-[#DBD7D6]' :
-																item.name === 'Activa' ? 'bg-[#CEF3E9]' :
-																	'bg-gray-500'
-												}`}
-										/>
 										<div className='space-y-4'>
 											<h3 className='text-lg font-semibold text-foreground uppercase'>{item.name}</h3>
 											<p className='text-sm text-muted-foreground text-pretty'>{item.subtitle}</p>
 										</div>
-										<NavigationMenuLink asChild>
-											<Link href={`/products/${item.slug}`}>
-												<Button
-													type='button'
-													variant='default'
-													className='flex justify-between items-center uppercase  h-11 w-fit gap-4 shadow-none border'
-												>
-													<span>Select</span>
-													<ArrowRight size={16} />
-												</Button>
-											</Link>
-										</NavigationMenuLink>
+										<div className='flex items-end justify-between gap-4'>
+											<NavigationMenuLink asChild>
+												<Link href={`/products/${item.slug}`}>
+													<Button
+														type='button'
+														variant='default'
+														className='flex justify-between items-center uppercase  h-11 w-fit gap-4 shadow-none border'
+													>
+														<span>Select</span>
+														<ArrowRight size={16} />
+													</Button>
+												</Link>
+											</NavigationMenuLink>
+											<div className="flex flex-row items-end justify-between space-x-4">
+												<div>
+													<div
+														className={`w-6 h-6 rounded-full ${item.name === 'Nadiva'
+															? 'bg-[#90B9AC]'
+															: item.name === 'Gloria'
+																? 'bg-[#AEA581]'
+																: item.name === 'Immuna'
+																	? 'bg-[#6E6D6B]'
+																	: item.name === 'Energia'
+																		? 'bg-[#DBD7D6]'
+																		: item.name === 'Activa'
+																			? 'bg-[#CEF3E9]'
+																			: 'bg-gray-500'
+															}`}
+													/>
+												</div>
+
+												<div className='w-[30px]'>
+													<Image
+														src={PixelatedImage}
+														alt="pixelated image"
+														className='object-contain h-full w-full'
+													/>
+												</div>
+											</div>
+										</div>
 									</div>
 								</CarouselItem>
 							))}

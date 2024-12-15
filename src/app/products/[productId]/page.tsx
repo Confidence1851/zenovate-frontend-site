@@ -3,9 +3,6 @@
 import {
 	Carousel,
 	CarouselMainContainer,
-	// SliderMainItem,
-	// CarouselThumbsContainer,
-	// SliderThumbItem
 } from '@/components/mixcnui/Carousel'
 
 import { AspectRatio } from "@/components/ui/aspect-ratio";
@@ -319,7 +316,7 @@ export default function ProductDetails({ params }: { params: { productId: string
 					</div>
 
 					<div className='py-6'>
-						<div className='border border-gray-200 w-full border-1' />
+						{/* <div className='border border-gray-200 w-full border-1' /> */}
 					</div>
 
 					<CTAButton
