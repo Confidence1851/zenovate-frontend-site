@@ -93,7 +93,7 @@ const Footer = () => {
 												</h3>
 												<p className='text-foreground text-sm'>
 													Your health is our priority. We proudly display{' '}
-													<Link href='/privacy-policy' className='text-[#7f1d1d]'>
+													<Link href='/legal/legal-disclaimer' className='text-[#7f1d1d]'>
 														our certifications
 													</Link>{' '}
 													and{' '}
