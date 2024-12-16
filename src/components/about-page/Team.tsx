@@ -1,6 +1,6 @@
 const teamMembers = [
 	{
-		name: 'Marco Anton',
+		name: 'emily clark',
 		role: 'founder & CEo'
 	},
 	{
