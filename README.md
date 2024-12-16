@@ -15,3 +15,10 @@ Backend API and core business logic. Handles data processing, authentication, an
 ### [zv-site](https://github.com/design-aesthetics/zenovate/tree/zv-site)
 
 Main website and landing pages for Zenovate.
+
+---
+
+TODO:
+
+[ ] quick links add products there...
+[ ] test contact form ...

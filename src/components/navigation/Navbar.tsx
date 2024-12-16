@@ -125,7 +125,7 @@ export default function Navbar() {
 	return (
 		<NavCont>
 			<nav className={styles.nav}>
-				<div className={`md-container ${styles.navContainer}`}>
+				<div className={`xmd-container ${styles.navContainer}`}>
 					<Logo className='text-xl lg:text-2xl' />
 
 					<NavigationMenu className='hidden lg:inline-block'>

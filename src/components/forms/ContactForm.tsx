@@ -4,11 +4,11 @@ import FormInputText from '@/components/common/FormInputText'
 import { Form } from '@/components/ui/form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FieldValues, useForm } from 'react-hook-form'
-import { ArrowRight } from 'iconsax-react'
 import { contactSchema } from '@/schemas/formSchema'
 import FormTextArea from '../common/FormTextArea'
 import useContactUs from '@/hooks/useContactUs'
 import ScaleLoader from 'react-spinners/ScaleLoader'
+import { CTAButton } from '../common/CTAButton'
 
 const ContactForm = () => {
 	const form = useForm({
@@ -46,7 +46,7 @@ const ContactForm = () => {
 								placeholder='email@domain.com'
 								control={control}
 								errors={errors}
-								className='1border !border-[#162C15] !h-12 !text-base '
+								className='1border !border-foreground !h-12 !text-base '
 							/>
 						</div>
 						<div className='col-span-2 md:col-span-1'>
@@ -56,7 +56,7 @@ const ContactForm = () => {
 								placeholder='email@domain.com'
 								control={control}
 								errors={errors}
-								className='1border !border-[#162C15] !h-12 !text-base '
+								className='1border !border-foreground !h-12 !text-base '
 							/>
 						</div>
 						<div className='col-span-2 md:col-span-1'>
@@ -66,7 +66,7 @@ const ContactForm = () => {
 								placeholder='+1 234 567 890'
 								control={control}
 								errors={errors}
-								className='1border !border-[#162C15] !h-12 !text-base '
+								className='1border !border-foreground !h-12 !text-base '
 							/>
 						</div>
 						<div className='col-span-2 md:col-span-1'>
@@ -76,7 +76,7 @@ const ContactForm = () => {
 								placeholder='I have an enquiry'
 								control={control}
 								errors={errors}
-								className='1border !border-[#162C15] !h-12 !text-base '
+								className='1border !border-foreground !h-12 !text-base '
 							/>
 						</div>
 						<div className='col-span-2'>
@@ -87,24 +87,25 @@ const ContactForm = () => {
 								placeholder='your message goes here....'
 								control={control}
 								errors={errors}
-								className='1border !border-[#162C15] !text-base'
+								className='1border !border-foreground !text-base'
 							/>
 						</div>
 					</div>
 
-					<button
+					<CTAButton
 						type='submit'
-						className={`w-full bg-Black-100 text-White-100 h-11 flex ${isPending ? 'justify-center' : 'justify-between'} items-center p-4 max-w-[190px]`}
+						size='lg'
+						className={`bg-Black-100 text-White-100 min-w-[320px]  ${isPending ? 'justify-center' : 'justify-between'} min-w-[320px]`}
 					>
 						{isPending ? (
-							<ScaleLoader color='#FFFFFF' height={18} />
+							<ScaleLoader color='#fafafa' height={18} />
 						) : (
 							<>
 								<span className='uppercase'>send message</span>
-								<ArrowRight size='24' className='text-white' />
+
 							</>
 						)}
-					</button>
+					</CTAButton>
 				</form>
 			</Form>
 		</div>

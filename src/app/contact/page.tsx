@@ -60,7 +60,7 @@ const ContactPage = () => {
 				/>
 
 				<section className='py-10 md:py-16 lg:py-20'>
-					<div className='md-container space-y-4 md:space-y-8 lg:space-y-14'>
+					<div className='xmd-container space-y-4 md:space-y-8 lg:space-y-14'>
 						<h2 className='text-2xl  md:text-3xl lg:text-5xl font-bold uppercase'>contact information</h2>
 
 						<div className='flex flex-col md:flex-row md:justify-between w-full max-w-[1000px] gap-6'>
@@ -85,15 +85,17 @@ const ContactPage = () => {
 					</div>
 				</section>
 
-				<section className='bg-background-accent md-container py-10 md:py-16 lg:py-20 space-y-3 md:space-y-5 lg:space-y-14'>
-					<h3 className='title'>
-						send a message
-					</h3>
-					<ContactForm />
+				<section className='bg-background-accent py-10 md:py-16 lg:py-20 space-y-3 md:space-y-5 lg:space-y-14'>
+					<div className='xmd-container'>
+						<h3 className='title'>
+							send a message
+						</h3>
+						<ContactForm />
+					</div>
 				</section>
 
 				<section className='pt-12 md:py-16 lg:py-20 space-y-10 md:space-y-16  lg:space-y-20 '>
-					<div className='md-container'>
+					<div className='xmd-container'>
 						<div className='space-y-6 md:space-y-10 px-[5vw] sm:px-[3.5vw] lg:px-[3vw]'>
 							<h1 className='title'>connect with us</h1>
 							<div className=' grid grid-cols-2 gap-y-6 gap-x-10 md:flex md:gap-10 md:flex-wrap'>
