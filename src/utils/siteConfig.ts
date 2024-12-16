@@ -101,8 +101,8 @@ export const siteConfig: SiteConfig = {
     },
     legalLinks: [
         { label: 'Privacy Policy', href: '/legal/privacy-policy' },
-        { label: 'Terms of Service', href: '/legal/terms-of-service' },
-        { label: 'Cookie Policy', href: '/legal/cookie-policy' },
+        // { label: 'Terms of Service', href: '/legal/terms-of-service' },
+        // { label: 'Cookie Policy', href: '/legal/cookie-policy' },
         { label: 'Website Disclaimer', href: '/legal/website-disclaimer' },
         { label: 'Legal Disclaimer', href: '/legal/legal-disclaimer' }
     ],
@@ -118,7 +118,7 @@ export const siteConfig: SiteConfig = {
         {
             title: 'Energize',
             description: 'Experience a better, healthier and longer life one shot at a time',
-            buttonText: 'Get Started Today',
+            buttonText: 'Get Started',
             videoSrc: '/videos/0762b1e1f802becd8900b5fc0336418b0582d7db2f821df7026c54850283c965.mp4',
             link: 'https://application.zenovate.health'
         },
@@ -132,7 +132,7 @@ export const siteConfig: SiteConfig = {
         {
             title: 'Transform',
             description: 'Embrace a new you with our revolutionary wellness solutions',
-            buttonText: 'Start Your Journey',
+            buttonText: 'Learn More',
             videoSrc: '/videos/e10dd19b9ed4eeb5563358b674378dee.mp4',
             link: 'https://application.zenovate.health'
         }

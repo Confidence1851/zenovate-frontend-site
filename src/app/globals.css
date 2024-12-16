@@ -78,12 +78,15 @@ body {
 	}
 
 	.main-layout {
-		@apply mx-auto w-full max-w-container-sm lg:max-w-container-md xl:max-w-container-lg;
-		/* @apply lg:px-gutter-lg md:px-gutter-md px-gutter-sm; */
+		/* @apply mx-auto w-full max-w-container-sm lg:max-w-container-md xl:max-w-container-lg; */
 		@apply mb-6 lg:mb-0;
 	}
 	.md-container {
-		@apply mx-auto w-full max-w-container-md;
+		@apply mx-auto w-full max-w-container-sm lg:max-w-container-md xl:max-w-container-lg;
+		@apply lg:px-gutter-lg md:px-gutter-md px-gutter-sm;
+	}
+	.xmd-container {
+		@apply mx-auto w-full max-w-container-sm lg:max-w-container-md;
 		@apply lg:px-gutter-lg md:px-gutter-md px-gutter-sm;
 	}
 	.title {

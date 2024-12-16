@@ -17,17 +17,18 @@
 }
 
 .GetStartedRight {
-	@apply border-t lg:mt-0 lg:pt-0 lg:border-none;
-	@apply xl:pl-16 xl:pr-[3vw] md:pt-16;
-	@apply pt-10;
+	/* @apply border-t lg:mt-0 lg:pt-0 lg:border-none; */
+	/* @apply xl:pl-16 xl:pr-[3vw] md:pt-16; */
+	/* @apply pt-10; */
 	/* @apply px-[5vw] sm:px-[3.5vw]; */
+	@apply flex items-center justify-center;
 }
 
-.GetStartedButton {
+/* .GetStartedButton {
 	@apply flex justify-between items-center flex-wrap w-full sm:w-fit md:w-fit h-fit;
 	@apply py-4 px-8;
 	@apply gap-x-6 gap-y-3  md:gap-x-12  sm:mx-auto;
-}
+} */
 
 .main {
 	margin-top: 50vh;
@@ -116,6 +117,10 @@
 
 .learnMore {
 	@apply w-full lg:w-auto mt-4 lg:mt-0;
+}
+.journeySection {
+	@apply relative;
+	@apply h-48 md:h-48 xl:h-56;
 }
 
 @media (max-width: 1024px) {

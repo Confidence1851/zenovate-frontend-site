@@ -82,58 +82,58 @@ export const LEGAL_DOCUMENTS: LegalDocument[] = [
             content: legalContent['privacy-policy']
         }
     },
-    {
-        id: 'terms-of-service',
-        title: 'Terms of Service',
-        shortTitle: 'Terms',
-        summary: {
-            intro: 'At Zenovate, we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy outlines how we collect, use, disclose, and safeguard your data when you visit our website or use our services.',
-            sections: [
-                {
-                    heading: 'Information We Collect',
-                    list: [
-                        '2Personal information you provide during the health assessment and consultation process',
-                        'Demographic information such as age, gender, and location',
-                        'Health information, including medical history and lifestyle factors',
-                        'Website usage data collected through cookies and analytics tools'
-                    ]
-                },
-                {
-                    heading: 'How We Use Your Information',
-                    list: [
-                        'To provide you with personalized wellness plan recommendations and services',
-                        'To communicate with you about your treatment plan and progress',
-                        'To improve our products, services, and website experience  ',
-                        'To send you relevant information, updates, and promotional offers (with your consent)',
-                        'To comply with legal obligations and protect our rights'
-                    ]
-                },
-                {
-                    heading: 'How We Protect Your Information',
-                    list: [
-                        '2We implement strict security measures to safeguard your personal and health data ',
-                        'We limit access to your information to authorized personnel only',
-                        'We use encryption and secure storage technologies to protect your data',
-                        'We do not sell, rent, or lease your personal information to third parties'
-                    ]
-                },
-                {
-                    heading: 'Your Rights and Choices  ',
-                    list: [
-                        'You have the right to access, update, and correct your personal information',
-                        'You can opt-out of promotional communications at any time',
-                        'You can request the deletion of your personal data, subject to legal requirements',
-                        'You can contact us with any questions or concerns regarding your privacy'
-                    ]
-                }
+    // {
+    //     id: 'terms-of-service',
+    //     title: 'Terms of Service',
+    //     shortTitle: 'Terms',
+    //     summary: {
+    //         intro: 'At Zenovate, we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy outlines how we collect, use, disclose, and safeguard your data when you visit our website or use our services.',
+    //         sections: [
+    //             {
+    //                 heading: 'Information We Collect',
+    //                 list: [
+    //                     '2Personal information you provide during the health assessment and consultation process',
+    //                     'Demographic information such as age, gender, and location',
+    //                     'Health information, including medical history and lifestyle factors',
+    //                     'Website usage data collected through cookies and analytics tools'
+    //                 ]
+    //             },
+    //             {
+    //                 heading: 'How We Use Your Information',
+    //                 list: [
+    //                     'To provide you with personalized wellness plan recommendations and services',
+    //                     'To communicate with you about your treatment plan and progress',
+    //                     'To improve our products, services, and website experience  ',
+    //                     'To send you relevant information, updates, and promotional offers (with your consent)',
+    //                     'To comply with legal obligations and protect our rights'
+    //                 ]
+    //             },
+    //             {
+    //                 heading: 'How We Protect Your Information',
+    //                 list: [
+    //                     '2We implement strict security measures to safeguard your personal and health data ',
+    //                     'We limit access to your information to authorized personnel only',
+    //                     'We use encryption and secure storage technologies to protect your data',
+    //                     'We do not sell, rent, or lease your personal information to third parties'
+    //                 ]
+    //             },
+    //             {
+    //                 heading: 'Your Rights and Choices  ',
+    //                 list: [
+    //                     'You have the right to access, update, and correct your personal information',
+    //                     'You can opt-out of promotional communications at any time',
+    //                     'You can request the deletion of your personal data, subject to legal requirements',
+    //                     'You can contact us with any questions or concerns regarding your privacy'
+    //                 ]
+    //             }
 
-            ]
-        },
-        fullVersion: {
-            intro: 'At Zenovate, we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy outlines how we collect, use, disclose, and safeguard your data when you visit our website or use our services.',
-            content: legalContent['terms-of-service']
-        }
-    },
+    //         ]
+    //     },
+    //     fullVersion: {
+    //         intro: 'At Zenovate, we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy outlines how we collect, use, disclose, and safeguard your data when you visit our website or use our services.',
+    //         content: legalContent['terms-of-service']
+    //     }
+    // },
     {
         id: 'legal-disclaimer',
         title: 'Legal Disclaimer',
