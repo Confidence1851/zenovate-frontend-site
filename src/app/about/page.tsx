@@ -78,7 +78,7 @@ const AboutPage = () => {
 
 			{/* Our promise */}
 			<section className='bg-White-100 py-10 lg:py-16 px-[5vw] sm:px-[3.5vw] lg:px-[3vw]'>
-				<div className='md-container flex gap-6 lg:gap-16 flex-col xl:flex-row items-center'>
+				<div className='md-container flex gap-6 lg:gap-16 flex-row items-center'>
 					<div className='flex flex-col gap-4 lg:gap-10'>
 						<h1 className={styles.header}>
 							Direct, quality healthcare without the hassle:
@@ -101,7 +101,7 @@ const AboutPage = () => {
 							</ul>
 						</div>
 					</div>
-					<div className='w-full '>
+					<div className='w-full h-[50vh] md:h-full'>
 						<Image
 							src={image1}
 							alt="about page image"

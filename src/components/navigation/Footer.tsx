@@ -69,11 +69,10 @@ const Footer = () => {
 														{siteConfig.footerLinks
 															.filter(item => item.category === category)
 															.map((item) => (
-																<div className="py-2">
+																<div className="py-2" key={item.label}>
 																	<Link
 																		href={item.href}
 																		className='text-foreground text-sm font-medium uppercase hover:text-primary transition-colors block'
-																		key={item.label}
 																	>
 																		{item.label}
 																	</Link>
