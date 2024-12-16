@@ -6,7 +6,9 @@
 		"dev": "next dev",
 		"build": "next build",
 		"start": "next start",
-		"lint": "next lint"
+		"lint": "next lint",
+		"obfuscate-build": "next-css-obfuscator",
+		"restart-clean": "rm -rf node_modules/.cache && rm -rf .next && kill -9 $(lsof -ti:3000) && bun run dev"
 	},
 	"dependencies": {
 		"@hookform/resolvers": "^3.9.1",
@@ -60,8 +62,12 @@
 		"@types/react-dom": "^18.3.1",
 		"eslint": "^8.57.1",
 		"eslint-config-next": "14.2.14",
+		"next-css-obfuscator": "^2.2.18",
 		"postcss": "^8.4.49",
+		"postcss-modules": "^6.0.1",
 		"prettier": "^3.3.3",
+		"terser-webpack-plugin": "^5.3.10",
+		"webpack-obfuscator": "^3.5.1",
 		"pretty-quick": "^4.0.0",
 		"raw-loader": "^4.0.2",
 		"tailwindcss": "^3.4.15",

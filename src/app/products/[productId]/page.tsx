@@ -24,6 +24,7 @@ import { CTAButton } from '@/components/common/CTAButton';
 import CheckMark from '@/assets/icons/CheckMark';
 import styles from '@/styles/ProductId.module.css';
 import PillIcon from '@/assets/icons/PillIcon';
+import { HowItWorksStatic } from '@/components/home-page/HowItWorks';
 
 
 
@@ -303,6 +304,8 @@ export default function ProductDetails({ params }: { params: { productId: string
 				</div>
 			</div>
 			<CustomersFeedback />
+
+			<HowItWorksStatic />
 		</MainLayout>
 	)
 }

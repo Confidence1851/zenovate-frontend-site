@@ -52,6 +52,16 @@ interface Section {
 	color: string;
 }
 
+
+interface SectionProps {
+	heading: string;
+	description: string;
+	bgColor: string;
+	i: number;
+	color: string;
+}
+
+
 const stepImages = [step1, step2, step3, step4];
 
 
@@ -113,11 +123,72 @@ const Section: React.FC<Section> = ({ heading, description, bgColor, color, i })
 	)
 }
 
-export default function HowItWorks() {
+const SectionStatic: React.FC<SectionProps> = ({ heading, description, bgColor, color, i }) => {
+	const formatStepNumber = (index: number) => `Step ${String(index + 1)}`;
+
+	return (
+		<div className={styles.cardContainer}>
+			<div
+				className={styles.card}
+				style={{
+					backgroundColor: bgColor,
+					top: `calc(-5vh + ${i * 25}px)`
+				}}
+			>
+				<div className={styles.leftSection}>
+					<div className="space-y-4 w-full pr-32">
+						<div className={styles.stepNumber}>
+							{formatStepNumber(i)}
+						</div>
+
+						<div className="py-2">
+							<div className='border-[0.8px] w-full border-muted-foreground' />
+						</div>
+					</div>
+
+					<h2 className={styles.heading2}>{heading}</h2>
+					<div
+						className={styles.description}
+					>
+						<p>{description}</p>
+					</div>
+				</div>
+				<div className={styles.rightSection}>
+					<AspectRatio ratio={16 / 9} >
+						<div className={styles.imageContainer}>
+							<div
+								className={styles.inner}
+							>
+								<Image
+									src={stepImages[i]}
+									alt={heading}
+									fill
+									style={{ objectFit: 'cover' }}
+								/>
+							</div>
+						</div>
+					</AspectRatio>
+				</div>
+			</div>
+		</div>
+	)
+}
+
+export function HowItWorks() {
 	return (
 		<main id="howItWorks" className={styles.main}>
 			{howItWorks.map((section, i) => (
 				<Section key={`section_${i}`} {...section} i={i} />
+			))}
+		</main>
+	)
+}
+
+export function HowItWorksStatic() {
+	return (
+		<main id="howItWorksStatic" className={styles.mainStatic}>
+			{howItWorks.map((section, i) => (
+				<SectionStatic key={`section_${i}`} {...section} i={i} />
 			))}
 		</main>
 	)

@@ -8,7 +8,7 @@ cmds = [
 
 [phases.build]
 cmds = [
-    'bun run build',
+    'bun run build && bun run obfuscate-build ',
 ]
 [start]
 cmd = 'bun start'
