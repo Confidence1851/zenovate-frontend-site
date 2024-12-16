@@ -1,17 +1,17 @@
 [phases.setup]
-nixPkgs = ['nodejs', 'bun']
+nixPkgs = ['nodejs']
 
 [phases.install]
 cmds = [
-    'bun install --frozen-lockfile',
+    'npm install --frozen-lockfile',
 ]
 
 [phases.build]
 cmds = [
-    'bun run build',
+    'npm run build',
 ]
 [start]
-cmd = 'bun start'
+cmd = 'npm start'
 
 [meta]
 expose = '3000'
