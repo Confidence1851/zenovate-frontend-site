@@ -18,12 +18,12 @@ const ArticleCard: React.FC<ArticleCardProps> = ({ article }) => {
 		<Card className=' p-1 border-0 shadow-none'>
 			<CardContent className='flex flex-col items-center p-0 gap-4'>
 				<Link href={`/blog/${article.id}`}>
-					<AspectRatio ratio={16 / 9} className='w-full overflow-hidden'>
+					<AspectRatio ratio={16 / 9}>
 						{article.img && (
 							<Image
 								src={article.img}
 								alt={article.content}
-								className='object-center object-cover rounded-sm'
+								className='object-cover rounded-sm'
 							/>
 						)}
 					</AspectRatio>
