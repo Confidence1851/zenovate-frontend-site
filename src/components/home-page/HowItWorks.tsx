@@ -2,7 +2,8 @@
 
 import { useRef } from 'react'
 import { useTransform, useScroll, motion } from 'framer-motion';
-import styles from '@/styles/HomePage.module.css'
+// import styles from '@/styles/HomePage.module.css'
+import styles from '@/styles/HowItWorks.module.css'
 import Image from 'next/image'
 import step1 from "@/assets/images/step-1.jpg";
 import step2 from "@/assets/images/step-2.jpg";
@@ -127,48 +128,53 @@ const SectionStatic: React.FC<SectionProps> = ({ heading, description, bgColor, 
 	const formatStepNumber = (index: number) => `Step ${String(index + 1)}`;
 
 	return (
-		<div className={styles.cardContainer}>
+		<div className={styles.cardContainerStatic}>
 			<div
-				className={styles.card}
+				className={`$styles.cardStatic`}
 				style={{
 					backgroundColor: bgColor,
-					top: `calc(-5vh + ${i * 25}px)`
 				}}
 			>
-				<div className={styles.leftSection}>
-					<div className="space-y-4 w-full pr-32">
-						<div className={styles.stepNumber}>
-							{formatStepNumber(i)}
-						</div>
+				<div className="md-container lg:px-12">
+					<div className="flex flex-col md:flex-row justify-between relative py-12 gap-x-24">
+						<div className={styles.leftSection}>
+							<div className="space-y-4 w-full pr-32">
+								<div className={styles.stepNumber}>
+									{formatStepNumber(i)}
+								</div>
 
-						<div className="py-2">
-							<div className='border-[0.8px] w-full border-muted-foreground' />
-						</div>
-					</div>
+								<div className="py-2">
+									<div className='border-[0.8px] w-full border-muted-foreground' />
+								</div>
+							</div>
 
-					<h2 className={styles.heading2}>{heading}</h2>
-					<div
-						className={styles.description}
-					>
-						<p>{description}</p>
-					</div>
-				</div>
-				<div className={styles.rightSection}>
-					<AspectRatio ratio={16 / 9} >
-						<div className={styles.imageContainer}>
+							<h2 className={styles.heading2}>{heading}</h2>
 							<div
-								className={styles.inner}
+								className={styles.description}
 							>
-								<Image
-									src={stepImages[i]}
-									alt={heading}
-									fill
-									style={{ objectFit: 'cover' }}
-								/>
+								<p>{description}</p>
 							</div>
 						</div>
-					</AspectRatio>
+						<div className={styles.rightSection}>
+							<AspectRatio ratio={16 / 9} >
+								<div className={styles.imageContainerStatic}>
+									<div
+										className={styles.inner}
+									>
+										<Image
+											src={stepImages[i]}
+											alt={heading}
+											fill
+											className='object-fill'
+										/>
+									</div>
+								</div>
+							</AspectRatio>
+						</div>
+					</div>
+
 				</div>
+
 			</div>
 		</div>
 	)

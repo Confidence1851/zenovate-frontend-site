@@ -49,7 +49,7 @@ const Footer = () => {
 							<div className='grid grid-cols-1 lg:grid-cols-12 w-full gap-12 lg:gap-16'>
 								{/* Left Column */}
 								<div className='lg:col-span-4 flex flex-col justify-between gap-10'>
-									<h3 className='text-foreground uppercase text-2xl font-semibold lg:text-4xl xl:text-[2.625rem] xl:leading-[2.75rem] max-w-[294px]'>
+									<h3 className='text-foreground uppercase text-2xl font-semibold lg:text-4xl xl:leading-[2.75rem] max-w-[294px]'>
 										Stay in tune with your health.
 									</h3>
 									<Logo className='text-xl lg:text-xl' />
@@ -60,18 +60,28 @@ const Footer = () => {
 									<div className='grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16'>
 										{/* Explore More Links */}
 										<div className='space-y-6'>
-											<h3 className='text-foreground uppercase text-base font-semibold lg:text-xl'>
-												Quick Links
-											</h3>
-											<div className='grid grid-cols-2 gap-x-4 gap-y-4'>
-												{siteConfig.footerLinks.map((item) => (
-													<Link
-														href={item.href}
-														className='text-foreground text-sm uppercase hover:text-primary transition-colors'
-														key={item.label}
-													>
-														{item.label}
-													</Link>
+											<div className='grid gap-x-4 gap-y-4' style={{ gridTemplateColumns: `repeat(${Array.from(new Set(siteConfig.footerLinks.map(item => item.category))).length}, minmax(0, 1fr))` }}>
+												{Array.from(new Set(siteConfig.footerLinks.map(item => item.category))).map(category => (
+													<div key={category}>
+														<h4 className="text-foreground uppercase text-base font-semibold lg:text-xl mb-4">
+															{category}
+														</h4>
+														{siteConfig.footerLinks
+															.filter(item => item.category === category)
+															.map((item) => (
+																<div className="py-2">
+																	<Link
+																		href={item.href}
+																		className='text-foreground text-sm font-medium uppercase hover:text-primary transition-colors block'
+																		key={item.label}
+																	>
+																		{item.label}
+																	</Link>
+																</div>
+
+															))}
+
+													</div>
 												))}
 											</div>
 										</div>

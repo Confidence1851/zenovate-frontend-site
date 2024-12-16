@@ -19,8 +19,7 @@ Main website and landing pages for Zenovate.
 ---
 
 TODO:
-
-[ ] quick links add products there...
 [ ] test contact form ...
+[ ] subscribed form ...
 [ ] how it works product
-[ ] faq organization
+[ ] meta tags on product pages

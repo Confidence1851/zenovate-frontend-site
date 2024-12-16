@@ -9,6 +9,7 @@ interface SocialLink {
 interface LinkItem {
     label: string;
     href: string;
+    category?: string;
 }
 
 interface HeroSlide {
@@ -107,12 +108,14 @@ export const siteConfig: SiteConfig = {
         { label: 'Legal Disclaimer', href: '/legal/legal-disclaimer' }
     ],
     footerLinks: [
-        { label: 'How it Works', href: '/how-it-works' },
-        { label: 'Products', href: '/products' },
-        { label: 'Blog', href: '/blog' },
-        { label: 'About', href: '/about' },
-        { label: 'FAQ', href: '/faq' },
-        { label: 'Contact', href: '/contact' }
+        { label: 'FAQ', href: '/faq', category: 'Company' },
+        { label: 'Blog', href: '/blog', category: 'Company' },
+        { label: 'Contact', href: '/contact', category: 'Company' },
+
+        { label: 'Immuna', href: '/about', category: 'Products' },
+        { label: 'Gloria', href: '/contact', category: 'Products' },
+        { label: 'Energia', href: '/about', category: 'Products' },
+        { label: 'Activa', href: '/contact', category: 'Products' },
     ],
     heroSlides: [
         {

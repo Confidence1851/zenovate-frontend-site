@@ -55,10 +55,10 @@ const CustomersFeedback = () => {
 
 	return (
 		<section className={styles.section}>
-			<div className='w-full max-w-container-md mx-auto h-full flex justify-end flex-col'>
+			<div className='xmd-container h-full flex justify-end flex-col'>
 				<h1 className={styles.headerOne}>Voices of Change</h1>
 			</div>
-			<div className='max-w-container-md mx-auto w-full'>
+			<div className='xmd-container'>
 				<Carousel
 					opts={{
 						align: 'start'

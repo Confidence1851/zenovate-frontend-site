@@ -21,11 +21,11 @@ export const faqAccordionCategories: Category[] = [
     },
     {
         id: 2,
-        name: "Product Information and Selection"
+        name: "Product Information"
     },
     {
         id: 3,
-        name: "Safe Usage and Administration"
+        name: "Safe Usage & Administration"
     },
     {
         id: 4,
@@ -217,10 +217,10 @@ const FAQSection = () => {
             <div className="xmd-container">
                 {faqAccordionCategories.map((category) => (
                     <div key={category.id} className="mb-12">
-                        <div className="flex flex-col md:flex-row gap-6">
+                        <div className="flex flex-col md:flex-row gap-12">
                             {/* Category Title - Takes 1/3 width on desktop */}
                             <div className="w-full md:w-1/4">
-                                <h2 className="uppercase text-xl font-bold sticky top-24">
+                                <h2 className="text-2xl font-semibold sticky top-24">
                                     {category.name}
                                 </h2>
                             </div>
