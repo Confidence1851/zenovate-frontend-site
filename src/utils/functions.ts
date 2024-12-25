@@ -1,5 +1,4 @@
 const CryptoJS = require('crypto-js');
-// import CryptoJS from "crypto-js";
 
 export const redirectToProductForm = (id: string | number) => {
     const data = {
