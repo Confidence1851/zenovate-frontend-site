@@ -155,7 +155,7 @@ export async function ordersListDetails(token: string, id: string) {
 				Authorization: `Bearer ${token}`
 			}
 		})
-		return response.data
+		return response.data.data
 	} catch (error) {
 		if (axios.isAxiosError(error)) {
 			if (error.response?.data?.message) {

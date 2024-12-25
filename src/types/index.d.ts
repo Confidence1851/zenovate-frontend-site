@@ -1,13 +1,13 @@
 import { DefaultSession } from "next-auth";
 
-interface Product {
-	id: number
-	slug: string
-	name: string
-	description: string
-	subtitle: string
-	price: string
-}
+// interface Product {
+// 	id: number
+// 	slug: string
+// 	name: string
+// 	description: string
+// 	subtitle: string
+// 	price: string
+// }
 
 type RegisterUserInput = {
 	first_name: string
@@ -62,13 +62,13 @@ type ForgotPasswordResponse = {
 
 
 // Type for a single product in the metadata's raw.selected_products array
-type Product = {
-	id: number;
-	name: string;
-	subtitle: string;
-	description: string;
-	price: string;
-};
+// type Product = {
+// 	id: number;
+// 	name: string;
+// 	subtitle: string;
+// 	description: string;
+// 	price: string;
+// };
 
 // Type for the raw metadata within the metadata field
 type RawMetadata = {
@@ -162,3 +162,90 @@ type OrdersListResponse = {
 //   } & DefaultSession["user"];
 //   accessToken?: string;
 // }
+
+
+
+type MetadataRaw = {
+	first_name: string;
+	last_name: string;
+	email: string;
+	phone_number: string;
+	date_of_birth: string;
+	preferred_contact: string;
+	street_address: string;
+	city: string;
+	state_province: string;
+	postal_zip_code: string;
+	country: string;
+	allergies: string;
+	current_medications: string;
+	allergies_details: string;
+	existing_conditions: string;
+	previous_surgeries: string;
+	heart_disease: string;
+	kidney_disease: string;
+	liver_disease: string;
+	autoimmune_disorders: string;
+	other_conditions: string;
+	recent_health_changes: string;
+	injectables_concerns: string;
+	needle_fear: string;
+	family_medical_history: string;
+	additional_info: string;
+  };
+  
+  type Metadata = {
+	user_agent: string;
+	location: string | null;
+	raw: MetadataRaw;
+  };
+  
+  type Price = {
+	frequency: number;
+	unit: string;
+	value: number;
+	currency: string;
+	id: string;
+  };
+  
+  type Product = {
+	id: number;
+	name: string;
+	slug: string;
+	subtitle: string;
+	description: string;
+	nav_description: string | null;
+	key_ingredients: string | null;
+	benefits: string | null;
+	price: Price[];
+	quantity: number;
+	selected_price: string | null;
+  };
+  
+  type CompletedPayment = {
+	id: number;
+	shipping_fee: string;
+	sub_total: string;
+	total: string;
+	status: string;
+	paid_at: string;
+	method: string;
+	method_info: any;
+	metadata: any;
+	products: Product[]; // Nested products in completed_payment
+  };
+  
+  type OrderDetail = {
+	id: string;
+	reference: string;
+	total_products: number;
+	total_cost: string;
+	metadata: Metadata;
+	status: string;
+	comment: string | null;
+	created_at: string;
+	completed_payment: CompletedPayment;
+	products: Product[]; // Top-level products
+	updated_at: string;
+  };
+  
