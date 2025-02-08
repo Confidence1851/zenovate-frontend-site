@@ -19,7 +19,7 @@ export const redirectToRecreateSession = (value: { id: string | number, token: s
 
 const redirectToForm = (data: object) => {
     const hash = btoa(encryptWithAES(data));
-    const url = `${process.env.NEXT_PUBLIC_FORM_URL}\\redirect\\${hash}`;
+    const url = `${process.env.NEXT_PUBLIC_FORM_URL}\\r\\${hash}`;
     window.open(url, '_blank');
 }
 
