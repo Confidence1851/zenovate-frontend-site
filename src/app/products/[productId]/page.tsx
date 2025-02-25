@@ -15,11 +15,11 @@ import { Skeleton } from '@/components/ui/skeleton'
 import MainLayout from '@/app/layouts/MainLayout'
 import CustomersFeedback from '@/components/home-page/CustomersFeedback'
 import { StaticImageData } from 'next/image';
-import ProductImagesActiva1 from '@/assets/images/u18nD58H5v2EH.png'
-import ProductImagesGloria1 from '@/assets/images/1duXn1s.png'
-import ProductImagesImmuna1 from '@/assets/images/2HQyRBbVQmOWWZhM.png'
-import ProductImagesEnergia1 from '@/assets/images/6LxAAhJso7Dk.png'
-import ProductImagesNadia1 from '@/assets/images/l7lA2QieckkRg.png'
+import ProductImagesActiva1 from '@/assets/images/u18nD58H5v2EH1.png'
+import ProductImagesGloria1 from '@/assets/images/1duXn1s1.png'
+import ProductImagesImmuna1 from '@/assets/images/2HQyRBbVQmOWWZhM1.png'
+import ProductImagesEnergia1 from '@/assets/images/6LxAAhJso7Dk1.png'
+import ProductImagesNadia1 from '@/assets/images/l7lA2QieckkRg1.png'
 import { CTAButton } from '@/components/common/CTAButton';
 import CheckMark from '@/assets/icons/CheckMark';
 import styles from '@/styles/ProductId.module.css';
