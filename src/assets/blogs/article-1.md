@@ -1,6 +1,6 @@
 In the realm of wellness, we’re always on the hunt for that magical solution to help us age gracefully, stay sharp, and keep our bodies in peak condition. Enter Nicotinamide Adenine Dinucleotide (NAD+) - a molecule that’s been quietly working behind the scenes, fueling some of our body’s most critical processes. While it may not be a household name yet, the benefits of NAD+ are backed by science, making it a game-changer for anyone focused on wellness and longevity.
 
-Let’s dive into why this small molecule packs a big punch and how supplementing with products like NADcreation (NADiva) can help you tap into its full potential.
+Let’s dive into why this small molecule packs a big punch and how supplementing with products like NADiva can help you tap into its full potential.
 
 ## What Is NAD+, and Why Is It Important?
 
@@ -24,15 +24,15 @@ Ever wonder why energy levels plummet as we age? A drop in NAD+ could be to blam
 
 Sirtuins, often referred to as “longevity genes,” rely on NAD+ to function. By boosting NAD+ levels, you’re essentially giving these genes the fuel they need to combat aging at a cellular level, from improving skin elasticity to enhancing organ function.
 
-## Why Choose NADcreation (NADiva)?
+## Why Choose NADiva?
 
-Zenovate’s NADcreation (NADiva) vial is designed to help you easily replenish your body’s NAD+ levels through subcutaneous injection. With a potent 50mg/ml formula, it’s ideal for those looking to support DNA repair, protect brain function, and boost metabolic health—all from the comfort of home. And since it’s subcutaneous, it’s a convenient, efficient way to ensure your body gets exactly what it needs.
+Zenovate’s NADiva vial is designed to help you easily replenish your body’s NAD+ levels through subcutaneous injection. With a potent 50mg/ml formula, it’s ideal for those looking to support DNA repair, protect brain function, and boost metabolic health—all from the comfort of home. And since it’s subcutaneous, it’s a convenient, efficient way to ensure your body gets exactly what it needs.
 
 ## The Takeaway
 
 NAD+ isn’t just another trendy buzzword in the wellness world—it’s a scientifically supported way to optimize your health and longevity. Whether you’re looking to maintain your energy levels, protect your brain, or fight the signs of aging, replenishing NAD+ levels can be a game-changer.
 
-With products like NADcreation (NADiva), you’re not just taking a step towards better health—you’re taking control of how you age, live, and thrive.
+With products like NADiva, you’re not just taking a step towards better health—you’re taking control of how you age, live, and thrive.
 
 ---
 

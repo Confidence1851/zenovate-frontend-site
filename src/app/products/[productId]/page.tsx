@@ -153,7 +153,7 @@ export default function ProductDetails({ params }: { params: { productId: string
 	const productDetails: ProductDetailsType = {
 		energia: {
 			tag: "B12 Energy & Nerve Support",
-			description: "Energia (MethylB12Pro) is a high-potency injectable methylcobalamin solution (10mg/mL) designed to support energy production, neurological health, and optimal B12 levels.",
+			description: "Energia is a high-potency injectable methylcobalamin solution (10mg/mL) designed to support energy production, neurological health, and optimal B12 levels.",
 			format: "10ml Injectable Solution",
 			keyBenefits: [
 				"Boosts natural energy production and vitality",
@@ -164,7 +164,7 @@ export default function ProductDetails({ params }: { params: { productId: string
 		},
 		gloria: {
 			tag: "Antioxidant & Skin Brightening Solution",
-			description: "Gloria (Glutathione) is a premium injectable solution containing 200mg/ml of pharmaceutical-grade glutathione designed to support antioxidant defense, skin health, and cellular detoxification.",
+			description: "Gloria is a premium injectable solution containing 200mg/ml of pharmaceutical-grade glutathione designed to support antioxidant defense, skin health, and cellular detoxification.",
 			format: "10ml Injectable Solution",
 			keyBenefits: [
 				"Powerful antioxidant protection against free radicals",
@@ -175,7 +175,7 @@ export default function ProductDetails({ params }: { params: { productId: string
 		},
 		nadiva: {
 			tag: "Cellular Regeneration & Anti-Aging",
-			description: "NADiva (NADcreation) is a premium injectable NAD+ solution designed to support cellular repair, metabolic function, and age-management processes.",
+			description: "NADiva is a premium injectable NAD+ solution designed to support cellular repair, metabolic function, and age-management processes.",
 			format: "10ml Injectable Solution",
 			keyBenefits: [
 				"Supports DNA repair and cellular regeneration",
@@ -186,7 +186,7 @@ export default function ProductDetails({ params }: { params: { productId: string
 		},
 		immuna: {
 			tag: "Immune Defense Complex",
-			description: "Immuna (TripleDefense) is a premium injectable solution combining Glutathione, Ascorbic Acid, and Zinc Sulfate designed to provide comprehensive immune support and antioxidant protection.",
+			description: "Immuna is a premium injectable solution combining Glutathione, Ascorbic Acid, and Zinc Sulfate designed to provide comprehensive immune support and antioxidant protection.",
 			format: "10ml Injectable Solution",
 			keyBenefits: [
 				"Enhances immune system function and defense",
