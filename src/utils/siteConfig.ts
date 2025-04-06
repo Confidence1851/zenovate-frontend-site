@@ -136,7 +136,7 @@ export const siteConfig: SiteConfig = {
             title: 'Transform',
             description: 'Embrace a new you with our revolutionary wellness solutions',
             buttonText: 'Learn More',
-            videoSrc: 'https://b8d40d70042a5e5903f0e663a9b0cc51.s3.us-east-2.amazonaws.com/clients/zenovate/e10dd19b9ed4eeb5563358b674378dee.mp4',
+            videoSrc: 'https://b8d40d70042a5e5903f0e663a9b0cc51.s3.us-east-2.amazonaws.com/clients/zenovate/e110dd19b9ed4eeb5563358b674378dee.mp4',
             link: 'https://application.zenovate.health'
         }
     ],
