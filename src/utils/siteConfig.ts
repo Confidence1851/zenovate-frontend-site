@@ -122,7 +122,7 @@ export const siteConfig: SiteConfig = {
             title: 'Energize',
             description: 'Experience a better, healthier and longer life one shot at a time',
             buttonText: 'Get Started',
-            videoSrc: '/videos/0762b1e1f802becd8900b5fc0336418b0582d7db2f821df7026c54850283c965.mov',
+            videoSrc: '/videos/0762b1e1f802becd8900b5fc0336418b0582d7db2f821df7026c54850283c965.mp4',
             link: 'https://application.zenovate.health'
         },
         {
@@ -136,7 +136,7 @@ export const siteConfig: SiteConfig = {
             title: 'Transform',
             description: 'Embrace a new you with our revolutionary wellness solutions',
             buttonText: 'Learn More',
-            videoSrc: '/videos/e10dd19b9ed4eeb5563358b674378dee.mov',
+            videoSrc: '/videos/e10dd19b9ed4eeb5563358b674378dee.mp4',
             link: 'https://application.zenovate.health'
         }
     ],
