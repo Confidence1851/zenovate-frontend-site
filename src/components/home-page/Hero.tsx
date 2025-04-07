@@ -54,6 +54,7 @@ export default function HeroCarousel() {
                                             autoPlay
                                             loop
                                             muted
+                                            playsInline
                                             className='w-full z-10 h-full object-cover absolute top-0 left-0'
                                         />
                                     </section>
