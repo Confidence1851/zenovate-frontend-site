@@ -95,7 +95,7 @@ export default async function BlogInfoPage({ params }: Props) {
 				</article>
 
 				{/* similar articles */}
-				<section className='py-10 md:py-20 md-container'>
+				{/* <section className='py-10 md:py-20 md-container'>
 					<BlogSectionWrapper heading='read more of our articles'>
 						<Carousel
 							opts={{
@@ -125,7 +125,7 @@ export default async function BlogInfoPage({ params }: Props) {
 							</div>
 						</Carousel>
 					</BlogSectionWrapper>
-				</section>
+				</section> */}
 			</main>
 		</MainLayout>
 
