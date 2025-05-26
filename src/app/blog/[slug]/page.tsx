@@ -95,7 +95,7 @@ export default async function BlogInfoPage({ params }: Props) {
 				</article>
 
 				{/* similar articles */}
-				{/* <section className='py-10 md:py-20 md-container'>
+				<section className='py-10 md:py-20 md-container'>
 					<BlogSectionWrapper heading='read more of our articles'>
 						<Carousel
 							opts={{
@@ -110,11 +110,7 @@ export default async function BlogInfoPage({ params }: Props) {
 										className='md:basis-1/2 lg:basis-1/3 xl:basis-1/4'
 									>
 										<ArticleCard
-											article={{
-												id: article.id,
-												content: article.title,
-												img: article.images[0]
-											}}
+											post={article}
 										/>
 									</CarouselItem>
 								))}
@@ -125,7 +121,7 @@ export default async function BlogInfoPage({ params }: Props) {
 							</div>
 						</Carousel>
 					</BlogSectionWrapper>
-				</section> */}
+				</section>
 			</main>
 		</MainLayout>
 
