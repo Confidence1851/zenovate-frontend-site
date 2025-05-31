@@ -2,9 +2,8 @@
 
 
 if [ -f "public/build.zip" ]; then
-    rm public/build.zip
+    rm .next.zip
 fi
 
 npm run build
-cp .next/* public/build/ 
-zip -r public/build.zip public/build
+zip -r .next.zip .next
