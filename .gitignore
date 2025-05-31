@@ -37,5 +37,4 @@ next-env.d.ts
 
 .env
 /css-obfuscator
-
-
+/public/build/*
