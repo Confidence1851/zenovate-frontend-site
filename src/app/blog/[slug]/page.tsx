@@ -5,7 +5,7 @@ import { markdownToHtml } from '@/lib/markdown';
 import { notFound } from 'next/navigation';
 import { createMetadata } from '@/lib/metadata'
 import { Metadata } from 'next'
-import PageHeroWrapper from '@/components/common/PageHeroWrapper';
+// import PageHeroWrapper from '@/components/common/PageHeroWrapper';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import MainLayout from '@/app/layouts/MainLayout';
 
@@ -63,13 +63,13 @@ export default async function BlogInfoPage({ params }: Props) {
 	return (
 		<MainLayout>
 			<main>
-				<PageHeroWrapper
+				{/* <PageHeroWrapper
 					image={post.images[0] ? {
 						src: post.images[0],
 						alt: post.title
 					} : undefined}
 					size='short'
-				/>
+				/> */}
 
 				<article className='py-10 md:py-16 lg:pt-24'>
 					<div className='w-full max-w-[800px] mx-auto space-y-14'>

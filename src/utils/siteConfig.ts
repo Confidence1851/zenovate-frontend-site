@@ -79,9 +79,11 @@ interface SiteConfig {
 import image1 from '@/assets/images/101589e1a6decdc226f18a128678c504.jpg'
 import image2 from '@/assets/images/1c2f243cdf51a73f0c1d326159aaa492.jpg'
 import image3 from '@/assets/images/546fdgfre454.png'
+import image4 from '@/assets/images/article-4.jpeg'
 import content1 from '@/assets/blogs/article-1.md'
 import content2 from '@/assets/blogs/article-2.md'
 import content3 from '@/assets/blogs/article-3.md'
+import content4 from '@/assets/blogs/article-4.md'
 
 export const siteConfig: SiteConfig = {
     socialLinks: {
@@ -167,9 +169,19 @@ export const siteConfig: SiteConfig = {
             id: '3',
             title: 'Fighting for Your Healthspan After 55: The New Era of Personalized Longevity',
             description: 'Introduction: A New Chapter in Aging',
-            date: '2024-12-02',
+            date: '2025-04-24',
             images: [image3],
             content: content3,
+            tags: ['nutrition', 'health', 'wellness'],
+            featured: true
+        }),
+        addSlugToBlogPost({
+            id: '4',
+            title: 'The Rise of At-Home Vitamin Injections: Is It for You?',
+            description: 'What Are At-Home Vitamin Injections?',
+            date: '2025-05-31',
+            images: [image4],
+            content: content4,
             tags: ['nutrition', 'health', 'wellness'],
             featured: true
         }),

@@ -1,0 +1,26 @@
+cd post_gen 
+python -m venv venv
+source venv/bin/activate
+pip install beautifulsoup4 html2text pillow
+
+
+Now download the google doc as zip
+Unzip and copy the unzipped folder into posts folder
+Rename into article1, article2, etc
+Run 
+
+
+# Basic usage (no compression)
+python runner.py posts/article3 --html-file index.html
+
+# With 80% quality compression
+python runner.py posts/article3 --html-file index.html --compression 80
+
+# Custom output path
+python runner.py posts/article3 --html-file index.html --output /Users/confidence/Workspace/Projects/Overthink/zenovate/src/assets/blogs/article-3.md
+
+# Full example with compression and custom output
+python runner.py posts/article3 --html-file index.html --compression 70 --output /Users/confidence/Workspace/Projects/Overthink/zenovate/src/assets/blogs/article-3.md
+
+# Short flags
+python runner.py posts/article3 --html-file index.html -c 85 -o ~/blogs/article-3.md
