@@ -92,8 +92,8 @@ export const siteConfig: SiteConfig = {
             handle: 'ZenovateInfo'
         },
         instagram: {
-            url: 'https://instagram.com/zenovate.health',
-            handle: 'zenovate.health'
+            url: 'https://instagram.com/zenovatehealth',
+            handle: 'zenovatehealth'
         },
         facebook: {
             url: 'https://www.facebook.com/profile.php?id=61569482751880&sk=about',

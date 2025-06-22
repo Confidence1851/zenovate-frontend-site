@@ -1,9 +1,5 @@
 #!/bin/bash
 
-
-if [ -f "public/build.zip" ]; then
-    rm .next.zip
-fi
-
+rm .next.zip
 npm run build
 zip -r .next.zip .next
