@@ -7,23 +7,23 @@ import phone from '@/assets/images/phone.png'
 
 const uniqueQualities = [
 	{
-		heading: '🩺 Expert Medical Guidance',
+		heading: 'Expert Medical Guidance',
 		description:
 			'Our licensed prescribers work closely with you to develop a personalized optimized plan tailored to your specific needs and goals.',
 		image: doctor
 	},
 	{
-		heading: '🔬 Science-Backed Formulations',
+		heading: 'Science-Backed Formulations',
 		description: 'We leverage the latest research to create precision-targeted wellness shots blends that deliver optimal results.',
 		image: tube
 	},
 	{
-		heading: '💉 Convenient At-Home Injections',
+		heading: 'Convenient At-Home Injections',
 		description: 'Our easy-to-use shots allow you to prioritize your health without disrupting your busy lifestyle.',
 		image: needle
 	},
 	{
-		heading: '📱 Telemedicine Platform',
+		heading: 'Telemedicine Platform',
 		description:
 			'Access expert support, track your progress, and manage your personalized therapy through our user-friendly website.',
 		image: phone
