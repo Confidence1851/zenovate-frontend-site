@@ -20,6 +20,8 @@ import ProductImagesGloria1 from '@/assets/images/1duXn1s1.png'
 import ProductImagesImmuna1 from '@/assets/images/2HQyRBbVQmOWWZhM1.png'
 import ProductImagesEnergia1 from '@/assets/images/6LxAAhJso7Dk1.png'
 import ProductImagesNadia1 from '@/assets/images/l7lA2QieckkRg1.png'
+import ProductImagesEpipen1 from '@/assets/images/epipen1.jpg'
+import ProductImagesEpipen2 from '@/assets/images/epipen2.jpg'
 import { CTAButton } from '@/components/common/CTAButton';
 import CheckMark from '@/assets/icons/CheckMark';
 import styles from '@/styles/ProductId.module.css';
@@ -86,9 +88,9 @@ export default function ProductDetails({ params }: { params: { productId: string
 		lowestPrice = Math.min(...usdPrices);
 	}
 
-	type ProductName = 'Energia' | 'Gloria' | 'Nadiva' | 'Immuna' | 'Activa';
+	type ProductName = 'Energia' | 'Gloria' | 'Nadiva' | 'Immuna' | 'Activa' | 'EpiPen';
 	const isValidProductName = (name: string): name is ProductName => {
-		return ['Energia', 'Gloria', 'Nadiva', 'Immuna', 'Activa'].includes(name);
+		return ['Energia', 'Gloria', 'Nadiva', 'Immuna', 'Activa', 'EpiPen'].includes(name);
 	};
 
 
@@ -98,6 +100,7 @@ export default function ProductDetails({ params }: { params: { productId: string
 		nadiva: StaticImageData[];
 		immuna: StaticImageData[];
 		activa: StaticImageData[];
+		epipen: StaticImageData[];
 		default: StaticImageData[];
 	}
 
@@ -112,7 +115,6 @@ export default function ProductDetails({ params }: { params: { productId: string
 		],
 		nadiva: [
 			ProductImagesNadia1,
-
 		],
 		immuna: [
 			ProductImagesImmuna1,
@@ -121,6 +123,10 @@ export default function ProductDetails({ params }: { params: { productId: string
 		activa: [
 			ProductImagesActiva1,
 
+		],
+		epipen: [
+			ProductImagesEpipen1,
+			ProductImagesEpipen2,
 		],
 		default: [
 			ProductImagesActiva1,
@@ -140,6 +146,7 @@ export default function ProductDetails({ params }: { params: { productId: string
 		nadiva: ProductDetail;
 		immuna: ProductDetail;
 		activa: ProductDetail;
+		epipen: ProductDetail;
 		default: ProductDetail;
 	}
 
@@ -148,6 +155,7 @@ export default function ProductDetails({ params }: { params: { productId: string
 		description: string;
 		format: string;
 		keyBenefits: string[];
+		howToUse?: string[];
 	}
 
 	const productDetails: ProductDetailsType = {
@@ -207,6 +215,28 @@ export default function ProductDetails({ params }: { params: { productId: string
 				"Supports overall metabolic wellness",
 			],
 		},
+		epipen: {
+			tag: "Epinephrine Auto-Injector",
+			description: "The EpiPen® auto-injector is a pre-filled, single-use device designed to deliver a fast, accurate dose of epinephrine during a severe allergic reaction, also known as anaphylaxis. Its compact, portable design makes it easy to carry in a purse, backpack, or pocket, ensuring it's always within reach. This design makes it ideal for situations where every second matters.",
+			format: "Single-use, preloaded auto-injector (0.3 mg for adults, 0.15 mg for children)",
+			keyBenefits: [
+				"Active Ingredient: Epinephrine",
+				"Indication: Emergency treatment of severe allergic reactions caused by insect stings or bites, foods, medications or other allergens",
+				"Onset of Action: Works within minutes to help open airways and improve breathing",
+				"Device Design: Simple, one-handed activation with audible click confirmation",
+				"Supplied As: Single-use, preloaded auto-injector (0.3 mg for adults, 0.15 mg for children)",
+			],
+			howToUse: [
+				"Use immediately at the first signs of a severe allergic reaction.",
+				"Remove the EpiPen® from its carrier tube.",
+				"Grip the device in your fist (orange tip pointing downward).",
+				"Remove the blue safety release by pulling straight up.",
+				"Press the orange tip firmly against the outer thigh at a right angle until you hear a click.",
+				"Hold in place for 3 seconds.",
+				"Call 911 (or local emergency number) and seek medical attention immediately.",
+				"Dispose of the used device safely.",
+			],
+		},
 		default: {
 			tag: "",
 			description: "Default product description. Please specify a valid product name.",
@@ -256,6 +286,7 @@ export default function ProductDetails({ params }: { params: { productId: string
 									product.name === 'Immuna' ? 'bg-[#6E6D6B]' :
 										product.name === 'Energia' ? 'bg-[#DBD7D6]' :
 											product.name === 'Activa' ? 'bg-[#CEF3E9]' :
+												product.name === 'EpiPen' ? 'bg-[#FF6B6B]' :
 												'bg-gray-500'
 								}`}
 						/>
@@ -291,6 +322,27 @@ export default function ProductDetails({ params }: { params: { productId: string
 							))}
 						</div>
 					</div>
+
+					{productDetail.howToUse && (
+						<div className={styles.productDetailsContainer}>
+							<p className='text-foreground font-semibold'>
+								How to Use (Emergency Quick Guide)
+							</p>
+							<div className='space-y-3'>
+								{productDetail.howToUse.map((step, index) => (
+									<div key={index} className="flex items-start gap-4">
+										<span className="flex-shrink-0 w-6 h-6 bg-foreground text-background rounded-full flex items-center justify-center text-sm font-semibold">
+											{index + 1}
+										</span>
+										<span>{step}</span>
+									</div>
+								))}
+							</div>
+							<div className="mt-4 p-3 bg-muted rounded-lg">
+								<p className="text-sm font-medium">Note: The EpiPen® may be injected through clothing if necessary.</p>
+							</div>
+						</div>
+					)}
 
 					<div className='py-6'></div>
 					<CTAButton

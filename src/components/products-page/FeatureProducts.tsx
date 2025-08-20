@@ -85,7 +85,8 @@ const FeatureProducts = () => {
 																	item.name === 'Immuna' ? 'bg-[#6E6D6B]' :
 																		item.name === 'Energia' ? 'bg-[#DBD7D6]' :
 																			item.name === 'Activa' ? 'bg-[#CEF3E9]' :
-																				'bg-gray-500'
+																				item.name === 'EpiPen' ? 'bg-[#FF6B6B]' :
+																					'bg-gray-500'
 															}`}
 													/>
 												</div>
