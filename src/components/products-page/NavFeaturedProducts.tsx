@@ -90,13 +90,13 @@ const NavFeatureProducts = (zz: any) => {
 													/>
 												</div>
 
-												<div className='w-[30px]'>
+												{/* <div className='w-[30px]'>
 													<Image
 														src={PixelatedImage}
 														alt="pixelated image"
 														className='object-contain h-full w-full'
 													/>
-												</div>
+												</div> */}
 											</div>
 										</div>
 									</div>
