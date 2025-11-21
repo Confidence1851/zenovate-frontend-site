@@ -115,11 +115,6 @@ export const siteConfig: SiteConfig = {
         { label: 'FAQ', href: '/faq', category: 'Company' },
         { label: 'Blog', href: '/blog', category: 'Company' },
         { label: 'Contact', href: '/contact', category: 'Company' },
-
-        { label: 'Immuna', href: '/about', category: 'Products' },
-        { label: 'Gloria', href: '/contact', category: 'Products' },
-        { label: 'Energia', href: '/about', category: 'Products' },
-        { label: 'Activa', href: '/contact', category: 'Products' },
     ],
     heroSlides: [
         {

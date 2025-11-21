@@ -6,6 +6,7 @@ import { ExIcon, FacebookIcon, InstagramIcon, LinkedinIcon } from '@/assets/icon
 import { usePathname } from 'next/navigation'
 import { siteConfig } from '@/utils/siteConfig'
 import styles from '@/styles/Footer.module.css'
+import FooterProducts from './FooterProducts'
 
 const socialMedia = [
 	{
@@ -60,28 +61,33 @@ const Footer = () => {
 									<div className='grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16'>
 										{/* Explore More Links */}
 										<div className='space-y-6'>
-											<div className='grid gap-x-4 gap-y-4' style={{ gridTemplateColumns: `repeat(${Array.from(new Set(siteConfig.footerLinks.map(item => item.category))).length}, minmax(0, 1fr))` }}>
-												{Array.from(new Set(siteConfig.footerLinks.map(item => item.category))).map(category => (
-													<div key={category}>
-														<h4 className="text-foreground uppercase text-base font-semibold lg:text-xl mb-4">
-															{category}
-														</h4>
-														{siteConfig.footerLinks
-															.filter(item => item.category === category)
-															.map((item) => (
-																<div className="py-2" key={item.label}>
-																	<Link
-																		href={item.href}
-																		className='text-foreground text-sm font-medium uppercase hover:text-primary transition-colors block'
-																	>
-																		{item.label}
-																	</Link>
-																</div>
+											<div className='grid gap-x-4 gap-y-4' style={{ gridTemplateColumns: 'repeat(2, minmax(0, 1fr))' }}>
+												{/* Company Links */}
+												<div>
+													<h4 className="text-foreground uppercase text-base font-semibold lg:text-xl mb-4">
+														Company
+													</h4>
+													{siteConfig.footerLinks
+														.filter(item => item.category === 'Company')
+														.map((item) => (
+															<div className="py-2" key={item.label}>
+																<Link
+																	href={item.href}
+																	className='text-foreground text-sm font-medium uppercase hover:text-primary transition-colors block'
+																>
+																	{item.label}
+																</Link>
+															</div>
+														))}
+												</div>
 
-															))}
-
-													</div>
-												))}
+												{/* Products Links - Dynamic */}
+												<div>
+													<h4 className="text-foreground uppercase text-base font-semibold lg:text-xl mb-4">
+														Products
+													</h4>
+													<FooterProducts />
+												</div>
 											</div>
 										</div>
 
