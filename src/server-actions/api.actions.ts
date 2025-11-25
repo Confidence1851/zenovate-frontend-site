@@ -7,7 +7,7 @@ import type {
 	ForgotPasswordResponse
 } from '@/types'
 
-function baseUrl(path = '') {
+export function baseUrl(path = '') {
 	return process.env.NEXT_PUBLIC_SERVER_URL + path
 }
 

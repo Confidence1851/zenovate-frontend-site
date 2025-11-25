@@ -1,6 +1,5 @@
 import axios from 'axios';
-
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:9802';
+import { baseUrl } from './api.actions';
 
 export interface Category {
   name: string;
@@ -16,7 +15,7 @@ export interface Category {
  */
 export async function getCategories(): Promise<Category[]> {
   try {
-    const response = await axios.get(`${API_BASE_URL}/api/categories`);
+    const response = await axios.get(baseUrl('/api/categories'));
     if (response.data.success && response.data.data) {
       return response.data.data;
     }
@@ -34,7 +33,7 @@ export async function getCategories(): Promise<Category[]> {
  */
 export async function getCategory(slug: string): Promise<Category> {
   try {
-    const response = await axios.get(`${API_BASE_URL}/api/categories/${slug}`);
+    const response = await axios.get(baseUrl(`/api/categories/${slug}`));
     if (response.data.success && response.data.data) {
       return response.data.data;
     }
@@ -52,7 +51,7 @@ export async function getCategory(slug: string): Promise<Category> {
  */
 export async function getCategoryProducts(slug: string): Promise<any> {
   try {
-    const response = await axios.get(`${API_BASE_URL}/api/categories/${slug}/products`);
+    const response = await axios.get(baseUrl(`/api/categories/${slug}/products`));
     if (response.data.success && response.data.data) {
       return response.data.data;
     }
@@ -70,7 +69,7 @@ export async function getCategoryProducts(slug: string): Promise<any> {
  */
 export async function getProductsByCategories(): Promise<Category[]> {
   try {
-    const response = await axios.get(`${API_BASE_URL}/api/form/products/by-categories`);
+    const response = await axios.get(baseUrl('/api/form/products/by-categories'));
     if (response.data.success && response.data.data) {
       return response.data.data;
     }

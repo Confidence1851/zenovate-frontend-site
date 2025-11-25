@@ -1,6 +1,5 @@
 import axios from 'axios';
-
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:9802';
+import { baseUrl } from './api.actions';
 
 export interface DirectCheckoutInitParams {
   product_id: number;
@@ -61,7 +60,7 @@ export async function initDirectCheckout(
 ): Promise<DirectCheckoutData> {
   try {
     const response = await axios.post(
-      `${API_BASE_URL}/api/direct-checkout/init`,
+      baseUrl('/api/direct-checkout/init'),
       params
     );
 
@@ -76,17 +75,17 @@ export async function initDirectCheckout(
       const message = error.response?.data?.message || error.response?.data?.error || 'Validation failed';
       throw new Error(message);
     }
-    
+
     // Handle other API errors
     if (error.response?.data?.message) {
       throw new Error(error.response.data.message);
     }
-    
+
     // Handle network errors
     if (axios.isAxiosError(error) && !error.response) {
       throw new Error('Network error. Please check your connection and try again.');
     }
-    
+
     throw new Error(error.message || 'Failed to initialize checkout');
   }
 }
@@ -100,7 +99,7 @@ export async function applyDiscountToCheckout(
 ): Promise<DirectCheckoutData> {
   try {
     const response = await axios.post(
-      `${API_BASE_URL}/api/direct-checkout/apply-discount`,
+      baseUrl('/api/direct-checkout/apply-discount'),
       {
         checkout_id: checkoutId,
         discount_code: discountCode,
@@ -118,17 +117,17 @@ export async function applyDiscountToCheckout(
       const message = error.response?.data?.message || 'Invalid discount code';
       throw new Error(message);
     }
-    
+
     // Handle other API errors
     if (error.response?.data?.message) {
       throw new Error(error.response.data.message);
     }
-    
+
     // Handle network errors
     if (axios.isAxiosError(error) && !error.response) {
       throw new Error('Network error. Please check your connection and try again.');
     }
-    
+
     throw new Error(error.message || 'Failed to apply discount');
   }
 }
@@ -141,7 +140,7 @@ export async function processDirectCheckout(
 ): Promise<ProcessPaymentResponse> {
   try {
     const response = await axios.post(
-      `${API_BASE_URL}/api/direct-checkout/process`,
+      baseUrl('/api/direct-checkout/process'),
       {
         checkout_id: checkoutId,
       }
@@ -158,17 +157,17 @@ export async function processDirectCheckout(
       const message = error.response?.data?.message || 'Payment processing failed';
       throw new Error(message);
     }
-    
+
     // Handle other API errors
     if (error.response?.data?.message) {
       throw new Error(error.response.data.message);
     }
-    
+
     // Handle network errors
     if (axios.isAxiosError(error) && !error.response) {
       throw new Error('Network error. Please check your connection and try again.');
     }
-    
+
     throw new Error(error.message || 'Failed to process payment');
   }
 }
