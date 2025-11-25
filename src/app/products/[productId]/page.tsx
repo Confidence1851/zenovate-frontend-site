@@ -10,7 +10,7 @@ import Image from 'next/image'
 import { redirectToProductForm } from '@/utils/functions'
 import { useQuery } from '@tanstack/react-query'
 import { productInfo } from '@/server-actions/api.actions'
-import { Product } from '@/types'
+import { Product, Price } from '@/types'
 import { Skeleton } from '@/components/ui/skeleton'
 import MainLayout from '@/app/layouts/MainLayout'
 import CustomersFeedback from '@/components/home-page/CustomersFeedback'
@@ -19,6 +19,10 @@ import CheckMark from '@/assets/icons/CheckMark';
 import styles from '@/styles/ProductId.module.css';
 import PillIcon from '@/assets/icons/PillIcon';
 import { HowItWorksStatic } from '@/components/home-page/HowItWorks';
+import { CheckoutModal } from '@/components/products-page/CheckoutModal';
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { ErrorDisplay } from '@/components/common/ErrorDisplay';
 
 
 
@@ -27,6 +31,8 @@ import { HowItWorksStatic } from '@/components/home-page/HowItWorks';
 export default function ProductDetails({ params }: { params: { productId: string } }) {
 	const productId = params.productId
 	let product: Product | undefined = undefined
+	const [isCheckoutModalOpen, setIsCheckoutModalOpen] = useState(false)
+	const [selectedPrice, setSelectedPrice] = useState<Price | null>(null)
 
 	const {
 		data: productData,
@@ -38,7 +44,22 @@ export default function ProductDetails({ params }: { params: { productId: string
 	})
 
 	if (error) {
-		return <h2>An error occured</h2>
+		const errorMessage = error instanceof Error 
+			? error.message 
+			: 'An unexpected error occurred'
+		
+		return (
+			<MainLayout>
+				<div className='w-full min-h-[50vh] flex items-center justify-center'>
+					<ErrorDisplay
+						title='Error Loading Product'
+						message={errorMessage}
+						onRetry={() => window.location.href = '/products'}
+						retryLabel='View All Products'
+					/>
+				</div>
+			</MainLayout>
+		)
 	}
 
 	// console.log(productData)
@@ -68,9 +89,16 @@ export default function ProductDetails({ params }: { params: { productId: string
 
 	if (!product) {
 		return (
-			<div className='w-full h-[50vh] min-h-[300px] flex justify-center items-center'>
-				<h2 className='text-2xl font-bold'>No product found</h2>
+			<MainLayout>
+				<div className='w-full min-h-[50vh] flex items-center justify-center'>
+					<ErrorDisplay
+						title='Product Not Found'
+						message="Sorry, we couldn't find the product you're looking for. It may have been removed or the link is incorrect."
+						onRetry={() => window.location.href = '/products'}
+						retryLabel='View All Products'
+					/>
 			</div>
+			</MainLayout>
 		)
 	}
 
@@ -130,17 +158,17 @@ export default function ProductDetails({ params }: { params: { productId: string
 						{getProductImageUrls().length > 0 ? (
 							getProductImageUrls().map((imgUrl: string, index: number) => (
 								<AspectRatio ratio={1} key={index}>
-									<div className="rounded-sm">
-										<Image
+								<div className="rounded-sm">
+									<Image
 											src={imgUrl}
-											alt={`${product.name} product view ${index + 1}`}
-											className="object-contain object-center"
-											fill
-											sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-											style={{ objectFit: 'contain' }}
-										/>
-									</div>
-								</AspectRatio>
+										alt={`${product.name} product view ${index + 1}`}
+										className="object-contain object-center"
+										fill
+										sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+										style={{ objectFit: 'contain' }}
+									/>
+								</div>
+							</AspectRatio>
 							))
 						) : (
 							<AspectRatio ratio={1}>
@@ -186,22 +214,76 @@ export default function ProductDetails({ params }: { params: { productId: string
 					</div>
 
 					{displayBenefits.length > 0 && (
-						<div className={styles.productDetailsContainer}>
-							<p className='text-foreground font-semibold'>
-								Key Benefits
-							</p>
-							<div className='space-y-3'>
+					<div className={styles.productDetailsContainer}>
+						<p className='text-foreground font-semibold'>
+							Key Benefits
+						</p>
+						<div className='space-y-3'>
 								{displayBenefits.map((benefit, index) => (
-									<div key={index} className="flex items-center gap-4">
-										<CheckMark className={styles.checkmarkIcon} />
-										<span>{benefit}</span>
-									</div>
+								<div key={index} className="flex items-center gap-4">
+									<CheckMark className={styles.checkmarkIcon} />
+									<span>{benefit}</span>
+								</div>
+							))}
+						</div>
+					</div>
+					)}
+
+					{/* Price Selection (for direct checkout) */}
+					{product.checkout_type === 'direct' && product.price && product.price.length > 0 && (
+						<div className={styles.productDetailsContainer}>
+							<p className='text-foreground font-semibold mb-3'>
+								Select Pricing
+							</p>
+							<div className='space-y-2'>
+								{product.price.map((price, index) => (
+									<Button
+										key={index}
+										type="button"
+										variant={selectedPrice?.id === price.id ? 'default' : 'outline'}
+										className="w-full justify-between"
+										onClick={() => setSelectedPrice(price)}
+									>
+										<span>
+											{price.frequency} {price.unit}
+										</span>
+										<span className="font-semibold">
+											{price.currency} {price.value.toFixed(2)}
+										</span>
+									</Button>
 								))}
 							</div>
 						</div>
 					)}
 
 					<div className='py-6'></div>
+					{product.checkout_type === 'direct' ? (
+						<>
+							<CTAButton
+								type='button'
+								onClick={() => {
+									if (!selectedPrice && product.price && product.price.length > 0) {
+										// Auto-select first price if none selected
+										setSelectedPrice(product.price[0])
+									}
+									setIsCheckoutModalOpen(true)
+								}}
+								disabled={!selectedPrice && (!product.price || product.price.length === 0)}
+								aria-label="Checkout"
+								size='lg'
+							>
+								CHECKOUT
+							</CTAButton>
+							{selectedPrice && (
+								<CheckoutModal
+									open={isCheckoutModalOpen}
+									onOpenChange={setIsCheckoutModalOpen}
+									product={product}
+									selectedPrice={selectedPrice}
+								/>
+							)}
+						</>
+					) : (
 					<CTAButton
 						type='submit'
 						onClick={() => redirectToProductForm(product.id)}
@@ -210,6 +292,7 @@ export default function ProductDetails({ params }: { params: { productId: string
 					>
 						GET STARTED
 					</CTAButton>
+					)}
 				</div>
 			</div>
 			<CustomersFeedback />

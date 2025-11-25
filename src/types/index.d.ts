@@ -208,6 +208,15 @@ type MetadataRaw = {
 	id: string;
   };
   
+  type ProductCategory = {
+	id: number;
+	category_name: string;
+	category_slug: string;
+	category_description?: string | null;
+	category_image_url?: string | null;
+	order: number;
+  };
+
   type Product = {
 	id: number;
 	name: string;
@@ -222,6 +231,11 @@ type MetadataRaw = {
 	selected_price: string | null;
 	image_path?: string | null;
 	image_url?: string | string[] | null;
+	checkout_type?: 'form' | 'direct';
+	requires_patient_clinic_selection?: boolean;
+	shipping_fee?: number | null;
+	tax_rate?: number | null;
+	product_categories?: ProductCategory[];
   };
   
   type CompletedPayment = {

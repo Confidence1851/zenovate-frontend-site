@@ -29,7 +29,7 @@ const FooterProducts = () => {
 
     return (
         <>
-            {(products?.data ?? []).map((item: Product) => (
+            {(products?.data ?? []).slice(0, 5).map((item: Product) => (
                 <div className="py-2" key={item.id}>
                     <Link
                         href={`/products/${item.slug}`}
