@@ -235,6 +235,8 @@ type MetadataRaw = {
 	method_info: any;
 	metadata: any;
 	products: Product[]; // Nested products in completed_payment
+	discount_code?: string | null;
+	discount_amount?: string | null;
   };
   
   type OrderDetail = {

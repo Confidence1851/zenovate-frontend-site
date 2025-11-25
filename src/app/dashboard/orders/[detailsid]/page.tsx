@@ -55,6 +55,12 @@ export default function OrderDetailPage({ params }: { params: { detailsid: strin
 				prefix: 'Expiry Date',
 				value: `${orderData?.completed_payment.method_info?.exp_month ?? ''}/${orderData?.completed_payment.method_info?.exp_year ?? ''}`
 			},
+			...(orderData?.completed_payment?.discount_code ? [
+				{ prefix: 'Discount Code', value: orderData.completed_payment.discount_code }
+			] : []),
+			...(orderData?.completed_payment?.discount_amount ? [
+				{ prefix: 'Discount Amount', value: orderData.completed_payment.discount_amount }
+			] : []),
 		] : []
 	}
 
