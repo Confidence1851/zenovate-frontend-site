@@ -80,10 +80,26 @@ import image1 from '@/assets/images/101589e1a6decdc226f18a128678c504.jpg'
 import image2 from '@/assets/images/1c2f243cdf51a73f0c1d326159aaa492.jpg'
 import image3 from '@/assets/images/546fdgfre454.png'
 import image4 from '@/assets/images/article-4.jpeg'
+import image5 from '@/assets/images/b4e2284fb44e5bf1aa285e70.jpg'
+import image6 from '@/assets/images/nutrition.jpg'
+import image7 from '@/assets/images/872403ab7663d45c41506034f0f9d52d.jpg'
+import image8 from '@/assets/images/b9459467ea83927edd7f56d0f789b1c5.jpg'
+import image9 from '@/assets/images/9d8a1c9e601a49672320e617247848bf.jpg'
+import image10 from '@/assets/images/f35ccf45b3bd9fcfb4b68977aed32fa1.jpg'
+import image11 from '@/assets/images/mental.jpg'
+import image12 from '@/assets/images/nuts.jpg'
 import content1 from '@/assets/blogs/article-1.md'
 import content2 from '@/assets/blogs/article-2.md'
 import content3 from '@/assets/blogs/article-3.md'
 import content4 from '@/assets/blogs/article-4.md'
+import content5 from '@/assets/blogs/article-5.md'
+import content6 from '@/assets/blogs/article-6.md'
+import content7 from '@/assets/blogs/article-7.md'
+import content8 from '@/assets/blogs/article-8.md'
+import content9 from '@/assets/blogs/article-9.md'
+import content10 from '@/assets/blogs/article-10.md'
+import content11 from '@/assets/blogs/article-11.md'
+import content12 from '@/assets/blogs/article-12.md'
 
 export const siteConfig: SiteConfig = {
     socialLinks: {
@@ -122,21 +138,21 @@ export const siteConfig: SiteConfig = {
             description: 'Experience a better, healthier and longer life one shot at a time',
             buttonText: 'Get Started',
             videoSrc: '/videos/0762b1e1f802becd8900b5fc0336418b0582d7db2f821df7026c54850283c965.mp4',
-            link: 'https://application.zenovate.health'
+            link: '/category/peptides'
         },
         {
             title: 'Revitalize',
             description: "Unlock your body's potential with our natural energy boosters",
             buttonText: 'Discover More',
             videoSrc: '/videos/a381fff7e10dd19b9ed4ee.mp4',
-            link: 'https://application.zenovate.health'
+            link: '/category/peptides'
         },
         {
             title: 'Transform',
             description: 'Embrace a new you with our revolutionary wellness solutions',
             buttonText: 'Learn More',
             videoSrc: '/videos/e10dd19b9ed4eeb5563358b674378dee.mp4',
-            link: 'https://application.zenovate.health'
+            link: '/category/peptides'
         }
     ],
     blogPosts: [
@@ -178,6 +194,86 @@ export const siteConfig: SiteConfig = {
             images: [image4],
             content: content4,
             tags: ['nutrition', 'health', 'wellness'],
+            featured: true
+        }),
+        addSlugToBlogPost({
+            id: '5',
+            title: 'BPC-157 & TB-500 — The Regeneration Peptide Duo the World Is Talking About',
+            description: 'BPC-157 & TB-500 — The Regeneration Peptide Duo the World Is Talking About',
+            date: '2025-11-25',
+            images: [image5],
+            content: content5,
+            tags: ['peptides', 'health', 'wellness'],
+            featured: true
+        }),
+        addSlugToBlogPost({
+            id: '6',
+            title: 'The Science Behind Ipamorelin & CJC-1295: A Modern Approach to GH Optimization',
+            description: 'The Science Behind Ipamorelin & CJC-1295: A Modern Approach to GH Optimization',
+            date: '2025-11-25',
+            images: [image6],
+            content: content6,
+            tags: ['peptides', 'health', 'wellness'],
+            featured: true
+        }),
+        addSlugToBlogPost({
+            id: '7',
+            title: 'Tesamorelin — The Visceral Fat-Targeting Peptide With Clinical Evidence',
+            description: 'Tesamorelin — The Visceral Fat-Targeting Peptide With Clinical Evidence',
+            date: '2025-11-25',
+            images: [image7],
+            content: content7,
+            tags: ['peptides', 'health', 'wellness'],
+            featured: true
+        }),
+        addSlugToBlogPost({
+            id: '8',
+            title: 'MOTS-c — The Mitochondrial Peptide Redefining Metabolic Wellness',
+            description: 'MOTS-c — The Mitochondrial Peptide Redefining Metabolic Wellness',
+            date: '2025-11-25',
+            images: [image8],
+            content: content8,
+            tags: ['peptides', 'health', 'wellness'],
+            featured: true
+        }),
+        addSlugToBlogPost({
+            id: '9',
+            title: 'Retatrutide — The Triple-Agonist Weight-Loss Peptide the World Is Watching',
+            description: 'Retatrutide — The Triple-Agonist Weight-Loss Peptide the World Is Watching',
+            date: '2025-11-25',
+            images: [image9],
+            content: content9,
+            tags: ['peptides', 'health', 'wellness'],
+            featured: true
+        }),
+        addSlugToBlogPost({
+            id: '10',
+            title: 'GHK-Cu — The Skin & Tissue Regeneration Peptide with 40+ Years of Research',
+            description: 'GHK-Cu — The Skin & Tissue Regeneration Peptide with 40+ Years of Research',
+            date: '2025-11-25',
+            images: [image10],
+            content: content10,
+            tags: ['peptides', 'health', 'wellness'],
+            featured: true
+        }),
+        addSlugToBlogPost({
+            id: '11',
+            title: 'Thymosin Alpha-1 — The Immune-Modulating Peptide Used Worldwide',
+            description: 'Thymosin Alpha-1 — The Immune-Modulating Peptide Used Worldwide',
+            date: '2025-11-25',
+            images: [image11],
+            content: content11,
+            tags: ['peptides', 'health', 'wellness'],
+            featured: true
+        }),
+        addSlugToBlogPost({
+            id: '12',
+            title: 'NAD+ — The Cellular Energy Peptide Fueling Longevity Research Worldwide',
+            description: 'NAD+ — The Cellular Energy Peptide Fueling Longevity Research Worldwide',
+            date: '2025-11-25',
+            images: [image12],
+            content: content12,
+            tags: ['peptides', 'health', 'wellness'],
             featured: true
         }),
     ]

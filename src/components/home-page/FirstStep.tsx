@@ -41,7 +41,7 @@ const FirstSteps = () => {
                     </div>
 
                     <div className={styles.GetStartedRight}>
-                        <Link href="https://application.zenovate.health">
+                        <Link href="/category/peptides">
                             <CTAButton size="lg" className={styles.GetStartedButton}>
                                 Get Started
                             </CTAButton>
