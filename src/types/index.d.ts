@@ -220,6 +220,8 @@ type MetadataRaw = {
 	price: Price[];
 	quantity: number;
 	selected_price: string | null;
+	image_path?: string | null;
+	image_url?: string | string[] | null;
   };
   
   type CompletedPayment = {

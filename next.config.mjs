@@ -14,6 +14,21 @@ const nextConfig = {
 	compiler: {
 		removeConsole: true,
 	},
+	images: {
+		remotePatterns: [
+			{
+				protocol: 'http',
+				hostname: '127.0.0.1',
+				port: '9802',
+				pathname: '/api/get-file/**',
+			},
+			{
+				protocol: 'https',
+				hostname: '**',
+				pathname: '/api/get-file/**',
+			},
+		],
+	},
 	webpack: (config, ctx) => {
 		config.module.rules.push({
 			test: /\.md$/,

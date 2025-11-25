@@ -14,14 +14,6 @@ import { Product } from '@/types'
 import { Skeleton } from '@/components/ui/skeleton'
 import MainLayout from '@/app/layouts/MainLayout'
 import CustomersFeedback from '@/components/home-page/CustomersFeedback'
-import { StaticImageData } from 'next/image';
-import ProductImagesActiva1 from '@/assets/images/u18nD58H5v2EH1.png'
-import ProductImagesGloria1 from '@/assets/images/1duXn1s1.png'
-import ProductImagesImmuna1 from '@/assets/images/2HQyRBbVQmOWWZhM1.png'
-import ProductImagesEnergia1 from '@/assets/images/6LxAAhJso7Dk1.png'
-import ProductImagesNadia1 from '@/assets/images/l7lA2QieckkRg1.png'
-import ProductImagesEpipen1 from '@/assets/images/epipen1.jpg'
-import ProductImagesEpipen2 from '@/assets/images/epipen2.jpg'
 import { CTAButton } from '@/components/common/CTAButton';
 import CheckMark from '@/assets/icons/CheckMark';
 import styles from '@/styles/ProductId.module.css';
@@ -41,7 +33,7 @@ export default function ProductDetails({ params }: { params: { productId: string
 		isLoading,
 		error
 	} = useQuery({
-		queryKey: ['product-info'],
+		queryKey: ['product-info', productId],
 		queryFn: () => productInfo(productId)
 	})
 
@@ -88,194 +80,75 @@ export default function ProductDetails({ params }: { params: { productId: string
 		lowestPrice = Math.min(...usdPrices);
 	}
 
-	type ProductName = 'Energia' | 'Gloria' | 'Nadiva' | 'Immuna' | 'Activa' | 'EpiPen';
-	const isValidProductName = (name: string): name is ProductName => {
-		return ['Energia', 'Gloria', 'Nadiva', 'Immuna', 'Activa', 'EpiPen'].includes(name);
+	// Get product images from API
+	const getProductImageUrls = (): string[] => {
+		if (product?.image_url) {
+			// Handle both string and array formats
+			if (Array.isArray(product.image_url)) {
+				return product.image_url;
+			}
+			return [product.image_url];
+		}
+		// Backend should return placeholder, but if not, return empty array
+		// The carousel will show placeholder from backend or fallback message
+		return [];
 	};
 
-
-	interface ProductImagesType {
-		energia: StaticImageData[];
-		gloria: StaticImageData[];
-		nadiva: StaticImageData[];
-		immuna: StaticImageData[];
-		activa: StaticImageData[];
-		epipen: StaticImageData[];
-		default: StaticImageData[];
+	// Use only API data - no hardcoded fallbacks
+	const displayDescription = product.description || '';
+	const displayTag = product.subtitle || product.key_ingredients || null;
+	
+	// Parse benefits from API (split by newlines or commas)
+	let displayBenefits: string[] = [];
+	if (product.benefits) {
+		// Try splitting by newlines first
+		const byNewlines = product.benefits
+			.split(/\n+/)
+			.map(b => b.trim())
+			.filter(b => b.length > 0);
+		
+		// If multiple items found via newlines, use those
+		if (byNewlines.length > 1) {
+			displayBenefits = byNewlines;
+		} else {
+			// Otherwise, try splitting by commas
+			const byCommas = product.benefits
+				.split(',')
+				.map(b => b.trim())
+				.filter(b => b.length > 0);
+			
+			// If multiple items found via commas, use those; otherwise use the single benefit
+			displayBenefits = byCommas.length > 1 ? byCommas : [product.benefits.trim()];
+		}
 	}
-
-	const productImages: ProductImagesType = {
-		energia: [
-			ProductImagesEnergia1,
-
-		],
-		gloria: [
-			ProductImagesGloria1,
-
-		],
-		nadiva: [
-			ProductImagesNadia1,
-		],
-		immuna: [
-			ProductImagesImmuna1,
-
-		],
-		activa: [
-			ProductImagesActiva1,
-
-		],
-		epipen: [
-			ProductImagesEpipen1,
-			ProductImagesEpipen2,
-		],
-		default: [
-			ProductImagesActiva1,
-
-		]
-	};
-
-	const getProductImages = (productName: string): StaticImageData[] => {
-		const normalizedName = productName.toLowerCase();
-		const key = isValidProductName(productName) ? normalizedName as keyof ProductImagesType : 'default';
-		return productImages[key];
-	};
-
-	interface ProductDetailsType {
-		energia: ProductDetail;
-		gloria: ProductDetail;
-		nadiva: ProductDetail;
-		immuna: ProductDetail;
-		activa: ProductDetail;
-		epipen: ProductDetail;
-		default: ProductDetail;
-	}
-
-	interface ProductDetail {
-		tag: string;
-		description: string;
-		format: string;
-		keyBenefits: string[];
-		howToUse?: string[];
-	}
-
-	const productDetails: ProductDetailsType = {
-		energia: {
-			tag: "B12 Energy & Nerve Support",
-			description: "Energia is a high-potency injectable methylcobalamin solution (10mg/mL) designed to support energy production, neurological health, and optimal B12 levels.",
-			format: "10ml Injectable Solution",
-			keyBenefits: [
-				"Boosts natural energy production and vitality",
-				"Supports neurological health and function",
-				"Enhances cognitive performance and mental clarity",
-				"Helps maintain healthy B12 levels for vegetarians/vegans",
-			],
-		},
-		gloria: {
-			tag: "Antioxidant & Skin Brightening Solution",
-			description: "Gloria is a premium injectable solution containing 200mg/ml of pharmaceutical-grade glutathione designed to support antioxidant defense, skin health, and cellular detoxification.",
-			format: "10ml Injectable Solution",
-			keyBenefits: [
-				"Powerful antioxidant protection against free radicals",
-				"Supports natural detoxification and liver function",
-				"Promotes skin brightening and even tone",
-				"Enhances cellular health and anti-aging benefits",
-			],
-		},
-		nadiva: {
-			tag: "Cellular Regeneration & Anti-Aging",
-			description: "NADiva is a premium injectable NAD+ solution designed to support cellular repair, metabolic function, and age-management processes.",
-			format: "10ml Injectable Solution",
-			keyBenefits: [
-				"Supports DNA repair and cellular regeneration",
-				"Enhances metabolic health and energy production",
-				"Promotes neuroprotection and cognitive function",
-				"Aids in biological age management",
-			],
-		},
-		immuna: {
-			tag: "Immune Defense Complex",
-			description: "Immuna is a premium injectable solution combining Glutathione, Ascorbic Acid, and Zinc Sulfate designed to provide comprehensive immune support and antioxidant protection.",
-			format: "10ml Injectable Solution",
-			keyBenefits: [
-				"Enhances immune system function and defense",
-				"Provides powerful antioxidant protection",
-				"Promotes skin health and radiance",
-				"Supports natural detoxification processes",
-				"Improves cognitive function and mood stability"
-			],
-		},
-		activa: {
-			tag: "Wellness & Vitality Solution",
-			description: "Activa is an injectable vitamin and nutrient solution containing B-vitamins (B1, B6, B12), L-Carnitine, and essential nutrients designed to support your body's natural processes.",
-			format: "10ml Injectable Solution",
-			keyBenefits: [
-				"Supports natural energy production and metabolism",
-				"Enhances physical endurance and recovery",
-				"Promotes mental clarity and focus",
-				"Supports overall metabolic wellness",
-			],
-		},
-		epipen: {
-			tag: "Epinephrine Auto-Injector",
-			description: "The EpiPen® auto-injector is a pre-filled, single-use device designed to deliver a fast, accurate dose of epinephrine during a severe allergic reaction, also known as anaphylaxis. Its compact, portable design makes it easy to carry in a purse, backpack, or pocket, ensuring it's always within reach. This design makes it ideal for situations where every second matters.",
-			format: "Single-use, preloaded auto-injector (0.3 mg for adults, 0.15 mg for children)",
-			keyBenefits: [
-				"Active Ingredient: Epinephrine",
-				"Indication: Emergency treatment of severe allergic reactions caused by insect stings or bites, foods, medications or other allergens",
-				"Onset of Action: Works within minutes to help open airways and improve breathing",
-				"Device Design: Simple, one-handed activation with audible click confirmation",
-				"Supplied As: Single-use, preloaded auto-injector (0.3 mg for adults, 0.15 mg for children)",
-			],
-			howToUse: [
-				"Use immediately at the first signs of a severe allergic reaction.",
-				"Remove the EpiPen® from its carrier tube.",
-				"Grip the device in your fist (orange tip pointing downward).",
-				"Remove the blue safety release by pulling straight up.",
-				"Press the orange tip firmly against the outer thigh at a right angle until you hear a click.",
-				"Hold in place for 3 seconds.",
-				"Call 911 (or local emergency number) and seek medical attention immediately.",
-				"Dispose of the used device safely.",
-			],
-		},
-		default: {
-			tag: "",
-			description: "Default product description. Please specify a valid product name.",
-			format: "10ml Injectable Solution",
-			keyBenefits: [
-				"Default benefit 1",
-				"Default benefit 2",
-				"Default benefit 3",
-			],
-		},
-	};
-
-	const getProductDetails = (productName: string): ProductDetail => {
-		const normalizedName = productName.toLowerCase();
-		const key = isValidProductName(productName) ? normalizedName as keyof ProductDetailsType : 'default';
-		return productDetails[key];
-	};
-
-	const productDetail = getProductDetails(product.name);
 	return (
 		<MainLayout>
 			<div className='w-[90vw] sm:w-[93vw] lg:w-[94vw] max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-10 pt-9 pb-10 md:pt-14  md:pb-16 '>
 				{' '}
 				<Carousel>
 					<CarouselMainContainer className='w-full'>
-						{getProductImages(product.name).map((imgSrc: StaticImageData, index: number) => (
+						{getProductImageUrls().length > 0 ? (
+							getProductImageUrls().map((imgUrl: string, index: number) => (
+								<AspectRatio ratio={1} key={index}>
+									<div className="rounded-sm">
+										<Image
+											src={imgUrl}
+											alt={`${product.name} product view ${index + 1}`}
+											className="object-contain object-center"
+											fill
+											sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+											style={{ objectFit: 'contain' }}
+										/>
+									</div>
+								</AspectRatio>
+							))
+						) : (
 							<AspectRatio ratio={1}>
-								<div className="rounded-sm">
-									<Image
-										src={imgSrc.src}
-										alt={`${product.name} product view ${index + 1}`}
-										className="object-contain object-center"
-										fill
-										sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-										style={{ objectFit: 'contain' }}
-									/>
+								<div className="rounded-sm bg-muted flex items-center justify-center">
+									<span className="text-muted-foreground text-sm">Loading image...</span>
 								</div>
 							</AspectRatio>
-						))}
+						)}
 					</CarouselMainContainer>
 				</Carousel>
 				<div className='text-block'>
@@ -293,53 +166,37 @@ export default function ProductDetails({ params }: { params: { productId: string
 					</div> */}
 
 					<div className='space-y-2'>
-						<h2 className='uppercase text-sm text-muted-foreground'>{productDetail.tag}</h2>
+						{displayTag && (
+							<h2 className='uppercase text-sm text-muted-foreground'>{displayTag}</h2>
+						)}
 						<h1 className=' uppercase text-3xl sm:text-[42px] sm:leading-tight  font-semibold '>{product.name}</h1>
 					</div>
 					<div className={styles.productDetailsContainer}>
 						<h3 className='text-foreground font-semibold'>
 							Product Details
 						</h3>
-						<p>
-							{productDetail.description}
-						</p>
-						<div className="flex items-center gap-4 pt-4">
-							<PillIcon className={styles.pillIcon} />
-							<span>Format: {productDetail.format}</span>
-						</div>
+						{displayDescription ? (
+							<div 
+								className="prose prose-sm max-w-none [&>div]:mb-3 [&>div:last-child]:mb-0 [&_strong]:font-semibold [&_a]:text-primary [&_a]:underline [&_a:hover]:text-primary/80"
+								dangerouslySetInnerHTML={{ __html: displayDescription }}
+							/>
+						) : (
+							<p className="text-muted-foreground">No description available.</p>
+						)}
 					</div>
 
-					<div className={styles.productDetailsContainer}>
-						<p className='text-foreground font-semibold'>
-							Key Benefits
-						</p>
-						<div className='space-y-3'>
-							{productDetail.keyBenefits.map((benefit, index) => (
-								<div key={index} className="flex items-center gap-4">
-									<CheckMark className={styles.checkmarkIcon} />
-									<span>{benefit}</span>
-								</div>
-							))}
-						</div>
-					</div>
-
-					{productDetail.howToUse && (
+					{displayBenefits.length > 0 && (
 						<div className={styles.productDetailsContainer}>
 							<p className='text-foreground font-semibold'>
-								How to Use (Emergency Quick Guide)
+								Key Benefits
 							</p>
 							<div className='space-y-3'>
-								{productDetail.howToUse.map((step, index) => (
-									<div key={index} className="flex items-start gap-4">
-										<span className="flex-shrink-0 w-6 h-6 bg-foreground text-background rounded-full flex items-center justify-center text-sm font-semibold">
-											{index + 1}
-										</span>
-										<span>{step}</span>
+								{displayBenefits.map((benefit, index) => (
+									<div key={index} className="flex items-center gap-4">
+										<CheckMark className={styles.checkmarkIcon} />
+										<span>{benefit}</span>
 									</div>
 								))}
-							</div>
-							<div className="mt-4 p-3 bg-muted rounded-lg">
-								<p className="text-sm font-medium">Note: The EpiPen® may be injected through clothing if necessary.</p>
 							</div>
 						</div>
 					)}

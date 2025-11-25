@@ -75,18 +75,16 @@ const NavFeatureProducts = (zz: any) => {
 											<div className="flex flex-row items-end justify-between space-x-4">
 												<div>
 													<div
-														className={`w-6 h-6 rounded-full ${item.name === 'Nadiva'
-															? 'bg-[#90B9AC]'
-															: item.name === 'Gloria'
-																? 'bg-[#AEA581]'
-																: item.name === 'Immuna'
-																	? 'bg-[#6E6D6B]'
-																	: item.name === 'Energia'
-																		? 'bg-[#DBD7D6]'
-																		: item.name === 'Activa'
-																			? 'bg-[#CEF3E9]'
-																			: 'bg-gray-500'
-															}`}
+														className="w-6 h-6 rounded-full bg-gray-500"
+														style={{
+															backgroundColor: (() => {
+																const colors = ['#90B9AC', '#AEA581', '#6E6D6B', '#DBD7D6', '#CEF3E9', '#FF6B6B', '#9CA3AF', '#FBBF24', '#60A5FA', '#A78BFA'];
+																const hash = item.id.toString().split('').reduce((acc, char) => {
+																	return char.charCodeAt(0) + ((acc << 5) - acc);
+																}, 0);
+																return colors[Math.abs(hash) % colors.length];
+															})()
+														}}
 													/>
 												</div>
 
