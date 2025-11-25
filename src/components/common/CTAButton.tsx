@@ -43,7 +43,7 @@ export const CTAButton = ({ children, className, size = 'lg', ...props }: Button
         <Button
             size={size}
             variant='withIcon'
-            className={`bg-primary text-background hidden lg:inline-flex px-8
+            className={`bg-primary text-background inline-flex px-8
                 ${size === 'sm' ? 'min-w-[150px] text-sm' : 'min-w-[240px]'} 
                 ${className}`}
             onMouseEnter={() => setIsHovered(true)}

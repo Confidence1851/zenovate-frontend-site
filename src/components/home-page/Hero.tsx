@@ -41,7 +41,7 @@ export default function HeroCarousel() {
                                             <Link href={slide.link}>
                                                 <CTAButton
                                                     size='lg'
-                                                    className='mt-5 sm:mt-6 py-3 h-14 min-w-[320px]'
+                                                    className='mt-5 sm:mt-6 py-3 h-14 w-full sm:w-auto sm:min-w-[320px]'
                                                 >
                                                     <span className='uppercase mx-auto text-wrap text-sm md:text-base xl:text-xl self-center font-semibold'>
                                                         {slide.buttonText}

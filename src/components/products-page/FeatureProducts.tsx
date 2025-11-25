@@ -61,7 +61,7 @@ const FeatureProducts = () => {
 						{(categoriesData ?? []).map((category: any) => (
 							<div key={category.slug} className='space-y-6'>
 								{/* Category Header */}
-								<div className='flex items-center justify-between'>
+								<div className='flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4'>
 									<div>
 										<h2 className='text-2xl md:text-3xl font-bold text-foreground uppercase'>
 											{category.name}
@@ -71,7 +71,7 @@ const FeatureProducts = () => {
 										)}
 									</div>
 									{category.products_count > 4 && (
-										<Link href={`/category/${category.slug}`}>
+										<Link href={`/category/${category.slug}`} className='self-start sm:self-auto'>
 											<CTAButton
 												variant='outline'
 												size='sm'
