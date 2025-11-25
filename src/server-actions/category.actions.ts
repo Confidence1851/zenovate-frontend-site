@@ -15,7 +15,7 @@ export interface Category {
  */
 export async function getCategories(): Promise<Category[]> {
   try {
-    const response = await axios.get(baseUrl('/api/categories'));
+    const response = await axios.get(baseUrl('/categories'));
     if (response.data.success && response.data.data) {
       return response.data.data;
     }
@@ -33,7 +33,7 @@ export async function getCategories(): Promise<Category[]> {
  */
 export async function getCategory(slug: string): Promise<Category> {
   try {
-    const response = await axios.get(baseUrl(`/api/categories/${slug}`));
+    const response = await axios.get(baseUrl(`/categories/${slug}`));
     if (response.data.success && response.data.data) {
       return response.data.data;
     }
@@ -51,7 +51,7 @@ export async function getCategory(slug: string): Promise<Category> {
  */
 export async function getCategoryProducts(slug: string): Promise<any> {
   try {
-    const response = await axios.get(baseUrl(`/api/categories/${slug}/products`));
+    const response = await axios.get(baseUrl(`/categories/${slug}/products`));
     if (response.data.success && response.data.data) {
       return response.data.data;
     }
@@ -69,7 +69,7 @@ export async function getCategoryProducts(slug: string): Promise<any> {
  */
 export async function getProductsByCategories(): Promise<Category[]> {
   try {
-    const response = await axios.get(baseUrl('/api/form/products/by-categories'));
+    const response = await axios.get(baseUrl('/form/products/by-categories'));
     if (response.data.success && response.data.data) {
       return response.data.data;
     }

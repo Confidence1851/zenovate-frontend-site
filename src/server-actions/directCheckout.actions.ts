@@ -60,7 +60,7 @@ export async function initDirectCheckout(
 ): Promise<DirectCheckoutData> {
   try {
     const response = await axios.post(
-      baseUrl('/api/direct-checkout/init'),
+      baseUrl('/direct-checkout/init'),
       params
     );
 
@@ -99,7 +99,7 @@ export async function applyDiscountToCheckout(
 ): Promise<DirectCheckoutData> {
   try {
     const response = await axios.post(
-      baseUrl('/api/direct-checkout/apply-discount'),
+      baseUrl('/direct-checkout/apply-discount'),
       {
         checkout_id: checkoutId,
         discount_code: discountCode,
@@ -140,7 +140,7 @@ export async function processDirectCheckout(
 ): Promise<ProcessPaymentResponse> {
   try {
     const response = await axios.post(
-      baseUrl('/api/direct-checkout/process'),
+      baseUrl('/direct-checkout/process'),
       {
         checkout_id: checkoutId,
       }
