@@ -201,8 +201,8 @@ type MetadataRaw = {
   };
   
   type Price = {
-	frequency: number;
-	unit: string;
+	frequency?: number;
+	unit?: string;
 	value: number;
 	currency: string;
 	id: string;

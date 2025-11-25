@@ -186,7 +186,7 @@ export function CheckoutModal({
         <DialogHeader>
           <DialogTitle>Checkout</DialogTitle>
           <DialogDescription>
-            {product.name} - {selectedPrice?.frequency} {selectedPrice?.unit}
+            {product.name} {selectedPrice?.frequency && selectedPrice?.unit ? `- ${selectedPrice.frequency} ${selectedPrice.unit}` : ''}
           </DialogDescription>
         </DialogHeader>
 
@@ -382,6 +382,13 @@ export function CheckoutModal({
                   <span>Total</span>
                   <span>{formatCurrency(checkoutData.total)}</span>
                 </div>
+              </div>
+
+              {/* Disclaimer for peptides */}
+              <div className="rounded-lg bg-yellow-50 border border-yellow-200 p-3 text-sm">
+                <p className="text-yellow-800 font-medium">
+                  ⚠️ Sterile - For Research Use Only
+                </p>
               </div>
 
               {/* Proceed Button */}

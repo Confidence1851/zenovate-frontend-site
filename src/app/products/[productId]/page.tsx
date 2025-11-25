@@ -236,22 +236,28 @@ export default function ProductDetails({ params }: { params: { productId: string
 								Select Pricing
 							</p>
 							<div className='space-y-2'>
-								{product.price.map((price, index) => (
-									<Button
-										key={index}
-										type="button"
-										variant={selectedPrice?.id === price.id ? 'default' : 'outline'}
-										className="w-full justify-between"
-										onClick={() => setSelectedPrice(price)}
-									>
-										<span>
-											{price.frequency} {price.unit}
-										</span>
-										<span className="font-semibold">
-											{price.currency} {price.value.toFixed(2)}
-										</span>
-									</Button>
-								))}
+								{product.price.map((price, index) => {
+									// For peptides, show just the price (no frequency/unit)
+									// Check if this is a peptide product (no frequency/unit)
+									const isPeptide = !price.frequency || !price.unit;
+									
+									return (
+										<Button
+											key={index}
+											type="button"
+											variant={selectedPrice?.id === price.id ? 'default' : 'outline'}
+											className="w-full justify-between"
+											onClick={() => setSelectedPrice(price)}
+										>
+											<span>
+												{isPeptide ? 'Price' : `${price.frequency} ${price.unit}`}
+											</span>
+											<span className="font-semibold">
+												{price.currency} {price.value.toFixed(2)}
+											</span>
+										</Button>
+									);
+								})}
 							</div>
 						</div>
 					)}
