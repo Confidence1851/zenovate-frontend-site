@@ -39,3 +39,7 @@ next-env.d.ts
 /css-obfuscator
 /public/build/*
 .next.zip
+
+docker-compose.temp.yml
+docker-compose.yml
+Dockerfile

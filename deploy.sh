@@ -124,6 +124,8 @@ RUN chown nextjs:nodejs .next
 
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
+# Copy standalone output (requires output: 'standalone' in next.config.js)
+# If standalone doesn't exist, this will fail - ensure next.config has output: 'standalone'
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
