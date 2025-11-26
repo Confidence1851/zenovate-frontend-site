@@ -44,10 +44,10 @@ export default function ProductDetails({ params }: { params: { productId: string
 	})
 
 	if (error) {
-		const errorMessage = error instanceof Error 
-			? error.message 
+		const errorMessage = error instanceof Error
+			? error.message
 			: 'An unexpected error occurred'
-		
+
 		return (
 			<MainLayout>
 				<div className='w-full min-h-[50vh] flex items-center justify-center'>
@@ -97,7 +97,7 @@ export default function ProductDetails({ params }: { params: { productId: string
 						onRetry={() => window.location.href = '/products'}
 						retryLabel='View All Products'
 					/>
-			</div>
+				</div>
 			</MainLayout>
 		)
 	}
@@ -125,7 +125,7 @@ export default function ProductDetails({ params }: { params: { productId: string
 	// Use only API data - no hardcoded fallbacks
 	const displayDescription = product.description || '';
 	const displayTag = product.subtitle || product.key_ingredients || null;
-	
+
 	// Parse benefits from API (split by newlines or commas)
 	let displayBenefits: string[] = [];
 	if (product.benefits) {
@@ -134,7 +134,7 @@ export default function ProductDetails({ params }: { params: { productId: string
 			.split(/\n+/)
 			.map(b => b.trim())
 			.filter(b => b.length > 0);
-		
+
 		// If multiple items found via newlines, use those
 		if (byNewlines.length > 1) {
 			displayBenefits = byNewlines;
@@ -144,7 +144,7 @@ export default function ProductDetails({ params }: { params: { productId: string
 				.split(',')
 				.map(b => b.trim())
 				.filter(b => b.length > 0);
-			
+
 			// If multiple items found via commas, use those; otherwise use the single benefit
 			displayBenefits = byCommas.length > 1 ? byCommas : [product.benefits.trim()];
 		}
@@ -158,17 +158,17 @@ export default function ProductDetails({ params }: { params: { productId: string
 						{getProductImageUrls().length > 0 ? (
 							getProductImageUrls().map((imgUrl: string, index: number) => (
 								<AspectRatio ratio={1} key={index}>
-								<div className="rounded-sm">
-									<Image
+									<div className="rounded-sm">
+										<Image
 											src={imgUrl}
-										alt={`${product.name} product view ${index + 1}`}
-										className="object-contain object-center"
-										fill
-										sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-										style={{ objectFit: 'contain' }}
-									/>
-								</div>
-							</AspectRatio>
+											alt={`${product.name} product view ${index + 1}`}
+											className="object-contain object-center"
+											fill
+											sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+											style={{ objectFit: 'contain' }}
+										/>
+									</div>
+								</AspectRatio>
 							))
 						) : (
 							<AspectRatio ratio={1}>
@@ -204,7 +204,7 @@ export default function ProductDetails({ params }: { params: { productId: string
 							Product Details
 						</h3>
 						{displayDescription ? (
-							<div 
+							<div
 								className="prose prose-sm max-w-none [&>div]:mb-3 [&>div:last-child]:mb-0 [&_strong]:font-semibold [&_a]:text-primary [&_a]:underline [&_a:hover]:text-primary/80"
 								dangerouslySetInnerHTML={{ __html: displayDescription }}
 							/>
@@ -214,19 +214,19 @@ export default function ProductDetails({ params }: { params: { productId: string
 					</div>
 
 					{displayBenefits.length > 0 && (
-					<div className={styles.productDetailsContainer}>
-						<p className='text-foreground font-semibold'>
-							Key Benefits
-						</p>
-						<div className='space-y-3'>
+						<div className={styles.productDetailsContainer}>
+							<p className='text-foreground font-semibold'>
+								Key Benefits
+							</p>
+							<div className='space-y-3'>
 								{displayBenefits.map((benefit, index) => (
-								<div key={index} className="flex items-center gap-4">
-									<CheckMark className={styles.checkmarkIcon} />
-									<span>{benefit}</span>
-								</div>
-							))}
+									<div key={index} className="flex items-center gap-4">
+										<CheckMark className={styles.checkmarkIcon} />
+										<span>{benefit}</span>
+									</div>
+								))}
+							</div>
 						</div>
-					</div>
 					)}
 
 					{/* Price Selection (for direct checkout) */}
@@ -240,7 +240,7 @@ export default function ProductDetails({ params }: { params: { productId: string
 									// For peptides, show just the price (no frequency/unit)
 									// Check if this is a peptide product (no frequency/unit)
 									const isPeptide = !price.frequency || !price.unit;
-									
+
 									return (
 										<Button
 											key={index}
@@ -290,14 +290,14 @@ export default function ProductDetails({ params }: { params: { productId: string
 							)}
 						</>
 					) : (
-					<CTAButton
-						type='submit'
-						onClick={() => redirectToProductForm(product.id)}
-						aria-label="Get started"
-						size='lg'
-					>
-						GET STARTED
-					</CTAButton>
+						<CTAButton
+							type='submit'
+							onClick={() => redirectToProductForm(product.id)}
+							aria-label="Get started"
+							size='lg'
+						>
+							GET STARTED
+						</CTAButton>
 					)}
 				</div>
 			</div>

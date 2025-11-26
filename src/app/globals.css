@@ -4,8 +4,10 @@
 @tailwind utilities;
 
 :root {
-	--primary: 188 21% 36%; /* #48696E */
-	--primary-foreground: 188 21% 24%;
+	/* --primary: 188 21% 36%; */ /* #48696E - OLD GREEN COLOR */
+	/* --primary-foreground: 188 21% 24%; */ /* OLD GREEN FOREGROUND */
+	--primary: 0 0% 0%; /* Black monochrome */
+	--primary-foreground: 0 0% 100%; /* White for contrast */
 
 	--secondary: 180 60% 94%; /* #E7F9F9 */
 	--secondary-foreground: 240 10% 4%;
@@ -33,7 +35,8 @@
 	--destructive: 0 100% 50%;
 	--destructive-foreground: 210 40% 98%;
 
-	--ring: 188 21% 36%;
+	/* --ring: 188 21% 36%; */ /* OLD GREEN RING COLOR */
+	--ring: 0 0% 0%; /* Black monochrome ring */
 
 	--radius: 0.125rem;
 }
