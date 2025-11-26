@@ -3,13 +3,34 @@
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { CTAButton } from '@/components/common/CTAButton'
+import { Button } from '@/components/ui/button'
 import { XCircle } from 'lucide-react'
 import MainLayout from '@/app/layouts/MainLayout'
-import { Suspense } from 'react'
+import { Suspense, useEffect, useState } from 'react'
+import { getProductFromPayment } from '@/server-actions/directCheckout.actions'
 
 function CheckoutCancelledContent() {
   const searchParams = useSearchParams()
   const paymentRef = searchParams?.get('ref') || null
+  const [productSlug, setProductSlug] = useState<string | null>(null)
+  const [isLoadingProduct, setIsLoadingProduct] = useState(false)
+
+  useEffect(() => {
+    if (paymentRef) {
+      setIsLoadingProduct(true)
+      getProductFromPayment(paymentRef)
+        .then((data) => {
+          setProductSlug(data.product_slug)
+        })
+        .catch(() => {
+          // Silently fail - just don't show the return button
+          setProductSlug(null)
+        })
+        .finally(() => {
+          setIsLoadingProduct(false)
+        })
+    }
+  }, [paymentRef])
 
   return (
     <div className="container mx-auto flex min-h-[60vh] flex-col items-center justify-center px-4 py-16">
@@ -39,15 +60,30 @@ function CheckoutCancelledContent() {
         </p>
         
         <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
-          <CTAButton
-            type="button"
-            asChild
-            size="lg"
-          >
-            <Link href="/products">
-              Continue Shopping
-            </Link>
-          </CTAButton>
+          <Link href="/products">
+            <CTAButton
+              size="lg"
+              className="py-3 h-14 w-full sm:w-auto sm:min-w-[320px]"
+            >
+              <span className="uppercase mx-auto text-wrap text-sm md:text-base xl:text-xl self-center font-semibold">
+                Continue Shopping
+              </span>
+            </CTAButton>
+          </Link>
+          
+          {productSlug && (
+            <Button
+              type="button"
+              variant="outline"
+              size="lg"
+              asChild
+              className="min-w-[240px] px-8"
+            >
+              <Link href={`/products/${productSlug}`}>
+                Return to Product
+              </Link>
+            </Button>
+          )}
         </div>
       </div>
     </div>

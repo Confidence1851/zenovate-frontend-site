@@ -15,7 +15,6 @@ import { Skeleton } from '@/components/ui/skeleton'
 import MainLayout from '@/app/layouts/MainLayout'
 import CustomersFeedback from '@/components/home-page/CustomersFeedback'
 import { CTAButton } from '@/components/common/CTAButton';
-import CheckMark from '@/assets/icons/CheckMark';
 import styles from '@/styles/ProductId.module.css';
 import PillIcon from '@/assets/icons/PillIcon';
 import { HowItWorksStatic } from '@/components/home-page/HowItWorks';
@@ -125,30 +124,6 @@ export default function ProductDetails({ params }: { params: { productId: string
 	// Use only API data - no hardcoded fallbacks
 	const displayDescription = product.description || '';
 	const displayTag = product.subtitle || product.key_ingredients || null;
-
-	// Parse benefits from API (split by newlines or commas)
-	let displayBenefits: string[] = [];
-	if (product.benefits) {
-		// Try splitting by newlines first
-		const byNewlines = product.benefits
-			.split(/\n+/)
-			.map(b => b.trim())
-			.filter(b => b.length > 0);
-
-		// If multiple items found via newlines, use those
-		if (byNewlines.length > 1) {
-			displayBenefits = byNewlines;
-		} else {
-			// Otherwise, try splitting by commas
-			const byCommas = product.benefits
-				.split(',')
-				.map(b => b.trim())
-				.filter(b => b.length > 0);
-
-			// If multiple items found via commas, use those; otherwise use the single benefit
-			displayBenefits = byCommas.length > 1 ? byCommas : [product.benefits.trim()];
-		}
-	}
 	return (
 		<MainLayout>
 			<div className='w-[90vw] sm:w-[93vw] lg:w-[94vw] max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-10 pt-9 pb-10 md:pt-14  md:pb-16 '>
@@ -213,25 +188,15 @@ export default function ProductDetails({ params }: { params: { productId: string
 						)}
 					</div>
 
-					{displayBenefits.length > 0 && (
-						<div className={styles.productDetailsContainer}>
-							<p className='text-foreground font-semibold'>
-								Key Benefits
-							</p>
-							<div className='space-y-3'>
-								{displayBenefits.map((benefit, index) => (
-									<div key={index} className="flex items-center gap-4">
-										<CheckMark className={styles.checkmarkIcon} />
-										<span>{benefit}</span>
-									</div>
-								))}
-							</div>
-						</div>
-					)}
-
 					{/* Price Selection (for direct checkout) */}
 					{product.checkout_type === 'direct' && product.price && product.price.length > 0 && (
 						<div className={styles.productDetailsContainer}>
+							{/* Check if this is a peptide product (no frequency/unit on first price) */}
+							{product.price[0] && !product.price[0].frequency && !product.price[0].unit && (
+								<p className='text-sm text-muted-foreground mb-3 italic'>
+									This is for pre-order. Shipping takes 2 to 4 weeks.
+								</p>
+							)}
 							<p className='text-foreground font-semibold mb-3'>
 								Select Pricing
 							</p>

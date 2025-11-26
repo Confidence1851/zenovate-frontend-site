@@ -146,7 +146,7 @@ export function CheckoutModal({
 
     try {
       const result = await processPayment()
-      // Redirect to Stripe checkout
+      // Redirect to Stripe checkout in same window
       if (result.redirect_url) {
         window.location.href = result.redirect_url
       }
@@ -158,7 +158,7 @@ export function CheckoutModal({
   // Can proceed to payment step (after checkout is initialized)
   const canProceedToPayment =
     checkoutData &&
-    (!requiresSelection || useType === 'patient') &&
+    (!requiresSelection || useType) &&
     !isLoading
 
   const formatCurrency = (amount: number) => {
@@ -190,8 +190,17 @@ export function CheckoutModal({
           </DialogDescription>
         </DialogHeader>
 
+        {/* Pre-order disclaimer for peptides */}
+        {selectedPrice && !selectedPrice.frequency && !selectedPrice.unit && (
+          <div className="rounded-lg bg-muted p-3 text-sm text-center">
+            <p className="text-muted-foreground italic">
+              This is for pre-order. Shipping takes 2 to 4 weeks.
+            </p>
+          </div>
+        )}
+
         <div className="space-y-6 py-4">
-          {/* Patient/Clinic Selection (for peptides) */}
+          {/* Individual/Clinic Selection (for peptides) */}
           {requiresSelection && (
             <div className="space-y-3">
               <Label>Select Use Type</Label>
@@ -202,7 +211,7 @@ export function CheckoutModal({
                   className="flex-1"
                   onClick={() => setUseType('patient')}
                 >
-                  Patient
+                  Individual
                 </Button>
                 <Button
                   type="button"
@@ -232,7 +241,7 @@ export function CheckoutModal({
           )}
 
           {/* Customer Information Form (Step 1 - before checkout initialization) */}
-          {showCheckoutForm && (!requiresSelection || useType === 'patient') && (
+          {showCheckoutForm && (!requiresSelection || useType) && (
             <div className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="firstName">First Name</Label>
@@ -303,8 +312,8 @@ export function CheckoutModal({
                 <p className="text-muted-foreground">{checkoutData.user.email}</p>
               </div>
 
-              {/* Discount Code Input (only for Patient or non-selection required) */}
-              {(!requiresSelection || useType === 'patient') && (
+              {/* Discount Code Input */}
+              {(!requiresSelection || useType) && (
                 <div className="space-y-2">
                   <Label htmlFor="discount-code">Discount Code (Optional)</Label>
                   <div className="flex gap-2">

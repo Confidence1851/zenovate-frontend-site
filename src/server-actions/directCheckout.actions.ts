@@ -172,3 +172,42 @@ export async function processDirectCheckout(
   }
 }
 
+/**
+ * Get product information from payment reference
+ */
+export async function getProductFromPayment(
+  reference: string
+): Promise<{ product_id: number; product_slug: string }> {
+  try {
+    const response = await axios.get(
+      baseUrl('/direct-checkout/product-from-payment'),
+      {
+        params: { reference },
+      }
+    );
+
+    if (response.data.success && response.data.data) {
+      return response.data.data;
+    }
+
+    throw new Error(response.data.message || 'Failed to get product information');
+  } catch (error: any) {
+    // Handle not found errors
+    if (error.response?.status === 404) {
+      throw new Error('Product not found for this payment');
+    }
+
+    // Handle other API errors
+    if (error.response?.data?.message) {
+      throw new Error(error.response.data.message);
+    }
+
+    // Handle network errors
+    if (axios.isAxiosError(error) && !error.response) {
+      throw new Error('Network error. Please check your connection and try again.');
+    }
+
+    throw new Error(error.message || 'Failed to get product information');
+  }
+}
+

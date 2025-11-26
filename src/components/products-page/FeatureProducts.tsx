@@ -84,38 +84,90 @@ const FeatureProducts = () => {
 
 								{/* Products Grid - 4 per row */}
 								<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4'>
-									{(category.products ?? []).map((item: Product) => (
-										<div
-											key={item.id}
-											className='border gap-4 h-80 w-full p-8 flex flex-col justify-between'
-										>
-											<div className='space-y-10'>
-												<h3 className='text-lg font-semibold text-foreground uppercase'>{item.name}</h3>
-												<p className='text-sm text-muted-foreground text-pretty'>{item.subtitle}</p>
-											</div>
-											<div className='flex items-end justify-between gap-4'>
-												<Link href={`/products/${item.slug}`}>
-													<CTAButton size='sm'>
-														Select
-													</CTAButton>
-												</Link>
-												<div>
-													<div
-														className="w-6 h-6 rounded-full bg-gray-500"
-														style={{
-															backgroundColor: (() => {
-																const colors = ['#90B9AC', '#AEA581', '#6E6D6B', '#DBD7D6', '#CEF3E9', '#FF6B6B', '#9CA3AF', '#FBBF24', '#60A5FA', '#A78BFA'];
-																const hash = item.id.toString().split('').reduce((acc, char) => {
-																	return char.charCodeAt(0) + ((acc << 5) - acc);
-																}, 0);
-																return colors[Math.abs(hash) % colors.length];
-															})()
-														}}
-													/>
+									{(category.products ?? []).map((item: Product) => {
+										// Get first price
+										const firstPrice = item.price && item.price.length > 0 ? item.price[0] : null;
+										
+										// Truncate benefits to first line or ~100 characters
+										// Skip first line if it's redundant with key_ingredients
+										const truncateBenefits = (benefits: string | null, keyIngredients: string | null): string => {
+											if (!benefits) return '';
+											const lines = benefits.split('\n').map(line => line.trim()).filter(line => line);
+											if (lines.length === 0) return '';
+											
+											// If key_ingredients is shown and first line contains it, skip first line
+											let startIndex = 0;
+											if (keyIngredients && lines.length > 0) {
+												const firstLineLower = lines[0].toLowerCase();
+												const keyIngredientsLower = keyIngredients.toLowerCase();
+												// Check if first line is redundant (contains key ingredient or is just "Active Ingredient: X")
+												if (firstLineLower.includes(keyIngredientsLower) || 
+														firstLineLower.startsWith('active ingredient:')) {
+													startIndex = 1;
+												}
+											}
+											
+											if (startIndex >= lines.length) return '';
+											
+											const displayLine = lines[startIndex];
+											if (displayLine.length <= 100) return displayLine;
+											return displayLine.substring(0, 100) + '...';
+										};
+
+										return (
+											<div
+												key={item.id}
+												className='border gap-4 h-auto min-h-80 w-full p-8 flex flex-col justify-between'
+											>
+												<div className='space-y-4'>
+													<h3 className='text-lg font-semibold text-foreground uppercase'>{item.name}</h3>
+													<p className='text-sm text-muted-foreground text-pretty'>{item.subtitle}</p>
+													
+													{/* Key Ingredients - only show if different from subtitle */}
+													{item.key_ingredients && item.key_ingredients !== item.subtitle && (
+														<p className='text-xs text-muted-foreground'>{item.key_ingredients}</p>
+													)}
+													
+													{/* Benefits (truncated) */}
+													{item.benefits && (
+														<p className='text-xs text-muted-foreground line-clamp-2'>
+															{truncateBenefits(item.benefits, item.key_ingredients)}
+														</p>
+													)}
+												</div>
+												
+												<div className='flex items-end justify-between gap-4 mt-4'>
+													<div className='flex flex-col gap-2'>
+														{/* First Price */}
+														{firstPrice && (
+															<p className='text-sm font-semibold text-foreground'>
+																{firstPrice.currency} ${firstPrice.value.toFixed(2)}
+															</p>
+														)}
+														<Link href={`/products/${item.slug}`}>
+															<CTAButton size='sm'>
+																Select
+															</CTAButton>
+														</Link>
+													</div>
+													<div>
+														<div
+															className="w-6 h-6 rounded-full bg-gray-500"
+															style={{
+																backgroundColor: (() => {
+																	const colors = ['#90B9AC', '#AEA581', '#6E6D6B', '#DBD7D6', '#CEF3E9', '#FF6B6B', '#9CA3AF', '#FBBF24', '#60A5FA', '#A78BFA'];
+																	const hash = item.id.toString().split('').reduce((acc, char) => {
+																		return char.charCodeAt(0) + ((acc << 5) - acc);
+																	}, 0);
+																	return colors[Math.abs(hash) % colors.length];
+																})()
+															}}
+														/>
+													</div>
 												</div>
 											</div>
-										</div>
-									))}
+										);
+									})}
 								</div>
 							</div>
 						))}
