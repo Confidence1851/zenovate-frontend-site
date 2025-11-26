@@ -218,7 +218,7 @@ export default function ProductDetails({ params }: { params: { productId: string
 												{isPeptide ? 'Price' : `${price.frequency} ${price.unit}`}
 											</span>
 											<span className="font-semibold">
-												{price.currency} {price.value.toFixed(2)}
+												${price.value.toFixed(2)}
 											</span>
 										</Button>
 									);
@@ -226,6 +226,13 @@ export default function ProductDetails({ params }: { params: { productId: string
 							</div>
 						</div>
 					)}
+
+					{/* Disclaimer */}
+					<div className={styles.productDetailsContainer}>
+						<p className='text-xs text-muted-foreground italic'>
+							Compounded drug products are not FDA or Health Canada approved. FDA or Health Canada does not evaluate compounded products for safety, effectiveness, or quality.
+						</p>
+					</div>
 
 					<div className='py-6'></div>
 					{product.checkout_type === 'direct' ? (

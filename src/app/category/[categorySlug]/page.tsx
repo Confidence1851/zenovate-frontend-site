@@ -39,10 +39,10 @@ export default function CategoryDetailPage() {
   const error = categoryError || productsError
 
   if (error) {
-    const errorMessage = error instanceof Error 
-      ? error.message 
+    const errorMessage = error instanceof Error
+      ? error.message
       : 'An unexpected error occurred'
-    
+
     return (
       <MainLayout>
         <div className='w-full min-h-[50vh] flex items-center justify-center px-4'>
@@ -110,28 +110,34 @@ export default function CategoryDetailPage() {
                 {productsData.map((item: Product) => {
                   // Get first price
                   const firstPrice = item.price && item.price.length > 0 ? item.price[0] : null;
-                  
+
                   // Truncate benefits to first line or ~100 characters
-                  // Skip first line if it's redundant with key_ingredients
+                  // Skip first line only if it's clearly redundant (short label format, not a full sentence)
                   const truncateBenefits = (benefits: string | null, keyIngredients: string | null): string => {
                     if (!benefits) return '';
                     const lines = benefits.split('\n').map(line => line.trim()).filter(line => line);
                     if (lines.length === 0) return '';
-                    
-                    // If key_ingredients is shown and first line contains it, skip first line
+
+                    // Only skip first line if it's clearly a label format (like "Active Ingredient: X")
+                    // Don't skip if it's a full sentence that just happens to mention the ingredient
                     let startIndex = 0;
                     if (keyIngredients && lines.length > 0) {
                       const firstLineLower = lines[0].toLowerCase();
                       const keyIngredientsLower = keyIngredients.toLowerCase();
-                      // Check if first line is redundant (contains key ingredient or is just "Active Ingredient: X")
-                      if (firstLineLower.includes(keyIngredientsLower) || 
-                          firstLineLower.startsWith('active ingredient:')) {
+                      // Only skip if:
+                      // 1. It starts with "active ingredient:" (label format)
+                      // 2. OR it's a very short line (<= 50 chars) that exactly matches or is just the ingredient name
+                      const isShortLabel = firstLineLower.length <= 50 &&
+                        (firstLineLower === keyIngredientsLower ||
+                          firstLineLower === `active ingredient: ${keyIngredientsLower}` ||
+                          firstLineLower.startsWith('active ingredient:'));
+                      if (isShortLabel) {
                         startIndex = 1;
                       }
                     }
-                    
+
                     if (startIndex >= lines.length) return '';
-                    
+
                     const displayLine = lines[startIndex];
                     if (displayLine.length <= 100) return displayLine;
                     return displayLine.substring(0, 100) + '...';
@@ -145,12 +151,12 @@ export default function CategoryDetailPage() {
                       <div className='space-y-4'>
                         <h3 className='text-lg font-semibold text-foreground uppercase'>{item.name}</h3>
                         <p className='text-sm text-muted-foreground text-pretty'>{item.subtitle}</p>
-                        
+
                         {/* Key Ingredients - only show if different from subtitle */}
                         {item.key_ingredients && item.key_ingredients !== item.subtitle && (
                           <p className='text-xs text-muted-foreground'>{item.key_ingredients}</p>
                         )}
-                        
+
                         {/* Benefits (truncated) */}
                         {item.benefits && (
                           <p className='text-xs text-muted-foreground line-clamp-2'>
@@ -158,13 +164,13 @@ export default function CategoryDetailPage() {
                           </p>
                         )}
                       </div>
-                      
+
                       <div className='flex items-end justify-between gap-4 mt-4'>
                         <div className='flex flex-col gap-2'>
                           {/* First Price */}
                           {firstPrice && (
                             <p className='text-sm font-semibold text-foreground'>
-                              {firstPrice.currency} ${firstPrice.value.toFixed(2)}
+                              ${firstPrice.value.toFixed(2)}
                             </p>
                           )}
                           <Link href={`/products/${item.slug}`}>

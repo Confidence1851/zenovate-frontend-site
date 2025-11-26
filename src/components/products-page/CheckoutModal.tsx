@@ -162,10 +162,10 @@ export function CheckoutModal({
     !isLoading
 
   const formatCurrency = (amount: number) => {
-    const currency = checkoutData?.currency || 'USD'
+    // Format as USD with dollar sign only (no currency code prefix)
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: currency,
+      currency: 'USD',
     }).format(amount)
   }
 
