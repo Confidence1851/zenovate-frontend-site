@@ -67,18 +67,28 @@ const Footer = () => {
 													<h4 className="text-foreground uppercase text-base font-semibold lg:text-xl mb-4">
 														Company
 													</h4>
-													{siteConfig.footerLinks
-														.filter(item => item.category === 'Company')
-														.map((item) => (
-															<div className="py-2" key={item.label}>
-																<Link
-																	href={item.href}
-																	className='text-foreground text-sm font-medium uppercase hover:text-primary transition-colors block'
-																>
-																	{item.label}
-																</Link>
-															</div>
-														))}
+													<div className="space-y-2">
+														{siteConfig.footerLinks
+															.filter(item => item.category === 'Company')
+															.map((item) => (
+																<div className="py-2" key={item.label}>
+																	<Link
+																		href={item.href}
+																		className='text-foreground text-sm font-medium uppercase hover:text-primary transition-colors block'
+																	>
+																		{item.label}
+																	</Link>
+																</div>
+															))}
+														<div className="py-2">
+															<a
+																href="tel:+12492060416"
+																className='text-foreground text-sm font-medium uppercase hover:text-primary transition-colors block'
+															>
+																Phone: +1 (249) 206-0416
+															</a>
+														</div>
+													</div>
 												</div>
 
 												{/* Products Links - Dynamic */}
@@ -95,19 +105,16 @@ const Footer = () => {
 										<div className='space-y-12'>
 											<div className='space-y-6'>
 												<h3 className='text-foreground uppercase text-base font-semibold lg:text-xl'>
-													trust & certifications
+													Trust & Quality You Can Count On
 												</h3>
-												<p className='text-foreground text-sm'>
-													Your health is our priority. We proudly display{' '}
-													<Link href='/legal/legal-disclaimer' className='text-[#7f1d1d]'>
-														our certifications
-													</Link>{' '}
-													and{' '}
-													<Link href='/terms-of-service' className='text-[#7f1d1d]'>
-														partnerships with trusted health organizations
-													</Link>{' '}
-													to ensure you receive only the best.
-												</p>
+												<div className='space-y-4'>
+													<p className='text-foreground text-sm'>
+														At Zenovate, your health and safety come first. Every product is formulated under the supervision of licensed medical or pharmaceutical professionals, using carefully selected ingredients sourced from trusted suppliers. We follow rigorous internal quality control procedures and uphold high standards through every step. Our commitment is to provide you with safe, reliable, science-based wellness solutions, because your well-being deserves nothing less.
+													</p>
+													<p className='text-foreground text-xs text-muted-foreground'>
+														Compounded products are not reviewed or approved by the FDA or HC, and therefore have not been evaluated for safety, effectiveness or quality. Even though we maintain high standards and great care in their preparation, many of our offerings are research compounds and are not FDA or HC approved.
+													</p>
+												</div>
 											</div>
 
 											<div className='space-y-6'>

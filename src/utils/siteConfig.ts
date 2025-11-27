@@ -196,86 +196,87 @@ export const siteConfig: SiteConfig = {
             tags: ['nutrition', 'health', 'wellness'],
             featured: true
         }),
-        addSlugToBlogPost({
-            id: '5',
-            title: 'BPC-157 & TB-500 — The Regeneration Peptide Duo the World Is Talking About',
-            description: 'BPC-157 & TB-500 — The Regeneration Peptide Duo the World Is Talking About',
-            date: '2025-11-25',
-            images: [image5],
-            content: content5,
-            tags: ['peptides', 'health', 'wellness'],
-            featured: true
-        }),
-        addSlugToBlogPost({
-            id: '6',
-            title: 'The Science Behind Ipamorelin & CJC-1295: A Modern Approach to GH Optimization',
-            description: 'The Science Behind Ipamorelin & CJC-1295: A Modern Approach to GH Optimization',
-            date: '2025-11-25',
-            images: [image6],
-            content: content6,
-            tags: ['peptides', 'health', 'wellness'],
-            featured: true
-        }),
-        addSlugToBlogPost({
-            id: '7',
-            title: 'Tesamorelin — The Visceral Fat-Targeting Peptide With Clinical Evidence',
-            description: 'Tesamorelin — The Visceral Fat-Targeting Peptide With Clinical Evidence',
-            date: '2025-11-25',
-            images: [image7],
-            content: content7,
-            tags: ['peptides', 'health', 'wellness'],
-            featured: true
-        }),
-        addSlugToBlogPost({
-            id: '8',
-            title: 'MOTS-c — The Mitochondrial Peptide Redefining Metabolic Wellness',
-            description: 'MOTS-c — The Mitochondrial Peptide Redefining Metabolic Wellness',
-            date: '2025-11-25',
-            images: [image8],
-            content: content8,
-            tags: ['peptides', 'health', 'wellness'],
-            featured: true
-        }),
-        addSlugToBlogPost({
-            id: '9',
-            title: 'Retatrutide — The Triple-Agonist Weight-Loss Peptide the World Is Watching',
-            description: 'Retatrutide — The Triple-Agonist Weight-Loss Peptide the World Is Watching',
-            date: '2025-11-25',
-            images: [image9],
-            content: content9,
-            tags: ['peptides', 'health', 'wellness'],
-            featured: true
-        }),
-        addSlugToBlogPost({
-            id: '10',
-            title: 'GHK-Cu — The Skin & Tissue Regeneration Peptide with 40+ Years of Research',
-            description: 'GHK-Cu — The Skin & Tissue Regeneration Peptide with 40+ Years of Research',
-            date: '2025-11-25',
-            images: [image10],
-            content: content10,
-            tags: ['peptides', 'health', 'wellness'],
-            featured: true
-        }),
-        addSlugToBlogPost({
-            id: '11',
-            title: 'Thymosin Alpha-1 — The Immune-Modulating Peptide Used Worldwide',
-            description: 'Thymosin Alpha-1 — The Immune-Modulating Peptide Used Worldwide',
-            date: '2025-11-25',
-            images: [image11],
-            content: content11,
-            tags: ['peptides', 'health', 'wellness'],
-            featured: true
-        }),
-        addSlugToBlogPost({
-            id: '12',
-            title: 'NAD+ — The Cellular Energy Peptide Fueling Longevity Research Worldwide',
-            description: 'NAD+ — The Cellular Energy Peptide Fueling Longevity Research Worldwide',
-            date: '2025-11-25',
-            images: [image12],
-            content: content12,
-            tags: ['peptides', 'health', 'wellness'],
-            featured: true
-        }),
+        // Blogs from 2025-11-25 - commented out
+        // addSlugToBlogPost({
+        //     id: '5',
+        //     title: 'BPC-157 & TB-500 — The Regeneration Peptide Duo the World Is Talking About',
+        //     description: 'BPC-157 & TB-500 — The Regeneration Peptide Duo the World Is Talking About',
+        //     date: '2025-11-25',
+        //     images: [image5],
+        //     content: content5,
+        //     tags: ['peptides', 'health', 'wellness'],
+        //     featured: true
+        // }),
+        // addSlugToBlogPost({
+        //     id: '6',
+        //     title: 'The Science Behind Ipamorelin & CJC-1295: A Modern Approach to GH Optimization',
+        //     description: 'The Science Behind Ipamorelin & CJC-1295: A Modern Approach to GH Optimization',
+        //     date: '2025-11-25',
+        //     images: [image6],
+        //     content: content6,
+        //     tags: ['peptides', 'health', 'wellness'],
+        //     featured: true
+        // }),
+        // addSlugToBlogPost({
+        //     id: '7',
+        //     title: 'Tesamorelin — The Visceral Fat-Targeting Peptide With Clinical Evidence',
+        //     description: 'Tesamorelin — The Visceral Fat-Targeting Peptide With Clinical Evidence',
+        //     date: '2025-11-25',
+        //     images: [image7],
+        //     content: content7,
+        //     tags: ['peptides', 'health', 'wellness'],
+        //     featured: true
+        // }),
+        // addSlugToBlogPost({
+        //     id: '8',
+        //     title: 'MOTS-c — The Mitochondrial Peptide Redefining Metabolic Wellness',
+        //     description: 'MOTS-c — The Mitochondrial Peptide Redefining Metabolic Wellness',
+        //     date: '2025-11-25',
+        //     images: [image8],
+        //     content: content8,
+        //     tags: ['peptides', 'health', 'wellness'],
+        //     featured: true
+        // }),
+        // addSlugToBlogPost({
+        //     id: '9',
+        //     title: 'Retatrutide — The Triple-Agonist Weight-Loss Peptide the World Is Watching',
+        //     description: 'Retatrutide — The Triple-Agonist Weight-Loss Peptide the World Is Watching',
+        //     date: '2025-11-25',
+        //     images: [image9],
+        //     content: content9,
+        //     tags: ['peptides', 'health', 'wellness'],
+        //     featured: true
+        // }),
+        // addSlugToBlogPost({
+        //     id: '10',
+        //     title: 'GHK-Cu — The Skin & Tissue Regeneration Peptide with 40+ Years of Research',
+        //     description: 'GHK-Cu — The Skin & Tissue Regeneration Peptide with 40+ Years of Research',
+        //     date: '2025-11-25',
+        //     images: [image10],
+        //     content: content10,
+        //     tags: ['peptides', 'health', 'wellness'],
+        //     featured: true
+        // }),
+        // addSlugToBlogPost({
+        //     id: '11',
+        //     title: 'Thymosin Alpha-1 — The Immune-Modulating Peptide Used Worldwide',
+        //     description: 'Thymosin Alpha-1 — The Immune-Modulating Peptide Used Worldwide',
+        //     date: '2025-11-25',
+        //     images: [image11],
+        //     content: content11,
+        //     tags: ['peptides', 'health', 'wellness'],
+        //     featured: true
+        // }),
+        // addSlugToBlogPost({
+        //     id: '12',
+        //     title: 'NAD+ — The Cellular Energy Peptide Fueling Longevity Research Worldwide',
+        //     description: 'NAD+ — The Cellular Energy Peptide Fueling Longevity Research Worldwide',
+        //     date: '2025-11-25',
+        //     images: [image12],
+        //     content: content12,
+        //     tags: ['peptides', 'health', 'wellness'],
+        //     featured: true
+        // }),
     ]
 } as const;
 export type { BlogPost, BlogPostWithSlug };
