@@ -192,32 +192,32 @@ type MetadataRaw = {
 	needle_fear: string;
 	family_medical_history: string;
 	additional_info: string;
-  };
-  
-  type Metadata = {
+};
+
+type Metadata = {
 	user_agent: string;
 	location: string | null;
 	raw: MetadataRaw;
-  };
-  
-  type Price = {
+};
+
+type Price = {
 	frequency?: number;
 	unit?: string;
 	value: number;
 	currency: string;
 	id: string;
-  };
-  
-  type ProductCategory = {
-	id: number;
-	category_name: string;
-	category_slug: string;
-	category_description?: string | null;
-	category_image_url?: string | null;
-	order: number;
-  };
+};
 
-  type Product = {
+type ProductCategory = {
+	id: number;
+	name: string;
+	slug: string;
+	description?: string | null;
+	image_url?: string | null;
+	order: number;
+};
+
+type Product = {
 	id: number;
 	name: string;
 	slug: string;
@@ -226,6 +226,7 @@ type MetadataRaw = {
 	nav_description: string | null;
 	key_ingredients: string | null;
 	benefits: string | null;
+	potency?: string | null;
 	price: Price[];
 	quantity: number;
 	selected_price: string | null;
@@ -235,10 +236,10 @@ type MetadataRaw = {
 	requires_patient_clinic_selection?: boolean;
 	shipping_fee?: number | null;
 	tax_rate?: number | null;
-	product_categories?: ProductCategory[];
-  };
-  
-  type CompletedPayment = {
+	category?: ProductCategory;
+};
+
+type CompletedPayment = {
 	id: number;
 	shipping_fee: string;
 	sub_total: string;
@@ -251,9 +252,9 @@ type MetadataRaw = {
 	products: Product[]; // Nested products in completed_payment
 	discount_code?: string | null;
 	discount_amount?: string | null;
-  };
-  
-  type OrderDetail = {
+};
+
+type OrderDetail = {
 	id: string;
 	reference: string;
 	total_products: number;
@@ -265,5 +266,5 @@ type MetadataRaw = {
 	completed_payment: CompletedPayment;
 	products: Product[]; // Top-level products
 	updated_at: string;
-  };
-  
+};
+

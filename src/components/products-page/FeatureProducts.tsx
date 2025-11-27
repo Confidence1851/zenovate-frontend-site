@@ -7,6 +7,7 @@ import { Product } from '@/types'
 import Link from 'next/link'
 import { CTAButton } from '../common/CTAButton'
 import { ErrorDisplay } from '../common/ErrorDisplay'
+import { ProductColorIndicator } from './ProductColorIndicator'
 
 const FeatureProducts = () => {
 	const {
@@ -88,57 +89,18 @@ const FeatureProducts = () => {
 										// Get first price
 										const firstPrice = item.price && item.price.length > 0 ? item.price[0] : null;
 
-										// Truncate benefits to first line or ~100 characters
-										// Skip first line only if it's clearly redundant (short label format, not a full sentence)
-										const truncateBenefits = (benefits: string | null, keyIngredients: string | null): string => {
-											if (!benefits) return '';
-											const lines = benefits.split('\n').map(line => line.trim()).filter(line => line);
-											if (lines.length === 0) return '';
-
-											// Only skip first line if it's clearly a label format (like "Active Ingredient: X")
-											// Don't skip if it's a full sentence that just happens to mention the ingredient
-											let startIndex = 0;
-											if (keyIngredients && lines.length > 0) {
-												const firstLineLower = lines[0].toLowerCase();
-												const keyIngredientsLower = keyIngredients.toLowerCase();
-												// Only skip if:
-												// 1. It starts with "active ingredient:" (label format)
-												// 2. OR it's a very short line (<= 50 chars) that exactly matches or is just the ingredient name
-												const isShortLabel = firstLineLower.length <= 50 &&
-													(firstLineLower === keyIngredientsLower ||
-														firstLineLower === `active ingredient: ${keyIngredientsLower}` ||
-														firstLineLower.startsWith('active ingredient:'));
-												if (isShortLabel) {
-													startIndex = 1;
-												}
-											}
-
-											if (startIndex >= lines.length) return '';
-
-											const displayLine = lines[startIndex];
-											if (displayLine.length <= 100) return displayLine;
-											return displayLine.substring(0, 100) + '...';
-										};
-
 										return (
 											<div
 												key={item.id}
-												className='border gap-4 h-auto min-h-80 w-full p-8 flex flex-col justify-between'
+												className='border gap-4 h-auto w-full p-8 flex flex-col justify-between'
 											>
-												<div className='space-y-4'>
+												<div className='space-y-3'>
 													<h3 className='text-lg font-semibold text-foreground uppercase'>{item.name}</h3>
 													<p className='text-sm text-muted-foreground text-pretty'>{item.subtitle}</p>
 
-													{/* Key Ingredients - only show if different from subtitle */}
-													{item.key_ingredients && item.key_ingredients !== item.subtitle && (
-														<p className='text-xs text-muted-foreground'>{item.key_ingredients}</p>
-													)}
-
-													{/* Benefits (truncated) */}
-													{item.benefits && (
-														<p className='text-xs text-muted-foreground line-clamp-2'>
-															{truncateBenefits(item.benefits, item.key_ingredients)}
-														</p>
+													{/* Potency Information */}
+													{item.potency && (
+														<p className='text-xs text-muted-foreground'>{item.potency}</p>
 													)}
 												</div>
 
@@ -157,18 +119,7 @@ const FeatureProducts = () => {
 														</Link>
 													</div>
 													<div>
-														<div
-															className="w-6 h-6 rounded-full bg-gray-500"
-															style={{
-																backgroundColor: (() => {
-																	const colors = ['#90B9AC', '#AEA581', '#6E6D6B', '#DBD7D6', '#CEF3E9', '#FF6B6B', '#9CA3AF', '#FBBF24', '#60A5FA', '#A78BFA'];
-																	const hash = item.id.toString().split('').reduce((acc, char) => {
-																		return char.charCodeAt(0) + ((acc << 5) - acc);
-																	}, 0);
-																	return colors[Math.abs(hash) % colors.length];
-																})()
-															}}
-														/>
+														<ProductColorIndicator product={item} />
 													</div>
 												</div>
 											</div>

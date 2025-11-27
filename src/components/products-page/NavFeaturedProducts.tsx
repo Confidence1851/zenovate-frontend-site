@@ -13,6 +13,7 @@ import Link from 'next/link'
 import { Product } from '@/types'
 import { NavigationMenuLink } from '../ui/navigation-menu'
 import PixelatedImage from '@/assets/svgs/VialPixalated.svg'
+import { ProductColorIndicator } from './ProductColorIndicator'
 import Image from 'next/image'
 import { CTAButton } from '../common/CTAButton'
 
@@ -53,12 +54,17 @@ const NavFeatureProducts = (zz: any) => {
 							{(products.data ?? []).map((item: Product, i: number) => (
 								<CarouselItem key={i} className='md:basis-1/2 lg:basis-1/3 xl:basis-1/4  '>
 									<div
-										className='border gap-4 h-80 w-full p-8 flex flex-col justify-between flex-shrink-0'
+										className='border gap-4 h-auto w-full p-8 flex flex-col justify-between flex-shrink-0'
 										key={item.name}
 									>
-										<div className='space-y-4'>
+										<div className='space-y-3'>
 											<h3 className='text-lg font-semibold text-foreground uppercase'>{item.name}</h3>
 											<p className='text-sm text-muted-foreground text-pretty'>{item.subtitle}</p>
+
+											{/* Potency Information */}
+											{item.potency && (
+												<p className='text-xs text-muted-foreground'>{item.potency}</p>
+											)}
 										</div>
 										<div className='flex items-end justify-between gap-4'>
 											<NavigationMenuLink asChild>
@@ -74,18 +80,7 @@ const NavFeatureProducts = (zz: any) => {
 											</NavigationMenuLink>
 											<div className="flex flex-row items-end justify-between space-x-4">
 												<div>
-													<div
-														className="w-6 h-6 rounded-full bg-gray-500"
-														style={{
-															backgroundColor: (() => {
-																const colors = ['#90B9AC', '#AEA581', '#6E6D6B', '#DBD7D6', '#CEF3E9', '#FF6B6B', '#9CA3AF', '#FBBF24', '#60A5FA', '#A78BFA'];
-																const hash = item.id.toString().split('').reduce((acc, char) => {
-																	return char.charCodeAt(0) + ((acc << 5) - acc);
-																}, 0);
-																return colors[Math.abs(hash) % colors.length];
-															})()
-														}}
-													/>
+													<ProductColorIndicator product={item} />
 												</div>
 
 												{/* <div className='w-[30px]'>

@@ -7,6 +7,7 @@ export interface Category {
   description?: string;
   image_url?: string;
   products_count?: number;
+  order?: number;
   products?: any[];
 }
 
