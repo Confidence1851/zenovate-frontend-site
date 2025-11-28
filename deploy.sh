@@ -394,99 +394,126 @@ fi
 # Clean up old containers and images
 echo "🧹 Cleaning up old containers and images..."
 
-# Remove old containers (keep only the current one)
-echo "🗑️  Removing old containers..."
-# Get the current running container name (timestamped format)
-CURRENT_CONTAINER=$(docker ps --filter "name=.*-$APP_NAME$" --format "{{.Names}}" | grep -E "^[0-9]+-$APP_NAME$" | head -1)
-if [ -z "$CURRENT_CONTAINER" ]; then
-    CURRENT_CONTAINER=$(docker ps --filter "name=^${APP_NAME}$" --format "{{.Names}}" | head -1)
+# Identify the current active container (the one we just started)
+CURRENT_CONTAINER="$TIMESTAMP-$APP_NAME"
+# Fallback: try to find any running container with APP_NAME
+if ! docker ps -q -f name=$CURRENT_CONTAINER | grep -q .; then
+    CURRENT_CONTAINER=$(docker ps --filter "name=.*-$APP_NAME$" --format "{{.Names}}" | grep -E "^[0-9]+-$APP_NAME$" | head -1)
+    if [ -z "$CURRENT_CONTAINER" ]; then
+        CURRENT_CONTAINER=$(docker ps --filter "name=^${APP_NAME}$" --format "{{.Names}}" | head -1)
+    fi
 fi
 
-# Remove stopped containers with APP_NAME pattern (excluding current)
-docker ps -a --filter "name=^${APP_NAME}$" --filter "status=exited" --format "table {{.Names}}\t{{.Status}}\t{{.CreatedAt}}" | tail -n +2 | awk '{print $1}' | while read container; do
-    if [ ! -z "$container" ] && [ "$container" != "$CURRENT_CONTAINER" ]; then
-        echo "   Removing stopped container: $container"
-        docker rm "$container" 2>/dev/null || true
-    fi
-done
-
-# Remove stopped containers with timestamp-based names (excluding current)
-docker ps -a --filter "name=.*-$APP_NAME$" --filter "status=exited" --format "table {{.Names}}\t{{.Status}}\t{{.CreatedAt}}" | tail -n +2 | awk '{print $1}' | while read container; do
-    if [ ! -z "$container" ] && [ "$container" != "$CURRENT_CONTAINER" ]; then
-        if [[ $container =~ ^[0-9]+-$APP_NAME$ ]]; then
-            echo "   Removing stopped timestamp container: $container"
-            docker rm "$container" 2>/dev/null || true
-        fi
-    fi
-done
-
-# Remove old images (keep only the current one)
-echo "🗑️  Removing old images..."
-# Get the current running container's image
+# Get the current active image from the current container
 CURRENT_IMAGE=""
 if [ ! -z "$CURRENT_CONTAINER" ]; then
     CURRENT_IMAGE=$(docker inspect $CURRENT_CONTAINER --format '{{.Config.Image}}' 2>/dev/null)
 fi
-# If not found, try to get from timestamped container name
+# Fallback: use the image we just built
 if [ -z "$CURRENT_IMAGE" ]; then
-    CURRENT_IMAGE=$(docker ps --filter "name=.*-$APP_NAME$" --format "{{.Image}}" | head -1)
+    CURRENT_IMAGE="$TIMESTAMP-$APP_NAME:latest"
 fi
 
-# Remove old timestamp-prefixed images (TIMESTAMP-APP_NAME:latest or TIMESTAMP-APP_NAME:TIMESTAMP)
-# Keep only the most recent one (current)
-docker images --format "table {{.Repository}}:{{.Tag}}\t{{.CreatedAt}}" | grep -E "^[0-9]+-$APP_NAME" | tail -n +2 | sort -k2 -r | tail -n +2 | while read line; do
-    image=$(echo "$line" | awk '{print $1}')
-    if [ ! -z "$image" ] && [ "$image" != "$CURRENT_IMAGE" ]; then
-        echo "   Removing old timestamped image: $image"
-        docker rmi "$image" 2>/dev/null || true
+echo "   Current active container: $CURRENT_CONTAINER"
+echo "   Current active image: $CURRENT_IMAGE"
+
+# Remove ALL containers with APP_NAME pattern (running or stopped) except the current one
+echo "🗑️  Removing old containers..."
+# Get all containers (running and stopped) with APP_NAME in the name
+docker ps -a --format "{{.Names}}" | grep -E "(^[0-9]+-$APP_NAME$|^${APP_NAME}$)" | while read container; do
+    if [ ! -z "$container" ] && [ "$container" != "$CURRENT_CONTAINER" ]; then
+        echo "   Removing container: $container"
+        docker stop "$container" 2>/dev/null || true
+        docker rm -f "$container" 2>/dev/null || true
     fi
 done
 
-# Remove old APP_NAME:tag images (legacy format)
-docker images $APP_NAME --format "table {{.Repository}}:{{.Tag}}\t{{.CreatedAt}}" | tail -n +2 | sort -k2 -r | tail -n +2 | awk '{print $1}' | while read image; do
-    if [ ! -z "$image" ] && [ "$image" != "$CURRENT_IMAGE" ]; then
-        echo "   Removing old image: $image"
-        docker rmi "$image" 2>/dev/null || true
-    fi
-done
-
-# Force remove any remaining images except the current one
+# Remove ALL images with APP_NAME pattern except the current one
+echo "🗑️  Removing old images..."
+# Define images to keep (both tags of current image)
+KEEP_IMAGES="$TIMESTAMP-$APP_NAME:latest $TIMESTAMP-$APP_NAME:$TIMESTAMP"
 if [ ! -z "$CURRENT_IMAGE" ]; then
-    echo "   Keeping current image: $CURRENT_IMAGE"
-    # Remove all timestamp-prefixed images except current
-    docker images --format "table {{.Repository}}:{{.Tag}}" | grep -E "^[0-9]+-$APP_NAME" | tail -n +2 | awk '{print $1}' | while read image; do
-        if [ ! -z "$image" ] && [ "$image" != "$CURRENT_IMAGE" ]; then
-            echo "   Force removing: $image"
-            docker rmi -f "$image" 2>/dev/null || true
-        fi
-    done
-    # Remove all APP_NAME images except current
-    docker images $APP_NAME --format "table {{.Repository}}:{{.Tag}}" | tail -n +2 | awk '{print $1}' | while read image; do
-        if [ ! -z "$image" ] && [ "$image" != "$CURRENT_IMAGE" ]; then
-            echo "   Force removing: $image"
-            docker rmi -f "$image" 2>/dev/null || true
-        fi
-    done
+    KEEP_IMAGES="$KEEP_IMAGES $CURRENT_IMAGE"
 fi
+
+# Get all images with timestamp-APP_NAME pattern
+docker images --format "{{.Repository}}:{{.Tag}}" | grep -E "^[0-9]+-$APP_NAME" | while read image; do
+    if [ ! -z "$image" ]; then
+        # Check if this image should be kept
+        KEEP_THIS=false
+        for keep_img in $KEEP_IMAGES; do
+            if [ "$image" = "$keep_img" ]; then
+                KEEP_THIS=true
+                break
+            fi
+        done
+        
+        if [ "$KEEP_THIS" = false ]; then
+            echo "   Removing image: $image"
+            docker rmi -f "$image" 2>/dev/null || true
+        fi
+    fi
+done
+
+# Get all images with APP_NAME pattern (legacy format, non-timestamped)
+docker images $APP_NAME --format "{{.Repository}}:{{.Tag}}" | while read image; do
+    if [ ! -z "$image" ]; then
+        # Skip timestamped images (already handled above)
+        if [[ $image =~ ^[0-9]+-$APP_NAME ]]; then
+            continue
+        fi
+        
+        # Check if this image should be kept
+        KEEP_THIS=false
+        for keep_img in $KEEP_IMAGES; do
+            if [ "$image" = "$keep_img" ]; then
+                KEEP_THIS=true
+                break
+            fi
+        done
+        
+        if [ "$KEEP_THIS" = false ]; then
+            echo "   Removing legacy image: $image"
+            docker rmi -f "$image" 2>/dev/null || true
+        fi
+    fi
+done
 
 # Remove dangling images
 echo "🗑️  Removing dangling images..."
 docker image prune -f
 
-# Remove stopped containers
-echo "🗑️  Removing stopped containers..."
-docker container prune -f
+# Clean up old networks
+echo "🗑️  Cleaning up old networks..."
+# Get the current active network (the one we're using)
+CURRENT_NETWORK="$DOCKER_NETWORK"
+
+# Get all networks with the NETWORK_NAME pattern
+# Networks are named: PROJECT_DIR_NETWORK_NAME
+docker network ls --format "{{.Name}}" | grep -E ".*_${NETWORK_NAME}$|^${NETWORK_NAME}$" | while read network; do
+    if [ ! -z "$network" ] && [ "$network" != "$CURRENT_NETWORK" ]; then
+        # Check if network is in use by any containers
+        CONTAINERS_USING=$(docker network inspect "$network" --format '{{range .Containers}}{{.Name}} {{end}}' 2>/dev/null)
+        if [ -z "$CONTAINERS_USING" ] || [ "$CONTAINERS_USING" = "" ]; then
+            echo "   Removing unused network: $network"
+            docker network rm "$network" 2>/dev/null || true
+        else
+            echo "   Skipping network in use: $network (used by: $CONTAINERS_USING)"
+        fi
+    fi
+done
 
 # Show remaining containers and images
-echo "📊 Remaining containers:"
-docker ps -a --filter "name=.*-$APP_NAME$" --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
-docker ps -a --filter "name=^${APP_NAME}$" --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
+echo "📊 Remaining containers with $APP_NAME:"
+docker ps -a --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}" | grep -E "(^NAMES|.*-$APP_NAME|^${APP_NAME})" || echo "   None"
 
-echo "📊 Remaining images:"
-docker images --format "table {{.Repository}}:{{.Tag}}\t{{.Size}}\t{{.CreatedAt}}" | grep -E "^[0-9]+-$APP_NAME|^REPOSITORY"
-docker images $APP_NAME --format "table {{.Repository}}:{{.Tag}}\t{{.Size}}\t{{.CreatedAt}}"
+echo "📊 Remaining images with $APP_NAME:"
+docker images --format "table {{.Repository}}:{{.Tag}}\t{{.Size}}\t{{.CreatedAt}}" | grep -E "(^REPOSITORY|^[0-9]+-$APP_NAME|^${APP_NAME})" || echo "   None"
 
-echo "✅ Container and image cleanup completed"
+echo "📊 Remaining networks with $NETWORK_NAME:"
+docker network ls --format "table {{.Name}}\t{{.Driver}}\t{{.Scope}}" | grep -E "(^NAME|.*_${NETWORK_NAME}|^${NETWORK_NAME})" || echo "   None"
+
+echo "✅ Container, image, and network cleanup completed"
 
 # Clean up temporary file
 if [ "$COMPOSE_FILE" = "docker-compose.temp.yml" ]; then
