@@ -69,17 +69,23 @@ const ContactPage = () => {
 
 								<ul className='space-y-2 md:space-y-3 *:text-sm *:md:text-base'>
 									<li className='uppercase'>
-										phone: <Link href="tel:+12492060416">+1 (249) 206-0416</Link>
+										phone: <Link href="tel:+12492060416">+1 (249) 206 0416</Link>
 									</li>
 									<li className='uppercase'>
 										email: <Link href="info@zenovate.health">info@zenovate.health</Link>
+									</li>
+									<li className='uppercase'>
+										address: 157 Queen St E, Brampton, ON L6W 3X4, Canada
 									</li>
 								</ul>
 							</div>
 
 							<div className='space-y-3 md:space-y-5'>
 								<h3 className='uppercase text-lg md:text-xl font-bold'>hours of operation</h3>
-								<p className='uppercase text-sm md:text-base'>Monday - Friday: 9:00 AM - 5:00 PM EST </p>
+								<div className='space-y-2 uppercase text-sm md:text-base'>
+									<p>Monday - Friday: 9:00 AM - 5:00 PM EST</p>
+									<p>Saturday - Sunday: 10:00 AM - 2:00 PM EST</p>
+								</div>
 							</div>
 						</div>
 					</div>

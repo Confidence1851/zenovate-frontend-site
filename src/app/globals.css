@@ -93,7 +93,7 @@ body {
 		@apply lg:px-gutter-lg md:px-gutter-md px-gutter-sm;
 	}
 	.title {
-		@apply text-Black-100 text-2xl lg:text-5xl lg:leading-tight uppercase font-bold;
+		@apply text-Black-100 text-2xl lg:text-5xl lg:leading-tight uppercase font-bold font-barlow;
 	}
 	.smaller-title {
 		@apply text-base md:text-[19px] md:leading-7 text-foreground uppercase font-semibold;
@@ -130,7 +130,7 @@ body {
 
 /* FORM */
 .form-input {
-	@apply text-Black-100 h-11 focus-visible:ring-4 border focus-visible:ring-offset-2 ring-primary text-lg rounded-none;
+	@apply text-Black-100 h-11 focus-visible:ring-4 border focus-visible:ring-offset-2 ring-primary text-lg rounded-none font-barlow;
 }
 
 /* Calender */

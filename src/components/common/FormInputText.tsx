@@ -44,7 +44,7 @@ const FormInputText = <TFormValues extends Record<string, unknown>>({
 			render={({ field }) => (
 				<FormItem>
 					<p
-						className={`${hasError ? 'text-red-600' : 'text-Green-100'}  text-sm lg:text-base font-semibold uppercase`}
+						className={`${hasError ? 'text-red-600' : 'text-Green-100'}  text-sm lg:text-base font-semibold uppercase font-barlow`}
 					>
 						{label}
 					</p>
@@ -59,9 +59,8 @@ const FormInputText = <TFormValues extends Record<string, unknown>>({
 								<Input
 									className={cn(
 										`form-input placeholder:text-Gray-100 placeholder:uppercase
-                 ${leftElement ? 'pl-12' : 'pl-[18px]'}  ${rightElement ? 'pr-12' : 'pr-[18px]'} ${
-										hasError ? 'focus-visible:ring-red-600' : 'focus-visible:ring-dark_text '
-									} `,
+                 ${leftElement ? 'pl-12' : 'pl-[18px]'}  ${rightElement ? 'pr-12' : 'pr-[18px]'} ${hasError ? 'focus-visible:ring-red-600' : 'focus-visible:ring-dark_text '
+										} `,
 										className
 									)}
 									placeholder={placeholder}

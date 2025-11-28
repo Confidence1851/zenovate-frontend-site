@@ -37,7 +37,7 @@ const FormTextArea = <TFormValues extends Record<string, unknown>>({
 			name={name}
 			render={({ field }) => (
 				<FormItem>
-					<p className={`${hasError ? 'text-red-600' : 'text-my_dark'}  text-sm lg:text-base  font-medium capitalize`}>
+					<p className={`${hasError ? 'text-red-600' : 'text-my_dark'}  text-sm lg:text-base  font-medium capitalize font-barlow`}>
 						{label}
 					</p>
 					<div className='relative '>

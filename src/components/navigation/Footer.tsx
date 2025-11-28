@@ -3,7 +3,6 @@
 import Logo from './Logo'
 import Link from 'next/link'
 import { ExIcon, FacebookIcon, InstagramIcon, LinkedinIcon } from '@/assets/icons';
-import { usePathname } from 'next/navigation'
 import { siteConfig } from '@/utils/siteConfig'
 import styles from '@/styles/Footer.module.css'
 import FooterProducts from './FooterProducts'
@@ -35,12 +34,17 @@ const socialMedia = [
 	}
 ]
 
-// text-foreground
+/**
+ * Footer Component
+ * 
+ * Reusable footer component used platform-wide through MainLayout.
+ * Includes:
+ * - Company and Products links
+ * - Trust & Quality information
+ * - Social media links
+ * - Copyright and legal links
+ */
 const Footer = () => {
-	const pathname = usePathname()
-	const keywords = ['dashboard', 'auth']
-	const isDashboard = keywords.some((keyword) => pathname?.includes(keyword))
-
 	return (
 		<>
 			<footer>
