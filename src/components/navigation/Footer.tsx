@@ -67,28 +67,18 @@ const Footer = () => {
 													<h4 className="text-foreground uppercase text-base font-semibold lg:text-xl mb-4">
 														Company
 													</h4>
-													<div className="space-y-2">
-														{siteConfig.footerLinks
-															.filter(item => item.category === 'Company')
-															.map((item) => (
-																<div className="py-2" key={item.label}>
-																	<Link
-																		href={item.href}
-																		className='text-foreground text-sm font-medium uppercase hover:text-primary transition-colors block'
-																	>
-																		{item.label}
-																	</Link>
-																</div>
-															))}
-														<div className="py-2">
-															<a
-																href="tel:+12492060416"
-																className='text-foreground text-sm font-medium uppercase hover:text-primary transition-colors block'
-															>
-																Phone: +1 (249) 206-0416
-															</a>
-														</div>
-													</div>
+													{siteConfig.footerLinks
+														.filter(item => item.category === 'Company')
+														.map((item) => (
+															<div className="py-2" key={item.label}>
+																<Link
+																	href={item.href}
+																	className='text-foreground text-sm font-medium uppercase hover:text-primary transition-colors block'
+																>
+																	{item.label}
+																</Link>
+															</div>
+														))}
 												</div>
 
 												{/* Products Links - Dynamic */}

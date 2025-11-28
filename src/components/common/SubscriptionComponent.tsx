@@ -21,10 +21,19 @@ const SubscriptionComponent = () => {
 				email: email
 			})
 			toast.success(response.data.message)
+			setEmail('') // Clear email field on success
 		} catch (error) {
 			if (axios.isAxiosError(error)) {
 				if (error.response?.data?.message) {
-					toast.error(error.response.data.message)
+					const errorMessage = error.response.data.message
+					// Check if it's the "already taken" error and show a friendlier message
+					if (errorMessage.toLowerCase().includes('already been taken') ||
+						errorMessage.toLowerCase().includes('already taken') ||
+						errorMessage.toLowerCase().includes('the email has already been taken')) {
+						toast.error('You already subscribed to our newsletter')
+					} else {
+						toast.error(errorMessage)
+					}
 				} else {
 					toast.error('An error occured')
 				}

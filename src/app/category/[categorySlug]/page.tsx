@@ -164,9 +164,9 @@ export default function CategoryDetailPage() {
 
           {/* Disclaimer */}
           <div className='pt-8'>
-            <div className='flex items-start gap-3 p-4 bg-amber-50 border border-amber-200 rounded-lg'>
-              <AlertTriangle className='h-5 w-5 text-amber-600 flex-shrink-0 mt-0.5' />
-              <p className='text-sm text-amber-800'>
+            <div className='flex items-start gap-3 p-4 bg-gray-50/50 border border-gray-200/50 rounded-lg'>
+              <AlertTriangle className='h-5 w-5 text-gray-400 flex-shrink-0 mt-0.5' />
+              <p className='text-sm text-muted-foreground'>
                 Compounded drug products are not FDA or Health Canada approved. FDA or Health Canada does not evaluate compounded products for safety, effectiveness, or quality.
               </p>
             </div>

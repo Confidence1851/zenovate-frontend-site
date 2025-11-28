@@ -9,6 +9,8 @@ import FormTextArea from '../common/FormTextArea'
 import useContactUs from '@/hooks/useContactUs'
 import ScaleLoader from 'react-spinners/ScaleLoader'
 import { CTAButton } from '../common/CTAButton'
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
+import { useState } from 'react'
 
 const ContactForm = () => {
 	const form = useForm({
@@ -23,16 +25,34 @@ const ContactForm = () => {
 		reset
 	} = form
 
+	const { executeRecaptcha } = useGoogleReCaptcha()
 	const { mutate, isPending } = useContactUs(reset)
+	const [isSubmitting, setIsSubmitting] = useState(false)
 
 	const onSubmit = async (data: FieldValues) => {
-		mutate({
-			email: data.email,
-			name: data.fullname,
-			phone: data.phone,
-			subject: data.subject,
-			message: data.message
-		})
+		if (!executeRecaptcha) {
+			console.error('reCAPTCHA not loaded')
+			return
+		}
+
+		setIsSubmitting(true)
+		try {
+			// Execute reCAPTCHA v3
+			const recaptchaToken = await executeRecaptcha('contact_form')
+
+			mutate({
+				email: data.email,
+				name: data.fullname,
+				phone: data.phone,
+				subject: data.subject,
+				message: data.message,
+				recaptcha_token: recaptchaToken
+			})
+		} catch (error) {
+			console.error('reCAPTCHA error:', error)
+		} finally {
+			setIsSubmitting(false)
+		}
 	}
 	return (
 		<div>
@@ -95,9 +115,10 @@ const ContactForm = () => {
 					<CTAButton
 						type='submit'
 						size='lg'
-						className={`bg-Black-100 text-White-100 min-w-[320px]  ${isPending ? 'justify-center' : 'justify-between'} min-w-[320px]`}
+						disabled={isPending || isSubmitting}
+						className={`bg-Black-100 text-White-100 min-w-[320px]  ${isPending || isSubmitting ? 'justify-center' : 'justify-between'} min-w-[320px]`}
 					>
-						{isPending ? (
+						{isPending || isSubmitting ? (
 							<ScaleLoader color='#fafafa' height={18} />
 						) : (
 							<>

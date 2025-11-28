@@ -33,6 +33,7 @@ type ContactInfoSent = {
 	phone: string
 	subject: string
 	message: string
+	recaptcha_token?: string
 }
 
 type ContactResponse = {

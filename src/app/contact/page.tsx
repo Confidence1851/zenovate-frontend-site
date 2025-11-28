@@ -69,7 +69,7 @@ const ContactPage = () => {
 
 								<ul className='space-y-2 md:space-y-3 *:text-sm *:md:text-base'>
 									<li className='uppercase'>
-										phone: <Link href="tel:1233456789">+123 345 6789</Link>
+										phone: <Link href="tel:+12492060416">+1 (249) 206-0416</Link>
 									</li>
 									<li className='uppercase'>
 										email: <Link href="info@zenovate.health">info@zenovate.health</Link>
