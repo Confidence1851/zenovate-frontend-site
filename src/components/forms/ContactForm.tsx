@@ -93,7 +93,7 @@ const ContactForm = () => {
 							<FormInputText
 								name='fullname'
 								label='full name'
-								placeholder='email@domain.com'
+								placeholder='Enter your full name'
 								control={control}
 								errors={errors}
 								className='1border !border-foreground !h-12 !text-base '

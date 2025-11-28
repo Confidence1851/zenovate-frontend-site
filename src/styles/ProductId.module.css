@@ -1,5 +1,31 @@
 .productDetailsContainer {
 	@apply pt-4 pb-4 space-y-4 text-base text-muted-foreground;
+	/* Ensure proper text wrapping */
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+	hyphens: auto;
+}
+
+/* Ensure URLs and long strings break properly */
+.productDetailsContainer a {
+	word-break: break-all;
+	overflow-wrap: anywhere;
+	hyphens: none;
+}
+
+/* Ensure text content wraps properly */
+.productDetailsContainer div,
+.productDetailsContainer p,
+.productDetailsContainer span {
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+	line-height: 1.6;
+}
+
+/* Ensure strong/bold text wraps properly */
+.productDetailsContainer strong {
+	word-wrap: break-word;
+	overflow-wrap: break-word;
 }
 
 .checkmarkIcon {

@@ -170,9 +170,9 @@ export default function ProductDetails({ params }: { params: { productId: string
 
 					<div className='space-y-2'>
 						{displayTag && (
-							<h2 className='uppercase text-sm text-muted-foreground'>{displayTag}</h2>
+							<h2 className='uppercase text-sm text-muted-foreground break-words'>{displayTag}</h2>
 						)}
-						<h1 className=' uppercase text-3xl sm:text-[42px] sm:leading-tight  font-semibold '>{product.name}</h1>
+						<h1 className='uppercase text-3xl sm:text-[42px] sm:leading-tight font-semibold break-words'>{product.name}</h1>
 					</div>
 					<div className={styles.productDetailsContainer}>
 						<h3 className='text-foreground font-semibold'>
@@ -180,7 +180,8 @@ export default function ProductDetails({ params }: { params: { productId: string
 						</h3>
 						{displayDescription ? (
 							<div
-								className="prose prose-sm max-w-none [&>div]:mb-3 [&>div:last-child]:mb-0 [&_strong]:font-semibold [&_a]:text-primary [&_a]:underline [&_a:hover]:text-primary/80"
+								className="prose prose-sm max-w-none [&>div]:mb-3 [&>div:last-child]:mb-0 [&_strong]:font-semibold [&_a]:text-primary [&_a]:underline [&_a:hover]:text-primary/80 break-words [&_a]:break-all"
+								style={{ wordWrap: 'break-word', overflowWrap: 'anywhere' }}
 								dangerouslySetInnerHTML={{ __html: displayDescription }}
 							/>
 						) : (
@@ -193,7 +194,7 @@ export default function ProductDetails({ params }: { params: { productId: string
 						<div className={styles.productDetailsContainer}>
 							{/* Check if this is a peptide product (no frequency/unit on first price) */}
 							{product.price[0] && !product.price[0].frequency && !product.price[0].unit && (
-								<p className='text-sm text-muted-foreground mb-3 italic'>
+								<p className='text-sm text-muted-foreground mb-3 italic break-words' style={{ overflowWrap: 'anywhere' }}>
 									This is for pre-order. Shipping takes 2 to 4 weeks.
 								</p>
 							)}
@@ -211,13 +212,13 @@ export default function ProductDetails({ params }: { params: { productId: string
 											key={index}
 											type="button"
 											variant={selectedPrice?.id === price.id ? 'default' : 'outline'}
-											className="w-full justify-between"
+											className="w-full justify-between flex-wrap gap-2"
 											onClick={() => setSelectedPrice(price)}
 										>
-											<span>
+											<span className="break-words text-left flex-1 min-w-0" style={{ overflowWrap: 'anywhere' }}>
 												{isPeptide ? 'Price' : `${price.frequency} ${price.unit}`}
 											</span>
-											<span className="font-semibold">
+											<span className="font-semibold whitespace-nowrap flex-shrink-0">
 												${price.value.toFixed(2)}
 											</span>
 										</Button>
@@ -229,7 +230,7 @@ export default function ProductDetails({ params }: { params: { productId: string
 
 					{/* Disclaimer */}
 					<div className={styles.productDetailsContainer}>
-						<p className='text-xs text-muted-foreground italic'>
+						<p className='text-xs text-muted-foreground italic break-words' style={{ overflowWrap: 'anywhere' }}>
 							Compounded drug products are not FDA or Health Canada approved. FDA or Health Canada does not evaluate compounded products for safety, effectiveness, or quality.
 						</p>
 					</div>
