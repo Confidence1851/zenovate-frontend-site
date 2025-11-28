@@ -4,13 +4,12 @@ import { contactUsApi } from '@/server-actions/api.actions'
 import type { ContactResponse, ContactInfoSent } from '@/types'
 
 
-const useContactUs = (reset: () => void) => {
+const useContactUs = () => {
 	return useMutation<ContactResponse, Error, ContactInfoSent>({
 		mutationFn: contactUsApi,
 		onSuccess: (result) => {
 			const { message } = result
 			toast.success(message)
-			reset()
 		},
 		onError: (err) => {
 			const errorMessage = err instanceof Error ? err.message : 'Could not send your message'

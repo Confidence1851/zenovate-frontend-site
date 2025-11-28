@@ -78,6 +78,11 @@ const ContactPage = () => {
 										address: 157 Queen St E, Brampton, ON L6W 3X4, Canada
 									</li>
 								</ul>
+
+								{/* GMP Compliance Statement */}
+								<p className='text-sm text-muted-foreground pt-2'>
+									Offering is made in a GMP-compliant, ISO Class 5 cleanroom in accordance with USP &lt;797&gt; standards.
+								</p>
 							</div>
 
 							<div className='space-y-3 md:space-y-5'>

@@ -10,12 +10,19 @@ import useContactUs from '@/hooks/useContactUs'
 import ScaleLoader from 'react-spinners/ScaleLoader'
 import { CTAButton } from '../common/CTAButton'
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 const ContactForm = () => {
 	const form = useForm({
 		resolver: zodResolver(contactSchema),
-		mode: 'all'
+		mode: 'all',
+		defaultValues: {
+			fullname: '',
+			email: '',
+			phone: '',
+			subject: '',
+			message: ''
+		}
 	})
 
 	const {
@@ -26,8 +33,31 @@ const ContactForm = () => {
 	} = form
 
 	const { executeRecaptcha } = useGoogleReCaptcha()
-	const { mutate, isPending } = useContactUs(reset)
+	const { mutate, isPending, isSuccess, reset: resetMutation } = useContactUs()
 	const [isSubmitting, setIsSubmitting] = useState(false)
+
+	// Reset form when mutation succeeds
+	useEffect(() => {
+		if (isSuccess) {
+			// Reset form with empty values
+			reset({
+				fullname: '',
+				email: '',
+				phone: '',
+				subject: '',
+				message: ''
+			}, {
+				keepErrors: false,
+				keepDirty: false,
+				keepIsSubmitted: false,
+				keepTouched: false,
+				keepIsValid: false,
+				keepSubmitCount: false
+			})
+			// Reset mutation state to allow another submission
+			resetMutation()
+		}
+	}, [isSuccess, reset, resetMutation])
 
 	const onSubmit = async (data: FieldValues) => {
 		if (!executeRecaptcha) {
