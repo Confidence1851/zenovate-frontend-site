@@ -31,7 +31,7 @@ const uniqueQualities = [
 ]
 const UniqueQualities = () => {
 	return (
-		<section className='bg-Green-200 space-y-12 md:space-y-14 px-[5vw] sm:px-[3.5vw] lg:px-[3vw] xl:space-y-16 pb-12 md:pb-16 lg:pb-20 '>
+		<section className='bg-OffWhite-100 space-y-12 md:space-y-14 px-[5vw] sm:px-[3.5vw] lg:px-[3vw] xl:space-y-16 pb-12 md:pb-16 lg:pb-20 '>
 			<div className='w-full mb-[-8px] md:mb-0 max-w-7xl mx-auto h-full flex justify-end flex-col  '>
 				<div className='flex flex-col gap-0 lg:gap-3  pt-12 md:pt-16 lg:pt-20  w-full max-w-[1500px] mx-auto '>
 					<h1 className={`${styles.header}`}>discover the</h1>
@@ -40,8 +40,7 @@ const UniqueQualities = () => {
 			</div>
 
 			<div className='max-w-7xl w-full mx-auto '>
-				{/* <div className="w-full overflow-x-scroll grid md:grid-cols-2 lg:flex  gap-6 custom-scrollbar pb-5 "> */}
-				<div className={styles.gridContainer}>
+				<div className='flex flex-col md:grid md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 px-4 md:px-0'>
 					{uniqueQualities.map((item, i) => (
 						<UniqueQualitiesCard cardContent={item} key={i} />
 					))}
