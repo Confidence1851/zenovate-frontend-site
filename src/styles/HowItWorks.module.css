@@ -46,24 +46,38 @@
 .card {
 	@apply flex flex-col md:flex-row  justify-between;
 	@apply relative rounded-sm;
-	@apply w-full h-auto lg:h-[80vh];
+	@apply w-full h-auto lg:min-h-[80vh];
 	@apply px-4 py-12 lg:px-24 lg:pt-[10rem] lg:pb-[5rem];
 	@apply gap-8 lg:gap-24;
 	transform-origin: top;
+	overflow: visible;
 }
 
 .cardStatic {
-	@apply w-full h-auto lg:h-[50vh];
+	@apply w-full h-auto lg:min-h-[50vh];
 	/* @apply py-12 lg:pt-[10rem] lg:pb-[5rem]; */
 	@apply py-12;
 	/* @apply gap-8 lg:gap-24; */
 	transform-origin: top;
+	overflow: visible;
 }
 
 .leftSection {
 	@apply flex flex-col gap-4 lg:gap-2 items-start lg:space-y-8;
 	@apply w-full lg:w-1/3;
 	overflow: visible;
+}
+
+.description {
+	@apply w-full;
+	@apply text-base md:text-lg leading-relaxed;
+	overflow: visible;
+}
+
+.description p {
+	@apply m-0;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
 }
 
 .rightSection {

@@ -5,10 +5,10 @@ import { useTransform, useScroll, motion } from 'framer-motion';
 // import styles from '@/styles/HomePage.module.css'
 import styles from '@/styles/HowItWorks.module.css'
 import Image from 'next/image'
-import step1 from "@/assets/images/step-1.jpg";
-import step2 from "@/assets/images/step-2.jpg";
-import step3 from "@/assets/images/step-3.jpg";
-import step4 from "@/assets/images/step-4.jpg";
+import step1 from "@/assets/images/step-1.png";
+import step2 from "@/assets/images/step-2.png";
+import step3 from "@/assets/images/step-3.png";
+import step4 from "@/assets/images/step-4.png";
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 
 const colorOne = '#f3f4f6';
@@ -16,30 +16,30 @@ const colorTwo = '#fafafa';
 
 const howItWorks = [
 	{
-		heading: 'Tell us about yourself',
+		heading: 'Tell Us About Yourself',
 		description:
-			'Take a quick health assessment to help us understand your needs and medical history.',
+			'Take a quick and simple health survey so we can learn about your medical history, lifestyle, and goals. This lets us tailor recommendations specifically to your needs.',
 		bgColor: colorOne,
 		color: colorTwo
 	},
 	{
-		heading: 'Get personalized recommendations',
+		heading: 'Get Your Personalized Plan',
 		description:
-			"Based on your assessment, we'll suggest the most suitable treatment options for you.",
+			'Based on your answers, our licensed prescribers analyze your profile and recommend a customized wellness plan that best matches your health goals.',
 		bgColor: colorTwo,
 		color: colorOne
 	},
 	{
-		heading: 'Choose your treatment',
+		heading: 'Select & Confirm Your Treatment Plan',
 		description:
-			'Select from our recommended treatments and create your personalized healthcare plan.',
+			'Pick from the recommended therapies (wellness injections, or package options), adjust as needed, and finalize your personalized treatment plan. All online, on your schedule.',
 		bgColor: colorOne,
 		color: colorTwo
 	},
 	{
-		heading: 'Receive ongoing support',
+		heading: 'Delivery & Ongoing Support',
 		description:
-			'Get your treatments delivered discreetly to your door and access continuous support from our healthcare team.',
+			'Once you confirm your plan, we ship your treatments discreetly to your door. Meanwhile, your licensed provider remains available for follow-up and continuous support. Ensuring safe, effective administration and ongoing care.',
 		bgColor: colorTwo,
 		color: colorOne
 	}
