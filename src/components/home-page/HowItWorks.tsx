@@ -103,7 +103,7 @@ const Section: React.FC<Section> = ({ heading, description, bgColor, color, i })
 					</div>
 				</div>
 				<div className={styles.rightSection}>
-					<AspectRatio ratio={16 / 9} >
+					<AspectRatio ratio={16 / 9} className="w-full">
 						<div className={styles.imageContainer}>
 							<motion.div
 								className={styles.inner}
@@ -114,6 +114,7 @@ const Section: React.FC<Section> = ({ heading, description, bgColor, color, i })
 									alt={heading}
 									fill
 									style={{ objectFit: 'cover' }}
+									sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
 								/>
 							</motion.div>
 						</div>
@@ -156,7 +157,7 @@ const SectionStatic: React.FC<SectionProps> = ({ heading, description, bgColor, 
 							</div>
 						</div>
 						<div className={styles.rightSection}>
-							<AspectRatio ratio={16 / 9} >
+							<AspectRatio ratio={16 / 9} className="w-full">
 								<div className={styles.imageContainerStatic}>
 									<div
 										className={styles.inner}
@@ -165,7 +166,8 @@ const SectionStatic: React.FC<SectionProps> = ({ heading, description, bgColor, 
 											src={stepImages[i]}
 											alt={heading}
 											fill
-											className='object-fill'
+											className='object-cover'
+											sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
 										/>
 									</div>
 								</div>

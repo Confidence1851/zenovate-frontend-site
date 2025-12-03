@@ -7,13 +7,45 @@
 }
 
 .imageContainer {
-	@apply relative w-full lg:w-[80%] lg:h-full overflow-hidden rounded-sm;
+	@apply relative w-full lg:w-[80%] overflow-hidden rounded-sm;
 	@apply mb-8 lg:mb-0;
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+@media (max-width: 1023px) {
+	.imageContainer {
+		min-height: 250px;
+		height: auto;
+	}
+}
+
+@media (min-width: 1024px) {
+	.imageContainer {
+		height: 100%;
+	}
 }
 
 .imageContainerStatic {
-	@apply relative w-full h-full overflow-hidden rounded-sm;
+	@apply relative w-full overflow-hidden rounded-sm;
 	@apply mb-8 lg:mb-0;
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+@media (max-width: 1023px) {
+	.imageContainerStatic {
+		min-height: 250px;
+		height: auto;
+	}
+}
+
+@media (min-width: 1024px) {
+	.imageContainerStatic {
+		height: 100%;
+	}
 }
 
 .inner {
@@ -66,6 +98,7 @@
 	@apply flex flex-col gap-4 lg:gap-2 items-start lg:space-y-8;
 	@apply w-full lg:w-1/3;
 	overflow: visible;
+	@apply order-1 md:order-1;
 }
 
 .description {
@@ -83,6 +116,24 @@
 .rightSection {
 	@apply flex flex-col items-end gap-4 lg:gap-2 lg:space-y-4;
 	@apply w-full lg:w-2/3;
+	@apply order-2 md:order-2;
+	position: relative;
+}
+
+.rightSection > div[style*="padding-bottom"] {
+	width: 100% !important;
+}
+
+@media (max-width: 768px) {
+	.rightSection {
+		width: 100% !important;
+		margin-top: 1rem;
+		align-items: stretch;
+	}
+	
+	.rightSection > div {
+		width: 100% !important;
+	}
 }
 
 @media (max-width: 1024px) {
@@ -98,5 +149,22 @@
 		padding: 1.5rem;
 		min-height: auto;
 		height: auto;
+		flex-direction: column;
+	}
+	
+	.rightSection > div {
+		width: 100% !important;
+	}
+	
+	.imageContainer {
+		width: 100% !important;
+		min-height: 250px;
+		height: 250px;
+	}
+	
+	.imageContainerStatic {
+		width: 100% !important;
+		min-height: 250px;
+		height: 250px;
 	}
 }
