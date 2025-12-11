@@ -144,18 +144,21 @@ const OrderSheetComponent = () => {
             subtotal += lineTotal
         })
 
-        // Apply discount to subtotal (Stripe's standard approach)
-        const appliedDiscount = Math.min(discountAmount, subtotal)
-        const discountedSubtotal = Math.max(0, subtotal - appliedDiscount)
-
-        // Calculate tax on discounted amount (matching Stripe's behavior)
-        const taxAmount = discountedSubtotal * (taxRate / 100)
-
         // Calculate shipping
         const shippingFee = subtotal >= freeShippingThreshold ? 0 : defaultShippingFee
 
+        // Calculate subtotal + shipping (before discount)
+        const subtotalWithShipping = subtotal + shippingFee
+
+        // Apply discount to subtotal + shipping
+        const appliedDiscount = Math.min(discountAmount, subtotalWithShipping)
+        const discountedAmount = Math.max(0, subtotalWithShipping - appliedDiscount)
+
+        // Calculate tax on discounted amount
+        const taxAmount = discountedAmount * (taxRate / 100)
+
         // Calculate grand total
-        const grandTotal = discountedSubtotal + taxAmount + shippingFee
+        const grandTotal = discountedAmount + taxAmount
 
         return {
             subtotal,
