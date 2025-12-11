@@ -115,6 +115,13 @@ export function useDirectCheckout(): UseDirectCheckoutReturn {
         return;
       }
 
+      // For order sheets, discount removal should be handled differently
+      // This function only works for regular direct checkouts
+      if (checkoutData.order_type === 'order_sheet' || !checkoutData.product_id || !checkoutData.price_id) {
+        setError('Discount removal not supported for this checkout type');
+        return;
+      }
+
       setIsLoading(true);
       setError(null);
       try {

@@ -798,10 +798,6 @@ const OrderSheetComponent = () => {
                             </li>
                             <li className='flex items-start'>
                                 <span className='mr-2'>•</span>
-                                <span>Phoslim 10mL Vial is not available in the USA.</span>
-                            </li>
-                            <li className='flex items-start'>
-                                <span className='mr-2'>•</span>
                                 <span>If you do not receive an order confirmation within 48 hours, email <a href='mailto:orders@zenovate.health' className='text-blue-600 underline'>orders@zenovate.health</a>.</span>
                             </li>
                         </ul>

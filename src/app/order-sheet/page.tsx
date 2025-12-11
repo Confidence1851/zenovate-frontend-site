@@ -1,7 +1,8 @@
+import { Suspense } from 'react'
 import PageHeroWrapper from '@/components/common/PageHeroWrapper'
 import { createMetadata } from '@/lib/metadata'
 import MainLayout from '@/app/layouts/MainLayout'
-import heroImage from "@/assets/images/ad6e850434c58cfdca5ed066a828ed0c9771e9faf8e15c.png";
+import heroImage from "@/assets/images/pinksky.jpeg";
 import OrderSheetComponent from '@/components/order-sheet/OrderSheetComponent'
 
 export const metadata = createMetadata({
@@ -25,12 +26,15 @@ const OrderSheetPage = () => {
 						src: heroImage,
 						alt: "Order sheet page hero image"
 					}}
+					variant='white'
 					size='short'
 				/>
 
 				<section className='py-10 md:py-16 lg:py-20'>
 					<div className='xmd-container'>
-						<OrderSheetComponent />
+						<Suspense fallback={<div className="text-center py-10">Loading...</div>}>
+							<OrderSheetComponent />
+						</Suspense>
 					</div>
 				</section>
 			</main>
