@@ -3,8 +3,10 @@ import {
   initDirectCheckout,
   applyDiscountToCheckout,
   processDirectCheckout,
+  initOrderSheetCheckout,
   DirectCheckoutData,
   ProcessPaymentResponse,
+  OrderSheetInitParams,
 } from '@/server-actions/directCheckout.actions';
 
 interface UseDirectCheckoutReturn {
@@ -18,6 +20,9 @@ interface UseDirectCheckoutReturn {
     lastName: string,
     email: string,
     useType?: 'patient' | 'clinic'
+  ) => Promise<void>;
+  initializeOrderSheetCheckout: (
+    params: OrderSheetInitParams
   ) => Promise<void>;
   applyDiscount: (discountCode: string) => Promise<void>;
   removeDiscount: () => Promise<void>;
@@ -51,6 +56,23 @@ export function useDirectCheckout(): UseDirectCheckoutReturn {
           email: email,
           use_type: useType,
         });
+        setCheckoutData(data);
+      } catch (err: any) {
+        setError(err.message || 'Failed to initialize checkout');
+        setCheckoutData(null);
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    []
+  );
+
+  const initializeOrderSheetCheckout = useCallback(
+    async (params: OrderSheetInitParams) => {
+      setIsLoading(true);
+      setError(null);
+      try {
+        const data = await initOrderSheetCheckout(params);
         setCheckoutData(data);
       } catch (err: any) {
         setError(err.message || 'Failed to initialize checkout');
@@ -149,6 +171,7 @@ export function useDirectCheckout(): UseDirectCheckoutReturn {
     isLoading,
     error,
     initializeCheckout,
+    initializeOrderSheetCheckout,
     applyDiscount,
     removeDiscount,
     processPayment,

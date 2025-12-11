@@ -7,30 +7,47 @@ import { Button } from '@/components/ui/button'
 import { XCircle } from 'lucide-react'
 import MainLayout from '@/app/layouts/MainLayout'
 import { Suspense, useEffect, useState } from 'react'
-import { getProductFromPayment } from '@/server-actions/directCheckout.actions'
+import { getCheckoutInfo } from '@/server-actions/directCheckout.actions'
 
 function CheckoutCancelledContent() {
   const searchParams = useSearchParams()
   const paymentRef = searchParams?.get('ref') || null
   const [productSlug, setProductSlug] = useState<string | null>(null)
   const [isLoadingProduct, setIsLoadingProduct] = useState(false)
+  const [orderType, setOrderType] = useState<string | null>(null)
+  const [isLoadingOrderType, setIsLoadingOrderType] = useState(false)
 
   useEffect(() => {
     if (paymentRef) {
-      setIsLoadingProduct(true)
-      getProductFromPayment(paymentRef)
+      setIsLoadingOrderType(true)
+      getCheckoutInfo(paymentRef)
         .then((data) => {
-          setProductSlug(data.product_slug)
+          const orderTypeValue = data.order_type || 'regular'
+          setOrderType(orderTypeValue)
+
+          // For regular orders, try to get product slug from products[0]
+          if (orderTypeValue !== 'order_sheet') {
+            const firstProduct = data.products?.[0]
+            setIsLoadingProduct(true)
+            if (firstProduct?.product_slug) {
+              setProductSlug(firstProduct.product_slug)
+            } else {
+              setProductSlug(null)
+            }
+            setIsLoadingProduct(false)
+          }
         })
         .catch(() => {
-          // Silently fail - just don't show the return button
+          setOrderType('regular')
           setProductSlug(null)
         })
         .finally(() => {
-          setIsLoadingProduct(false)
+          setIsLoadingOrderType(false)
         })
     }
   }, [paymentRef])
+
+  const isOrderSheet = orderType === 'order_sheet'
 
   return (
     <div className="container mx-auto flex min-h-[60vh] flex-col items-center justify-center px-4 py-16">
@@ -40,49 +57,80 @@ function CheckoutCancelledContent() {
             <XCircle className="h-16 w-16 text-orange-600" />
           </div>
         </div>
-        
+
         <h1 className="mb-4 text-3xl font-bold text-gray-900">
           Payment Cancelled
         </h1>
-        
+
         <p className="mb-2 text-gray-600">
           Your payment was cancelled. No charges were made to your account.
         </p>
-        
+
         {paymentRef && (
           <p className="mb-6 text-sm text-gray-500">
             Reference: <span className="font-mono">{paymentRef}</span>
           </p>
         )}
-        
+
         <p className="mb-8 text-gray-600">
           If you'd like to complete your purchase, please try again.
         </p>
-        
+
         <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
-          <Link href="/products">
+          {!isLoadingOrderType && isOrderSheet && (
+            <Link href={`/order-sheet?cancelled=true&ref=${paymentRef || ''}`}>
+              <CTAButton
+                size="lg"
+                className="py-3 h-14 w-full sm:w-auto sm:min-w-[320px]"
+              >
+                <span className="uppercase mx-auto text-wrap text-sm md:text-base xl:text-xl self-center font-semibold">
+                  Return to Order Sheet
+                </span>
+              </CTAButton>
+            </Link>
+          )}
+
+          {!isLoadingOrderType && !isOrderSheet && (
+            <>
+              <Link href="/products">
+                <CTAButton
+                  size="lg"
+                  className="py-3 h-14 w-full sm:w-auto sm:min-w-[320px]"
+                >
+                  <span className="uppercase mx-auto text-wrap text-sm md:text-base xl:text-xl self-center font-semibold">
+                    Continue Shopping
+                  </span>
+                </CTAButton>
+              </Link>
+
+              {productSlug && !isLoadingProduct && (
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="lg"
+                  asChild
+                  className="py-3 h-14 w-full sm:w-auto sm:min-w-[320px]"
+                >
+                  <Link href={`/products/${productSlug}`}>
+                    <span className="uppercase mx-auto text-wrap text-sm md:text-base xl:text-xl self-center font-semibold">
+                      Return to Product
+                    </span>
+                  </Link>
+                </Button>
+              )}
+            </>
+          )}
+
+          {isLoadingOrderType && (
             <CTAButton
               size="lg"
               className="py-3 h-14 w-full sm:w-auto sm:min-w-[320px]"
+              disabled
             >
               <span className="uppercase mx-auto text-wrap text-sm md:text-base xl:text-xl self-center font-semibold">
-                Continue Shopping
+                Loading...
               </span>
             </CTAButton>
-          </Link>
-          
-          {productSlug && (
-            <Button
-              type="button"
-              variant="outline"
-              size="lg"
-              asChild
-              className="min-w-[240px] px-8"
-            >
-              <Link href={`/products/${productSlug}`}>
-                Return to Product
-              </Link>
-            </Button>
           )}
         </div>
       </div>

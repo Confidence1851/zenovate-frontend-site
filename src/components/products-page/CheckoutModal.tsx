@@ -20,6 +20,18 @@ interface CheckoutModalProps {
   onOpenChange: (open: boolean) => void
   product: Product
   selectedPrice: Price | null
+  mode?: 'single' | 'order-sheet'
+  orderSheetProducts?: Array<{ product: Product; price: Price; quantity: number }>
+  orderSheetCustomerInfo?: {
+    firstName: string
+    lastName: string
+    email: string
+    phone: string
+    accountNumber: string
+    location: string
+    shippingAddress?: string
+    additionalInformation?: string
+  }
 }
 
 type UseType = 'patient' | 'clinic' | null
@@ -35,12 +47,16 @@ export function CheckoutModal({
   onOpenChange,
   product,
   selectedPrice,
+  mode = 'single',
+  orderSheetProducts,
+  orderSheetCustomerInfo
 }: CheckoutModalProps) {
   const {
     checkoutData,
     isLoading,
     error,
     initializeCheckout,
+    initializeOrderSheetCheckout,
     applyDiscount,
     removeDiscount,
     processPayment,
@@ -58,7 +74,8 @@ export function CheckoutModal({
   })
   const [formErrors, setFormErrors] = useState<Partial<CustomerInfo>>({})
 
-  const requiresSelection = product.requires_patient_clinic_selection ?? false
+  const isOrderSheet = mode === 'order-sheet'
+  const requiresSelection = !isOrderSheet && (product.requires_patient_clinic_selection ?? false)
 
   // Reset state when modal closes
   useEffect(() => {
@@ -100,6 +117,28 @@ export function CheckoutModal({
   }
 
   const handleContinue = async () => {
+    if (isOrderSheet) {
+      if (!orderSheetProducts || orderSheetProducts.length === 0) return
+      if (!orderSheetCustomerInfo) return
+
+      await initializeOrderSheetCheckout({
+        products: orderSheetProducts.map((item) => ({
+          product_id: item.product.id,
+          price_id: item.price.id,
+          quantity: item.quantity,
+        })),
+        first_name: orderSheetCustomerInfo.firstName,
+        last_name: orderSheetCustomerInfo.lastName,
+        email: orderSheetCustomerInfo.email,
+        phone: orderSheetCustomerInfo.phone,
+        account_number: orderSheetCustomerInfo.accountNumber,
+        location: orderSheetCustomerInfo.location,
+        shipping_address: orderSheetCustomerInfo.shippingAddress,
+        additional_information: orderSheetCustomerInfo.additionalInformation,
+      })
+      return
+    }
+
     if (!validateForm()) return
     if (!selectedPrice) return
     if (requiresSelection && !useType) return
@@ -186,7 +225,9 @@ export function CheckoutModal({
         <DialogHeader>
           <DialogTitle>Checkout</DialogTitle>
           <DialogDescription>
-            {product.name} {selectedPrice?.frequency && selectedPrice?.unit ? `- ${selectedPrice.frequency} ${selectedPrice.unit}` : ''}
+            {isOrderSheet
+              ? 'Order Sheet Checkout'
+              : `${product.name} ${selectedPrice?.frequency && selectedPrice?.unit ? `- ${selectedPrice.frequency} ${selectedPrice.unit}` : ''}`}
           </DialogDescription>
         </DialogHeader>
 
@@ -201,7 +242,7 @@ export function CheckoutModal({
 
         <div className="space-y-6 py-4">
           {/* Individual/Clinic Selection (for peptides) */}
-          {requiresSelection && (
+          {!isOrderSheet && requiresSelection && (
             <div className="space-y-3">
               <Label>Select Use Type</Label>
               <div className="flex gap-4">
@@ -241,53 +282,102 @@ export function CheckoutModal({
           )}
 
           {/* Customer Information Form (Step 1 - before checkout initialization) */}
-          {showCheckoutForm && (!requiresSelection || useType) && (
+          {showCheckoutForm && (!requiresSelection || useType || isOrderSheet) && (
             <div className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="firstName">First Name</Label>
-                <Input
-                  id="firstName"
-                  placeholder="Enter your first name"
-                  value={customerInfo.firstName}
-                  onChange={(e) => handleInputChange('firstName', e.target.value)}
-                  disabled={isLoading}
-                  className={formErrors.firstName ? 'border-destructive' : ''}
-                />
-                {formErrors.firstName && (
-                  <p className="text-sm text-destructive">{formErrors.firstName}</p>
-                )}
-              </div>
+              {!isOrderSheet && (
+                <>
+                  <div className="space-y-2">
+                    <Label htmlFor="firstName">First Name</Label>
+                    <Input
+                      id="firstName"
+                      placeholder="Enter your first name"
+                      value={customerInfo.firstName}
+                      onChange={(e) => handleInputChange('firstName', e.target.value)}
+                      disabled={isLoading}
+                      className={formErrors.firstName ? 'border-destructive' : ''}
+                    />
+                    {formErrors.firstName && (
+                      <p className="text-sm text-destructive">{formErrors.firstName}</p>
+                    )}
+                  </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="lastName">Last Name</Label>
-                <Input
-                  id="lastName"
-                  placeholder="Enter your last name"
-                  value={customerInfo.lastName}
-                  onChange={(e) => handleInputChange('lastName', e.target.value)}
-                  disabled={isLoading}
-                  className={formErrors.lastName ? 'border-destructive' : ''}
-                />
-                {formErrors.lastName && (
-                  <p className="text-sm text-destructive">{formErrors.lastName}</p>
-                )}
-              </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="lastName">Last Name</Label>
+                    <Input
+                      id="lastName"
+                      placeholder="Enter your last name"
+                      value={customerInfo.lastName}
+                      onChange={(e) => handleInputChange('lastName', e.target.value)}
+                      disabled={isLoading}
+                      className={formErrors.lastName ? 'border-destructive' : ''}
+                    />
+                    {formErrors.lastName && (
+                      <p className="text-sm text-destructive">{formErrors.lastName}</p>
+                    )}
+                  </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="Enter your email"
-                  value={customerInfo.email}
-                  onChange={(e) => handleInputChange('email', e.target.value)}
-                  disabled={isLoading}
-                  className={formErrors.email ? 'border-destructive' : ''}
-                />
-                {formErrors.email && (
-                  <p className="text-sm text-destructive">{formErrors.email}</p>
-                )}
-              </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="email">Email</Label>
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder="Enter your email"
+                      value={customerInfo.email}
+                      onChange={(e) => handleInputChange('email', e.target.value)}
+                      disabled={isLoading}
+                      className={formErrors.email ? 'border-destructive' : ''}
+                    />
+                    {formErrors.email && (
+                      <p className="text-sm text-destructive">{formErrors.email}</p>
+                    )}
+                  </div>
+                </>
+              )}
+
+              {isOrderSheet && orderSheetCustomerInfo && (
+                <div className="space-y-2 rounded-lg border p-4 text-sm">
+                  <div className="flex justify-between">
+                    <span className="font-medium">Name</span>
+                    <span>{orderSheetCustomerInfo.firstName} {orderSheetCustomerInfo.lastName}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="font-medium">Email</span>
+                    <span>{orderSheetCustomerInfo.email}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="font-medium">Phone</span>
+                    <span>{orderSheetCustomerInfo.phone}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="font-medium">Account #</span>
+                    <span>{orderSheetCustomerInfo.accountNumber}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="font-medium">Location</span>
+                    <span>{orderSheetCustomerInfo.location}</span>
+                  </div>
+                  {orderSheetCustomerInfo.shippingAddress && (
+                    <div className="flex justify-between">
+                      <span className="font-medium">Shipping</span>
+                      <span className="text-right max-w-[240px]">{orderSheetCustomerInfo.shippingAddress}</span>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {isOrderSheet && orderSheetProducts && (
+                <div className="space-y-2 rounded-lg border p-4 text-sm">
+                  <p className="font-semibold">Products</p>
+                  {orderSheetProducts.map((item) => (
+                    <div key={`${item.product.id}-${item.price.id}`} className="flex justify-between">
+                      <span>{item.product.name} × {item.quantity}</span>
+                      <span>
+                        ${item.price.value.toFixed(2)}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              )}
 
               <CTAButton
                 type="button"
@@ -313,7 +403,7 @@ export function CheckoutModal({
               </div>
 
               {/* Discount Code Input */}
-              {(!requiresSelection || useType) && (
+              { (isOrderSheet || !requiresSelection || useType) && (
                 <div className="space-y-2">
                   <Label htmlFor="discount-code">Discount Code (Optional)</Label>
                   <div className="flex gap-2">

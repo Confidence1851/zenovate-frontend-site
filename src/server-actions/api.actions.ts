@@ -29,6 +29,59 @@ export async function productList() {
 	}
 }
 
+export async function orderSheetProducts() {
+	const url = baseUrl('/form/products/order-sheet')
+	try {
+		const response = await axios.get(url)
+		return response.data
+	} catch (error) {
+		if (axios.isAxiosError(error)) {
+			if (error.response?.data?.message) {
+				throw new Error(error.response.data.message)
+			} else {
+				throw new Error((error as Error).message || 'Failed to fetch order sheet products')
+			}
+		} else {
+			throw new Error('An unexpected error occurred')
+		}
+	}
+}
+
+export interface ValidateDiscountCodeResponse {
+	success: boolean
+	data?: {
+		code: string
+		type: 'percentage' | 'fixed'
+		value: number
+		discount_amount: number
+	}
+	message?: string
+}
+
+export async function validateDiscountCode(
+	code: string,
+	subtotal: number
+): Promise<ValidateDiscountCodeResponse> {
+	const url = baseUrl('/api/discount-codes/validate')
+	try {
+		const response = await axios.post(url, {
+			code: code.trim().toUpperCase(),
+			subtotal,
+		})
+		return response.data
+	} catch (error) {
+		if (axios.isAxiosError(error)) {
+			if (error.response?.data?.message) {
+				throw new Error(error.response.data.message)
+			} else {
+				throw new Error((error as Error).message || 'Failed to validate discount code')
+			}
+		} else {
+			throw new Error('An unexpected error occurred')
+		}
+	}
+}
+
 export async function productInfo(id: string) {
 	const url = baseUrl('/form/products/' + id)
 	try {

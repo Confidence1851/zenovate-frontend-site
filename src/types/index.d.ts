@@ -237,6 +237,7 @@ type Product = {
 	requires_patient_clinic_selection?: boolean;
 	shipping_fee?: number | null;
 	tax_rate?: number | null;
+	enabled_for_order_sheet?: boolean;
 	category?: ProductCategory;
 };
 

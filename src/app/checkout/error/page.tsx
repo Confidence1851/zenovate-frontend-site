@@ -1,6 +1,7 @@
 'use client'
 
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams, useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 import Link from 'next/link'
 import { CTAButton } from '@/components/common/CTAButton'
 import { AlertCircle } from 'lucide-react'
@@ -9,8 +10,20 @@ import { Suspense } from 'react'
 
 function CheckoutErrorContent() {
   const searchParams = useSearchParams()
+  const router = useRouter()
   const paymentRef = searchParams?.get('ref') || null
   const status = searchParams?.get('status') || null
+
+  // Check if this is an order sheet order and redirect if form data exists
+  useEffect(() => {
+    if (paymentRef) {
+      const storedData = sessionStorage.getItem('orderSheetFormData')
+      if (storedData) {
+        // Redirect to order sheet with error flag
+        router.replace(`/order-sheet?error=true&ref=${paymentRef}`)
+      }
+    }
+  }, [paymentRef, router])
 
   const getErrorMessage = () => {
     if (status === 'failed') {
@@ -52,6 +65,19 @@ function CheckoutErrorContent() {
               Continue Shopping
             </Link>
           </CTAButton>
+          
+          {paymentRef && (
+            <CTAButton
+              type="button"
+              variant="outline"
+              asChild
+              size="lg"
+            >
+              <Link href={`/order-sheet?error=true&ref=${paymentRef}`}>
+                Retry Order
+              </Link>
+            </CTAButton>
+          )}
           
           <CTAButton
             type="button"
