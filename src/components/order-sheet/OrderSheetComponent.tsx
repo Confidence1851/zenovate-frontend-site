@@ -777,31 +777,7 @@ const OrderSheetComponent = () => {
                             </li>
                             <li className='flex items-start'>
                                 <span className='mr-2'>•</span>
-                                <span>All pricing and fees are in USD.</span>
-                            </li>
-                            <li className='flex items-start'>
-                                <span className='mr-2'>•</span>
-                                <span>Tax applies to medical supplies and the Zenovate IV Kit; no tax for Rx products.</span>
-                            </li>
-                            <li className='flex items-start'>
-                                <span className='mr-2'>•</span>
-                                <span>Medical supplies may change due to shortages; replacements are comparable quality.</span>
-                            </li>
-                            <li className='flex items-start'>
-                                <span className='mr-2'>•</span>
                                 <span>Please report any package issues within 24 hours of receipt.</span>
-                            </li>
-                            <li className='flex items-start'>
-                                <span className='mr-2'>•</span>
-                                <span>We use third-party shippers; unexpected delays can occur.</span>
-                            </li>
-                            <li className='flex items-start'>
-                                <span className='mr-2'>•</span>
-                                <span>IV Supplies and Kits are available only to clients purchasing IV Drips.</span>
-                            </li>
-                            <li className='flex items-start'>
-                                <span className='mr-2'>•</span>
-                                <span>If you do not receive an order confirmation within 48 hours, email <a href='mailto:orders@zenovate.health' className='text-blue-600 underline'>orders@zenovate.health</a>.</span>
                             </li>
                         </ul>
 
@@ -810,10 +786,6 @@ const OrderSheetComponent = () => {
                             <p>
                                 <strong>For general and order related information</strong>{' '}
                                 <a href='mailto:info@zenovate.health' className='text-blue-600 underline'>info@zenovate.health</a>
-                            </p>
-                            <p>
-                                <strong>For accounting email information</strong>{' '}
-                                <a href='mailto:accounting@zenovate.health' className='text-blue-600 underline'>accounting@zenovate.health</a>
                             </p>
                         </div>
                     </div>

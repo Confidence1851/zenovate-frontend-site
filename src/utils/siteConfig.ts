@@ -88,6 +88,7 @@ import image9 from '@/assets/images/9d8a1c9e601a49672320e617247848bf.jpg'
 import image10 from '@/assets/images/f35ccf45b3bd9fcfb4b68977aed32fa1.jpg'
 import image11 from '@/assets/images/mental.jpg'
 import image12 from '@/assets/images/nuts.jpg'
+import image13 from '@/assets/images/article-13.jpeg'
 import content1 from '@/assets/blogs/article-1.md'
 import content2 from '@/assets/blogs/article-2.md'
 import content3 from '@/assets/blogs/article-3.md'
@@ -100,6 +101,7 @@ import content9 from '@/assets/blogs/article-9.md'
 import content10 from '@/assets/blogs/article-10.md'
 import content11 from '@/assets/blogs/article-11.md'
 import content12 from '@/assets/blogs/article-12.md'
+import content13 from '@/assets/blogs/article-13.md'
 
 export const siteConfig: SiteConfig = {
     socialLinks: {
@@ -194,6 +196,16 @@ export const siteConfig: SiteConfig = {
             images: [image4],
             content: content4,
             tags: ['nutrition', 'health', 'wellness'],
+            featured: true
+        }),
+        addSlugToBlogPost({
+            id: '13',
+            title: 'BPC-157 & TB-500 — The Regeneration Peptide Duo the World Is Talking About',
+            description: 'BPC-157 & TB-500 — The Regeneration Peptide Duo the World Is Talking About',
+            date: '2025-12-01',
+            images: [image13],
+            content: content13,
+            tags: ['peptides', 'health', 'wellness'],
             featured: true
         }),
         // Blogs from 2025-11-25 - commented out
