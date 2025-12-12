@@ -777,6 +777,10 @@ const OrderSheetComponent = () => {
                             </li>
                             <li className='flex items-start'>
                                 <span className='mr-2'>•</span>
+                                <span>We use third-party shippers; unexpected delays can occur.</span>
+                            </li>
+                            <li className='flex items-start'>
+                                <span className='mr-2'>•</span>
                                 <span>Please report any package issues within 24 hours of receipt.</span>
                             </li>
                         </ul>
