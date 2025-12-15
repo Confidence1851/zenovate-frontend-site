@@ -221,6 +221,7 @@ type ProductCategory = {
 type Product = {
 	id: number;
 	name: string;
+	code?: string | null;
 	slug: string;
 	subtitle: string;
 	description: string;

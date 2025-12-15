@@ -78,7 +78,7 @@ function CheckoutCancelledContent() {
 
         <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
           {!isLoadingOrderType && isOrderSheet && (
-            <Link href={`/order-sheet?cancelled=true&ref=${paymentRef || ''}`}>
+            <Link href={`/pinksky/order?cancelled=true&ref=${paymentRef || ''}`}>
               <CTAButton
                 size="lg"
                 className="py-3 h-14 w-full sm:w-auto sm:min-w-[320px]"

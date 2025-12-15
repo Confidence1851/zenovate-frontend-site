@@ -20,7 +20,7 @@ function CheckoutErrorContent() {
       const storedData = sessionStorage.getItem('orderSheetFormData')
       if (storedData) {
         // Redirect to order sheet with error flag
-        router.replace(`/order-sheet?error=true&ref=${paymentRef}`)
+        router.replace(`/pinksky/order?error=true&ref=${paymentRef}`)
       }
     }
   }, [paymentRef, router])
@@ -73,7 +73,7 @@ function CheckoutErrorContent() {
               asChild
               size="lg"
             >
-              <Link href={`/order-sheet?error=true&ref=${paymentRef}`}>
+              <Link href={`/pinksky/order?error=true&ref=${paymentRef}`}>
                 Retry Order
               </Link>
             </CTAButton>

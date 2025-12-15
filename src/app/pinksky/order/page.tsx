@@ -11,7 +11,7 @@ export const metadata = createMetadata({
 	openGraph: {
 		title: 'Order Sheet | Zenovate Health - Personalized Wellness, Elevated',
 		description: 'Browse and order our premium wellness products. Select quantities and place your order with ease.',
-		url: '/order-sheet',
+		url: '/pinksky/order',
 	},
 })
 

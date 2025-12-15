@@ -106,6 +106,10 @@ const OrderSheetComponent = () => {
     }
 
     const getProductCode = (product: Product): string => {
+        // Use code field if available, otherwise fall back to slug-based generation
+        if (product.code) {
+            return product.code;
+        }
         return product.slug.toUpperCase().replace(/-/g, '') || `PRD${product.id}`
     }
 
@@ -587,7 +591,12 @@ const OrderSheetComponent = () => {
                                                 </td>
                                                 <td className='p-4'>
                                                     <div className='space-y-1'>
-                                                        <p className='font-medium text-foreground'>{product.name}</p>
+                                                        <p className='font-medium text-foreground'>
+                                                            {product.name}
+                                                            {getProductCode(product) && (
+                                                                <span className='text-muted-foreground font-normal'> ({getProductCode(product)})</span>
+                                                            )}
+                                                        </p>
                                                         {product.subtitle && (
                                                             <p className='text-sm text-muted-foreground'>{product.subtitle}</p>
                                                         )}
@@ -771,6 +780,18 @@ const OrderSheetComponent = () => {
                     <div className='space-y-4 pt-6 border-t'>
                         <h2 className='text-xl md:text-2xl font-bold uppercase'>Disclaimers</h2>
                         <ul className='space-y-3 text-sm md:text-base'>
+                            <li className='flex items-start'>
+                                <span className='mr-2'>•</span>
+                                <span>This is for pre-order. Shipping takes 2 to 4 weeks.</span>
+                            </li>
+                            <li className='flex items-start'>
+                                <span className='mr-2'>⚠️</span>
+                                <span>Sterile - For Research Use Only.</span>
+                            </li>
+                            <li className='flex items-start'>
+                                <span className='mr-2'>•</span>
+                                <span>Compounded drug products are not FDA or Health Canada approved. FDA or Health Canada does not evaluate compounded products for safety, effectiveness, or quality.</span>
+                            </li>
                             <li className='flex items-start'>
                                 <span className='mr-2'>•</span>
                                 <span>Orders over $1000 ship free; orders under $1000 have a flat $60 shipping fee (USD).</span>

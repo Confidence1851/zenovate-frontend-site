@@ -74,7 +74,7 @@ function CheckoutSuccessContent() {
 
         <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
           {!isLoadingOrderType && (
-            <Link href={isOrderSheet ? "/order-sheet" : "/products"}>
+            <Link href={isOrderSheet ? "/pinksky/order" : "/products"}>
               <CTAButton
                 size="lg"
                 className="py-3 h-14 w-full sm:w-auto sm:min-w-[320px]"
