@@ -593,9 +593,6 @@ const OrderSheetComponent = () => {
                                                     <div className='space-y-1'>
                                                         <p className='font-medium text-foreground'>
                                                             {product.name}
-                                                            {getProductCode(product) && (
-                                                                <span className='text-muted-foreground font-normal'> ({getProductCode(product)})</span>
-                                                            )}
                                                         </p>
                                                         {product.subtitle && (
                                                             <p className='text-sm text-muted-foreground'>{product.subtitle}</p>
@@ -785,7 +782,7 @@ const OrderSheetComponent = () => {
                                 <span>This is for pre-order. Shipping takes 2 to 4 weeks.</span>
                             </li>
                             <li className='flex items-start'>
-                                <span className='mr-2'>⚠️</span>
+                                <span className='mr-2'>•</span>
                                 <span>Sterile - For Research Use Only.</span>
                             </li>
                             <li className='flex items-start'>
@@ -809,7 +806,7 @@ const OrderSheetComponent = () => {
                         {/* Contact Information */}
                         <div className='pt-4 space-y-2 text-sm md:text-base'>
                             <p>
-                                <strong>For general and order related information</strong>{' '}
+                                <strong>For general and order related information, please send an email to</strong>{' '}
                                 <a href='mailto:info@zenovate.health' className='text-blue-600 underline'>info@zenovate.health</a>
                             </p>
                         </div>
