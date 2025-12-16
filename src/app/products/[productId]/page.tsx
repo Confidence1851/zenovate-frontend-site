@@ -22,6 +22,8 @@ import { CheckoutModal } from '@/components/products-page/CheckoutModal';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { ErrorDisplay } from '@/components/common/ErrorDisplay';
+import { useCartStore } from '@/stores/cartStore';
+import toast from 'react-hot-toast';
 
 
 
@@ -32,6 +34,7 @@ export default function ProductDetails({ params }: { params: { productId: string
 	let product: Product | undefined = undefined
 	const [isCheckoutModalOpen, setIsCheckoutModalOpen] = useState(false)
 	const [selectedPrice, setSelectedPrice] = useState<Price | null>(null)
+	const addToCart = useCartStore((state) => state.addToCart)
 
 	const {
 		data: productData,
@@ -238,21 +241,48 @@ export default function ProductDetails({ params }: { params: { productId: string
 					<div className='py-6'></div>
 					{product.checkout_type === 'direct' ? (
 						<>
-							<CTAButton
-								type='button'
-								onClick={() => {
-									if (!selectedPrice && product.price && product.price.length > 0) {
-										// Auto-select first price if none selected
-										setSelectedPrice(product.price[0])
-									}
-									setIsCheckoutModalOpen(true)
-								}}
-								disabled={!selectedPrice && (!product.price || product.price.length === 0)}
-								aria-label="Checkout"
-								size='lg'
-							>
-								CHECKOUT
-							</CTAButton>
+							<div className='flex flex-col sm:flex-row gap-4'>
+								<CTAButton
+									type='button'
+									onClick={() => {
+										if (!selectedPrice && product.price && product.price.length > 0) {
+											// Auto-select first price if none selected
+											setSelectedPrice(product.price[0])
+										}
+										setIsCheckoutModalOpen(true)
+									}}
+									disabled={!selectedPrice && (!product.price || product.price.length === 0)}
+									aria-label="Checkout"
+									size='lg'
+									className='flex-1'
+								>
+									CHECKOUT
+								</CTAButton>
+								<Button
+									type='button'
+									variant='outline'
+									onClick={() => {
+										if (!selectedPrice && product.price && product.price.length > 0) {
+											// Auto-select first price if none selected
+											setSelectedPrice(product.price[0])
+											toast.error('Please select a price option first')
+											return
+										}
+										if (!selectedPrice) {
+											toast.error('Please select a price option first')
+											return
+										}
+										addToCart(product, selectedPrice, 1)
+										toast.success('Product added to cart')
+									}}
+									disabled={!selectedPrice && (!product.price || product.price.length === 0)}
+									aria-label="Add to Cart"
+									size='lg'
+									className='flex-1'
+								>
+									ADD TO CART
+								</Button>
+							</div>
 							{selectedPrice && (
 								<CheckoutModal
 									open={isCheckoutModalOpen}

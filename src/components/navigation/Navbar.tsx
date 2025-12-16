@@ -21,6 +21,9 @@ import NavFeatureProducts from '../products-page/NavFeaturedProducts'
 import DropdownCardsCont from './DropdownCardsCont'
 import { signOut, useSession } from 'next-auth/react'
 import Link from 'next/link'
+import { CartIconButton } from '@/components/cart/CartIconButton'
+import { CartSidebar } from '@/components/cart/CartSidebar'
+import { useState } from 'react'
 
 interface NavItemWithDropdown {
 	label: string
@@ -115,6 +118,7 @@ const navLinks: NavItem[] = [
 export default function Navbar() {
 	// const [activeImage, setActiveImage] = useState<string | null>(null)
 	const { data: session } = useSession()
+	const [isCartOpen, setIsCartOpen] = useState(false)
 
 	function handleLogout() {
 		signOut({
@@ -176,6 +180,8 @@ export default function Navbar() {
 					</NavigationMenu>
 
 					<div className='flex items-center gap-4'>
+						<CartIconButton onClick={() => setIsCartOpen(true)} />
+						<CartSidebar open={isCartOpen} onOpenChange={setIsCartOpen} />
 						{!session ? (
 							<>
 								{/* <Link href='https://application.zenovate.health'>

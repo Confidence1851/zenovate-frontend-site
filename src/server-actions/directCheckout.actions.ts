@@ -212,13 +212,15 @@ export async function applyDiscountToCheckout(
  * Process direct checkout payment
  */
 export async function processDirectCheckout(
-  checkoutId: string
+  checkoutId: string,
+  recaptchaToken?: string
 ): Promise<ProcessPaymentResponse> {
   try {
     const response = await axios.post(
       baseUrl('/direct-checkout/process'),
       {
         checkout_id: checkoutId,
+        recaptcha_token: recaptchaToken,
       }
     );
 
@@ -306,6 +308,61 @@ export async function getCheckoutInfo(
     }
 
     throw new Error(error.message || 'Failed to get payment information');
+  }
+}
+
+export interface CartSummaryParams {
+  products: Array<{
+    product_id: number
+    price_id: string
+    quantity: number
+  }>
+  discount_code?: string | null
+}
+
+export interface CartSummary {
+  sub_total: number
+  discount_code: string | null
+  discount_amount: number
+  tax_rate: number
+  tax_amount: number
+  shipping_fee: number
+  total: number
+  currency: string
+}
+
+/**
+ * Calculate cart summary without creating a checkout
+ */
+export async function calculateCartSummary(
+  params: CartSummaryParams
+): Promise<CartSummary> {
+  try {
+    const response = await axios.post(
+      baseUrl('/direct-checkout/cart/summary'),
+      params
+    );
+
+    if (response.data.success && response.data.data) {
+      return response.data.data;
+    }
+
+    throw new Error(response.data.message || 'Failed to calculate cart summary');
+  } catch (error: any) {
+    if (error.response?.status === 422 || error.response?.status === 400) {
+      const message = error.response?.data?.message || error.response?.data?.error || 'Validation failed';
+      throw new Error(message);
+    }
+
+    if (error.response?.data?.message) {
+      throw new Error(error.response.data.message);
+    }
+
+    if (axios.isAxiosError(error) && !error.response) {
+      throw new Error('Network error. Please check your connection and try again.');
+    }
+
+    throw new Error(error.message || 'Failed to calculate cart summary');
   }
 }
 

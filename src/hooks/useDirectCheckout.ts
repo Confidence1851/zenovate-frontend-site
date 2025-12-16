@@ -26,7 +26,7 @@ interface UseDirectCheckoutReturn {
   ) => Promise<void>;
   applyDiscount: (discountCode: string) => Promise<void>;
   removeDiscount: () => Promise<void>;
-  processPayment: () => Promise<ProcessPaymentResponse>;
+  processPayment: (recaptchaToken?: string) => Promise<ProcessPaymentResponse>;
   clearError: () => void;
   resetCheckout: () => void;
 }
@@ -145,7 +145,7 @@ export function useDirectCheckout(): UseDirectCheckoutReturn {
     [checkoutData]
   );
 
-  const processPayment = useCallback(async () => {
+  const processPayment = useCallback(async (recaptchaToken?: string) => {
     if (!checkoutData) {
       throw new Error('Checkout not initialized');
     }
@@ -153,7 +153,7 @@ export function useDirectCheckout(): UseDirectCheckoutReturn {
     setIsLoading(true);
     setError(null);
     try {
-      const result = await processDirectCheckout(checkoutData.checkout_id);
+      const result = await processDirectCheckout(checkoutData.checkout_id, recaptchaToken);
       return result;
     } catch (err: any) {
       const errorMessage = err.message || 'Failed to process payment';

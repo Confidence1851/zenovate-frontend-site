@@ -14,6 +14,7 @@ import { Label } from '@/components/ui/label'
 import { useDirectCheckout } from '@/hooks/useDirectCheckout'
 import { Product, Price } from '@/types'
 import { CTAButton } from '@/components/common/CTAButton'
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 
 interface CheckoutModalProps {
   open: boolean
@@ -27,11 +28,10 @@ interface CheckoutModalProps {
     lastName: string
     email: string
     phone: string
-    accountNumber: string
-    location: string
     shippingAddress?: string
     additionalInformation?: string
   }
+  onCheckoutSuccess?: () => void
 }
 
 type UseType = 'patient' | 'clinic' | null
@@ -49,7 +49,8 @@ export function CheckoutModal({
   selectedPrice,
   mode = 'single',
   orderSheetProducts,
-  orderSheetCustomerInfo
+  orderSheetCustomerInfo,
+  onCheckoutSuccess
 }: CheckoutModalProps) {
   const {
     checkoutData,
@@ -73,6 +74,7 @@ export function CheckoutModal({
     email: '',
   })
   const [formErrors, setFormErrors] = useState<Partial<CustomerInfo>>({})
+  const { executeRecaptcha } = useGoogleReCaptcha()
 
   const isOrderSheet = mode === 'order-sheet'
   const requiresSelection = !isOrderSheet && (product.requires_patient_clinic_selection ?? false)
@@ -94,6 +96,8 @@ export function CheckoutModal({
       setDiscountCode(checkoutData.discount_code)
     }
   }, [checkoutData?.discount_code])
+
+  // Note: onCheckoutSuccess will be called when payment is processed (in handleProceedToCheckout)
 
   const validateForm = (): boolean => {
     const errors: Partial<CustomerInfo> = {}
@@ -131,9 +135,9 @@ export function CheckoutModal({
         last_name: orderSheetCustomerInfo.lastName,
         email: orderSheetCustomerInfo.email,
         phone: orderSheetCustomerInfo.phone,
-        account_number: orderSheetCustomerInfo.accountNumber,
-        location: orderSheetCustomerInfo.location,
-        shipping_address: orderSheetCustomerInfo.shippingAddress,
+        account_number: '',
+        location: '',
+        shipping_address: undefined,
         additional_information: orderSheetCustomerInfo.additionalInformation,
       })
       return
@@ -183,8 +187,22 @@ export function CheckoutModal({
   const handleProceedToCheckout = async () => {
     if (!checkoutData) return
 
+    if (!executeRecaptcha) {
+      // If reCAPTCHA is not loaded, proceed without it (for development/fallback)
+      console.warn('reCAPTCHA not loaded, proceeding without verification');
+    }
+
     try {
-      const result = await processPayment()
+      let recaptchaToken: string | undefined;
+      if (executeRecaptcha) {
+        recaptchaToken = await executeRecaptcha('checkout_submission');
+      }
+
+      const result = await processPayment(recaptchaToken);
+      // Call onCheckoutSuccess before redirect (cart will be cleared)
+      if (onCheckoutSuccess && result.redirect_url) {
+        onCheckoutSuccess();
+      }
       // Redirect to Stripe checkout in same window
       if (result.redirect_url) {
         window.location.href = result.redirect_url
@@ -348,20 +366,6 @@ export function CheckoutModal({
                     <span className="font-medium">Phone</span>
                     <span>{orderSheetCustomerInfo.phone}</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="font-medium">Account #</span>
-                    <span>{orderSheetCustomerInfo.accountNumber}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="font-medium">Location</span>
-                    <span>{orderSheetCustomerInfo.location}</span>
-                  </div>
-                  {orderSheetCustomerInfo.shippingAddress && (
-                    <div className="flex justify-between">
-                      <span className="font-medium">Shipping</span>
-                      <span className="text-right max-w-[240px]">{orderSheetCustomerInfo.shippingAddress}</span>
-                    </div>
-                  )}
                 </div>
               )}
 

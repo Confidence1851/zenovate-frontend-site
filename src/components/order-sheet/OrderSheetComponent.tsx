@@ -13,6 +13,7 @@ import { Label } from '../ui/label'
 import { Button } from '../ui/button'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
 import { useSearchParams } from 'next/navigation'
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 
 interface ProductQuantity {
     productId: number
@@ -47,6 +48,7 @@ const OrderSheetComponent = () => {
     const [storedCheckoutData, setStoredCheckoutData] = useState<any>(null)
     const [quantitiesApplied, setQuantitiesApplied] = useState(false)
     const searchParams = useSearchParams()!
+    const { executeRecaptcha } = useGoogleReCaptcha()
 
     const {
         data: productsData,
@@ -279,7 +281,15 @@ const OrderSheetComponent = () => {
             const checkout = await initOrderSheetCheckout(payload)
             setDiscountAmount(Number(checkout.discount_amount) || 0)
 
-            const result = await processDirectCheckout(checkout.checkout_id)
+            // Execute reCAPTCHA before processing payment
+            let recaptchaToken: string | undefined;
+            if (executeRecaptcha) {
+                recaptchaToken = await executeRecaptcha('checkout_submission');
+            } else {
+                console.warn('reCAPTCHA not loaded, proceeding without verification');
+            }
+
+            const result = await processDirectCheckout(checkout.checkout_id, recaptchaToken)
 
             if (result.redirect_url) {
                 window.location.href = result.redirect_url
