@@ -24,6 +24,11 @@ const nextConfig = {
 				pathname: '/api/get-file/**',
 			},
 			{
+				protocol: 'http',
+				hostname: 'localhost',
+				pathname: '/api/get-file/**',
+			},
+			{
 				protocol: 'https',
 				hostname: '**',
 				pathname: '/api/get-file/**',

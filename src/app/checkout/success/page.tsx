@@ -10,6 +10,7 @@ import MainLayout from '@/app/layouts/MainLayout'
 import { Suspense } from 'react'
 import { useSession } from 'next-auth/react'
 import { getCheckoutInfo } from '@/server-actions/directCheckout.actions'
+import { useCartStore } from '@/stores/cartStore'
 
 function CheckoutSuccessContent() {
   const searchParams = useSearchParams()
@@ -18,19 +19,28 @@ function CheckoutSuccessContent() {
   const isLoggedIn = !!session
   const [orderType, setOrderType] = useState<string | null>(null)
   const [isLoadingOrderType, setIsLoadingOrderType] = useState(false)
+  const clearCart = useCartStore((state) => state.clearCart)
+  const [cartCleared, setCartCleared] = useState(false)
 
   // Clear stored form data on successful checkout
   useEffect(() => {
     sessionStorage.removeItem('orderSheetFormData')
   }, [])
 
-  // Fetch order type if payment reference exists
+  // Fetch order type if payment reference exists and clear cart for order_sheet
   useEffect(() => {
     if (paymentRef) {
       setIsLoadingOrderType(true)
       getCheckoutInfo(paymentRef)
         .then((data) => {
-          setOrderType(data.order_type || 'regular')
+          const orderTypeValue = data.order_type || 'regular'
+          setOrderType(orderTypeValue)
+          
+          // Clear cart only for order_sheet type and only once
+          if (orderTypeValue === 'order_sheet' && !cartCleared) {
+            clearCart()
+            setCartCleared(true)
+          }
         })
         .catch((error) => {
           console.error('Failed to get payment info:', error)
@@ -41,7 +51,7 @@ function CheckoutSuccessContent() {
           setIsLoadingOrderType(false)
         })
     }
-  }, [paymentRef])
+  }, [paymentRef, clearCart, cartCleared])
 
   const isOrderSheet = orderType === 'order_sheet'
 

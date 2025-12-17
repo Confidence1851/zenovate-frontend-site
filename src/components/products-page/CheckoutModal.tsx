@@ -407,7 +407,7 @@ export function CheckoutModal({
               </div>
 
               {/* Discount Code Input */}
-              { (isOrderSheet || !requiresSelection || useType) && (
+              {(isOrderSheet || !requiresSelection || useType) && (
                 <div className="space-y-2">
                   <Label htmlFor="discount-code">Discount Code (Optional)</Label>
                   <div className="flex gap-2">
