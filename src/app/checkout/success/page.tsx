@@ -27,7 +27,7 @@ function CheckoutSuccessContent() {
     sessionStorage.removeItem('orderSheetFormData')
   }, [])
 
-  // Fetch order type if payment reference exists and clear cart for order_sheet
+  // Fetch order type if payment reference exists and clear cart for order_sheet and cart types
   useEffect(() => {
     if (paymentRef) {
       setIsLoadingOrderType(true)
@@ -36,8 +36,8 @@ function CheckoutSuccessContent() {
           const orderTypeValue = data.order_type || 'regular'
           setOrderType(orderTypeValue)
           
-          // Clear cart only for order_sheet type and only once
-          if (orderTypeValue === 'order_sheet' && !cartCleared) {
+          // Clear cart for order_sheet and cart types (only once)
+          if ((orderTypeValue === 'order_sheet' || orderTypeValue === 'cart') && !cartCleared) {
             clearCart()
             setCartCleared(true)
           }

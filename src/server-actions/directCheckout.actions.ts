@@ -32,7 +32,7 @@ export interface OrderSheetInitParams {
 export interface DirectCheckoutData {
   checkout_id: string;
   form_session_id: string;
-  order_type?: 'regular' | 'order_sheet';
+  order_type?: 'regular' | 'order_sheet' | 'cart';
   product_id?: number;
   price_id?: string;
   use_type?: 'patient' | 'clinic' | null;
@@ -163,6 +163,41 @@ export async function initOrderSheetCheckout(
     }
 
     throw new Error(error.message || 'Failed to initialize order sheet checkout');
+  }
+}
+
+/**
+ * Initialize cart checkout
+ */
+export async function initCartCheckout(
+  params: OrderSheetInitParams
+): Promise<DirectCheckoutData> {
+  try {
+    const response = await axios.post(
+      baseUrl('/direct-checkout/cart/init'),
+      params
+    );
+
+    if (response.data.success && response.data.data) {
+      return response.data.data;
+    }
+
+    throw new Error(response.data.message || 'Failed to initialize cart checkout');
+  } catch (error: any) {
+    if (error.response?.status === 422 || error.response?.status === 400) {
+      const message = error.response?.data?.message || error.response?.data?.error || 'Validation failed';
+      throw new Error(message);
+    }
+
+    if (error.response?.data?.message) {
+      throw new Error(error.response.data.message);
+    }
+
+    if (axios.isAxiosError(error) && !error.response) {
+      throw new Error('Network error. Please check your connection and try again.');
+    }
+
+    throw new Error(error.message || 'Failed to initialize cart checkout');
   }
 }
 
