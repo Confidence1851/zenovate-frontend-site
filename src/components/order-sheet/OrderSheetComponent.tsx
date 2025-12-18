@@ -60,7 +60,7 @@ const OrderSheetComponent = () => {
     })
 
     const products: Product[] = productsData?.data || []
-    const quantityOptions = [0, 1, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50]
+    const quantityOptions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 30, 50, 100]
 
     const getUsdPrice = (product: Product): Price | null => {
         if (!product.price || product.price.length === 0) return null
