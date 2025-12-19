@@ -1,5 +1,17 @@
 const CryptoJS = require('crypto-js');
 
+/**
+ * Format a number with commas as thousands separators and 2 decimal places
+ * @param value - The number to format
+ * @returns Formatted string (e.g., "1,021.37")
+ */
+export const formatPrice = (value: number): string => {
+    return new Intl.NumberFormat('en-US', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    }).format(value);
+};
+
 export const redirectToProductForm = (id: string | number) => {
     const data = {
         "key": "selected_products",

@@ -7,7 +7,7 @@ import {
 
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import Image from 'next/image'
-import { redirectToProductForm } from '@/utils/functions'
+import { redirectToProductForm, formatPrice } from '@/utils/functions'
 import { useQuery } from '@tanstack/react-query'
 import { productInfo } from '@/server-actions/api.actions'
 import { Product, Price } from '@/types'
@@ -110,6 +110,11 @@ export default function ProductDetails({ params }: { params: { productId: string
 		lowestPrice = Math.min(...usdPrices);
 	}
 
+	// Filter out prices with frequency === 1 for display
+	const displayPrices = product.price && Array.isArray(product.price)
+		? product.price.filter(price => price.frequency !== 1)
+		: [];
+
 	// Get product images from API
 	const getProductImageUrls = (): string[] => {
 		if (product?.image_url) {
@@ -193,10 +198,10 @@ export default function ProductDetails({ params }: { params: { productId: string
 					</div>
 
 					{/* Price Selection (for direct checkout) */}
-					{product.checkout_type === 'direct' && product.price && product.price.length > 0 && (
+					{product.checkout_type === 'direct' && displayPrices && displayPrices.length > 0 && (
 						<div className={styles.productDetailsContainer}>
 							{/* Check if this is a peptide product (no frequency/unit on first price) */}
-							{product.price[0] && !product.price[0].frequency && !product.price[0].unit && (
+							{displayPrices[0] && !displayPrices[0].frequency && !displayPrices[0].unit && (
 								<p className='text-sm text-muted-foreground mb-3 italic break-words' style={{ overflowWrap: 'anywhere' }}>
 									This is for pre-order. Shipping takes 2 to 4 weeks.
 								</p>
@@ -205,7 +210,7 @@ export default function ProductDetails({ params }: { params: { productId: string
 								Select Pricing
 							</p>
 							<div className='space-y-2'>
-								{product.price.map((price, index) => {
+								{displayPrices.map((price, index) => {
 									// For peptides, show just the price (no frequency/unit)
 									// Check if this is a peptide product (no frequency/unit)
 									const isPeptide = !price.frequency || !price.unit;
@@ -222,7 +227,7 @@ export default function ProductDetails({ params }: { params: { productId: string
 												{isPeptide ? 'Price' : `${price.frequency} ${price.unit}`}
 											</span>
 											<span className="font-semibold whitespace-nowrap flex-shrink-0">
-												${price.value.toFixed(2)}
+												${formatPrice(price.value)}
 											</span>
 										</Button>
 									);
@@ -245,13 +250,13 @@ export default function ProductDetails({ params }: { params: { productId: string
 								<CTAButton
 									type='button'
 									onClick={() => {
-										if (!selectedPrice && product.price && product.price.length > 0) {
+										if (!selectedPrice && displayPrices && displayPrices.length > 0) {
 											// Auto-select first price if none selected
-											setSelectedPrice(product.price[0])
+											setSelectedPrice(displayPrices[0])
 										}
 										setIsCheckoutModalOpen(true)
 									}}
-									disabled={!selectedPrice && (!product.price || product.price.length === 0)}
+									disabled={!selectedPrice && (!displayPrices || displayPrices.length === 0)}
 									aria-label="Checkout"
 									size='lg'
 									className='flex-1'
@@ -262,9 +267,9 @@ export default function ProductDetails({ params }: { params: { productId: string
 									type='button'
 									variant='outline'
 									onClick={() => {
-										if (!selectedPrice && product.price && product.price.length > 0) {
+										if (!selectedPrice && displayPrices && displayPrices.length > 0) {
 											// Auto-select first price if none selected
-											setSelectedPrice(product.price[0])
+											setSelectedPrice(displayPrices[0])
 											toast.error('Please select a price option first')
 											return
 										}
@@ -275,7 +280,7 @@ export default function ProductDetails({ params }: { params: { productId: string
 										addToCart(product, selectedPrice, 1)
 										toast.success('Product added to cart')
 									}}
-									disabled={!selectedPrice && (!product.price || product.price.length === 0)}
+									disabled={!selectedPrice && (!displayPrices || displayPrices.length === 0)}
 									aria-label="Add to Cart"
 									size='lg'
 									className='flex-1'

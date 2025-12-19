@@ -199,6 +199,8 @@ export function CheckoutModal({
       }
 
       const result = await processPayment(recaptchaToken);
+      console.log('Payment processing result:', result);
+      
       // Call onCheckoutSuccess before redirect (cart will be cleared)
       if (onCheckoutSuccess && result.redirect_url) {
         onCheckoutSuccess();
@@ -206,9 +208,13 @@ export function CheckoutModal({
       // Redirect to Stripe checkout in same window
       if (result.redirect_url) {
         window.location.href = result.redirect_url
+      } else {
+        console.error('No redirect URL returned from payment processing:', result);
+        // Error should be set by hook, but log for debugging
       }
-    } catch (err) {
-      // Error is handled by hook
+    } catch (err: any) {
+      console.error('Error in handleProceedToCheckout:', err);
+      // Error is handled by hook, but log for debugging
     }
   }
 
