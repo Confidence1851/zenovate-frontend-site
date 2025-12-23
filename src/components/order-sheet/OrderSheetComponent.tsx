@@ -62,10 +62,11 @@ const OrderSheetComponent = () => {
     const products: Product[] = productsData?.data || []
     const quantityOptions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 30, 50, 100]
 
-    const getUsdPrice = (product: Product): Price | null => {
+    // Get price - backend already returns location-based pricing via getLocationPrice
+    // So we just use the first price which will be in the correct currency
+    const getProductPrice = (product: Product): Price | null => {
         if (!product.price || product.price.length === 0) return null
-        const usd = product.price.find(p => p.currency === 'USD')
-        return usd || product.price[0]
+        return product.price[0] // Backend already filters by location
     }
 
     const selectedProducts = useMemo(() => {
@@ -74,7 +75,7 @@ const OrderSheetComponent = () => {
                 const pq = quantities[product.id]
                 const quantity = pq?.quantity || 0
                 if (!pq?.selected || quantity <= 0) return null
-                const price = getUsdPrice(product)
+                const price = getProductPrice(product)
                 if (!price) return null
                 return { product, price, quantity }
             })
@@ -115,23 +116,32 @@ const OrderSheetComponent = () => {
         return product.slug.toUpperCase().replace(/-/g, '') || `PRD${product.id}`
     }
 
-    const formatCurrency = (amount: number): string => {
-        return new Intl.NumberFormat('en-US', {
+    // Get currency from first product's price (backend already sets correct currency)
+    const getCurrency = (): string => {
+        if (products.length > 0 && products[0].price && products[0].price.length > 0) {
+            return products[0].price[0].currency || 'USD'
+        }
+        return 'USD'
+    }
+
+    const formatCurrency = (amount: number, currency?: string): string => {
+        const curr = currency || getCurrency()
+        return new Intl.NumberFormat(curr === 'CAD' ? 'en-CA' : 'en-US', {
             style: 'currency',
-            currency: 'USD',
+            currency: curr,
             minimumFractionDigits: 2,
             maximumFractionDigits: 2
         }).format(amount)
     }
 
-    const getProductPrice = (product: Product): string => {
-        const price = getUsdPrice(product)
-        if (!price) return '$0.00'
-        return formatCurrency(price.value)
+    const getProductPriceDisplay = (product: Product): string => {
+        const price = getProductPrice(product)
+        if (!price) return formatCurrency(0)
+        return formatCurrency(price.value, price.currency)
     }
 
     const getProductPriceValue = (product: Product): number => {
-        const price = getUsdPrice(product)
+        const price = getProductPrice(product)
         return price ? price.value : 0
     }
 
@@ -613,7 +623,7 @@ const OrderSheetComponent = () => {
                                                     <span className='text-sm font-mono'>{getProductCode(product)}</span>
                                                 </td>
                                                 <td className='p-4'>
-                                                    <span className='font-semibold'>{getProductPrice(product)}</span>
+                                                    <span className='font-semibold'>{getProductPriceDisplay(product)}</span>
                                                 </td>
                                                 <td className='p-4'>
                                                     <Select

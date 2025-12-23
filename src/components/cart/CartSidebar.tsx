@@ -417,7 +417,7 @@ export function CartSidebar({ open, onOpenChange }: CartSidebarProps) {
                                                     )}
                                                     {item.selectedPrice.frequency && item.selectedPrice.unit && (
                                                         <p className="text-xs text-muted-foreground">
-                                                            {item.selectedPrice.frequency} {item.selectedPrice.unit}
+                                                            {item.selectedPrice.display_name || `${item.selectedPrice.frequency} ${item.selectedPrice.unit}`}
                                                         </p>
                                                     )}
                                                 </div>

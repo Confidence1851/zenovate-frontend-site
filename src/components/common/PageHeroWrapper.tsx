@@ -31,19 +31,27 @@ const PageHeroWrapper: React.FC<PageHeroWrapperProps> = ({ description, heading,
 						priority
 						sizes="100vw"
 					/>
-					{/* Dark overlay for better text contrast */}
-					<div className="absolute inset-0 bg-black/40 z-0" />
+					{/* Dark overlay for better text contrast - only show if text is present */}
+					{(heading || description) && (
+						<div className="absolute inset-0 bg-black/40 z-0" />
+					)}
 				</>
 			)}
 
-			<div className='relative z-10 md-container h-full flex justify-end flex-col pb-10 sm:pb-16 '>
-				<div className='w-full max-w-[750px] flex flex-col gap-3 md:gap-5'>
-					<h1 className={`${textColor} text-2xl md:text-4xl lg:text-5xl leading-normal md:leading-[1.3] lg:leading-[1.3] uppercase font-bold lg:tracking-wider ${image ? 'drop-shadow-lg' : ''}`}>
-						{heading} {coloredHeading && <span className='text-Green-300'>{coloredHeading}</span>}
-					</h1>
-					<p className={`${textColor} text-base lg:text-xl lg:leading-8 ${image ? 'drop-shadow-md' : ''}`}>{description}</p>
+			{(heading || description) && (
+				<div className='relative z-10 md-container h-full flex justify-end flex-col pb-10 sm:pb-16 '>
+					<div className='w-full max-w-[750px] flex flex-col gap-3 md:gap-5'>
+						{heading && (
+							<h1 className={`${textColor} text-2xl md:text-4xl lg:text-5xl leading-normal md:leading-[1.3] lg:leading-[1.3] uppercase font-bold lg:tracking-wider ${image ? 'drop-shadow-lg' : ''}`}>
+								{heading} {coloredHeading && <span className='text-Green-300'>{coloredHeading}</span>}
+							</h1>
+						)}
+						{description && (
+							<p className={`${textColor} text-base lg:text-xl lg:leading-8 ${image ? 'drop-shadow-md' : ''}`}>{description}</p>
+						)}
+					</div>
 				</div>
-			</div>
+			)}
 
 
 		</section>

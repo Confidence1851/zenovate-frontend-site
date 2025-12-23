@@ -19,9 +19,8 @@ const OrderSheetPage = () => {
 	return (
 		<MainLayout>
 			<main className='bg-background'>
+				{/* Hero image without overlay text */}
 				<PageHeroWrapper
-					heading='order sheet'
-					description="Browse our complete selection of premium wellness products. Select the quantities you need and place your order with ease."
 					image={{
 						src: heroImage,
 						alt: "Order sheet page hero image"
@@ -30,8 +29,17 @@ const OrderSheetPage = () => {
 					size='short'
 				/>
 
-				<section className='py-10 md:py-16 lg:py-20'>
+				{/* New section with title and subtitle in black text */}
+				<section className='bg-background py-10 md:py-16 lg:py-20'>
 					<div className='xmd-container'>
+						<div className='flex flex-col gap-3 md:gap-5 mb-8 md:mb-12'>
+							<h1 className='text-foreground text-2xl md:text-4xl lg:text-5xl leading-normal md:leading-[1.3] lg:leading-[1.3] uppercase font-bold lg:tracking-wider'>
+								order sheet
+							</h1>
+							<p className='text-foreground text-base lg:text-xl lg:leading-8'>
+								Browse our complete selection of premium wellness products. Select the quantities you need and place your order with ease.
+							</p>
+						</div>
 						<Suspense fallback={<div className="text-center py-10">Loading...</div>}>
 							<OrderSheetComponent />
 						</Suspense>
@@ -43,6 +51,7 @@ const OrderSheetPage = () => {
 }
 
 export default OrderSheetPage
+
 
 
 

@@ -251,7 +251,7 @@ export function CheckoutModal({
           <DialogDescription>
             {isOrderSheet
               ? 'Order Sheet Checkout'
-              : `${product.name} ${selectedPrice?.frequency && selectedPrice?.unit ? `- ${selectedPrice.frequency} ${selectedPrice.unit}` : ''}`}
+              : `${product.name} ${selectedPrice?.display_name || (selectedPrice?.frequency && selectedPrice?.unit ? `- ${selectedPrice.frequency} ${selectedPrice.unit}` : '')}`}
           </DialogDescription>
         </DialogHeader>
 

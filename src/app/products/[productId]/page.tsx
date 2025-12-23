@@ -224,7 +224,7 @@ export default function ProductDetails({ params }: { params: { productId: string
 											onClick={() => setSelectedPrice(price)}
 										>
 											<span className="break-words text-left flex-1 min-w-0" style={{ overflowWrap: 'anywhere' }}>
-												{isPeptide ? 'Price' : `${price.frequency} ${price.unit}`}
+												{isPeptide ? 'Price' : (price.display_name || `${price.frequency} ${price.unit}`)}
 											</span>
 											<span className="font-semibold whitespace-nowrap flex-shrink-0">
 												${formatPrice(price.value)}

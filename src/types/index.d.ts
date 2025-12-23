@@ -207,6 +207,8 @@ type Price = {
 	value: number;
 	currency: string;
 	id: string;
+	pens?: number;
+	display_name?: string;
 };
 
 type ProductCategory = {

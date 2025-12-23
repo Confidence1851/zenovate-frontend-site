@@ -7,7 +7,8 @@ export default function ProductTable({products, paymentProducts}: {products: Pro
 		const lowestPrice = product.price.reduce((min, current) => 
 			current.value < min.value ? current : min
 		);
-		return `Starts at ${lowestPrice.currency}${lowestPrice.value} / ${lowestPrice.frequency} ${lowestPrice.unit}s`;
+		const priceLabel = lowestPrice.display_name || (lowestPrice.frequency && lowestPrice.unit ? `${lowestPrice.frequency} ${lowestPrice.unit}s` : '');
+		return `Starts at ${lowestPrice.currency}${lowestPrice.value}${priceLabel ? ` / ${priceLabel}` : ''}`;
 	}
 	
 	return (
