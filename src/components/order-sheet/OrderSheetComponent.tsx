@@ -163,23 +163,30 @@ const OrderSheetComponent = () => {
         // Calculate shipping
         const shippingFee = subtotal >= freeShippingThreshold ? 0 : defaultShippingFee
 
-        // Calculate subtotal + shipping (before discount)
-        const subtotalWithShipping = subtotal + shippingFee
+        // Apply discount to subtotal only (not including shipping)
+        // This matches the backend calculation and Stripe's behavior
+        // Shipping is NOT discounted - it's a separate shipping_option in Stripe
+        let appliedDiscount = 0
+        let discountedSubtotal = subtotal
+        
+        if (discountAmount > 0) {
+            // Apply discount to subtotal only (matching backend calculation)
+            appliedDiscount = Math.min(discountAmount, subtotal)
+            discountedSubtotal = Math.max(0, subtotal - appliedDiscount)
+        }
 
-        // Apply discount to subtotal + shipping
-        const appliedDiscount = Math.min(discountAmount, subtotalWithShipping)
-        const discountedAmount = Math.max(0, subtotalWithShipping - appliedDiscount)
+        // Calculate tax on discounted subtotal only (NOT including shipping)
+        // This matches Stripe's calculation - tax is only on products, not shipping
+        const taxAmount = discountedSubtotal * (taxRate / 100)
 
-        // Calculate tax on discounted amount
-        const taxAmount = discountedAmount * (taxRate / 100)
-
-        // Calculate grand total
-        const grandTotal = discountedAmount + taxAmount
+        // Calculate grand total: discounted subtotal + shipping + tax
+        // Shipping is never discounted (matches backend and Stripe behavior)
+        const grandTotal = discountedSubtotal + shippingFee + taxAmount
 
         return {
             subtotal,
             taxAmount,
-            shippingFee,
+            shippingFee, // Shipping is never discounted
             discountAmount: appliedDiscount,
             grandTotal,
             taxRate,
@@ -741,11 +748,11 @@ const OrderSheetComponent = () => {
                         <div className='w-full max-w-md space-y-2'>
                             <div className='flex justify-between items-center'>
                                 <span className='font-medium'>Subtotal:</span>
-                                <span className='font-medium'>{formatCurrency(pricing.subtotal)} USD</span>
+                                <span className='font-medium'>{formatCurrency(pricing.subtotal)} {getCurrency()}</span>
                             </div>
                             <div className='flex justify-between items-center'>
                                 <span className='font-medium'>Tax ({pricing.taxRate}%):</span>
-                                <span className='font-medium'>{formatCurrency(pricing.taxAmount)} USD</span>
+                                <span className='font-medium'>{formatCurrency(pricing.taxAmount)} {getCurrency()}</span>
                             </div>
                             <div className='flex justify-between items-center'>
                                 <span className='font-medium'>Shipping:</span>
@@ -753,24 +760,24 @@ const OrderSheetComponent = () => {
                                     {pricing.shippingFee === 0 ? (
                                         <span className='text-green-600'>FREE</span>
                                     ) : (
-                                        `${formatCurrency(pricing.shippingFee)} USD`
+                                        `${formatCurrency(pricing.shippingFee)} ${getCurrency()}`
                                     )}
                                 </span>
                             </div>
                             {pricing.discountAmount > 0 && (
                                 <div className='flex justify-between items-center'>
                                     <span className='font-medium'>Discount:</span>
-                                    <span className='font-medium text-green-700'>-{formatCurrency(pricing.discountAmount)} USD</span>
+                                    <span className='font-medium text-green-700'>-{formatCurrency(pricing.discountAmount)} {getCurrency()}</span>
                                 </div>
                             )}
                             {pricing.subtotal >= 1000 && (
                                 <div className='text-sm text-green-600 italic'>
-                                    Free shipping on orders over $1000
+                                    Free shipping on orders over {formatCurrency(1000)}
                                 </div>
                             )}
                             <div className='flex justify-between items-center border-t pt-2 mt-2'>
                                 <span className='font-bold text-lg'>Grand Total:</span>
-                                <span className='font-bold text-lg'>{formatCurrency(pricing.grandTotal)} USD</span>
+                                <span className='font-bold text-lg'>{formatCurrency(pricing.grandTotal)} {getCurrency()}</span>
                             </div>
                         </div>
                     </div>
@@ -811,7 +818,7 @@ const OrderSheetComponent = () => {
                             </li>
                             <li className='flex items-start'>
                                 <span className='mr-2'>•</span>
-                                <span>Orders over $1000 ship free; orders under $1000 have a flat $60 shipping fee (USD).</span>
+                                <span>Orders over {formatCurrency(1000)} ship free; orders under {formatCurrency(1000)} have a flat {formatCurrency(60)} shipping fee ({getCurrency()}).</span>
                             </li>
                             <li className='flex items-start'>
                                 <span className='mr-2'>•</span>
