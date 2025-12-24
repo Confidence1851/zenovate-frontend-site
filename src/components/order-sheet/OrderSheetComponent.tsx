@@ -161,7 +161,7 @@ const OrderSheetComponent = () => {
         })
 
         // Calculate shipping
-        const shippingFee = subtotal >= freeShippingThreshold ? 0 : defaultShippingFee
+        let shippingFee = subtotal >= freeShippingThreshold ? 0 : defaultShippingFee
 
         // Apply discount to subtotal only (not including shipping)
         // This matches the backend calculation and Stripe's behavior
@@ -173,6 +173,11 @@ const OrderSheetComponent = () => {
             // Apply discount to subtotal only (matching backend calculation)
             appliedDiscount = Math.min(discountAmount, subtotal)
             discountedSubtotal = Math.max(0, subtotal - appliedDiscount)
+        }
+
+        // If discount is 100% (discounted subtotal is 0), set shipping fee to 0
+        if (discountedSubtotal === 0 && appliedDiscount > 0) {
+            shippingFee = 0
         }
 
         // Calculate tax on discounted subtotal only (NOT including shipping)
