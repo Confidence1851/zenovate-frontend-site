@@ -28,6 +28,15 @@ export interface OrderSheetInitParams {
   additional_information?: string;
   discount_code?: string;
   currency?: 'USD' | 'CAD';
+  source_path?: string;
+  ref?: string;
+}
+
+export interface OrderSheetCalculateTotalsParams {
+  products: OrderSheetProductPayload[];
+  discount_code?: string;
+  currency?: 'USD' | 'CAD';
+  location?: string;
 }
 
 export interface DirectCheckoutData {
@@ -168,6 +177,42 @@ export async function initOrderSheetCheckout(
 }
 
 /**
+ * Calculate order sheet totals with discount (no side effects)
+ * Pure calculation endpoint for discount preview
+ */
+export async function calculateOrderSheetTotals(
+  params: OrderSheetCalculateTotalsParams
+): Promise<DirectCheckoutData> {
+  try {
+    const response = await axios.post(
+      baseUrl('/direct-checkout/order-sheet/calculate-totals'),
+      params
+    );
+
+    if (response.data.success && response.data.data) {
+      return response.data.data;
+    }
+
+    throw new Error(response.data.message || 'Failed to calculate totals');
+  } catch (error: any) {
+    if (error.response?.status === 422 || error.response?.status === 400) {
+      const message = error.response?.data?.message || 'Validation failed';
+      throw new Error(message);
+    }
+
+    if (error.response?.data?.message) {
+      throw new Error(error.response.data.message);
+    }
+
+    if (axios.isAxiosError(error) && !error.response) {
+      throw new Error('Network error. Please check your connection and try again.');
+    }
+
+    throw new Error(error.message || 'Failed to calculate totals');
+  }
+}
+
+/**
  * Initialize cart checkout
  */
 export async function initCartCheckout(
@@ -199,48 +244,6 @@ export async function initCartCheckout(
     }
 
     throw new Error(error.message || 'Failed to initialize cart checkout');
-  }
-}
-
-/**
- * Apply discount code to checkout
- */
-export async function applyDiscountToCheckout(
-  checkoutId: string,
-  discountCode: string
-): Promise<DirectCheckoutData> {
-  try {
-    const response = await axios.post(
-      baseUrl('/direct-checkout/apply-discount'),
-      {
-        checkout_id: checkoutId,
-        discount_code: discountCode,
-      }
-    );
-
-    if (response.data.success && response.data.data) {
-      return response.data.data;
-    }
-
-    throw new Error(response.data.message || 'Failed to apply discount');
-  } catch (error: any) {
-    // Handle validation/bad request errors
-    if (error.response?.status === 422 || error.response?.status === 400) {
-      const message = error.response?.data?.message || 'Invalid discount code';
-      throw new Error(message);
-    }
-
-    // Handle other API errors
-    if (error.response?.data?.message) {
-      throw new Error(error.response.data.message);
-    }
-
-    // Handle network errors
-    if (axios.isAxiosError(error) && !error.response) {
-      throw new Error('Network error. Please check your connection and try again.');
-    }
-
-    throw new Error(error.message || 'Failed to apply discount');
   }
 }
 

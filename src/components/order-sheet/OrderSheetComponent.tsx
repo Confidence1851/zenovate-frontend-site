@@ -4,7 +4,7 @@ import { useMemo, useState, useEffect } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { orderSheetProducts } from '@/server-actions/api.actions'
 import { Product, Price } from '@/types'
-import { getCheckoutInfo, initOrderSheetCheckout, processDirectCheckout } from '@/server-actions/directCheckout.actions'
+import { getCheckoutInfo, initOrderSheetCheckout, calculateOrderSheetTotals, processDirectCheckout } from '@/server-actions/directCheckout.actions'
 import { ErrorDisplay } from '../common/ErrorDisplay'
 import { Skeleton } from '../ui/skeleton'
 import { Input } from '../ui/input'
@@ -51,6 +51,7 @@ const OrderSheetComponent = ({ currency = 'USD' }: OrderSheetComponentProps) => 
     const [prefillDone, setPrefillDone] = useState(false)
     const [storedCheckoutData, setStoredCheckoutData] = useState<any>(null)
     const [quantitiesApplied, setQuantitiesApplied] = useState(false)
+    const [paymentRef, setPaymentRef] = useState<string | null>(null)
     const searchParams = useSearchParams()!
     const pathname = usePathname()!
     const { executeRecaptcha } = useGoogleReCaptcha()
@@ -288,7 +289,7 @@ const OrderSheetComponent = ({ currency = 'USD' }: OrderSheetComponentProps) => 
         setSubmitError(null)
         setIsSubmitting(true)
         try {
-            const payload = {
+            const payload: any = {
                 products: selectedProducts.map(item => ({
                     product_id: item.product.id,
                     price_id: item.price.id,
@@ -305,6 +306,11 @@ const OrderSheetComponent = ({ currency = 'USD' }: OrderSheetComponentProps) => 
                 discount_code: discountCode ? discountCode.trim().toUpperCase() : undefined,
                 currency,
                 source_path: pathname,
+            }
+            
+            // If resuming a cancelled payment, pass ref
+            if (paymentRef) {
+                payload.ref = paymentRef
             }
 
             const checkout = await initOrderSheetCheckout(payload)
@@ -340,6 +346,7 @@ const OrderSheetComponent = ({ currency = 'USD' }: OrderSheetComponentProps) => 
         if (!cancelled || !ref || prefillDone || isLoading) return
 
         setPrefillLoading(true)
+        setPaymentRef(ref)  // Store the ref for later use when applying discount or processing payment
         getCheckoutInfo(ref)
             .then((data) => {
                 if (data.order_type !== 'order_sheet') {
@@ -703,30 +710,24 @@ const OrderSheetComponent = ({ currency = 'USD' }: OrderSheetComponentProps) => 
                                             return
                                         }
                                         setDiscountError(null)
-                                        setDiscountNotice(null)
-                                        setIsApplyingDiscount(true)
-                                        try {
-                                            const payload = {
-                                                products: selectedProducts.map(item => ({
-                                                    product_id: item.product.id,
-                                                    price_id: item.price.id,
-                                                    quantity: item.quantity,
-                                                })),
-                                                first_name: formData.firstName,
-                                                last_name: formData.lastName,
-                                                email: formData.email,
-                                                phone: formData.phone,
-                                                account_number: formData.accountNumber,
-                                                location: formData.location,
-                                                shipping_address: formData.useShippingAddress ? formData.shippingAddress : formData.location,
-                                                additional_information: formData.additionalInformation,
-                                                discount_code: discountCode.trim().toUpperCase(),
-                                                currency,
-                                                source_path: pathname,
-                                            }
-                                            const checkout = await initOrderSheetCheckout(payload)
-                                            setDiscountAmount(Number(checkout.discount_amount) || 0)
-                                            setDiscountNotice('Discount applied.')
+                                         setDiscountNotice(null)
+                                         setIsApplyingDiscount(true)
+                                         try {
+                                             // Use pure calculation endpoint for discount preview (no side effects)
+                                             const payload = {
+                                                 products: selectedProducts.map(item => ({
+                                                     product_id: item.product.id,
+                                                     price_id: item.price.id,
+                                                     quantity: item.quantity,
+                                                 })),
+                                                 discount_code: discountCode.trim().toUpperCase(),
+                                                 currency,
+                                                 location: formData.location,
+                                             }
+                                             
+                                             const totals = await calculateOrderSheetTotals(payload)
+                                             setDiscountAmount(Number(totals.discount_amount) || 0)
+                                             setDiscountNotice('Discount applied.')
                                         } catch (err: any) {
                                             setDiscountAmount(0)
                                             setDiscountError(err?.message || 'Failed to apply discount code')

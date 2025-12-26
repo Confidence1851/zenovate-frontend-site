@@ -1,7 +1,6 @@
 import { useState, useCallback } from 'react';
 import {
   initDirectCheckout,
-  applyDiscountToCheckout,
   processDirectCheckout,
   initOrderSheetCheckout,
   DirectCheckoutData,
@@ -91,19 +90,14 @@ export function useDirectCheckout(): UseDirectCheckoutReturn {
         return;
       }
 
-      setIsLoading(true);
-      setError(null);
-      try {
-        const updatedData = await applyDiscountToCheckout(
-          checkoutData.checkout_id,
-          discountCode
-        );
-        setCheckoutData(updatedData);
-      } catch (err: any) {
-        setError(err.message || 'Failed to apply discount code');
-      } finally {
-        setIsLoading(false);
+      // Discount application is only supported for order sheets and cart checkouts
+      // For regular direct checkouts, discounts are not supported at this time
+      if (checkoutData.order_type === 'regular' || (!checkoutData.order_type && checkoutData.product_id)) {
+        setError('Discount codes are not supported for this checkout type');
+        return;
       }
+
+      setError('Discount application not implemented for this checkout type');
     },
     [checkoutData]
   );

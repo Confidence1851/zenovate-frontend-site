@@ -61,6 +61,12 @@ export default function OrderDetailPage({ params }: { params: { detailsid: strin
 			...(orderData?.completed_payment?.discount_amount ? [
 				{ prefix: 'Discount Amount', value: orderData.completed_payment.discount_amount }
 			] : []),
+			...(orderData?.completed_payment?.tax_rate ? [
+				{ prefix: 'Tax Rate', value: `${orderData.completed_payment.tax_rate}%` }
+			] : []),
+			...(orderData?.completed_payment?.tax_amount ? [
+				{ prefix: 'Tax Amount', value: orderData.completed_payment.tax_amount }
+			] : []),
 		] : []
 	}
 
