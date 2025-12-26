@@ -12,7 +12,7 @@ import { Textarea } from '../ui/textarea'
 import { Label } from '../ui/label'
 import { Button } from '../ui/button'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select'
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams, usePathname } from 'next/navigation'
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 
 interface ProductQuantity {
@@ -21,7 +21,11 @@ interface ProductQuantity {
     selected: boolean
 }
 
-const OrderSheetComponent = () => {
+interface OrderSheetComponentProps {
+    currency?: 'USD' | 'CAD'
+}
+
+const OrderSheetComponent = ({ currency = 'USD' }: OrderSheetComponentProps) => {
     const [quantities, setQuantities] = useState<Record<number, ProductQuantity>>({})
     const [formData, setFormData] = useState({
         firstName: '',
@@ -48,6 +52,7 @@ const OrderSheetComponent = () => {
     const [storedCheckoutData, setStoredCheckoutData] = useState<any>(null)
     const [quantitiesApplied, setQuantitiesApplied] = useState(false)
     const searchParams = useSearchParams()!
+    const pathname = usePathname()!
     const { executeRecaptcha } = useGoogleReCaptcha()
 
     const {
@@ -55,8 +60,8 @@ const OrderSheetComponent = () => {
         isLoading,
         error
     } = useQuery({
-        queryKey: ['order-sheet-products'],
-        queryFn: orderSheetProducts
+        queryKey: ['order-sheet-products', currency],
+        queryFn: () => orderSheetProducts(currency)
     })
 
     const products: Product[] = productsData?.data || []
@@ -298,6 +303,8 @@ const OrderSheetComponent = () => {
                 shipping_address: formData.useShippingAddress ? formData.shippingAddress : formData.location,
                 additional_information: formData.additionalInformation,
                 discount_code: discountCode ? discountCode.trim().toUpperCase() : undefined,
+                currency,
+                source_path: pathname,
             }
 
             const checkout = await initOrderSheetCheckout(payload)
@@ -714,6 +721,8 @@ const OrderSheetComponent = () => {
                                                 shipping_address: formData.useShippingAddress ? formData.shippingAddress : formData.location,
                                                 additional_information: formData.additionalInformation,
                                                 discount_code: discountCode.trim().toUpperCase(),
+                                                currency,
+                                                source_path: pathname,
                                             }
                                             const checkout = await initOrderSheetCheckout(payload)
                                             setDiscountAmount(Number(checkout.discount_amount) || 0)

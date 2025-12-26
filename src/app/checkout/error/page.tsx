@@ -1,7 +1,8 @@
 'use client'
 
 import { useSearchParams, useRouter } from 'next/navigation'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { getCheckoutInfo } from '@/server-actions/directCheckout.actions'
 import Link from 'next/link'
 import { CTAButton } from '@/components/common/CTAButton'
 import { AlertCircle } from 'lucide-react'
@@ -13,15 +14,30 @@ function CheckoutErrorContent() {
   const router = useRouter()
   const paymentRef = searchParams?.get('ref') || null
   const status = searchParams?.get('status') || null
+  const [sourcePath, setSourcePath] = useState<string | null>(null)
+  const [isLoadingOrderType, setIsLoadingOrderType] = useState(false)
 
-  // Check if this is an order sheet order and redirect if form data exists
+  // Fetch source path and check if this is an order sheet order to redirect if form data exists
   useEffect(() => {
     if (paymentRef) {
-      const storedData = sessionStorage.getItem('orderSheetFormData')
-      if (storedData) {
-        // Redirect to order sheet with error flag
-        router.replace(`/pinksky/order?error=true&ref=${paymentRef}`)
-      }
+      setIsLoadingOrderType(true)
+      getCheckoutInfo(paymentRef)
+        .then((data) => {
+          const sourcePathValue = data.source_path || '/pinksky/order'
+          setSourcePath(sourcePathValue)
+          
+          const storedData = sessionStorage.getItem('orderSheetFormData')
+          if (storedData) {
+            // Redirect to order sheet with error flag
+            router.replace(`${sourcePathValue}?error=true&ref=${paymentRef}`)
+          }
+        })
+        .catch(() => {
+          setSourcePath('/pinksky/order')
+        })
+        .finally(() => {
+          setIsLoadingOrderType(false)
+        })
     }
   }, [paymentRef, router])
 
@@ -73,7 +89,7 @@ function CheckoutErrorContent() {
               asChild
               size="lg"
             >
-              <Link href={`/pinksky/order?error=true&ref=${paymentRef}`}>
+              <Link href={`${sourcePath || '/pinksky/order'}?error=true&ref=${paymentRef}`}>
                 Retry Order
               </Link>
             </CTAButton>

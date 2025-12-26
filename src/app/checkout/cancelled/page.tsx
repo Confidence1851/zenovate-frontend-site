@@ -15,6 +15,7 @@ function CheckoutCancelledContent() {
   const [productSlug, setProductSlug] = useState<string | null>(null)
   const [isLoadingProduct, setIsLoadingProduct] = useState(false)
   const [orderType, setOrderType] = useState<string | null>(null)
+  const [sourcePath, setSourcePath] = useState<string | null>(null)
   const [isLoadingOrderType, setIsLoadingOrderType] = useState(false)
 
   useEffect(() => {
@@ -23,7 +24,9 @@ function CheckoutCancelledContent() {
       getCheckoutInfo(paymentRef)
         .then((data) => {
           const orderTypeValue = data.order_type || 'regular'
+          const sourcePathValue = data.source_path || '/products'
           setOrderType(orderTypeValue)
+          setSourcePath(sourcePathValue)
 
           // For regular orders, try to get product slug from products[0]
           if (orderTypeValue !== 'order_sheet') {
@@ -39,6 +42,7 @@ function CheckoutCancelledContent() {
         })
         .catch(() => {
           setOrderType('regular')
+          setSourcePath('/products')
           setProductSlug(null)
         })
         .finally(() => {
@@ -78,7 +82,7 @@ function CheckoutCancelledContent() {
 
         <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
           {!isLoadingOrderType && isOrderSheet && (
-            <Link href={`/pinksky/order?cancelled=true&ref=${paymentRef || ''}`}>
+            <Link href={`${sourcePath || '/pinksky/order'}?cancelled=true&ref=${paymentRef || ''}`}>
               <CTAButton
                 size="lg"
                 className="py-3 h-14 w-full sm:w-auto sm:min-w-[320px]"

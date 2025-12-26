@@ -27,6 +27,7 @@ export interface OrderSheetInitParams {
   shipping_address?: string;
   additional_information?: string;
   discount_code?: string;
+  currency?: 'USD' | 'CAD';
 }
 
 export interface DirectCheckoutData {

@@ -18,6 +18,7 @@ function CheckoutSuccessContent() {
   const { data: session } = useSession()
   const isLoggedIn = !!session
   const [orderType, setOrderType] = useState<string | null>(null)
+  const [sourcePath, setSourcePath] = useState<string | null>(null)
   const [isLoadingOrderType, setIsLoadingOrderType] = useState(false)
   const clearCart = useCartStore((state) => state.clearCart)
   const [cartCleared, setCartCleared] = useState(false)
@@ -27,14 +28,16 @@ function CheckoutSuccessContent() {
     sessionStorage.removeItem('orderSheetFormData')
   }, [])
 
-  // Fetch order type if payment reference exists and clear cart for order_sheet and cart types
+  // Fetch order type and source path if payment reference exists and clear cart for order_sheet and cart types
   useEffect(() => {
     if (paymentRef) {
       setIsLoadingOrderType(true)
       getCheckoutInfo(paymentRef)
         .then((data) => {
           const orderTypeValue = data.order_type || 'regular'
+          const sourcePathValue = data.source_path || '/products'
           setOrderType(orderTypeValue)
+          setSourcePath(sourcePathValue)
           
           // Clear cart for order_sheet and cart types (only once)
           if ((orderTypeValue === 'order_sheet' || orderTypeValue === 'cart') && !cartCleared) {
@@ -46,6 +49,7 @@ function CheckoutSuccessContent() {
           console.error('Failed to get payment info:', error)
           // Default to regular if we can't fetch
           setOrderType('regular')
+          setSourcePath('/products')
         })
         .finally(() => {
           setIsLoadingOrderType(false)
@@ -84,7 +88,7 @@ function CheckoutSuccessContent() {
 
         <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
           {!isLoadingOrderType && (
-            <Link href={isOrderSheet ? "/pinksky/order" : "/products"}>
+            <Link href={isOrderSheet && sourcePath ? sourcePath : "/products"}>
               <CTAButton
                 size="lg"
                 className="py-3 h-14 w-full sm:w-auto sm:min-w-[320px]"

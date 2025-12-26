@@ -29,10 +29,12 @@ export async function productList() {
 	}
 }
 
-export async function orderSheetProducts() {
+export async function orderSheetProducts(currency?: 'USD' | 'CAD') {
 	const url = baseUrl('/form/products/order-sheet')
 	try {
-		const response = await axios.get(url)
+		const response = await axios.get(url, {
+			params: currency ? { currency } : undefined
+		})
 		return response.data
 	} catch (error) {
 		if (axios.isAxiosError(error)) {
