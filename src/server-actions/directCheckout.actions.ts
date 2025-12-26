@@ -295,6 +295,7 @@ export async function getCheckoutInfo(
   order_type: string
   reference: string
   status: string
+  source_path?: string
   products: Array<{
     product_id: number
     product_slug?: string | null
