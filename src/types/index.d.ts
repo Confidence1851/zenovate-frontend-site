@@ -257,6 +257,8 @@ type CompletedPayment = {
 	products: Product[]; // Nested products in completed_payment
 	discount_code?: string | null;
 	discount_amount?: string | null;
+	tax_rate?: number | null;
+	tax_amount?: string | null;
 };
 
 type OrderDetail = {

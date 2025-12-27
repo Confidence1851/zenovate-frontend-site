@@ -252,7 +252,7 @@ export function CartSidebar({ open, onOpenChange }: CartSidebarProps) {
                  toast.error('Failed to initialize cart checkout');
                  return;
              }
-             const result = await processCartCheckout(checkout.form_session_id, recaptchaToken);
+             const result = await processCartCheckout(String(checkout.form_session_id), recaptchaToken);
 
             if (result.redirect_url) {
                 // Close sidebar and reset form (but don't clear cart yet - only on success)
