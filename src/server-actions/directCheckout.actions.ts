@@ -8,6 +8,15 @@ export interface DirectCheckoutInitParams {
   last_name: string;
   email: string;
   use_type?: 'patient' | 'clinic';
+  source_path?: string;
+}
+
+export interface CalculateTotalsParams {
+  product_id?: number;
+  price_id?: string;
+  products?: OrderSheetProductPayload[];
+  discount_code?: string;
+  location?: string;
 }
 
 export interface OrderSheetProductPayload {
@@ -40,8 +49,7 @@ export interface OrderSheetCalculateTotalsParams {
 }
 
 export interface DirectCheckoutData {
-  checkout_id?: string;
-  form_session_id: number | string;
+  form_session_id?: number | string;
   order_type?: 'regular' | 'order_sheet' | 'cart';
   product_id?: number;
   price_id?: string;
@@ -67,8 +75,8 @@ export interface DirectCheckoutData {
     id: number;
     name: string;
     selected_price: {
-      frequency: number;
-      unit: string;
+      frequency?: number;
+      unit?: string;
       value: number;
       currency: string;
     };
@@ -93,6 +101,7 @@ export interface DirectCheckoutData {
   currency: string;
   country_code: string;
   country: string;
+  source_path?: string;
 }
 
 export interface ProcessPaymentResponse {
@@ -247,18 +256,113 @@ export async function initCartCheckout(
   }
 }
 
+export interface ProcessDirectCheckoutParams {
+  product_id: number;
+  price_id: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  use_type?: 'patient' | 'clinic';
+  discount_code?: string;
+  source_path?: string;
+  recaptcha_token?: string;
+}
+
 /**
- * Process direct checkout payment
+ * Process direct checkout payment (single product)
+ * Creates form session and processes payment in one call
  */
 export async function processDirectCheckout(
-  formSessionId: number | string,
-  recaptchaToken?: string
+  params: ProcessDirectCheckoutParams
 ): Promise<ProcessPaymentResponse> {
   try {
     const response = await axios.post(
       baseUrl('/direct-checkout/process'),
+      params
+    );
+
+    if (response.data.success && response.data.data) {
+      return response.data.data;
+    }
+
+    throw new Error(response.data.message || 'Failed to process payment');
+  } catch (error: any) {
+    // Handle validation/bad request errors
+    if (error.response?.status === 422 || error.response?.status === 400) {
+      const message = error.response?.data?.message || 'Payment processing failed';
+      throw new Error(message);
+    }
+
+    // Handle other API errors
+    if (error.response?.data?.message) {
+      throw new Error(error.response.data.message);
+    }
+
+    // Handle network errors
+    if (axios.isAxiosError(error) && !error.response) {
+      throw new Error('Network error. Please check your connection and try again.');
+    }
+
+    throw new Error(error.message || 'Failed to process payment');
+  }
+}
+
+/**
+ * Process cart checkout payment (backward compatibility)
+ * TODO: Update cart checkout to use new flow
+ */
+export async function processCartCheckout(
+  sessionId: string,
+  recaptchaToken?: string
+): Promise<ProcessPaymentResponse> {
+  try {
+    const response = await axios.post(
+      baseUrl('/direct-checkout/cart/process'),
       {
-        form_session_id: String(formSessionId),
+        session_id: sessionId,
+        recaptcha_token: recaptchaToken,
+      }
+    );
+
+    if (response.data.success && response.data.data) {
+      return response.data.data;
+    }
+
+    throw new Error(response.data.message || 'Failed to process payment');
+  } catch (error: any) {
+    // Handle validation/bad request errors
+    if (error.response?.status === 422 || error.response?.status === 400) {
+      const message = error.response?.data?.message || 'Payment processing failed';
+      throw new Error(message);
+    }
+
+    // Handle other API errors
+    if (error.response?.data?.message) {
+      throw new Error(error.response.data.message);
+    }
+
+    // Handle network errors
+    if (axios.isAxiosError(error) && !error.response) {
+      throw new Error('Network error. Please check your connection and try again.');
+    }
+
+    throw new Error(error.message || 'Failed to process payment');
+  }
+}
+
+/**
+ * Process order sheet checkout payment (backward compatibility)
+ * TODO: Update order sheet checkout to use new flow
+ */
+export async function processOrderSheetCheckout(
+  sessionId: string,
+  recaptchaToken?: string
+): Promise<ProcessPaymentResponse> {
+  try {
+    const response = await axios.post(
+      baseUrl('/direct-checkout/order-sheet/process'),
+      {
+        session_id: sessionId,
         recaptcha_token: recaptchaToken,
       }
     );
@@ -403,6 +507,41 @@ export async function calculateCartSummary(
     }
 
     throw new Error(error.message || 'Failed to calculate cart summary');
+  }
+}
+
+/**
+ * Calculate totals for direct checkout, cart, or order sheet (pure calculation, no side effects)
+ */
+export async function calculateTotals(
+  params: CalculateTotalsParams
+): Promise<DirectCheckoutData | CartSummary> {
+  try {
+    const response = await axios.post(
+      baseUrl('/direct-checkout/calculate-totals'),
+      params
+    );
+
+    if (response.data.success && response.data.data) {
+      return response.data.data;
+    }
+
+    throw new Error(response.data.message || 'Failed to calculate totals');
+  } catch (error: any) {
+    if (error.response?.status === 422 || error.response?.status === 400) {
+      const message = error.response?.data?.message || error.response?.data?.error || 'Validation failed';
+      throw new Error(message);
+    }
+
+    if (error.response?.data?.message) {
+      throw new Error(error.response.data.message);
+    }
+
+    if (axios.isAxiosError(error) && !error.response) {
+      throw new Error('Network error. Please check your connection and try again.');
+    }
+
+    throw new Error(error.message || 'Failed to calculate totals');
   }
 }
 

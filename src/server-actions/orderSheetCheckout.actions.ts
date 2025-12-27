@@ -19,7 +19,6 @@ export interface OrderSheetCustomerInfo {
 }
 
 export interface OrderSheetCheckoutData {
-  checkout_id: string;
   form_session_id: string;
   order_type: string;
   products: Array<{
@@ -110,13 +109,13 @@ export async function initOrderSheetCheckout(
  * Process order sheet checkout payment
  */
 export async function processOrderSheetCheckout(
-  checkoutId: string
+  sessionId: string
 ): Promise<ProcessPaymentResponse> {
   try {
     const response = await axios.post(
       baseUrl('/direct-checkout/order-sheet/process'),
       {
-        checkout_id: checkoutId,
+        session_id: sessionId,
       }
     );
 

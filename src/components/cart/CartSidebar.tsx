@@ -19,7 +19,7 @@ import { useCartStore } from '@/stores/cartStore';
 import { Trash2, Plus, Minus, ShoppingCart, ArrowLeft } from 'lucide-react';
 import { Product, Price } from '@/types';
 import toast from 'react-hot-toast';
-import { calculateCartSummary, CartSummary, initCartCheckout, processDirectCheckout } from '@/server-actions/directCheckout.actions';
+import { calculateCartSummary, CartSummary, initCartCheckout, processDirectCheckout, processCartCheckout } from '@/server-actions/directCheckout.actions';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 
 interface CartSidebarProps {
@@ -248,7 +248,11 @@ export function CartSidebar({ open, onOpenChange }: CartSidebarProps) {
             }
 
             // Process payment and redirect to Stripe
-            const result = await processDirectCheckout(checkout.checkout_id, recaptchaToken);
+             if (!checkout.form_session_id) {
+                 toast.error('Failed to initialize cart checkout');
+                 return;
+             }
+             const result = await processCartCheckout(checkout.form_session_id, recaptchaToken);
 
             if (result.redirect_url) {
                 // Close sidebar and reset form (but don't clear cart yet - only on success)

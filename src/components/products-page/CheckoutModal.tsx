@@ -153,7 +153,8 @@ export function CheckoutModal({
       customerInfo.firstName.trim(),
       customerInfo.lastName.trim(),
       customerInfo.email.trim().toLowerCase(),
-      useType || undefined
+      useType || undefined,
+      typeof window !== 'undefined' ? window.location.pathname : undefined
     )
   }
 

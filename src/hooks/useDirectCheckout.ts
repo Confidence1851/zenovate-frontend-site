@@ -3,9 +3,11 @@ import {
   initDirectCheckout,
   processDirectCheckout,
   initOrderSheetCheckout,
+  calculateTotals,
   DirectCheckoutData,
   ProcessPaymentResponse,
   OrderSheetInitParams,
+  CalculateTotalsParams,
 } from '@/server-actions/directCheckout.actions';
 
 interface UseDirectCheckoutReturn {
@@ -18,7 +20,8 @@ interface UseDirectCheckoutReturn {
     firstName: string,
     lastName: string,
     email: string,
-    useType?: 'patient' | 'clinic'
+    useType?: 'patient' | 'clinic',
+    sourcePath?: string
   ) => Promise<void>;
   initializeOrderSheetCheckout: (
     params: OrderSheetInitParams
@@ -42,7 +45,8 @@ export function useDirectCheckout(): UseDirectCheckoutReturn {
       firstName: string,
       lastName: string,
       email: string,
-      useType?: 'patient' | 'clinic'
+      useType?: 'patient' | 'clinic',
+      sourcePath?: string
     ) => {
       setIsLoading(true);
       setError(null);
@@ -54,6 +58,7 @@ export function useDirectCheckout(): UseDirectCheckoutReturn {
           last_name: lastName,
           email: email,
           use_type: useType,
+          source_path: sourcePath,
         });
         setCheckoutData(data);
       } catch (err: any) {
@@ -90,14 +95,39 @@ export function useDirectCheckout(): UseDirectCheckoutReturn {
         return;
       }
 
-      // Discount application is only supported for order sheets and cart checkouts
-      // For regular direct checkouts, discounts are not supported at this time
-      if (checkoutData.order_type === 'regular' || (!checkoutData.order_type && checkoutData.product_id)) {
-        setError('Discount codes are not supported for this checkout type');
-        return;
-      }
+      setIsLoading(true);
+      setError(null);
+      try {
+        // Calculate totals with discount (no form session creation)
+        const totalsParams: CalculateTotalsParams = {
+          discount_code: discountCode,
+        };
 
-      setError('Discount application not implemented for this checkout type');
+        // For direct checkout (single product)
+        if (checkoutData.product_id && checkoutData.price_id) {
+          totalsParams.product_id = checkoutData.product_id;
+          totalsParams.price_id = checkoutData.price_id;
+        }
+        // For cart/order sheet (multiple products)
+        else if (checkoutData.products && checkoutData.products.length > 0) {
+          totalsParams.products = checkoutData.products;
+        }
+
+        const updatedTotals = await calculateTotals(totalsParams);
+        
+        // Update checkout data with new totals
+        setCheckoutData({
+          ...checkoutData,
+          ...updatedTotals,
+          discount_code: updatedTotals.discount_code,
+          discount_amount: updatedTotals.discount_amount,
+          total: updatedTotals.total,
+        } as DirectCheckoutData);
+      } catch (err: any) {
+        setError(err.message || 'Failed to apply discount');
+      } finally {
+        setIsLoading(false);
+      }
     },
     [checkoutData]
   );
@@ -147,8 +177,22 @@ export function useDirectCheckout(): UseDirectCheckoutReturn {
     setIsLoading(true);
     setError(null);
     try {
-      const result = await processDirectCheckout(checkoutData.checkout_id, recaptchaToken);
-      return result;
+      // For single product checkout
+      if (checkoutData.product_id && checkoutData.price_id) {
+        const result = await processDirectCheckout({
+          product_id: checkoutData.product_id,
+          price_id: checkoutData.price_id,
+          first_name: checkoutData.user.first_name,
+          last_name: checkoutData.user.last_name,
+          email: checkoutData.user.email,
+          use_type: checkoutData.use_type as 'patient' | 'clinic' | undefined,
+          discount_code: checkoutData.discount_code || undefined,
+          recaptcha_token: recaptchaToken,
+        });
+        return result;
+      }
+      
+      throw new Error('Invalid checkout data');
     } catch (err: any) {
       const errorMessage = err.message || 'Failed to process payment';
       setError(errorMessage);

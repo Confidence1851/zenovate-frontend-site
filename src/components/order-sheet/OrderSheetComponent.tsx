@@ -4,7 +4,7 @@ import { useMemo, useState, useEffect } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { orderSheetProducts } from '@/server-actions/api.actions'
 import { Product, Price } from '@/types'
-import { getCheckoutInfo, initOrderSheetCheckout, calculateOrderSheetTotals, processDirectCheckout } from '@/server-actions/directCheckout.actions'
+import { getCheckoutInfo, initOrderSheetCheckout, calculateOrderSheetTotals, processDirectCheckout, processOrderSheetCheckout } from '@/server-actions/directCheckout.actions'
 import { ErrorDisplay } from '../common/ErrorDisplay'
 import { Skeleton } from '../ui/skeleton'
 import { Input } from '../ui/input'
@@ -326,8 +326,8 @@ const OrderSheetComponent = ({ currency = 'USD' }: OrderSheetComponentProps) => 
                  console.warn('reCAPTCHA not loaded, proceeding without verification');
              }
 
-             console.log('[Order Sheet Submit] Calling processDirectCheckout with form_session_id:', checkout.form_session_id)
-             const result = await processDirectCheckout(checkout.form_session_id, recaptchaToken)
+             console.log('[Order Sheet Submit] Calling processOrderSheetCheckout with form_session_id:', checkout.form_session_id)
+             const result = await processOrderSheetCheckout(String(checkout.form_session_id), recaptchaToken)
 
             if (result.redirect_url) {
                 window.location.href = result.redirect_url
