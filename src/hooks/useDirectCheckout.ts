@@ -119,6 +119,10 @@ export function useDirectCheckout(): UseDirectCheckoutReturn {
         setCheckoutData({
           ...checkoutData,
           ...updatedTotals,
+          sub_total: updatedTotals.sub_total,
+          shipping_fee: updatedTotals.shipping_fee,
+          tax_rate: updatedTotals.tax_rate,
+          tax_amount: updatedTotals.tax_amount,
           discount_code: updatedTotals.discount_code,
           discount_amount: updatedTotals.discount_amount,
           total: updatedTotals.total,
