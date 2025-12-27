@@ -40,8 +40,8 @@ export interface OrderSheetCalculateTotalsParams {
 }
 
 export interface DirectCheckoutData {
-  checkout_id: string;
-  form_session_id: string;
+  checkout_id?: string;
+  form_session_id: number | string;
   order_type?: 'regular' | 'order_sheet' | 'cart';
   product_id?: number;
   price_id?: string;
@@ -251,14 +251,14 @@ export async function initCartCheckout(
  * Process direct checkout payment
  */
 export async function processDirectCheckout(
-  checkoutId: string,
+  formSessionId: number | string,
   recaptchaToken?: string
 ): Promise<ProcessPaymentResponse> {
   try {
     const response = await axios.post(
       baseUrl('/direct-checkout/process'),
       {
-        checkout_id: checkoutId,
+        form_session_id: String(formSessionId),
         recaptcha_token: recaptchaToken,
       }
     );

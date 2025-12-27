@@ -314,17 +314,20 @@ const OrderSheetComponent = ({ currency = 'USD' }: OrderSheetComponentProps) => 
             }
 
             const checkout = await initOrderSheetCheckout(payload)
-            setDiscountAmount(Number(checkout.discount_amount) || 0)
+             setDiscountAmount(Number(checkout.discount_amount) || 0)
 
-            // Execute reCAPTCHA before processing payment
-            let recaptchaToken: string | undefined;
-            if (executeRecaptcha) {
-                recaptchaToken = await executeRecaptcha('checkout_submission');
-            } else {
-                console.warn('reCAPTCHA not loaded, proceeding without verification');
-            }
+             console.log('[Order Sheet Submit] Checkout response:', checkout)
 
-            const result = await processDirectCheckout(checkout.checkout_id, recaptchaToken)
+             // Execute reCAPTCHA before processing payment
+             let recaptchaToken: string | undefined;
+             if (executeRecaptcha) {
+                 recaptchaToken = await executeRecaptcha('checkout_submission');
+             } else {
+                 console.warn('reCAPTCHA not loaded, proceeding without verification');
+             }
+
+             console.log('[Order Sheet Submit] Calling processDirectCheckout with form_session_id:', checkout.form_session_id)
+             const result = await processDirectCheckout(checkout.form_session_id, recaptchaToken)
 
             if (result.redirect_url) {
                 window.location.href = result.redirect_url
