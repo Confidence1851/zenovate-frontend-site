@@ -7,10 +7,10 @@ import { createMetadata } from '@/lib/metadata'
 
 export const metadata = createMetadata({
   title: 'Peptide Testing & Quality Assurance | Zenovate',
-  description: 'Multi-layer analytical verification of research peptides using pharmaceutical-grade instrumentation.',
+  description: 'Multi layer analytical verification of research peptides using pharmaceutical grade instrumentation.',
   openGraph: {
     title: 'Peptide Testing & Quality Assurance | Zenovate',
-    description: 'Multi-layer analytical verification of research peptides using pharmaceutical-grade instrumentation.',
+    description: 'Multi layer analytical verification of research peptides using pharmaceutical grade instrumentation.',
     url: '/quality-assurance',
   },
 })
@@ -161,7 +161,7 @@ export default function QualityAssurancePage() {
       <main className='bg-white'>
         <PageHeroWrapper
           heading='Peptide Testing & Quality Assurance'
-          description='Every research peptide we supply undergoes multi-layer analytical verification using advanced pharmaceutical-grade instrumentation.'
+          description='Every research peptide we supply undergoes multi layer analytical verification using advanced pharmaceutical grade instrumentation.'
           image={{
             src: heroImage,
             alt: 'Testing and quality assurance',

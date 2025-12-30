@@ -24,8 +24,8 @@ export const QualityAssuranceSection = ({
             {/* Left Column - Text Content */}
             <div className='space-y-6'>
               <p className='text-base md:text-lg leading-relaxed text-foreground'>
-                Every research peptide we supply undergoes multi-layer analytical
-                verification using advanced pharmaceutical-grade instrumentation.
+                Every research peptide we supply undergoes multi layer analytical
+                verification using advanced pharmaceutical grade instrumentation.
               </p>
               <p className='text-base md:text-lg leading-relaxed text-foreground'>
                 This ensures identity, purity, potency, and consistency not just
