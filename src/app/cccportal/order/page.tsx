@@ -2,7 +2,7 @@ import { Suspense } from 'react'
 import PageHeroWrapper from '@/components/common/PageHeroWrapper'
 import { createMetadata } from '@/lib/metadata'
 import MainLayout from '@/app/layouts/MainLayout'
-import heroImage from "@/assets/images/pinksky.jpeg";
+// import heroImage from "@/assets/images/pinksky.jpeg";
 import OrderSheetComponent from '@/components/order-sheet/OrderSheetComponent'
 
 export const metadata = createMetadata({
@@ -19,14 +19,14 @@ const OrderSheetPage = () => {
 	return (
 		<MainLayout>
 			<main className='bg-background'>
-				<PageHeroWrapper
+				{/* <PageHeroWrapper
 					image={{
 						src: heroImage,
 						alt: "Order sheet page hero image"
 					}}
 					variant='white'
 					size='short'
-				/>
+				/> */}
 
 				<section className='bg-background py-10 md:py-16 lg:py-20'>
 					<div className='xmd-container'>
