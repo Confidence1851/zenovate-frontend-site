@@ -132,8 +132,9 @@ const testingMethods = [
     number: 9,
     title: 'pH Testing',
     subtitle: 'Chemical Stability Check',
-    image: null,
-    description: '',
+    image: '/peptides/image9.png',
+    description:
+      'This test measures the pH level of the final peptide solution to ensure proper chemical environment for stability.',
     verifies: ['Final solution pH (when applicable)'],
     importance:
       'pH affects stability, degradation rate, and compatibility in research environments.',
@@ -142,7 +143,7 @@ const testingMethods = [
     number: 10,
     title: 'Stability Chambers',
     subtitle: 'Real-World & Accelerated Stability',
-    image: '/peptides/image9.png',
+    image: '/peptides/image10.png',
     description:
       'Controlled chambers simulate time and temperature exposure.',
     verifies: [
