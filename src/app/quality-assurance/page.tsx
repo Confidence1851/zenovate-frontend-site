@@ -252,7 +252,7 @@ export default function QualityAssurancePage() {
                       <h3 className='text-2xl md:text-3xl font-bold uppercase mb-2'>
                         {method.title}
                       </h3>
-                      <p className='text-lg md:text-xl font-semibold text-Green-200'>
+                      <p className='text-lg md:text-xl font-semibold text-emerald-700'>
                         {method.subtitle}
                       </p>
                     </div>
@@ -275,7 +275,7 @@ export default function QualityAssurancePage() {
                             key={idx}
                             className='flex gap-3 text-foreground text-sm md:text-base'
                           >
-                            <span className='text-Green-200 font-bold flex-shrink-0'>
+                            <span className='text-emerald-700 font-bold flex-shrink-0'>
                               ✓
                             </span>
                             <span>{item}</span>
