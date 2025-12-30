@@ -2,6 +2,7 @@ import PageHeroWrapper from '@/components/common/PageHeroWrapper'
 import SubscriptionComponent from '@/components/common/SubscriptionComponent'
 import CustomersFeedback from '@/components/home-page/CustomersFeedback'
 import FeatureProducts from '@/components/products-page/FeatureProducts'
+import { QualityAssuranceSection } from '@/components/products-page/QualityAssuranceSection'
 // import { ArrowRight } from 'iconsax-react'
 import heroImage from "@/assets/images/d703c9c47427018598d7fc12827.png";
 import MainLayout from '@/app/layouts/MainLayout'
@@ -22,6 +23,9 @@ const ProductsPage = () => {
 
 			{/* FEATURED PRODUTCS */}
 			<FeatureProducts />
+
+			{/* QUALITY ASSURANCE */}
+			<QualityAssuranceSection />
 
 			{/* CUSTOMER REVIEW */}
 			<CustomersFeedback />

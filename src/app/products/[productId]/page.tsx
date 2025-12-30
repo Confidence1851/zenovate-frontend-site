@@ -18,12 +18,20 @@ import { CTAButton } from '@/components/common/CTAButton';
 import styles from '@/styles/ProductId.module.css';
 import PillIcon from '@/assets/icons/PillIcon';
 import { HowItWorksStatic } from '@/components/home-page/HowItWorks';
+import { QualityAssuranceSection } from '@/components/products-page/QualityAssuranceSection';
 import { CheckoutModal } from '@/components/products-page/CheckoutModal';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { ErrorDisplay } from '@/components/common/ErrorDisplay';
 import { useCartStore } from '@/stores/cartStore';
 import toast from 'react-hot-toast';
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from '@/components/ui/select';
 
 
 
@@ -206,32 +214,74 @@ export default function ProductDetails({ params }: { params: { productId: string
 									This is for pre-order. Shipping takes 2 to 4 weeks.
 								</p>
 							)}
-							<p className='text-foreground font-semibold mb-3'>
+							<p className='text-foreground font-semibold mb-4'>
 								Select Pricing
 							</p>
-							<div className='space-y-2'>
-								{displayPrices.map((price, index) => {
-									// For peptides, show just the price (no frequency/unit)
-									// Check if this is a peptide product (no frequency/unit)
-									const isPeptide = !price.frequency || !price.unit;
+							
+							<div className='space-y-4'>
+								{/* Select Dropdown */}
+								<Select 
+									value={selectedPrice?.id.toString() || ''} 
+									onValueChange={(priceId) => {
+										const selected = displayPrices.find(p => p.id.toString() === priceId);
+										if (selected) setSelectedPrice(selected);
+									}}
+								>
+									<SelectTrigger className="w-full">
+										<SelectValue placeholder="Choose an option" />
+									</SelectTrigger>
+									<SelectContent>
+										{displayPrices.map((price) => {
+											const isPeptide = !price.frequency || !price.unit;
+											const label = isPeptide ? 'Price' : (price.display_name || `${price.frequency} ${price.unit}`);
+											return (
+												<SelectItem key={price.id} value={price.id.toString()}>
+													{label}
+												</SelectItem>
+											);
+										})}
+									</SelectContent>
+								</Select>
 
-									return (
-										<Button
-											key={index}
-											type="button"
-											variant={selectedPrice?.id === price.id ? 'default' : 'outline'}
-											className="w-full justify-between flex-wrap gap-2"
-											onClick={() => setSelectedPrice(price)}
-										>
-											<span className="break-words text-left flex-1 min-w-0" style={{ overflowWrap: 'anywhere' }}>
-												{isPeptide ? 'Price' : (price.display_name || `${price.frequency} ${price.unit}`)}
-											</span>
-											<span className="font-semibold whitespace-nowrap flex-shrink-0">
-												${formatPrice(price.value)}
-											</span>
-										</Button>
-									);
-								})}
+								{/* Selected Price Card */}
+								{selectedPrice && (
+									<div className='border border-border rounded-lg p-5 bg-muted/30'>
+										<div className='space-y-3'>
+											{/* Option Name */}
+											<div className='flex justify-between items-start gap-4'>
+												<div>
+													<p className='text-sm text-muted-foreground'>Selected Plan</p>
+													<p className='text-lg font-semibold text-foreground'>
+														{!selectedPrice.frequency || !selectedPrice.unit 
+															? 'Price' 
+															: (selectedPrice.display_name || `${selectedPrice.frequency} ${selectedPrice.unit}`)}
+													</p>
+												</div>
+												{(() => {
+													let discountPercentage = null;
+													if (selectedPrice.frequency === 6) {
+														discountPercentage = 10;
+													} else if (selectedPrice.frequency === 9 || selectedPrice.frequency === 12) {
+														discountPercentage = 15;
+													}
+													return discountPercentage && (
+														<span className='inline-flex items-center justify-center px-3 py-1 bg-green-500 text-white text-xs font-bold rounded-full whitespace-nowrap'>
+															{discountPercentage}% OFF
+														</span>
+													);
+												})()}
+											</div>
+											
+											{/* Price */}
+											<div className='border-t border-border pt-3'>
+												<p className='text-sm text-muted-foreground mb-1'>Total Price</p>
+												<p className='text-3xl font-bold text-foreground'>
+													${formatPrice(selectedPrice.value)}
+												</p>
+											</div>
+										</div>
+									</div>
+								)}
 							</div>
 						</div>
 					)}
@@ -309,6 +359,12 @@ export default function ProductDetails({ params }: { params: { productId: string
 					)}
 				</div>
 			</div>
+			
+			{/* Quality Assurance Section - Only for Peptide Products */}
+			{/* {product.checkout_type === 'direct' && displayPrices && displayPrices.length > 0 && !displayPrices[0].frequency && !displayPrices[0].unit && ( */}
+				<QualityAssuranceSection showButton={true} />
+			{/* )} */}
+
 			<CustomersFeedback />
 
 			<HowItWorksStatic />
