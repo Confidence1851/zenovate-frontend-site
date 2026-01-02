@@ -23,7 +23,7 @@ export function CartIconButton({ onClick }: CartIconButtonProps) {
       <Button
         variant="ghost"
         size="icon"
-        className="relative hidden lg:inline-flex"
+        className="relative inline-flex"
         onClick={onClick}
         aria-label="Shopping cart"
       >
@@ -36,7 +36,7 @@ export function CartIconButton({ onClick }: CartIconButtonProps) {
     <Button
       variant="ghost"
       size="icon"
-      className="relative hidden lg:inline-flex"
+      className="relative inline-flex"
       onClick={onClick}
       aria-label="Shopping cart"
     >

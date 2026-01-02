@@ -110,6 +110,12 @@ const navLinks: NavItem[] = [
 				href: '/contact',
 				image: '/placeholder.png?height=400&width=600',
 				description: 'Get in touch with our support team.'
+			},
+			{
+				title: 'Quality Assurance',
+				href: '/quality-assurance',
+				image: '/placeholder.png?height=400&width=600',
+				description: 'Learn about our quality standards and assurance processes.'
 			}
 		]
 	}

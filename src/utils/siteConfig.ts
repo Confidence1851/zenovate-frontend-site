@@ -133,6 +133,7 @@ export const siteConfig: SiteConfig = {
         { label: 'FAQ', href: '/faq', category: 'Company' },
         { label: 'Blog', href: '/blog', category: 'Company' },
         { label: 'Contact', href: '/contact', category: 'Company' },
+        { label: 'Quality Assurance', href: '/quality-assurance', category: 'Company' },
     ],
     heroSlides: [
         {
