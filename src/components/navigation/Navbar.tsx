@@ -227,43 +227,42 @@ export default function Navbar() {
 								</Button>
 							</SheetTrigger>
 							<SheetContent side='right' className='bg-background'>
-								<nav className='flex flex-col gap-4'>
+								<nav className='flex flex-col gap-3'>
 									{navLinks.map((item) => (
-										<div key={item.label} className='flex flex-col gap-2'>
-											<h2 className='text-lg font-semibold'>{item.label}</h2>
+										<div key={item.label} className='flex flex-col gap-3'>
 											{item.type === 'link' ? (
 												<Link
 													href={
 														(typeof item.href === 'string' ? item.href : item.href.path) as any
 													}
-													className='text-sm hover:underline'>
+													className='text-base font-semibold text-foreground hover:text-primary transition-colors py-2'>
 													{item.label}
 												</Link>
 											) : item.type === 'dropdown' ? (
-												item.items.map((subItem) => (
-													<a key={subItem.title} href={subItem.href} className='text-sm hover:underline'>
-														{subItem.title}
-													</a>
-												))
+												<>
+													<h3 className='text-base font-semibold text-foreground py-2'>{item.label}</h3>
+													<div className='flex flex-col gap-2'>
+														{item.items.map((subItem) => (
+															<a key={subItem.title} href={subItem.href} className='text-sm text-muted-foreground hover:text-primary transition-colors pl-4 py-1'>
+																{subItem.title}
+															</a>
+														))}
+													</div>
+												</>
 											) : (
-												<Link href={`/${item.label.toLowerCase()}`} className='text-sm hover:underline'>
+												<Link href={`/${item.label.toLowerCase()}`} className='text-base font-semibold text-foreground hover:text-primary transition-colors py-2'>
 													{item.label}
 												</Link>
 											)}
 										</div>
 									))}
-									{!session ? (
-										// <Link href='/auth/login'>
-										// 	<Button className='bg-primary hover:bg-primary-foreground text-background w-fit mt-2'>
-										// 		JOIN NOW <ChevronRight className='ml-2 h-4 w-4' />
-										// 	</Button>
-										// </Link>
-										null
-									) : <Link href='/dashboard/orders'>
-										<Button className='bg-primary hover:bg-primary-foreground text-background w-fit mt-2'>
-											DASHBOARD <ChevronRight className='ml-2 h-4 w-4' />
-										</Button>
-									</Link>}
+									{session && (
+										<Link href='/dashboard/orders' className='mt-2'>
+											<Button className='bg-primary hover:bg-primary-foreground text-background w-full'>
+												DASHBOARD <ChevronRight className='ml-2 h-4 w-4' />
+											</Button>
+										</Link>
+									)}
 								</nav>
 							</SheetContent>
 						</Sheet>
