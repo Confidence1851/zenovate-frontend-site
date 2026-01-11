@@ -2,7 +2,7 @@
 
 import { useMemo, useState, useEffect } from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { orderSheetProducts } from '@/server-actions/api.actions'
+import { orderSheetProducts, getCheckoutConfig } from '@/server-actions/api.actions'
 import { Product, Price } from '@/types'
 import { getCheckoutInfo, initOrderSheetCheckout, calculateOrderSheetTotals, processDirectCheckout, processOrderSheetCheckout } from '@/server-actions/directCheckout.actions'
 import { ErrorDisplay } from '../common/ErrorDisplay'
@@ -52,6 +52,7 @@ const OrderSheetComponent = ({ currency = 'USD' }: OrderSheetComponentProps) => 
     const [storedCheckoutData, setStoredCheckoutData] = useState<any>(null)
     const [quantitiesApplied, setQuantitiesApplied] = useState(false)
     const [paymentRef, setPaymentRef] = useState<string | null>(null)
+    const [backendTaxRate, setBackendTaxRate] = useState<number | null>(null)
     const searchParams = useSearchParams()!
     const pathname = usePathname()!
     const { executeRecaptcha } = useGoogleReCaptcha()
@@ -64,6 +65,20 @@ const OrderSheetComponent = ({ currency = 'USD' }: OrderSheetComponentProps) => 
         queryKey: ['order-sheet-products', currency],
         queryFn: () => orderSheetProducts(currency)
     })
+
+    const {
+        data: configData
+    } = useQuery({
+        queryKey: ['checkout-config', currency],
+        queryFn: () => getCheckoutConfig(currency)
+    })
+
+    // Set tax rate from config when it loads
+    useEffect(() => {
+        if (configData?.tax_rate !== undefined) {
+            setBackendTaxRate(configData.tax_rate)
+        }
+    }, [configData?.tax_rate])
 
     const products: Product[] = productsData?.data || []
     const quantityOptions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 30, 50, 100]
@@ -151,13 +166,11 @@ const OrderSheetComponent = ({ currency = 'USD' }: OrderSheetComponentProps) => 
         return price ? price.value : 0
     }
 
-    const getTaxRate = (_product: Product): number => 13
-
     const calculatePricing = () => {
         let subtotal = 0
         const defaultShippingFee = 60
         const freeShippingThreshold = 1000
-        const taxRate = 13 // 13% tax rate
+        const taxRate = backendTaxRate !== null ? backendTaxRate : 0
 
         // Calculate subtotal first
         selectedProducts.forEach(({ product, quantity }) => {
@@ -730,6 +743,7 @@ const OrderSheetComponent = ({ currency = 'USD' }: OrderSheetComponentProps) => 
                                              
                                              const totals = await calculateOrderSheetTotals(payload)
                                              setDiscountAmount(Number(totals.discount_amount) || 0)
+                                             setBackendTaxRate(Number(totals.tax_rate) || 0)
                                              setDiscountNotice('Discount applied.')
                                         } catch (err: any) {
                                             setDiscountAmount(0)
@@ -750,6 +764,7 @@ const OrderSheetComponent = ({ currency = 'USD' }: OrderSheetComponentProps) => 
                                             setDiscountCode('')
                                             setDiscountError(null)
                                             setDiscountNotice(null)
+                                            setBackendTaxRate(null)
                                         }}
                                     >
                                         Remove

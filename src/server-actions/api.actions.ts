@@ -49,6 +49,26 @@ export async function orderSheetProducts(currency?: 'USD' | 'CAD') {
 	}
 }
 
+export async function getCheckoutConfig(currency?: 'USD' | 'CAD') {
+	const url = baseUrl('/form/checkout/config')
+	try {
+		const response = await axios.get(url, {
+			params: currency ? { currency } : undefined
+		})
+		return response.data?.data || {}
+	} catch (error) {
+		if (axios.isAxiosError(error)) {
+			if (error.response?.data?.message) {
+				throw new Error(error.response.data.message)
+			} else {
+				throw new Error((error as Error).message || 'Failed to fetch checkout config')
+			}
+		} else {
+			throw new Error('An unexpected error occurred')
+		}
+	}
+}
+
 export interface ValidateDiscountCodeResponse {
 	success: boolean
 	data?: {
