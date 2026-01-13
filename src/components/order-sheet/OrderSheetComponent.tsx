@@ -241,7 +241,7 @@ const OrderSheetComponent = ({ currency = 'USD' }: OrderSheetComponentProps) => 
             if (!validatePhone(value)) return 'Please enter a valid phone number'
             return undefined
         },
-        accountNumber: (v) => !String(v).trim() ? 'Account number is required' : undefined,
+        accountNumber: (v) => undefined,
         location: (v) => !String(v).trim() ? 'Location is required' : undefined,
         shippingAddress: (v) => {
             if (formData.useShippingAddress && !String(v).trim()) {
@@ -546,7 +546,7 @@ const OrderSheetComponent = ({ currency = 'USD' }: OrderSheetComponentProps) => 
 
                         <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
                             <div className='space-y-1'>
-                                <Label className='text-sm'>Account number *</Label>
+                                <Label className='text-sm'>Account number</Label>
                                 <Input
                                     placeholder='Account number'
                                     value={formData.accountNumber}
