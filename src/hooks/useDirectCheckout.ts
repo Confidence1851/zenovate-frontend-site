@@ -191,6 +191,7 @@ export function useDirectCheckout(): UseDirectCheckoutReturn {
           email: checkoutData.user.email,
           use_type: checkoutData.use_type as 'patient' | 'clinic' | undefined,
           discount_code: checkoutData.discount_code || undefined,
+          source_path: (checkoutData as any).source_path,
           recaptcha_token: recaptchaToken,
         });
         return result;

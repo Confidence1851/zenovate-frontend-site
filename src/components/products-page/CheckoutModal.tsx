@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { usePathname } from 'next/navigation'
 import {
   Dialog,
   DialogContent,
@@ -56,6 +57,7 @@ export function CheckoutModal({
   orderSheetCustomerInfo,
   onCheckoutSuccess
 }: CheckoutModalProps) {
+  const pathname = usePathname()
   const {
     checkoutData,
     isLoading,
@@ -145,6 +147,7 @@ export function CheckoutModal({
         location: orderSheetCustomerInfo.location,
         shipping_address: orderSheetCustomerInfo.shippingAddress,
         additional_information: orderSheetCustomerInfo.additionalInformation,
+        source_path: pathname,
       })
       return
     }
@@ -490,7 +493,7 @@ export function CheckoutModal({
                 )}
                 {checkoutData.tax_amount > 0 && (
                   <div className="flex justify-between text-sm">
-                    <span>HST</span>
+                    <span>HST ({checkoutData.tax_rate}%)</span>
                     <span>{formatCurrency(checkoutData.tax_amount)}</span>
                   </div>
                 )}

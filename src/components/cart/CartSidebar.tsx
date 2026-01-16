@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import {
@@ -33,6 +34,7 @@ export function CartSidebar({ open, onOpenChange }: CartSidebarProps) {
     const updateQuantity = useCartStore((state) => state.updateQuantity);
     const clearCart = useCartStore((state) => state.clearCart);
     const getCartTotal = useCartStore((state) => state.getCartTotal);
+    const pathname = usePathname();
 
     const [showCustomerForm, setShowCustomerForm] = useState(false);
     const [isProcessingCheckout, setIsProcessingCheckout] = useState(false);
@@ -237,6 +239,7 @@ export function CartSidebar({ open, onOpenChange }: CartSidebarProps) {
                 shipping_address: undefined,
                 additional_information: customerInfo.additionalInformation.trim() || undefined,
                 discount_code: discountCode || undefined,
+                source_path: pathname,
             });
 
             // Execute reCAPTCHA before processing payment
