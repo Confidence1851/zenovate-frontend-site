@@ -31,6 +31,8 @@ export interface OrderSheetInitParams {
   last_name: string;
   email: string;
   phone: string;
+  business_name: string;
+  medical_director_name: string;
   account_number: string;
   location: string;
   shipping_address?: string;

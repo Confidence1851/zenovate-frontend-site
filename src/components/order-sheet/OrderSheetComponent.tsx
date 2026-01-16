@@ -32,6 +32,8 @@ const OrderSheetComponent = ({ currency = 'USD' }: OrderSheetComponentProps) => 
         lastName: '',
         email: '',
         phone: '',
+        businessName: '',
+        medicalDirectorName: '',
         accountNumber: '',
         location: '',
         useShippingAddress: false,
@@ -187,7 +189,7 @@ const OrderSheetComponent = ({ currency = 'USD' }: OrderSheetComponentProps) => 
         // Shipping is NOT discounted - it's a separate shipping_option in Stripe
         let appliedDiscount = 0
         let discountedSubtotal = subtotal
-        
+
         if (discountAmount > 0) {
             // Apply discount to subtotal only (matching backend calculation)
             appliedDiscount = Math.min(discountAmount, subtotal)
@@ -226,6 +228,8 @@ const OrderSheetComponent = ({ currency = 'USD' }: OrderSheetComponentProps) => 
         return digitsOnly.length >= 10
     }
 
+    const isPinksky = pathname.includes('/pinksky')
+
     const fieldValidators: Record<string, (value: string | boolean) => string | undefined> = {
         firstName: (v) => !String(v).trim() ? 'First name is required' : undefined,
         lastName: (v) => !String(v).trim() ? 'Last name is required' : undefined,
@@ -239,6 +243,18 @@ const OrderSheetComponent = ({ currency = 'USD' }: OrderSheetComponentProps) => 
             const value = String(v).trim()
             if (!value) return 'Phone is required'
             if (!validatePhone(value)) return 'Please enter a valid phone number'
+            return undefined
+        },
+        businessName: (v) => {
+            if (isPinksky && !String(v).trim()) {
+                return 'Business name is required'
+            }
+            return undefined
+        },
+        medicalDirectorName: (v) => {
+            if (isPinksky && !String(v).trim()) {
+                return 'Medical director name is required'
+            }
             return undefined
         },
         accountNumber: (v) => undefined,
@@ -312,6 +328,8 @@ const OrderSheetComponent = ({ currency = 'USD' }: OrderSheetComponentProps) => 
                 last_name: formData.lastName,
                 email: formData.email,
                 phone: formData.phone,
+                business_name: formData.businessName,
+                medical_director_name: formData.medicalDirectorName,
                 account_number: formData.accountNumber,
                 location: formData.location,
                 shipping_address: formData.useShippingAddress ? formData.shippingAddress : formData.location,
@@ -320,27 +338,27 @@ const OrderSheetComponent = ({ currency = 'USD' }: OrderSheetComponentProps) => 
                 currency,
                 source_path: pathname,
             }
-            
+
             // If resuming a cancelled payment, pass ref
             if (paymentRef) {
                 payload.ref = paymentRef
             }
 
             const checkout = await initOrderSheetCheckout(payload)
-             setDiscountAmount(Number(checkout.discount_amount) || 0)
+            setDiscountAmount(Number(checkout.discount_amount) || 0)
 
-             console.log('[Order Sheet Submit] Checkout response:', checkout)
+            console.log('[Order Sheet Submit] Checkout response:', checkout)
 
-             // Execute reCAPTCHA before processing payment
-             let recaptchaToken: string | undefined;
-             if (executeRecaptcha) {
-                 recaptchaToken = await executeRecaptcha('checkout_submission');
-             } else {
-                 console.warn('reCAPTCHA not loaded, proceeding without verification');
-             }
+            // Execute reCAPTCHA before processing payment
+            let recaptchaToken: string | undefined;
+            if (executeRecaptcha) {
+                recaptchaToken = await executeRecaptcha('checkout_submission');
+            } else {
+                console.warn('reCAPTCHA not loaded, proceeding without verification');
+            }
 
-             console.log('[Order Sheet Submit] Calling processOrderSheetCheckout with form_session_id:', checkout.form_session_id)
-             const result = await processOrderSheetCheckout(String(checkout.form_session_id), recaptchaToken)
+            console.log('[Order Sheet Submit] Calling processOrderSheetCheckout with form_session_id:', checkout.form_session_id)
+            const result = await processOrderSheetCheckout(String(checkout.form_session_id), recaptchaToken)
 
             if (result.redirect_url) {
                 window.location.href = result.redirect_url
@@ -389,6 +407,8 @@ const OrderSheetComponent = ({ currency = 'USD' }: OrderSheetComponentProps) => 
                     lastName: customer.last_name || '',
                     email: customer.email || '',
                     phone: customer.phone || '',
+                    businessName: customer.business_name || '',
+                    medicalDirectorName: customer.medical_director_name || '',
                     accountNumber: customer.account_number || '',
                     location: customer.location || '',
                     useShippingAddress: !!customer.shipping_address,
@@ -543,6 +563,31 @@ const OrderSheetComponent = ({ currency = 'USD' }: OrderSheetComponentProps) => 
                                 {formErrors.phone && <p className='text-sm text-red-500'>{formErrors.phone}</p>}
                             </div>
                         </div>
+
+                        {isPinksky && (
+                            <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+                                <div className='space-y-1'>
+                                    <Label className='text-sm'>Business Name *</Label>
+                                    <Input
+                                        placeholder='Business Name'
+                                        value={formData.businessName}
+                                        onChange={(e) => handleFieldChange('businessName', e.target.value)}
+                                        onBlur={() => handleFieldBlur('businessName')}
+                                    />
+                                    {formErrors.businessName && <p className='text-sm text-red-500'>{formErrors.businessName}</p>}
+                                </div>
+                                <div className='space-y-1'>
+                                    <Label className='text-sm'>Medical Director Name *</Label>
+                                    <Input
+                                        placeholder='Medical Director Name'
+                                        value={formData.medicalDirectorName}
+                                        onChange={(e) => handleFieldChange('medicalDirectorName', e.target.value)}
+                                        onBlur={() => handleFieldBlur('medicalDirectorName')}
+                                    />
+                                    {formErrors.medicalDirectorName && <p className='text-sm text-red-500'>{formErrors.medicalDirectorName}</p>}
+                                </div>
+                            </div>
+                        )}
 
                         <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
                             <div className='space-y-1'>
@@ -726,25 +771,25 @@ const OrderSheetComponent = ({ currency = 'USD' }: OrderSheetComponentProps) => 
                                             return
                                         }
                                         setDiscountError(null)
-                                         setDiscountNotice(null)
-                                         setIsApplyingDiscount(true)
-                                         try {
-                                             // Use pure calculation endpoint for discount preview (no side effects)
-                                             const payload = {
-                                                 products: selectedProducts.map(item => ({
-                                                     product_id: item.product.id,
-                                                     price_id: item.price.id,
-                                                     quantity: item.quantity,
-                                                 })),
-                                                 discount_code: discountCode.trim().toUpperCase(),
-                                                 currency,
-                                                 location: formData.location,
-                                             }
-                                             
-                                             const totals = await calculateOrderSheetTotals(payload)
-                                             setDiscountAmount(Number(totals.discount_amount) || 0)
-                                             setBackendTaxRate(Number(totals.tax_rate) || 0)
-                                             setDiscountNotice('Discount applied.')
+                                        setDiscountNotice(null)
+                                        setIsApplyingDiscount(true)
+                                        try {
+                                            // Use pure calculation endpoint for discount preview (no side effects)
+                                            const payload = {
+                                                products: selectedProducts.map(item => ({
+                                                    product_id: item.product.id,
+                                                    price_id: item.price.id,
+                                                    quantity: item.quantity,
+                                                })),
+                                                discount_code: discountCode.trim().toUpperCase(),
+                                                currency,
+                                                location: formData.location,
+                                            }
+
+                                            const totals = await calculateOrderSheetTotals(payload)
+                                            setDiscountAmount(Number(totals.discount_amount) || 0)
+                                            setBackendTaxRate(Number(totals.tax_rate) || 0)
+                                            setDiscountNotice('Discount applied.')
                                         } catch (err: any) {
                                             setDiscountAmount(0)
                                             setDiscountError(err?.message || 'Failed to apply discount code')
