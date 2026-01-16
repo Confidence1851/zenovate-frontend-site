@@ -28,6 +28,10 @@ interface CheckoutModalProps {
     lastName: string
     email: string
     phone: string
+    businessName: string
+    medicalDirectorName: string
+    accountNumber: string
+    location: string
     shippingAddress?: string
     additionalInformation?: string
   }
@@ -135,9 +139,11 @@ export function CheckoutModal({
         last_name: orderSheetCustomerInfo.lastName,
         email: orderSheetCustomerInfo.email,
         phone: orderSheetCustomerInfo.phone,
-        account_number: '',
-        location: '',
-        shipping_address: undefined,
+        business_name: orderSheetCustomerInfo.businessName,
+        medical_director_name: orderSheetCustomerInfo.medicalDirectorName,
+        account_number: orderSheetCustomerInfo.accountNumber,
+        location: orderSheetCustomerInfo.location,
+        shipping_address: orderSheetCustomerInfo.shippingAddress,
         additional_information: orderSheetCustomerInfo.additionalInformation,
       })
       return

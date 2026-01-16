@@ -43,6 +43,22 @@ export interface OrderSheetInitParams {
   ref?: string;
 }
 
+export interface CartCheckoutInitParams {
+  products: OrderSheetProductPayload[];
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone: string;
+  account_number: string;
+  location: string;
+  shipping_address?: string;
+  additional_information?: string;
+  discount_code?: string;
+  currency?: 'USD' | 'CAD';
+  source_path?: string;
+  ref?: string;
+}
+
 export interface OrderSheetCalculateTotalsParams {
   products: OrderSheetProductPayload[];
   discount_code?: string;
@@ -227,7 +243,7 @@ export async function calculateOrderSheetTotals(
  * Initialize cart checkout
  */
 export async function initCartCheckout(
-  params: OrderSheetInitParams
+  params: CartCheckoutInitParams
 ): Promise<DirectCheckoutData> {
   try {
     const response = await axios.post(
