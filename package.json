@@ -7,6 +7,8 @@
 		"build": "next build",
 		"start": "next start",
 		"lint": "next lint",
+		"test": "vitest",
+		"test:ui": "vitest --ui",
 		"obfuscate-build": "next-css-obfuscator",
 		"restart-clean": "rm -rf node_modules/.cache && rm -rf .next && kill -9 $(lsof -ti:3000) && bun run dev"
 	},
@@ -58,12 +60,16 @@
 	},
 	"devDependencies": {
 		"@tailwindcss/typography": "^0.5.15",
+		"@testing-library/react": "^14.0.0",
+		"@testing-library/user-event": "^14.0.0",
 		"@types/markdown-it": "^14.1.2",
 		"@types/node": "^20.17.6",
 		"@types/react": "^18.3.12",
 		"@types/react-dom": "^18.3.1",
+		"@vitejs/plugin-react": "^5.1.2",
 		"eslint": "^8.57.1",
 		"eslint-config-next": "14.2.14",
+		"jsdom": "^22.0.0",
 		"next-css-obfuscator": "^2.2.18",
 		"postcss": "^8.4.49",
 		"postcss-modules": "^6.0.1",
@@ -73,6 +79,7 @@
 		"tailwindcss": "^3.4.15",
 		"terser-webpack-plugin": "^5.3.10",
 		"typescript": "^5.6.3",
+		"vitest": "^0.34.0",
 		"webpack-obfuscator": "^3.5.1"
 	}
 }
