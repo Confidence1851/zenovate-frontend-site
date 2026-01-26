@@ -787,6 +787,7 @@ const OrderSheetComponent = ({ currency = 'USD', brand }: OrderSheetComponentPro
                                                 discount_code: discountCode.trim().toUpperCase(),
                                                 currency,
                                                 location: formData.location,
+                                                source_path: pathname,
                                             }
 
                                             const totals = await calculateOrderSheetTotals(payload)

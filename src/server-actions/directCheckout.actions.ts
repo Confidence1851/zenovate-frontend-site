@@ -64,6 +64,7 @@ export interface OrderSheetCalculateTotalsParams {
   discount_code?: string;
   currency?: 'USD' | 'CAD';
   location?: string;
+  source_path?: string;
 }
 
 export interface DirectCheckoutData {
