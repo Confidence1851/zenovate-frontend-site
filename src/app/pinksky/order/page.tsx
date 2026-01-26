@@ -37,11 +37,11 @@ const OrderSheetPage = () => {
 								order sheet
 							</h1>
 							<p className='text-foreground text-base lg:text-xl lg:leading-8'>
-								Browse our complete selection of premium wellness products. Select the quantities you need and place your order with ease.
+								Explore our premium wellness collection; offered in single-packed, self-injection multi-dose pens for convenience and precision. Select what you need and order in just a few clicks.
 							</p>
 						</div>
 						<Suspense fallback={<div className="text-center py-10">Loading...</div>}>
-							<OrderSheetComponent />
+							<OrderSheetComponent currency="CAD" brand="pinksky" />
 						</Suspense>
 					</div>
 				</section>

@@ -39,7 +39,7 @@ const OrderSheetPage = () => {
 							</p>
 						</div>
 						<Suspense fallback={<div className="text-center py-10">Loading...</div>}>
-							<OrderSheetComponent currency="CAD" />
+							<OrderSheetComponent currency="CAD" brand="professional" />
 						</Suspense>
 					</div>
 				</section>

@@ -23,9 +23,10 @@ interface ProductQuantity {
 
 interface OrderSheetComponentProps {
     currency?: 'USD' | 'CAD'
+    brand?: 'professional' | 'cccportal' | 'pinksky'
 }
 
-const OrderSheetComponent = ({ currency = 'USD' }: OrderSheetComponentProps) => {
+const OrderSheetComponent = ({ currency = 'USD', brand }: OrderSheetComponentProps) => {
     const [quantities, setQuantities] = useState<Record<number, ProductQuantity>>({})
     const [formData, setFormData] = useState({
         firstName: '',
@@ -64,23 +65,25 @@ const OrderSheetComponent = ({ currency = 'USD' }: OrderSheetComponentProps) => 
         isLoading,
         error
     } = useQuery({
-        queryKey: ['order-sheet-products', currency],
-        queryFn: () => orderSheetProducts(currency)
+        queryKey: ['order-sheet-products', brand],
+        queryFn: () => orderSheetProducts(brand),
+        enabled: !!brand
     })
 
     const {
         data: configData
     } = useQuery({
-        queryKey: ['checkout-config', currency],
-        queryFn: () => getCheckoutConfig(currency)
+        queryKey: ['checkout-config', brand],
+        queryFn: () => getCheckoutConfig(brand),
+        enabled: !!brand
     })
 
     // Set tax rate from config when it loads
     useEffect(() => {
-        if (configData?.tax_rate !== undefined) {
+        if (configData && configData.tax_rate !== undefined) {
             setBackendTaxRate(configData.tax_rate)
         }
-    }, [configData?.tax_rate])
+    }, [configData])
 
     const products: Product[] = productsData?.data || []
     const quantityOptions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 30, 50, 100]

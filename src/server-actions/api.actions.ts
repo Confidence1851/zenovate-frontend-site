@@ -29,11 +29,11 @@ export async function productList() {
 	}
 }
 
-export async function orderSheetProducts(currency?: 'USD' | 'CAD') {
+export async function orderSheetProducts(brand?: 'professional' | 'cccportal' | 'pinksky') {
 	const url = baseUrl('/form/products/order-sheet')
 	try {
 		const response = await axios.get(url, {
-			params: currency ? { currency } : undefined
+			params: brand ? { brand } : undefined
 		})
 		return response.data
 	} catch (error) {
@@ -49,11 +49,11 @@ export async function orderSheetProducts(currency?: 'USD' | 'CAD') {
 	}
 }
 
-export async function getCheckoutConfig(currency?: 'USD' | 'CAD') {
+export async function getCheckoutConfig(brand?: 'professional' | 'cccportal' | 'pinksky') {
 	const url = baseUrl('/form/checkout/config')
 	try {
 		const response = await axios.get(url, {
-			params: currency ? { currency } : undefined
+			params: brand ? { brand } : undefined
 		})
 		return response.data?.data || {}
 	} catch (error) {
