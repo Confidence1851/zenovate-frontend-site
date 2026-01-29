@@ -27,6 +27,12 @@ export default function RootLayout({
 			<ReactLenis root>
 				<head>
 					<script defer data-domain='zenovate.health' src='https://analytics.aes-studio.com/js/script.js'></script>
+					{/* <script
+						src={process.env.NEXT_PUBLIC_KNOWCLERK_WIDGET_SRC}
+						data-knowclerk-api-url={process.env.NEXT_PUBLIC_KNOWCLERK_API_URL}
+						data-knowclerk-widget-key={process.env.NEXT_PUBLIC_KNOWCLERK_WIDGET_KEY}
+					></script> */}
+					<style>{`.grecaptcha-badge { visibility: hidden; }`}</style>
 				</head>
 				<body className={`${barlow.variable} ${aerotis.variable} antialiased`}>
 					<Provider>
