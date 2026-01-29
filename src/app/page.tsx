@@ -46,9 +46,9 @@ const HomePage = () => {
 
 
 			{/* HOW IT WORKS */}
-			<div className='mt-[-12rem] lg:mt-[-20rem] mb-[-12rem] lg:mb-[-20rem]'>
+			{/* <div className='mt-[-12rem] lg:mt-[-20rem] mb-[-12rem] lg:mb-[-20rem]'>
 				<HowItWorks />
-			</div>
+			</div> */}
 
 			<FirstSteps />
 		</MainLayout>

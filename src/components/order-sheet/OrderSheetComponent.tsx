@@ -830,11 +830,11 @@ const OrderSheetComponent = ({ currency = 'USD', brand }: OrderSheetComponentPro
                         <div className='w-full max-w-md space-y-2'>
                             <div className='flex justify-between items-center'>
                                 <span className='font-medium'>Subtotal:</span>
-                                <span className='font-medium'>{formatCurrency(pricing.subtotal)} {getCurrency()}</span>
+                                <span className='font-medium'>{formatCurrency(pricing.subtotal)}{brand !== 'cccportal' && ` ${getCurrency()}`}</span>
                             </div>
                             <div className='flex justify-between items-center'>
                                 <span className='font-medium'>Tax ({pricing.taxRate}%):</span>
-                                <span className='font-medium'>{formatCurrency(pricing.taxAmount)} {getCurrency()}</span>
+                                <span className='font-medium'>{formatCurrency(pricing.taxAmount)}{brand !== 'cccportal' && ` ${getCurrency()}`}</span>
                             </div>
                             <div className='flex justify-between items-center'>
                                 <span className='font-medium'>Shipping:</span>
@@ -842,14 +842,14 @@ const OrderSheetComponent = ({ currency = 'USD', brand }: OrderSheetComponentPro
                                     {pricing.shippingFee === 0 ? (
                                         <span className='text-green-600'>FREE</span>
                                     ) : (
-                                        `${formatCurrency(pricing.shippingFee)} ${getCurrency()}`
+                                        `${formatCurrency(pricing.shippingFee)}${brand !== 'cccportal' ? ` ${getCurrency()}` : ''}`
                                     )}
                                 </span>
                             </div>
                             {pricing.discountAmount > 0 && (
                                 <div className='flex justify-between items-center'>
                                     <span className='font-medium'>Discount:</span>
-                                    <span className='font-medium text-green-700'>-{formatCurrency(pricing.discountAmount)} {getCurrency()}</span>
+                                    <span className='font-medium text-green-700'>-{formatCurrency(pricing.discountAmount)}{brand !== 'cccportal' && ` ${getCurrency()}`}</span>
                                 </div>
                             )}
                             {pricing.subtotal >= 1000 && (
@@ -859,7 +859,7 @@ const OrderSheetComponent = ({ currency = 'USD', brand }: OrderSheetComponentPro
                             )}
                             <div className='flex justify-between items-center border-t pt-2 mt-2'>
                                 <span className='font-bold text-lg'>Grand Total:</span>
-                                <span className='font-bold text-lg'>{formatCurrency(pricing.grandTotal)} {getCurrency()}</span>
+                                <span className='font-bold text-lg'>{formatCurrency(pricing.grandTotal)}{brand !== 'cccportal' && ` ${getCurrency()}`}</span>
                             </div>
                         </div>
                     </div>
@@ -900,7 +900,7 @@ const OrderSheetComponent = ({ currency = 'USD', brand }: OrderSheetComponentPro
                             </li>
                             <li className='flex items-start'>
                                 <span className='mr-2'>•</span>
-                                <span>Orders over {formatCurrency(1000)} ship free; orders under {formatCurrency(1000)} have a flat {formatCurrency(60)} shipping fee ({getCurrency()}).</span>
+                                <span>Orders over {formatCurrency(1000)} ship free; orders under {formatCurrency(1000)} have a flat {formatCurrency(60)} shipping fee{brand !== 'cccportal' && ` (${getCurrency()})`}.</span>
                             </li>
                             <li className='flex items-start'>
                                 <span className='mr-2'>•</span>

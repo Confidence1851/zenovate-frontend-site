@@ -57,28 +57,28 @@ interface NavItemSimple {
 type NavItem = NavItemWithDropdown | NavItemSimple | NavItemCustom
 
 const navLinks: NavItem[] = [
-	{
-		label: 'How it works',
-		href: {
-			path: '/#howItWorks',
-			scroll: false,
-			onClick: (e) => {
-				e.preventDefault()
-				if (window.location.pathname === '/') {
-					window.location.href = '/#howItWorks'
-				} else {
-					window.location.href = '/#howItWorks'
-					// After navigation, smooth scroll to element
-					setTimeout(() => {
-						document.getElementById('howItWorks')?.scrollIntoView({
-							behavior: 'smooth'
-						})
-					}, 100)
-				}
-			}
-		},
-		type: 'link'
-	},
+	// {
+	// 	label: 'How it works',
+	// 	href: {
+	// 		path: '/#howItWorks',
+	// 		scroll: false,
+	// 		onClick: (e) => {
+	// 			e.preventDefault()
+	// 			if (window.location.pathname === '/') {
+	// 				window.location.href = '/#howItWorks'
+	// 			} else {
+	// 				window.location.href = '/#howItWorks'
+	// 				// After navigation, smooth scroll to element
+	// 				setTimeout(() => {
+	// 					document.getElementById('howItWorks')?.scrollIntoView({
+	// 						behavior: 'smooth'
+	// 					})
+	// 				}, 100)
+	// 			}
+	// 		}
+	// 	},
+	// 	type: 'link'
+	// },
 	{
 		label: 'Products',
 		type: 'custom',
