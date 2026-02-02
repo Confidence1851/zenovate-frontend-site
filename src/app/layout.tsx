@@ -6,6 +6,7 @@ import { createMetadata } from '@/lib/metadata'
 import { Toaster } from 'react-hot-toast'
 import Provider from '@/utils/Providers'
 import InformlyWidget from '@/components/common/InformlyWidget'
+import { Suspense } from 'react'
 const barlow = Poppins({
 	weight: ['400', '100', '200', '300', '500', '900', '700', '400', '600'],
 	subsets: ['latin'],
@@ -30,8 +31,10 @@ export default function RootLayout({
 					<script defer data-domain='zenovate.health' src='https://analytics.aes-studio.com/js/script.js'></script>
 					<style>{`.grecaptcha-badge { visibility: hidden; }`}</style>
 				</head>
-					<InformlyWidget />
 				<body className={`${barlow.variable} ${aerotis.variable} antialiased`}>
+					<Suspense fallback={null}>
+						<InformlyWidget />
+					</Suspense>
 					<Provider>
 						<Toaster />
 						<main>{children}</main>
