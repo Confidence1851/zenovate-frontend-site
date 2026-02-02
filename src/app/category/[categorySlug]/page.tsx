@@ -132,9 +132,13 @@ export default function CategoryDetailPage() {
                         <div className='flex flex-col gap-2'>
                           {/* First Price */}
                           {firstPrice && (
-                            <p className='text-sm font-semibold text-foreground'>
-                              ${firstPrice.value.toFixed(2)}
-                            </p>
+                            <div className='flex flex-col gap-1'>
+                              <p className='text-xs text-muted-foreground'>Starts at</p>
+                              <p className='text-sm text-foreground'>
+                                <span className='font-semibold'>${firstPrice.value.toFixed(2)}</span>
+                                <span> / Month</span>
+                              </p>
+                            </div>
                           )}
                           <Link href={`/products/${item.slug}`}>
                             <CTAButton size='sm'>
