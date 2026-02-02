@@ -263,8 +263,8 @@ if [ -z "$OLD_SERVICE_NAME" ]; then
 fi
 
 echo "🏗️  Building new image..."
-# Build the new image with a unique tag
-docker build -t $APP_NAME:$TIMESTAMP .
+# Build the new image with a unique tag (--no-cache to avoid stale cached layers)
+docker build --no-cache -t $APP_NAME:$TIMESTAMP .
 
 if [ $? -ne 0 ]; then
     echo "❌ Build failed! Aborting deployment."
