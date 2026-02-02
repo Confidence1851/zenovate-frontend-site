@@ -5,7 +5,6 @@
 const nextConfig = {
 	reactStrictMode: true,
 	output: 'standalone', // Required for Docker standalone builds
-
 	eslint: {
 		ignoreDuringBuilds: true
 	},
