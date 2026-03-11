@@ -23,12 +23,12 @@ interface ProductQuantity {
 
 interface OrderSheetComponentProps {
     currency?: 'USD' | 'CAD'
-    brand?: 'professional' | 'cccportal' | 'pinksky'
+    brand?: 'professional' | 'cccportal' | 'pinksky' | 'zenovateus'
 }
 
 const OrderSheetComponent = ({ currency = 'USD', brand }: OrderSheetComponentProps) => {
-    const [quantities, setQuantities] = useState<Record<number, ProductQuantity>>({})
-    const [formData, setFormData] = useState({
+     const [quantities, setQuantities] = useState<Record<number, ProductQuantity>>({})
+     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
         email: '',
@@ -55,7 +55,6 @@ const OrderSheetComponent = ({ currency = 'USD', brand }: OrderSheetComponentPro
     const [storedCheckoutData, setStoredCheckoutData] = useState<any>(null)
     const [quantitiesApplied, setQuantitiesApplied] = useState(false)
     const [paymentRef, setPaymentRef] = useState<string | null>(null)
-    const [backendTaxRate, setBackendTaxRate] = useState<number | null>(null)
     const searchParams = useSearchParams()!
     const pathname = usePathname()!
     const { executeRecaptcha } = useGoogleReCaptcha()
@@ -78,12 +77,9 @@ const OrderSheetComponent = ({ currency = 'USD', brand }: OrderSheetComponentPro
         enabled: !!brand
     })
 
-    // Set tax rate from config when it loads
-    useEffect(() => {
-        if (configData && configData.tax_rate !== undefined) {
-            setBackendTaxRate(configData.tax_rate)
-        }
-    }, [configData])
+    const backendTaxRate = configData?.tax_rate ?? null
+    const defaultShippingFee = configData?.default_shipping_fee ?? 60
+    const freeShippingThreshold = configData?.free_shipping_threshold ?? 1000
 
     const products: Product[] = productsData?.data || []
     const quantityOptions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 30, 50, 100]
@@ -173,8 +169,6 @@ const OrderSheetComponent = ({ currency = 'USD', brand }: OrderSheetComponentPro
 
     const calculatePricing = () => {
         let subtotal = 0
-        const defaultShippingFee = 60
-        const freeShippingThreshold = 1000
         const taxRate = backendTaxRate !== null ? backendTaxRate : 0
 
         // Calculate subtotal first
@@ -231,7 +225,7 @@ const OrderSheetComponent = ({ currency = 'USD', brand }: OrderSheetComponentPro
         return digitsOnly.length >= 10
     }
 
-    const isPinksky = pathname.includes('/pinksky')
+    const isPinksky = pathname.includes('/pinksky') || pathname.includes('/zenovate-us')
 
     const fieldValidators: Record<string, (value: string | boolean) => string | undefined> = {
         firstName: (v) => !String(v).trim() ? 'First name is required' : undefined,
@@ -792,7 +786,6 @@ const OrderSheetComponent = ({ currency = 'USD', brand }: OrderSheetComponentPro
 
                                             const totals = await calculateOrderSheetTotals(payload)
                                             setDiscountAmount(Number(totals.discount_amount) || 0)
-                                            setBackendTaxRate(Number(totals.tax_rate) || 0)
                                             setDiscountNotice('Discount applied.')
                                         } catch (err: any) {
                                             setDiscountAmount(0)
@@ -813,7 +806,6 @@ const OrderSheetComponent = ({ currency = 'USD', brand }: OrderSheetComponentPro
                                             setDiscountCode('')
                                             setDiscountError(null)
                                             setDiscountNotice(null)
-                                            setBackendTaxRate(null)
                                         }}
                                     >
                                         Remove

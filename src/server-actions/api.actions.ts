@@ -29,7 +29,7 @@ export async function productList() {
 	}
 }
 
-export async function orderSheetProducts(brand?: 'professional' | 'cccportal' | 'pinksky') {
+export async function orderSheetProducts(brand?: 'professional' | 'cccportal' | 'pinksky' | 'zenovateus') {
 	const url = baseUrl('/form/products/order-sheet')
 	try {
 		const response = await axios.get(url, {
@@ -49,7 +49,7 @@ export async function orderSheetProducts(brand?: 'professional' | 'cccportal' | 
 	}
 }
 
-export async function getCheckoutConfig(brand?: 'professional' | 'cccportal' | 'pinksky') {
+export async function getCheckoutConfig(brand?: 'professional' | 'cccportal' | 'pinksky' | 'zenovateus') {
 	const url = baseUrl('/form/checkout/config')
 	try {
 		const response = await axios.get(url, {
