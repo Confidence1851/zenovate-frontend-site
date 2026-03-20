@@ -269,7 +269,7 @@ export function CheckoutModal({
         {selectedPrice && !selectedPrice.frequency && !selectedPrice.unit && (
           <div className="rounded-lg bg-muted p-3 text-sm text-center">
             <p className="text-muted-foreground italic">
-              This is for pre-order. Shipping takes 2 to 4 weeks.
+              Processing and shipping of orders takes 5 to 7 business days.
             </p>
           </div>
         )}

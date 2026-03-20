@@ -880,7 +880,7 @@ const OrderSheetComponent = ({ currency = 'USD', brand }: OrderSheetComponentPro
                         <ul className='space-y-3 text-sm md:text-base'>
                             <li className='flex items-start'>
                                 <span className='mr-2'>•</span>
-                                <span>This is for pre-order. Shipping takes 2 to 4 weeks.</span>
+                                <span>Processing and shipping of orders takes 5 to 7 business days.</span>
                             </li>
                             <li className='flex items-start'>
                                 <span className='mr-2'>•</span>

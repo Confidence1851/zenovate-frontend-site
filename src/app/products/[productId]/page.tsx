@@ -211,7 +211,7 @@ export default function ProductDetails({ params }: { params: { productId: string
 							{/* Check if this is a peptide product (no frequency/unit on first price) */}
 							{displayPrices[0] && !displayPrices[0].frequency && !displayPrices[0].unit && (
 								<p className='text-sm text-muted-foreground mb-3 italic break-words' style={{ overflowWrap: 'anywhere' }}>
-									This is for pre-order. Shipping takes 2 to 4 weeks.
+									Processing and shipping of orders takes 5 to 7 business days.
 								</p>
 							)}
 							<p className='text-foreground font-semibold mb-4'>
